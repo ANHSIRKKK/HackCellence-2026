@@ -1972,7 +1972,8 @@
             </div>
           </div>
 
-          <div style="display: flex; gap: 10px;">
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn-booking-outline" onclick="openQuickEditParamsModal()">✏️ Edit Trip (Dates, Guests, Budget)</button>
             <button class="btn-booking-outline" onclick="openPriorityWeightsModal()">⚖️ Adjust Priorities</button>
             <button class="btn-booking-primary" onclick="executeSmartSearch()">🔄 Re-Optimize Package</button>
           </div>
@@ -2290,6 +2291,91 @@
       </div>
 
       <button class="btn-booking-primary" style="width: 100%;" onclick="applyWeightsAndSearch()">Apply Priorities</button>
+    </div>
+  </div>
+
+  <!-- Quick Edit Parameters Modal -->
+  <div id="modalQuickEditParams" class="modal-overlay-booking">
+    <div class="modal-booking-content" style="max-width: 500px;">
+      <button class="modal-close-booking" onclick="closeQuickEditParamsModal()">✕</button>
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 4px;">Edit Trip Parameters</h3>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Update cities, dates, guests, or budget to re-calculate your holiday package.</p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+        <div>
+          <label style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Departure City</label>
+          <select id="editParamDep" class="search-cell-select" style="width: 100%; border: 1px solid var(--border-dark); border-radius: 4px; padding: 8px 10px; margin-top: 4px;">
+            <option value="Bengaluru">Bengaluru (BLR)</option>
+            <option value="Delhi">Delhi (DEL)</option>
+            <option value="Mumbai">Mumbai (BOM)</option>
+            <option value="Chennai">Chennai (MAA)</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Destination Country</label>
+          <select id="editParamDest" class="search-cell-select" style="width: 100%; border: 1px solid var(--border-dark); border-radius: 4px; padding: 8px 10px; margin-top: 4px;">
+            <option value="Japan">Japan</option>
+            <option value="United Arab Emirates">United Arab Emirates</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+        <div>
+          <label style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Start Date</label>
+          <input type="date" id="editParamStart" class="search-cell-input" min="2027-04-01" max="2027-04-20" style="width: 100%; border: 1px solid var(--border-dark); border-radius: 4px; padding: 8px 10px; margin-top: 4px;">
+        </div>
+        <div>
+          <label style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Duration</label>
+          <select id="editParamNights" class="search-cell-select" style="width: 100%; border: 1px solid var(--border-dark); border-radius: 4px; padding: 8px 10px; margin-top: 4px;">
+            <option value="3">3 Nights</option>
+            <option value="4">4 Nights</option>
+            <option value="5">5 Nights</option>
+            <option value="6">6 Nights</option>
+            <option value="7">7 Nights</option>
+            <option value="8">8 Nights</option>
+            <option value="9">9 Nights</option>
+            <option value="10">10 Nights</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+        <div>
+          <label style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Adults (Age 18+)</label>
+          <select id="editParamAdults" class="search-cell-select" style="width: 100%; border: 1px solid var(--border-dark); border-radius: 4px; padding: 8px 10px; margin-top: 4px;">
+            <option value="1">1 Adult</option>
+            <option value="2">2 Adults</option>
+            <option value="3">3 Adults</option>
+            <option value="4">4 Adults</option>
+            <option value="5">5 Adults</option>
+            <option value="6">6 Adults</option>
+            <option value="7">7 Adults</option>
+            <option value="8">8 Adults</option>
+            <option value="9">9 Adults (Max seats)</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Children (Age 0-17)</label>
+          <select id="editParamChildren" class="search-cell-select" style="width: 100%; border: 1px solid var(--border-dark); border-radius: 4px; padding: 8px 10px; margin-top: 4px;">
+            <option value="0">0 Children</option>
+            <option value="1">1 Child</option>
+            <option value="2">2 Children</option>
+            <option value="3">3 Children</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <label style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Holiday Budget (INR)</label>
+        <div style="position: relative; margin-top: 4px;">
+          <span style="position: absolute; left: 10px; top: 10px; font-weight: 700; color: var(--text-muted);">₹</span>
+          <input type="number" id="editParamBudget" class="search-cell-input" step="10000" min="10000" style="width: 100%; border: 1px solid var(--border-dark); border-radius: 4px; padding: 8px 10px 8px 24px; font-size: 15px; font-weight: 700;">
+        </div>
+        <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 4px;">ℹ️ Flights in current dataset have up to 9 seats available per aircraft.</div>
+      </div>
+
+      <button class="btn-booking-primary" style="width: 100%; padding: 12px; font-size: 14.5px;" onclick="applyQuickEditParams()">Apply Changes & Re-Optimize →</button>
     </div>
   </div>
 
@@ -2844,14 +2930,68 @@
           renderPackageComponentsList();
           renderLiveItineraryPreview();
         } else if (data.budget_exceeded) {
-          appPackages = { cheapest: data.cheapest_package };
-          activePackageData = data.cheapest_package;
-          showToast(`Notice: Budget of ₹${budget.toLocaleString()} exceeded. Minimum package is ₹${data.cheapest_package.total_inr.toLocaleString()}`);
+          appPackages = data.packages || { 
+            cheapest: data.cheapest_package, 
+            fastest: data.cheapest_package, 
+            best_rated: data.cheapest_package 
+          };
+          activePackageData = appPackages[selectedTierKey] || data.cheapest_package;
           updateTierPriceDisplay();
-          renderPackageComponentsList();
+          renderCityPlanPills(data.available_city_plans);
+          renderPackageComponentsList(data.message, data.suggestions);
           renderLiveItineraryPreview();
         } else {
-          listEl.innerHTML = `<div style="padding: 30px; text-align: center; color: #dc2626;">No package fits these constraints. Try adjusting dates or nights.</div>`;
+          // Clear active state & stale tier pricing so previous search doesn't linger
+          appPackages = null;
+          activePackageData = null;
+          document.getElementById('tierPriceCheapest').innerText = '—';
+          document.getElementById('tierPriceFastest').innerText = '—';
+          document.getElementById('tierPriceBest').innerText = '—';
+          document.querySelectorAll('.tier-button').forEach(b => b.classList.remove('active'));
+
+          const previewEl = document.getElementById('liveItineraryScroll');
+          if (previewEl) {
+            previewEl.innerHTML = `
+              <div style="padding: 40px 15px; text-align: center; color: var(--text-muted); font-size: 13.5px;">
+                <div style="font-size: 32px; margin-bottom: 8px;">📋</div>
+                <strong>No Active Itinerary</strong>
+                <p style="margin: 4px 0 0 0; font-size: 12px;">Please adjust party size or travel dates on the left to build a valid package.</p>
+              </div>
+            `;
+          }
+          document.getElementById('liveGrandTotal').innerText = '₹0';
+          document.getElementById('liveMeterFill').style.width = '0%';
+          document.getElementById('liveMeterPct').innerText = '0% of budget used';
+          document.getElementById('liveMeterSaved').innerText = '₹0 remaining';
+
+          const reason = data.reason || data.error || 'No package fits these constraints.';
+          const suggestions = data.suggestions || [
+            'Try reducing the number of travelers to fit available airline seats (catalog flights have up to 9 seats).',
+            'Try adjusting holiday dates between 1 and 20 April 2027.'
+          ];
+
+          listEl.innerHTML = `
+            <div style="background: #fff; border: 1.5px solid #ef4444; border-radius: 10px; padding: 24px 28px; margin-top: 10px; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.08);">
+              <div style="display: flex; gap: 16px; align-items: flex-start;">
+                <span style="font-size: 34px; line-height: 1;">🚫</span>
+                <div style="flex: 1;">
+                  <h3 style="margin: 0; color: #991b1b; font-size: 18px; font-weight: 800;">No Possible Package (Rule Check Bottleneck - M2)</h3>
+                  <p style="margin: 8px 0 16px 0; color: #7f1d1d; font-size: 14.5px; line-height: 1.5; font-weight: 600;">
+                    ${reason}
+                  </p>
+                  <div style="background: #fef2f2; border-left: 4px solid #ef4444; padding: 14px 18px; border-radius: 6px;">
+                    <strong style="color: #991b1b; font-size: 13.5px; display: block; margin-bottom: 8px;">💡 Suggested Actions:</strong>
+                    <ul style="margin: 0; padding-left: 20px; color: #7f1d1d; font-size: 13px; line-height: 1.6;">
+                      ${suggestions.map(s => `<li>${s}</li>`).join('')}
+                    </ul>
+                  </div>
+                  <div style="margin-top: 18px;">
+                    <button class="btn-booking-primary" style="padding: 10px 18px; font-size: 13.5px;" onclick="openQuickEditParamsModal()">✏️ Edit Trip (Dates / Guests / Budget) →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
         }
       } catch (err) {
         console.error('Search error:', err);
@@ -2913,7 +3053,7 @@
       }
     }
 
-    function renderPackageComponentsList() {
+    function renderPackageComponentsList(budgetWarningMsg = null, budgetSuggestions = null) {
       const container = document.getElementById('bookingComponentsList');
       if (!activePackageData || !activePackageData.items) {
         container.innerHTML = '<div style="padding: 20px;">No package items available.</div>';
@@ -2921,6 +3061,30 @@
       }
 
       container.innerHTML = '';
+
+      if (budgetWarningMsg) {
+        const warnCard = document.createElement('div');
+        warnCard.style = 'background: #fffbeb; border: 1.5px solid #f59e0b; border-radius: 10px; padding: 18px 22px; margin-bottom: 22px; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.08);';
+        warnCard.innerHTML = `
+          <div style="display: flex; gap: 14px; align-items: flex-start;">
+            <span style="font-size: 28px; line-height: 1;">⚠️</span>
+            <div style="flex: 1;">
+              <h3 style="margin: 0; color: #92400e; font-size: 16.5px; font-weight: 800;">Budget Limit Notice (Requirement M8)</h3>
+              <p style="margin: 6px 0 10px 0; color: #78350f; font-size: 14px; line-height: 1.5;">${budgetWarningMsg}</p>
+              ${budgetSuggestions && budgetSuggestions.length > 0 ? `
+                <div style="background: #fef3c7; border-left: 3px solid #d97706; padding: 10px 14px; border-radius: 4px;">
+                  <strong style="color: #92400e; font-size: 12.5px; display: block; margin-bottom: 4px;">Recommended Adjustments:</strong>
+                  <ul style="margin: 0; padding-left: 18px; color: #78350f; font-size: 12.5px; line-height: 1.5;">
+                    ${budgetSuggestions.map(s => `<li>${s}</li>`).join('')}
+                  </ul>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        `;
+        container.appendChild(warnCard);
+      }
+
       const items = activePackageData.items;
 
       const outFlight = items.find(it => it.type === 'flight' && it.item_id.includes('fl-out'));
@@ -4195,10 +4359,20 @@
 
     function adjustGuestCount(type, delta) {
       if (type === 'adults') {
-        guestState.adults = Math.max(1, Math.min(10, guestState.adults + delta));
+        const next = Math.max(1, Math.min(9, guestState.adults + delta));
+        if (next + guestState.children > 9) {
+          showToast('ℹ️ Notice: Aircraft seats in catalog limit party size to 9 travelers.');
+          return;
+        }
+        guestState.adults = next;
         document.getElementById('modalCountAdults').innerText = guestState.adults;
       } else {
-        guestState.children = Math.max(0, Math.min(8, guestState.children + delta));
+        const next = Math.max(0, Math.min(8, guestState.children + delta));
+        if (guestState.adults + next > 9) {
+          showToast('ℹ️ Notice: Aircraft seats in catalog limit party size to 9 travelers.');
+          return;
+        }
+        guestState.children = next;
         document.getElementById('modalCountChildren').innerText = guestState.children;
       }
     }
@@ -4214,6 +4388,51 @@
       document.getElementById('homeGuestsDisplay').innerText = label;
       closeGuestModal();
       showToast(`Updated to ${label}`);
+      executeSmartSearch();
+    }
+
+    // Quick Edit Parameters Modal Handlers
+    function openQuickEditParamsModal() {
+      document.getElementById('editParamDep').value = document.getElementById('homeDepCity').value;
+      document.getElementById('editParamDest').value = document.getElementById('homeDestCountry').value;
+      document.getElementById('editParamStart').value = document.getElementById('homeStartDate').value;
+      document.getElementById('editParamNights').value = document.getElementById('homeNights').value;
+      document.getElementById('editParamAdults').value = Math.min(9, guestState.adults);
+      document.getElementById('editParamChildren').value = guestState.children;
+      document.getElementById('editParamBudget').value = document.getElementById('homeBudget').value;
+      document.getElementById('modalQuickEditParams').style.display = 'flex';
+    }
+
+    function closeQuickEditParamsModal() {
+      document.getElementById('modalQuickEditParams').style.display = 'none';
+    }
+
+    function applyQuickEditParams() {
+      const dep = document.getElementById('editParamDep').value;
+      const dest = document.getElementById('editParamDest').value;
+      const start = document.getElementById('editParamStart').value;
+      const nights = document.getElementById('editParamNights').value;
+      const adults = parseInt(document.getElementById('editParamAdults').value, 10);
+      const children = parseInt(document.getElementById('editParamChildren').value, 10);
+      const budget = document.getElementById('editParamBudget').value;
+
+      document.getElementById('homeDepCity').value = dep;
+      document.getElementById('homeDestCountry').value = dest;
+      document.getElementById('homeStartDate').value = start;
+      document.getElementById('homeNights').value = nights;
+      document.getElementById('homeBudget').value = budget;
+
+      guestState.adults = adults;
+      guestState.children = children;
+      guestState.childAges = children > 0 ? [6] : [];
+
+      let label = `${adults} adult${adults > 1 ? 's' : ''}`;
+      if (children > 0) label += ` · ${children} child`;
+      document.getElementById('homeGuestsDisplay').innerText = label;
+
+      closeQuickEditParamsModal();
+      currentActiveCityPlan = null;
+      showToast(`Updated search for ${dest}! Re-optimizing...`);
       executeSmartSearch();
     }
 

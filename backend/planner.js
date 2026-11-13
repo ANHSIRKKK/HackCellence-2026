@@ -697,9 +697,42 @@ class PlannerService {
     }
 
     if (candidatePackages.length === 0) {
+      // Diagnostic bottleneck detection for M2 ("When no package is possible, the app says so and says why")
+      const outKey = `${homeAirport}_${start_date}`;
+      const allOut = catalog.outboundFlights.get(outKey) || [];
+      const maxOut = allOut.length > 0 ? Math.max(...allOut.map(f => f.seats_left - storage.getLockedSeats(f.flight_id))) : 0;
+
+      const inKey = `${homeAirport}_${endDate}`;
+      const allIn = catalog.inboundFlights.get(inKey) || [];
+      const maxIn = allIn.length > 0 ? Math.max(...allIn.map(f => f.seats_left - storage.getLockedSeats(f.flight_id))) : 0;
+
+      let reason = '';
+      const suggestions = [];
+
+      if (allOut.length === 0) {
+        reason = `No outbound flights operate from ${departure_city} (${homeAirport}) to ${validCountry.name} on ${start_date}.`;
+        suggestions.push(`Change your holiday start date to an earlier or later day (between 1 and 20 April 2027).`);
+      } else if (maxOut < totalTravelers) {
+        reason = `Flight capacity bottleneck: Your party has ${totalTravelers} travelers (${adults} adults${children > 0 ? `, ${children} children` : ''}), but available flights from ${departure_city} on ${start_date} only have up to ${maxOut} open seats.`;
+        suggestions.push(`Reduce the number of travelers to ${maxOut} or fewer to fit available aircraft seats.`);
+        suggestions.push(`Try departing on a different date between 1 and 20 April 2027.`);
+      } else if (allIn.length === 0) {
+        reason = `No return flights operate from ${validCountry.name} to ${departure_city} on ${endDate}.`;
+        suggestions.push(`Adjust your stay duration (${nights} nights) so the return flight falls on an active flight date.`);
+      } else if (maxIn < totalTravelers) {
+        reason = `Return flight capacity bottleneck: Your party has ${totalTravelers} travelers, but return flights to ${departure_city} on ${endDate} only have up to ${maxIn} open seats.`;
+        suggestions.push(`Reduce the number of travelers to ${maxIn} or fewer.`);
+        suggestions.push(`Change the number of nights so the return flight falls on a date with more seats.`);
+      } else {
+        reason = `Accommodation or transfer buffer conflict: No combination of certified hotels and airport transfers satisfied all required safety buffers (60 min arrival buffer and 180 min departure buffer) for ${totalTravelers} travelers across ${nights} nights in ${validCountry.name}.`;
+        suggestions.push(`Try adjusting the number of nights or selecting a single destination city.`);
+      }
+
       return {
         success: false,
-        error: `No complete holiday package could be constructed that fits all travel and safety rules for ${nights} nights in ${validCountry.name}.`
+        error: reason,
+        reason: reason,
+        suggestions: suggestions
       };
     }
 
@@ -710,16 +743,30 @@ class PlannerService {
     const withinBudget = candidatePackages.filter(p => p.total_inr <= budget);
 
     if (withinBudget.length === 0) {
+      const cheapestPkg = candidatePackages[0];
+      const fastestPkg = [...candidatePackages].sort((a, b) => a.metrics.travel_duration_minutes - b.metrics.travel_duration_minutes)[0];
+      const bestRatedPkg = [...candidatePackages].sort((a, b) => b.metrics.avg_stars - a.metrics.avg_stars || a.total_inr - b.total_inr)[0];
+
       return {
         success: true,
         budget_exceeded: true,
-        cheapest_package: cheapestOverall,
-        message: `No holiday package fits within your budget of ₹${budget.toLocaleString('en-IN')}. The most affordable valid package starts at ₹${cheapestOverall.total_inr.toLocaleString('en-IN')}.`,
+        packages: {
+          cheapest: cheapestPkg,
+          fastest: fastestPkg,
+          best_rated: bestRatedPkg,
+          priority_match: cheapestPkg
+        },
+        cheapest_package: cheapestPkg,
+        message: `No holiday package fits within your budget of ₹${budget.toLocaleString('en-IN')}. The most affordable valid package starts at ₹${cheapestPkg.total_inr.toLocaleString('en-IN')}.`,
         suggestions: [
-          `Increase your budget by ₹${(cheapestOverall.total_inr - budget).toLocaleString('en-IN')} to book the cheapest plan.`,
+          `Increase your budget by ₹${(cheapestPkg.total_inr - budget).toLocaleString('en-IN')} to book the cheapest plan.`,
           `Reduce your stay to ${Math.max(3, nights - 1)} or ${Math.max(3, nights - 2)} nights.`,
           `Consider visiting a single city to eliminate inter-city transfer costs.`
-        ]
+        ],
+        available_city_plans: allValidCityPlans.map(cp => ({
+          label: cp.map(s => `${s.city} (${s.nights}N)`).join(' ➔ '),
+          plan: cp
+        }))
       };
     }
 
