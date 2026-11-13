@@ -1,0 +1,293 @@
+[
+  {
+    "reference": "9279894003",
+    "trip_id": "trip-1794557797393-1196",
+    "traveler": {
+      "name": "Menon family",
+      "home_airport": "BLR",
+      "adults": 2,
+      "children": 1,
+      "child_ages": [
+        6
+      ]
+    },
+    "country": "Japan",
+    "start_date": "2027-04-10",
+    "end_date": "2027-04-16",
+    "budget_inr": 350000,
+    "total_inr": 251888,
+    "items": [
+      {
+        "item_id": "item-fl-out-FL-405",
+        "type": "flight",
+        "name": "Nippon Sky NS 811 (BLR to NRT)",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "FL-405",
+        "room_id": null,
+        "start": "2027-04-10T06:30",
+        "end": "2027-04-10T21:30",
+        "quantity": 3,
+        "price_inr": 71820,
+        "booking": {
+          "reference": "9279894003"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-tr-arr-TR-NRT-UEN-TAXI",
+        "type": "transfer",
+        "name": "Narita airport taxi to Ueno (NRT to Ueno area hotels)",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "TR-NRT-UEN-TAXI",
+        "room_id": null,
+        "start": "2027-04-10T22:30",
+        "end": "2027-04-10T23:40",
+        "quantity": 1,
+        "price_inr": 12880,
+        "booking": {
+          "reference": "9279894003"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-htl-HTL-TYO-004-2027-04-10",
+        "type": "hotel",
+        "name": "Ueno Garden Inn (Family Room)",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "HTL-TYO-004",
+        "room_id": "RM-TYO-004-B",
+        "start": "2027-04-10",
+        "end": "2027-04-16",
+        "quantity": 1,
+        "price_inr": 56784,
+        "booking": {
+          "reference": "9279894003"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-tr-dep-TR-HND-UEN-TAXI",
+        "type": "transfer",
+        "name": "Haneda airport taxi to Ueno (Ueno Garden Inn to Ueno area hotels)",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "TR-HND-UEN-TAXI",
+        "room_id": null,
+        "start": "2027-04-16T07:20",
+        "end": "2027-04-16T08:00",
+        "quantity": 1,
+        "price_inr": 5320,
+        "booking": {
+          "reference": "9279894003"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-fl-in-FL-412",
+        "type": "flight",
+        "name": "Nippon Sky NS 806 (HND to BLR)",
+        "city": "Bengaluru",
+        "status": "BOOKED",
+        "catalog_id": "FL-412",
+        "room_id": null,
+        "start": "2027-04-16T11:00",
+        "end": "2027-04-16T17:30",
+        "quantity": 3,
+        "price_inr": 80640,
+        "booking": {
+          "reference": "9279894003"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-001-2027-04-11",
+        "type": "attraction",
+        "name": "teamLab Planets TOKYO",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-001",
+        "room_id": null,
+        "start": "2027-04-11T09:30",
+        "end": "2027-04-11T11:30",
+        "quantity": 3,
+        "price_inr": 5096,
+        "booking": {
+          "reference": "9279894003"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-002-2027-04-11",
+        "type": "attraction",
+        "name": "Tokyo Disneyland",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-002",
+        "room_id": null,
+        "start": "2027-04-11T12:15",
+        "end": "2027-04-11T20:15",
+        "quantity": 3,
+        "price_inr": 13664,
+        "booking": {
+          "reference": "9279894003"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-003-2027-04-12",
+        "type": "attraction",
+        "name": "Tokyo Toy Museum",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-003",
+        "room_id": null,
+        "start": "2027-04-12T10:00",
+        "end": "2027-04-12T11:30",
+        "quantity": 3,
+        "price_inr": 1680,
+        "booking": {
+          "reference": "9279894003"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-004-2027-04-12",
+        "type": "attraction",
+        "name": "Senso-ji",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-004",
+        "room_id": null,
+        "start": "2027-04-12T12:15",
+        "end": "2027-04-12T13:15",
+        "quantity": 3,
+        "price_inr": 0,
+        "booking": {
+          "reference": "9279894003"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-005-2027-04-13",
+        "type": "attraction",
+        "name": "Tokyo National Museum",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-005",
+        "room_id": null,
+        "start": "2027-04-13T09:30",
+        "end": "2027-04-13T11:30",
+        "quantity": 3,
+        "price_inr": 1120,
+        "booking": {
+          "reference": "9279894003"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-007-2027-04-13",
+        "type": "attraction",
+        "name": "Tokyo Skytree",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-007",
+        "room_id": null,
+        "start": "2027-04-13T12:15",
+        "end": "2027-04-13T13:45",
+        "quantity": 3,
+        "price_inr": 2884,
+        "booking": {
+          "reference": "9279894003"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-008-2027-04-14",
+        "type": "attraction",
+        "name": "Ueno Park",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-008",
+        "room_id": null,
+        "start": "2027-04-14T09:30",
+        "end": "2027-04-14T11:00",
+        "quantity": 3,
+        "price_inr": 0,
+        "booking": {
+          "reference": "9279894003"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-009-2027-04-14",
+        "type": "attraction",
+        "name": "Ameyoko Market",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-009",
+        "room_id": null,
+        "start": "2027-04-14T11:45",
+        "end": "2027-04-14T12:45",
+        "quantity": 3,
+        "price_inr": 0,
+        "booking": {
+          "reference": "9279894003"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-010-2027-04-15",
+        "type": "attraction",
+        "name": "Meiji Jingu",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-010",
+        "room_id": null,
+        "start": "2027-04-15T09:30",
+        "end": "2027-04-15T10:30",
+        "quantity": 3,
+        "price_inr": 0,
+        "booking": {
+          "reference": "9279894003"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-011-2027-04-15",
+        "type": "attraction",
+        "name": "Shibuya Crossing",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-011",
+        "room_id": null,
+        "start": "2027-04-15T11:15",
+        "end": "2027-04-15T11:45",
+        "quantity": 3,
+        "price_inr": 0,
+        "booking": {
+          "reference": "9279894003"
+        },
+        "sources": [],
+        "warnings": []
+      }
+    ],
+    "created_at": "2026-11-13T08:16:37.423Z"
+  }
+]

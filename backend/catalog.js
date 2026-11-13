@@ -137,3 +137,4 @@ class CatalogService {
 }
 
 module.exports = new CatalogService();
+
