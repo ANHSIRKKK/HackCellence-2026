@@ -1,0 +1,11 @@
+# GitHub Linguist Overrides
+# Exclude build outputs and data files from language stats
+dist/** linguist-vendored
+dist/** linguist-generated
+index.html linguist-detectable=false
+*.json linguist-detectable=false
+data/** linguist-documentation
+
+# Mark JSX as JavaScript
+src/**/*.jsx linguist-language=JavaScript
+src/**/*.js linguist-language=JavaScript
