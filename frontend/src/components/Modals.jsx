@@ -237,3 +237,4 @@ export function ConfirmedModal({ isOpen, onClose, refCode, onViewReservations })
     </div>
   );
 }
+

@@ -65,3 +65,4 @@ export async function cancelBooking(reference) {
   });
   return res.json();
 }
+
