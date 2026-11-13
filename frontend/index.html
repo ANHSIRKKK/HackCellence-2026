@@ -1828,8 +1828,7 @@
             <span>INR</span>
             <span style="font-size: 16px;">🇮🇳</span>
           </div>
-          <button class="btn-header-outline" onclick="navigateToPage('bookings')">My Reservations</button>
-          <button class="btn-header-white" onclick="openSqlDatabaseModal()">Past Bookings</button>
+          <button class="btn-header-white" onclick="navigateToPage('bookings')">My Reservations</button>
         </div>
       </div>
     </div>
@@ -2870,7 +2869,7 @@
             <a href="#">Deterministic Engine</a>
             <a href="#">Rule Solver</a>
             <a href="#">Hackathon Architecture</a>
-            <a href="#">SQLite Schema</a>
+            <a href="javascript:void(0)" onclick="openSqlDatabaseModal()">SQLite Schema & Records</a>
           </div>
         </div>
       </div>
@@ -2882,7 +2881,7 @@
           <span>TRIPRISE</span>
           <span>AURA LUXE</span>
           <span>SOLVER CORE</span>
-          <span>SQLITE 3</span>
+          <span style="cursor: pointer;" onclick="openSqlDatabaseModal()" title="View SQLite 3 Database Records">SQLITE 3</span>
         </div>
       </div>
     </div>
