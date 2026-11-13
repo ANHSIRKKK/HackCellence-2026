@@ -1916,119 +1916,6 @@
         </button>
       </div>
     </div>
-
-    <!-- Main Content Container: Stays / Hotels Grid -->
-    <div class="container">
-      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px;">
-        <div>
-          <h2 class="section-title">Discover Your Stay</h2>
-          <p class="section-subtitle">Real hotel inventory with verified room-fit formulas and star ratings</p>
-        </div>
-      </div>
-
-      <!-- City & Star Filters for Stays -->
-      <div class="filter-pills-bar">
-        <span style="font-size: 13px; font-weight: 700; color: var(--text-muted);">CITY:</span>
-        <button class="filter-btn-pill active" onclick="filterStaysCity('all')">All Cities</button>
-        <button class="filter-btn-pill" onclick="filterStaysCity('Tokyo')">Tokyo</button>
-        <button class="filter-btn-pill" onclick="filterStaysCity('Kyoto')">Kyoto</button>
-        <button class="filter-btn-pill" onclick="filterStaysCity('Osaka')">Osaka</button>
-        <button class="filter-btn-pill" onclick="filterStaysCity('Dubai')">Dubai</button>
-        <button class="filter-btn-pill" onclick="filterStaysCity('Abu Dhabi')">Abu Dhabi</button>
-      </div>
-
-      <!-- Hotels Catalog Grid (WITH REAL IMAGES FROM ./images/hotels/) -->
-      <div class="hotels-grid-catalog" id="hotelsCatalogGrid">
-        <div style="padding: 20px;">Loading catalog stays...</div>
-      </div>
-
-      <!-- Explore by Country Cards -->
-      <h2 class="section-title">Explore by country</h2>
-      <p class="section-subtitle">Discover trending destinations, just a flight away</p>
-
-      <div class="explore-country-grid">
-        <div class="country-thumb-card" onclick="quickPlanCountry('Japan')">
-          <img src="images/attractions/ATT-KYO-001.jpg" alt="Japan">
-          <div class="country-overlay">
-            <div class="country-title-overlay">🇯🇵 Japan</div>
-            <div class="country-price-overlay">Tokyo, Kyoto & Osaka · Packages from ₹1,64,472</div>
-          </div>
-        </div>
-
-        <div class="country-thumb-card" onclick="quickPlanCountry('United Arab Emirates')">
-          <img src="images/attractions/ATT-AUH-001.jpg" alt="UAE">
-          <div class="country-overlay">
-            <div class="country-title-overlay">🇦🇪 United Arab Emirates</div>
-            <div class="country-price-overlay">Dubai & Abu Dhabi · Packages from ₹1,42,000</div>
-          </div>
-        </div>
-
-        <div class="country-thumb-card" onclick="navigateToPage('spiritual')">
-          <img src="images/attractions/ATT-KYO-003.jpg" alt="India Pilgrimage">
-          <div class="country-overlay">
-            <div class="country-title-overlay">🇮🇳 India Sacred Pilgrimage</div>
-            <div class="country-price-overlay">Char Dham, Kashi & Tirupati · Curated for Adults</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Why TRIPRISE? -->
-      <h2 class="section-title">Why Choose TRIPRISE?</h2>
-      <p class="section-subtitle">A truly elevated travel platform powered by deterministic constraint architecture</p>
-
-      <div class="why-booking-grid">
-        <div class="why-card">
-          <div class="why-icon">📝</div>
-          <div>
-            <h4 class="why-card-title">Free Cancellation</h4>
-            <p class="why-card-text">Cancel up to 72 hours before flight departure with automated refunds.</p>
-          </div>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">👍</div>
-          <div>
-            <h4 class="why-card-title">10-Digit Verified Bookings</h4>
-            <p class="why-card-text">Every reservation is stored permanently in the database with locked room inventory.</p>
-          </div>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">🌐</div>
-          <div>
-            <h4 class="why-card-title">100% Deterministic Engine</h4>
-            <p class="why-card-text">Zero AI hallucinations. Traditional algorithmic optimization with non-conflicting schedules.</p>
-          </div>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">🎧</div>
-          <div>
-            <h4 class="why-card-title">Adult & Elder-Care Ready</h4>
-            <p class="why-card-text">Certified room fit math ($adults \ge 1$), wheelchair, and pure sattvic food for senior parents.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Luxury Social Proof / Testimonial Banner (Screenshot Match) -->
-      <div class="luxury-quote-container" style="margin: 40px 0 24px 0; background: linear-gradient(135deg, #1E1B18 0%, #2D2722 100%); border-radius: 18px; padding: 32px 36px; color: #FFFFFF; display: flex; align-items: center; justify-content: space-between; gap: 24px; box-shadow: 0 16px 40px -10px rgba(30, 20, 10, 0.25); border: 1px solid rgba(194, 139, 81, 0.25);">
-        <div style="display: flex; align-items: center; gap: 24px;">
-          <div style="text-align: center; border-right: 1px solid rgba(255,255,255,0.15); padding-right: 24px;">
-            <div style="font-size: 42px; font-weight: 800; font-family: var(--font-serif); color: #FFFFFF; line-height: 1;">4.8</div>
-            <div style="color: #D4AF37; font-size: 14px; margin-top: 4px;">★★★★★</div>
-            <div style="font-size: 11px; color: #A89F91; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px;">1,420 Reviews</div>
-          </div>
-          <div>
-            <div style="font-family: var(--font-serif); font-size: 20px; font-weight: 500; color: #F5EBE1; line-height: 1.4;">
-              "A truly elevated hotel & holiday experience from start to finish."
-            </div>
-            <div style="font-size: 13px; color: #C28B51; font-weight: 600; margin-top: 6px;">
-              Menon Family, Bengaluru · Verified 6-Night Japan Package
-            </div>
-          </div>
-        </div>
-        <button class="btn-booking-primary" style="padding: 12px 24px; font-size: 14px; white-space: nowrap;" onclick="navigateToPage('packages')">
-          Explore Curated Packages ↗
-        </button>
-      </div>
-    </div>
   </div>
 
   <!-- ============================================================== -->
@@ -3093,6 +2980,7 @@
 
     function renderStaysGrid(hotels) {
       const grid = document.getElementById('hotelsCatalogGrid');
+      if (!grid) return;
       grid.innerHTML = '';
 
       hotels.slice(0, 12).forEach(h => {
