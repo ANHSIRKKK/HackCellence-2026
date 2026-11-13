@@ -66,7 +66,7 @@
     .header-booking {
       background: linear-gradient(180deg, #181513 0%, #221E1A 100%);
       color: #ffffff;
-      padding: 14px 0 0 0;
+      padding: 16px 0;
       border-bottom: 1px solid rgba(194, 139, 81, 0.25);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
@@ -75,7 +75,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 14px;
     }
 
     .brand-logo-area {
@@ -110,9 +109,32 @@
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       font-size: 14px;
       font-weight: 600;
+    }
+
+    .btn-header-yatra {
+      background: linear-gradient(135deg, rgba(194, 139, 81, 0.2) 0%, rgba(194, 139, 81, 0.35) 100%);
+      color: #F7EFE4;
+      border: 1px solid rgba(194, 139, 81, 0.6);
+      padding: 7px 16px;
+      border-radius: 100px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-header-yatra:hover, .btn-header-yatra.active {
+      background: linear-gradient(135deg, #C28B51 0%, #AF773E 100%);
+      color: #ffffff;
+      border-color: #C28B51;
+      box-shadow: 0 4px 14px rgba(194, 139, 81, 0.35);
+      transform: translateY(-1px);
     }
 
     .currency-pill {
@@ -268,7 +290,7 @@
     /* ============================================================== */
     .search-box-anchor {
       position: relative;
-      margin-top: -34px;
+      margin-top: 0;
       z-index: 100;
       margin-bottom: 38px;
     }
@@ -1797,8 +1819,11 @@
           <span class="brand-logo-sub">LUXURY HOLIDAYS</span>
         </a>
 
-        <!-- Right Header Actions -->
+        <!-- Right Header Actions (With Tirth Yatra Pill) -->
         <div class="header-actions">
+          <button class="btn-header-yatra" id="nav-tab-spiritual" onclick="navigateToPage('spiritual')">
+            ⛩️ Tirth Yatra
+          </button>
           <div class="currency-pill">
             <span>INR</span>
             <span style="font-size: 16px;">🇮🇳</span>
@@ -1807,47 +1832,27 @@
           <button class="btn-header-white" onclick="navigateToPage('bookings')">Sign In</button>
         </div>
       </div>
-
-      <!-- CLEAN SPECIFIC 5-TAB NAVIGATION (NO EXTRA OVERFLOW) -->
-      <nav class="header-nav-tabs">
-        <button class="tab-item-btn active" id="nav-tab-stays" onclick="navigateToPage('stays')">
-          🛏️ Stays
-        </button>
-        <button class="tab-item-btn" id="nav-tab-flights" onclick="navigateToPage('flights')">
-          ✈️ Flights
-        </button>
-        <button class="tab-item-btn" id="nav-tab-packages" onclick="navigateToPage('packages')">
-          🏨 Flight + Hotel
-        </button>
-        <button class="tab-item-btn" id="nav-tab-attractions" onclick="navigateToPage('attractions')">
-          🎡 Attractions
-        </button>
-        <button class="tab-item-btn badge-special" id="nav-tab-spiritual" onclick="navigateToPage('spiritual')">
-          ⛩️ Tirth Yatra
-        </button>
-      </nav>
     </div>
   </header>
 
   <!-- ============================================================== -->
-  <!-- PAGE 1: 🛏️ STAYS & HOTELS                                     -->
+  <!-- PAGE 1: 🛏️ STAYS & HOLIDAYS (CLEAN MINIMAL LUXURY LAYOUT)       -->
   <!-- ============================================================== -->
   <div id="page-stays" class="page-section active">
-    <!-- Hero Banner with Promo -->
-    <section class="hero-banner-section">
-      <div class="container">
-        <div class="hero-sale-badge">✨ LUXURY HOLIDAY ARCHITECTURE · VERIFIED SMART PACKAGES</div>
-        <h1 class="hero-title-main">Enjoy Modern, Elegant Accommodations & Curated Holidays</h1>
-        <p class="hero-subtitle-main">
-          Experience luxury and comfort in meticulously verified holiday packages with flights, private chauffeur transfers, certified family suites & curated passes — auto-optimized to your budget.
+    <!-- Clean Minimalist Header for Holiday Builder -->
+    <div class="container" style="padding-top: 36px; padding-bottom: 4px;">
+      <div style="margin-bottom: 22px;">
+        <span style="font-size: 11.5px; font-weight: 700; color: #C28B51; text-transform: uppercase; letter-spacing: 1.5px;">✨ SMART HOLIDAY ARCHITECTURE</span>
+        <h1 style="font-family: var(--font-serif); font-size: 36px; font-weight: 700; color: var(--text-dark); margin: 6px 0 4px 0; letter-spacing: -0.5px;">
+          Build Your Curated Holiday
+        </h1>
+        <p style="font-size: 14.5px; color: var(--text-muted); max-width: 680px;">
+          Verified flights, certified family suites, private chauffeur transfers & curated passes — auto-optimized to your budget.
         </p>
-        <button class="btn-booking-primary" style="padding: 12px 28px; font-size: 15px;" onclick="navigateToPage('packages')">
-          Explore Auto-Optimized Packages →
-        </button>
       </div>
-    </section>
+    </div>
 
-    <!-- Signature Yellow Search Box -->
+    <!-- Signature Luxury Search Box -->
     <div class="container search-box-anchor">
       <div class="yellow-search-frame">
         <div class="search-cell">
