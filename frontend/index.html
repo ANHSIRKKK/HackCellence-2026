@@ -2226,6 +2226,13 @@
   <!-- ============================================================== -->
   <div id="page-spiritual" class="page-section">
     <div class="container">
+      <!-- Back Navigation Button -->
+      <div style="margin-bottom: 12px;">
+        <button class="btn-booking-outline" style="font-size: 13px; padding: 6px 14px; display: inline-flex; align-items: center; gap: 6px;" onclick="window.history.back()">
+          <span>←</span> <span>Back</span>
+        </button>
+      </div>
+
       <!-- Top Sacred Header Banner -->
       <div class="yatra-banner-deluxe">
         <div style="flex: 1;">
@@ -2241,7 +2248,7 @@
             Book complete peace of mind for your senior parents: Helipad priority boarding, golf carts at temple corridors, 100% pure sattvic food without onion/garlic, dedicated personal sevak, and round-the-clock medical escorts.
           </p>
         </div>
-        <button class="btn-booking-primary" style="background: #b45309; white-space: nowrap;" onclick="navigateToPage('bookings')">
+        <button class="btn-booking-primary" style="background: #b45309; white-space: nowrap;" onclick="navigateToPage('bookings', 'pilgrim')">
           View All Pilgrim Bookings →
         </button>
       </div>
@@ -2308,7 +2315,25 @@
           <p class="section-subtitle">Inspect your 10-digit reservations, locked inventory, and vouchers</p>
         </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <button class="btn-booking-primary" onclick="loadAllReservations()">🔄 Refresh Bookings</button>
+          <button class="btn-booking-primary" onclick="loadAllReservations(currentBookingsFilter)">🔄 Refresh Bookings</button>
+        </div>
+      </div>
+
+      <!-- Navigation Back Button & Category Filter Strip -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+        <button class="btn-booking-outline" style="font-size: 13px; padding: 7px 16px; display: inline-flex; align-items: center; gap: 6px;" onclick="window.history.back()">
+          <span>←</span> <span>Back</span>
+        </button>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="filter-btn-pill active" id="filterBookings_all" onclick="filterBookingsCategory('all')">
+            All Reservations
+          </button>
+          <button class="filter-btn-pill" id="filterBookings_pilgrim" onclick="filterBookingsCategory('pilgrim')">
+            ⛩️ Sacred Pilgrim Bookings
+          </button>
+          <button class="filter-btn-pill" id="filterBookings_international" onclick="filterBookingsCategory('international')">
+            🌍 International Holidays (Japan & UAE)
+          </button>
         </div>
       </div>
 
@@ -2909,8 +2934,26 @@
       setTimeout(() => { toast.style.display = 'none'; }, 3200);
     }
 
-    // MULTI-PAGE ROUTER (EXACT 5 CORE TABS + BOOKINGS)
-    function navigateToPage(pageId) {
+    // MULTI-PAGE ROUTER (EXACT 5 CORE TABS + BOOKINGS WITH BROWSER BACK/FORWARD HISTORY)
+    let currentActivePage = 'stays';
+    let currentBookingsFilter = 'all';
+
+    function navigateToPage(pageId, extraParam = 'all', pushState = true) {
+      if (!pageId) pageId = 'stays';
+      currentActivePage = pageId;
+
+      if (pageId === 'bookings' && extraParam) {
+        currentBookingsFilter = extraParam;
+      }
+
+      // Browser History Management: enables the browser's Back and Forward buttons to navigate between pages!
+      if (pushState) {
+        const hashTarget = `#${pageId}${extraParam && extraParam !== 'all' ? `?filter=${extraParam}` : ''}`;
+        if (window.location.hash !== hashTarget) {
+          window.history.pushState({ pageId, extraParam }, '', hashTarget);
+        }
+      }
+
       document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.tab-item-btn').forEach(b => b.classList.remove('active'));
 
@@ -2928,14 +2971,50 @@
       if (pageId === 'packages') { if (!activePackageData) executeSmartSearch(); }
       if (pageId === 'attractions') loadAttractionsCatalog();
       if (pageId === 'spiritual') renderYatraCatalog();
-      if (pageId === 'bookings') loadAllReservations();
+      if (pageId === 'bookings') loadAllReservations(currentBookingsFilter);
     }
+
+    // Browser Back / Forward Button Handling (popstate listener)
+    window.addEventListener('popstate', (event) => {
+      if (event.state && event.state.pageId) {
+        navigateToPage(event.state.pageId, event.state.extraParam || 'all', false);
+      } else {
+        const rawHash = (window.location.hash || '').replace('#', '').trim();
+        if (rawHash) {
+          const [pId, query] = rawHash.split('?');
+          const params = new URLSearchParams(query || '');
+          const filter = params.get('filter') || 'all';
+          navigateToPage(pId || 'stays', filter, false);
+        } else {
+          navigateToPage('stays', 'all', false);
+        }
+      }
+    });
 
     // Startup
     window.addEventListener('DOMContentLoaded', () => {
+      const rawHash = (window.location.hash || '').replace('#', '').trim();
+      let initialPage = 'stays';
+      let initialFilter = 'all';
+      if (rawHash) {
+        const [pId, query] = rawHash.split('?');
+        if (['stays', 'flights', 'packages', 'attractions', 'spiritual', 'bookings'].includes(pId)) {
+          initialPage = pId;
+          const params = new URLSearchParams(query || '');
+          initialFilter = params.get('filter') || 'all';
+        }
+      }
+
+      // Initialize base state for back navigation
+      window.history.replaceState({ pageId: initialPage, extraParam: initialFilter }, '', window.location.hash || `#${initialPage}`);
+
       loadStaysCatalog();
       executeSmartSearch();
       renderYatraCatalog();
+
+      if (initialPage !== 'stays') {
+        navigateToPage(initialPage, initialFilter, false);
+      }
     });
 
     // Quick plan from country cards
@@ -3880,8 +3959,38 @@
       }
     }
 
-    // My Reservations Loader (PAGE 6)
-    async function loadAllReservations() {
+    function isPilgrimBooking(b) {
+      if (!b) return false;
+      if (b.is_pilgrim) return true;
+      const c = (b.country || (b.trip && b.trip.destination_country) || '').toLowerCase();
+      const p = (b.package_name || (b.trip && b.trip.package_name) || '').toLowerCase();
+      const n = (b.traveler_name || (b.traveler && b.traveler.name) || '').toLowerCase();
+      return c.includes('india') || c.includes('pilgrim') || c.includes('yatra') || c.includes('sacred') ||
+             p.includes('yatra') || p.includes('pilgrim') || p.includes('dham') ||
+             n.includes('pilgrim') || (b.traveler && b.traveler.seniors_count > 0);
+    }
+
+    function filterBookingsCategory(cat) {
+      currentBookingsFilter = cat || 'all';
+      document.querySelectorAll('#page-bookings .filter-btn-pill').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`filterBookings_${currentBookingsFilter}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const hashTarget = `#bookings${currentBookingsFilter !== 'all' ? `?filter=${currentBookingsFilter}` : ''}`;
+      if (window.location.hash !== hashTarget) {
+        window.history.replaceState({ pageId: 'bookings', extraParam: currentBookingsFilter }, '', hashTarget);
+      }
+
+      loadAllReservations(currentBookingsFilter);
+    }
+
+    // My Reservations Loader (PAGE 6 with Pilgrim / International Filtering)
+    async function loadAllReservations(filter) {
+      if (filter) currentBookingsFilter = filter;
+      document.querySelectorAll('#page-bookings .filter-btn-pill').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`filterBookings_${currentBookingsFilter}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
       const container = document.getElementById('myBookingsListContainer');
       container.innerHTML = '<div style="padding: 30px; text-align: center;">Loading confirmed reservations from server...</div>';
 
@@ -3890,31 +3999,68 @@
         const data = await res.json();
 
         if (data.success && data.reservations && data.reservations.length > 0) {
+          let list = data.reservations;
+
+          // Apply category filter
+          if (currentBookingsFilter === 'pilgrim') {
+            list = list.filter(isPilgrimBooking);
+          } else if (currentBookingsFilter === 'international') {
+            list = list.filter(b => !isPilgrimBooking(b));
+          }
+
+          if (list.length === 0) {
+            if (currentBookingsFilter === 'pilgrim') {
+              container.innerHTML = `
+                <div style="text-align: center; padding: 48px 20px; background: #FFFBEB; border: 1px dashed #FCD34D; border-radius: 12px;">
+                  <div style="font-size: 34px; margin-bottom: 8px;">⛩️</div>
+                  <h3 style="font-size: 18px; font-weight: 800; color: #92400E; margin-bottom: 4px;">No Sacred Pilgrim Bookings Yet</h3>
+                  <p style="font-size: 14px; color: #B45309; max-width: 520px; margin: 0 auto 18px auto;">
+                    You haven't confirmed any Sacred Tirth Yatra packages yet. Custom elder-care packages confirmed on the Tirth Yatra page will appear here.
+                  </p>
+                  <button class="btn-booking-primary" style="background: #B45309;" onclick="navigateToPage('spiritual')">
+                    Explore Sacred Tirth Yatra Packages →
+                  </button>
+                </div>
+              `;
+            } else {
+              container.innerHTML = '<div style="padding: 30px; text-align: center; color: var(--text-muted);">No reservations found in this category.</div>';
+            }
+            return;
+          }
+
           container.innerHTML = '';
-          data.reservations.forEach(b => {
+          list.forEach(b => {
             const card = document.createElement('div');
             card.className = 'res-card-full';
 
+            const isPilgrim = isPilgrimBooking(b);
             const travelerName = (b.traveler && b.traveler.name) || 'Lead Guest';
-            const dates = `${b.start_date} to ${b.end_date}`;
+            const dates = `${b.start_date || '2027-04-10'} to ${b.end_date || '2027-04-16'}`;
+            const pkgTitle = b.package_name || (b.trip && b.trip.package_name) || '';
+
+            const badgeHtml = isPilgrim ? 
+              `<span class="booking-pill" style="font-size: 12px; background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D;">⛩️ SACRED PILGRIMAGE · ELDER-CARE CONFIRMED</span>` :
+              `<span class="booking-pill pill-green" style="font-size: 12px;">● CONFIRMED & INVENTORY LOCKED</span>`;
 
             card.innerHTML = `
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
                 <div>
-                  <span class="booking-pill pill-green" style="font-size: 12px;">● CONFIRMED & INVENTORY LOCKED</span>
+                  ${badgeHtml}
                   <h3 style="font-size: 20px; font-weight: 800; margin-top: 4px;">Reservation #${b.reference}</h3>
+                  ${pkgTitle ? `<div style="font-size: 14.5px; font-weight: 700; color: #1e293b; margin-top: 2px;">${pkgTitle}</div>` : ''}
                 </div>
                 <div style="text-align: right;">
-                  <div style="font-size: 24px; font-weight: 800; color: var(--booking-blue-light);">₹${b.total_inr.toLocaleString()}</div>
+                  <div style="font-size: 24px; font-weight: 800; color: var(--booking-blue-light);">₹${(b.total_inr || 0).toLocaleString()}</div>
                   <div style="font-size: 12px; color: var(--text-muted);">Paid in full · Free cancellation</div>
                 </div>
               </div>
 
-              <div style="font-size: 13.5px; color: var(--text-dark); margin-bottom: 16px;">
-                <strong>Guest:</strong> ${travelerName} · <strong>Destination:</strong> ${b.country} · <strong>Travel Dates:</strong> ${dates} · <strong>Items Count:</strong> ${b.items ? b.items.length : 0} components
+              <div style="font-size: 13.5px; color: var(--text-dark); margin-bottom: 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 14px;">
+                <strong>Guest:</strong> ${travelerName} ${b.traveler && b.traveler.seniors_count ? `(${b.traveler.seniors_count} Senior Pilgrims)` : ''} · <strong>Destination:</strong> ${b.country} · <strong>Travel Dates:</strong> ${dates} · <strong>Items Count:</strong> ${b.items ? b.items.length : 0} components
+                ${b.traveler && b.traveler.health_notes ? `<div style="margin-top: 4px; font-size: 12.5px; color: #b45309;"><strong>Care Notes:</strong> ${b.traveler.health_notes}</div>` : ''}
               </div>
 
-              <div style="display: flex; gap: 10px;">
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                 <button class="btn-booking-primary" onclick="downloadSpecificReservationJSON('${b.reference}')">📥 Download JSON Itinerary</button>
                 <button class="btn-booking-outline" style="color: #dc2626; border-color: #fca5a5;" onclick="cancelBooking('${b.reference}')">✕ Cancel Reservation</button>
               </div>
@@ -4591,22 +4737,65 @@
 
       const ref = `${Math.floor(1000000000 + Math.random() * 9000000000)}`;
 
+      const nightsCount = parseInt(currentCustomYatra.subtitle.match(/\d+/)?.[0] || '6', 10);
       const bookingRecord = {
         reference: ref,
         booking_reference: ref,
         confirmed_at: new Date().toISOString(),
+        country: `India Pilgrimage (${currentCustomYatra.region})`,
+        package_name: currentCustomYatra.title,
+        is_pilgrim: true,
+        start_date: travelDate,
+        end_date: addDays(travelDate, nightsCount),
+        budget_inr: finalPrice + 35000,
         total_inr: finalPrice,
         total_price_inr: finalPrice,
         traveler: {
           name: parentsNames,
           seniors_count: travelerCount,
-          health_notes: healthNotes || 'Wheelchair assistance requested'
+          health_notes: healthNotes || 'Wheelchair assistance & Sattvic meal requested'
         },
+        items: [
+          {
+            item_id: `pilgrim-hotel-${ref}`,
+            type: 'hotel',
+            name: `${currentCustomYatra.title} (Senior Care Ground-Floor Suite)`,
+            city: currentCustomYatra.region,
+            status: 'BOOKED',
+            start: `${travelDate}T12:00`,
+            end: `${addDays(travelDate, nightsCount)}T10:00`,
+            price_inr: Math.round(finalPrice * 0.55),
+            booking: { reference: ref }
+          },
+          {
+            item_id: `pilgrim-transfer-${ref}`,
+            type: 'transfer',
+            name: 'VIP Helipad Shuttle & Temple Corridor Golf Cart Buggy',
+            city: currentCustomYatra.region,
+            status: 'BOOKED',
+            start: `${travelDate}T09:00`,
+            end: `${travelDate}T11:00`,
+            price_inr: Math.round(finalPrice * 0.25),
+            booking: { reference: ref }
+          },
+          {
+            item_id: `pilgrim-darshan-${ref}`,
+            type: 'attraction',
+            name: 'VIP Sanctum Darshan & Special Gotra Sankalp Puja',
+            city: currentCustomYatra.region,
+            status: 'BOOKED',
+            start: `${travelDate}T14:00`,
+            end: `${travelDate}T17:00`,
+            price_inr: Math.round(finalPrice * 0.20),
+            booking: { reference: ref }
+          }
+        ],
         trip: {
           destination_country: `India Pilgrimage (${currentCustomYatra.region})`,
           package_name: currentCustomYatra.title,
           start_date: travelDate,
-          nights: parseInt(currentCustomYatra.subtitle.match(/\d+/)?.[0] || '6', 10),
+          end_date: addDays(travelDate, nightsCount),
+          nights: nightsCount,
           travelers_count: travelerCount,
           total_price_inr: finalPrice
         }
@@ -4634,12 +4823,77 @@
       showToast(`✓ Custom Tirth Yatra confirmed for parents with 10-digit code #${ref}!`);
     }
 
-    function bookPilgrimInstant(name, price) {
+    async function bookPilgrimInstant(name, price) {
       const ref = `${Math.floor(1000000000 + Math.random() * 9000000000)}`;
+      const numPrice = parseInt(String(price).replace(/[^0-9]/g, ''), 10) || 185000;
+      const bookingRecord = {
+        reference: ref,
+        booking_reference: ref,
+        confirmed_at: new Date().toISOString(),
+        country: 'India (Sacred Pilgrimage)',
+        package_name: name,
+        is_pilgrim: true,
+        start_date: '2027-04-15',
+        end_date: '2027-04-24',
+        budget_inr: numPrice + 40000,
+        total_inr: numPrice,
+        total_price_inr: numPrice,
+        traveler: {
+          name: 'Pilgrim Family',
+          seniors_count: 2,
+          health_notes: 'Wheelchair assistance requested'
+        },
+        items: [
+          {
+            item_id: `pilgrim-hotel-${ref}`,
+            type: 'hotel',
+            name: `${name} (Senior Care Ground-Floor Suite)`,
+            city: 'Sacred Site',
+            status: 'BOOKED',
+            start: '2027-04-15T12:00',
+            end: '2027-04-24T10:00',
+            price_inr: Math.round(numPrice * 0.55),
+            booking: { reference: ref }
+          },
+          {
+            item_id: `pilgrim-transfer-${ref}`,
+            type: 'transfer',
+            name: 'VIP Helipad Shuttle & Temple Corridor Golf Cart Buggy',
+            city: 'Pilgrim Corridor',
+            status: 'BOOKED',
+            start: '2027-04-15T09:00',
+            end: '2027-04-15T11:00',
+            price_inr: Math.round(numPrice * 0.25),
+            booking: { reference: ref }
+          },
+          {
+            item_id: `pilgrim-darshan-${ref}`,
+            type: 'attraction',
+            name: 'VIP Sanctum Darshan & Gotra Sankalp Puja',
+            city: 'Sanctum Corridor',
+            status: 'BOOKED',
+            start: '2027-04-16T06:00',
+            end: '2027-04-16T09:00',
+            price_inr: Math.round(numPrice * 0.20),
+            booking: { reference: ref }
+          }
+        ]
+      };
+
+      try {
+        await fetch('/api/bookings/confirm', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ trip: bookingRecord, package: bookingRecord })
+        });
+      } catch (err) {
+        console.warn('Persist instant error:', err);
+      }
+
       document.getElementById('confRefCode').innerText = ref;
       document.getElementById('confTraveler').innerText = `Pilgrim Family (2 Seniors) - ${name}`;
       document.getElementById('confDates').innerText = `April 15, 2027 – April 24, 2027 (Confirmed VIP Pass)`;
-      document.getElementById('confTotal').innerText = `₹${price.toLocaleString()}`;
+      document.getElementById('confTotal').innerText = `₹${numPrice.toLocaleString()}`;
       document.getElementById('modalConfirmed').style.display = 'flex';
       showToast(`✓ Reserved VIP Pilgrimage Pass #${ref} for parents!`);
     }

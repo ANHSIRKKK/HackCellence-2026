@@ -155,16 +155,25 @@ class StorageService {
       }
     }
 
+    const isPilgrimBooking = Boolean(
+      bookedTrip.is_pilgrim ||
+      (bookedTrip.country && bookedTrip.country.toLowerCase().includes('india')) ||
+      (bookedTrip.trip && bookedTrip.trip.destination_country && bookedTrip.trip.destination_country.toLowerCase().includes('india')) ||
+      (bookedTrip.traveler && bookedTrip.traveler.seniors_count > 0)
+    );
+
     const record = {
       reference,
-      trip_id: bookedTrip.trip_id,
-      traveler: bookedTrip.traveler,
-      country: bookedTrip.country,
-      start_date: bookedTrip.start_date,
-      end_date: bookedTrip.end_date,
-      budget_inr: bookedTrip.budget_inr,
-      total_inr: bookedTrip.total_inr,
-      items: bookedTrip.items,
+      trip_id: bookedTrip.trip_id || `trip-pilgrim-${reference}`,
+      traveler: bookedTrip.traveler || { name: 'Pilgrim Family' },
+      country: bookedTrip.country || (bookedTrip.trip && bookedTrip.trip.destination_country) || (isPilgrimBooking ? 'India Pilgrimage' : 'Japan'),
+      start_date: bookedTrip.start_date || (bookedTrip.trip && bookedTrip.trip.start_date) || '2027-04-10',
+      end_date: bookedTrip.end_date || (bookedTrip.trip && bookedTrip.trip.end_date) || '2027-04-16',
+      budget_inr: bookedTrip.budget_inr || (bookedTrip.trip && bookedTrip.trip.total_price_inr) || bookedTrip.total_inr || 350000,
+      total_inr: bookedTrip.total_inr || (bookedTrip.trip && bookedTrip.trip.total_price_inr) || 0,
+      items: bookedTrip.items || [],
+      is_pilgrim: isPilgrimBooking,
+      package_name: bookedTrip.package_name || (bookedTrip.trip && bookedTrip.trip.package_name) || '',
       created_at: now
     };
 

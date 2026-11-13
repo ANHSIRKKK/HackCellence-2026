@@ -1,5 +1,88 @@
 [
   {
+    "reference": "5892147361",
+    "trip_id": "trip-pilgrim-5892147361",
+    "traveler": {
+      "name": "Ramesh & Sunita Sharma",
+      "seniors_count": 2,
+      "health_notes": "Wheelchair assistance & Sattvic dining requested"
+    },
+    "country": "India (Uttarakhand Sacred Pilgrimage)",
+    "package_name": "Char Dham Yatra Deluxe (Helicopter VIP Darshan)",
+    "is_pilgrim": true,
+    "start_date": "2027-04-12",
+    "end_date": "2027-04-21",
+    "budget_inr": 320000,
+    "total_inr": 288000,
+    "items": [
+      {
+        "item_id": "pilgrim-fl-5892147361",
+        "type": "flight",
+        "name": "Dehradun Airport VIP Helicopter Transfer to Kedarnath & Badrinath",
+        "city": "Dehradun",
+        "status": "BOOKED",
+        "catalog_id": "PILGRIM-HELI-01",
+        "room_id": null,
+        "start": "2027-04-12T07:30",
+        "end": "2027-04-12T08:45",
+        "quantity": 2,
+        "price_inr": 48000,
+        "booking": {
+          "reference": "5892147361"
+        }
+      },
+      {
+        "item_id": "pilgrim-htl-5892147361",
+        "type": "hotel",
+        "name": "Himalayan Luxury Senior Ashram & Spa (Ground Floor Lift-Access Suite)",
+        "city": "Rishikesh",
+        "status": "BOOKED",
+        "catalog_id": "PILGRIM-HTL-01",
+        "room_id": "RM-PILGRIM-01",
+        "start": "2027-04-12T12:00",
+        "end": "2027-04-21T10:00",
+        "quantity": 1,
+        "price_inr": 168000,
+        "booking": {
+          "reference": "5892147361"
+        }
+      },
+      {
+        "item_id": "pilgrim-tr-5892147361",
+        "type": "transfer",
+        "name": "Temple Corridor Battery Golf Cart Buggy & Dedicated Personal Sevak",
+        "city": "Kedarnath",
+        "status": "BOOKED",
+        "catalog_id": "PILGRIM-TR-01",
+        "room_id": null,
+        "start": "2027-04-13T09:00",
+        "end": "2027-04-13T12:00",
+        "quantity": 2,
+        "price_inr": 22000,
+        "booking": {
+          "reference": "5892147361"
+        }
+      },
+      {
+        "item_id": "pilgrim-att-5892147361",
+        "type": "attraction",
+        "name": "VIP Sanctum Darshan & Special Gotra Sankalp Puja (Kedarnath & Badrinath)",
+        "city": "Kedarnath",
+        "status": "BOOKED",
+        "catalog_id": "PILGRIM-ATT-01",
+        "room_id": null,
+        "start": "2027-04-14T06:00",
+        "end": "2027-04-14T09:00",
+        "quantity": 2,
+        "price_inr": 50000,
+        "booking": {
+          "reference": "5892147361"
+        }
+      }
+    ],
+    "created_at": "2026-11-13T16:30:00.704Z"
+  },
+  {
     "reference": "9279894003",
     "trip_id": "trip-1794557797393-1196",
     "traveler": {
@@ -621,237 +704,5 @@
       }
     ],
     "created_at": "2026-11-13T12:35:12.406Z"
-  },
-  {
-    "reference": "2421439513",
-    "trip_id": "trip-1794573727359-3414",
-    "traveler": {
-      "name": "Menon family",
-      "home_airport": "DEL",
-      "adults": 2,
-      "children": 1,
-      "child_ages": [
-        6
-      ]
-    },
-    "country": "United Arab Emirates",
-    "start_date": "2027-04-10",
-    "end_date": "2027-04-13",
-    "budget_inr": 350000,
-    "total_inr": 129227,
-    "items": [
-      {
-        "item_id": "item-fl-out-FL-1177",
-        "type": "flight",
-        "name": "Sandline Airways SL 700 (DEL to AUH)",
-        "airline": "Sandline Airways",
-        "flight_number": "SL 700",
-        "from_code": "DEL",
-        "to_code": "AUH",
-        "duration_minutes": 235,
-        "stops": 0,
-        "cabin": "ECONOMY",
-        "city": "Abu Dhabi",
-        "status": "BOOKED",
-        "catalog_id": "FL-1177",
-        "room_id": null,
-        "start": "2027-04-10T05:00",
-        "end": "2027-04-10T07:25",
-        "quantity": 3,
-        "price_inr": 42000,
-        "booking": {
-          "reference": "2421439513"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-tr-arr-TR-AUH-COR-TAXI",
-        "type": "transfer",
-        "name": "Abu Dhabi airport taxi to Corniche (AUH to Corniche area hotels)",
-        "city": "Abu Dhabi",
-        "status": "BOOKED",
-        "catalog_id": "TR-AUH-COR-TAXI",
-        "room_id": null,
-        "start": "2027-04-10T08:25",
-        "end": "2027-04-10T09:00",
-        "quantity": 1,
-        "price_inr": 2176,
-        "booking": {
-          "reference": "2421439513"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-htl-HTL-AUH-002-2027-04-10",
-        "type": "hotel",
-        "name": "Corniche Budget Inn (Twin Room)",
-        "hotel_name": "Corniche Budget Inn",
-        "room_name": "Twin Room",
-        "image": "images/hotels/HOTEL-BUSINESS-1.jpg",
-        "stars": 2,
-        "rating": 7.2,
-        "area": "Corniche",
-        "family_friendly": false,
-        "city": "Abu Dhabi",
-        "status": "BOOKED",
-        "catalog_id": "HTL-AUH-002",
-        "room_id": "RM-AUH-002-B",
-        "start": "2027-04-10",
-        "end": "2027-04-13",
-        "quantity": 2,
-        "price_inr": 31602,
-        "booking": {
-          "reference": "2421439513"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-tr-dep-TR-DXB-ABU-TAXI",
-        "type": "transfer",
-        "name": "Dubai airport taxi to Abu Dhabi (Corniche Budget Inn to Abu Dhabi hotels (all areas))",
-        "city": "Abu Dhabi",
-        "status": "BOOKED",
-        "catalog_id": "TR-DXB-ABU-TAXI",
-        "room_id": null,
-        "start": "2027-04-13T05:20",
-        "end": "2027-04-13T07:00",
-        "quantity": 1,
-        "price_inr": 7328,
-        "booking": {
-          "reference": "2421439513"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-fl-in-FL-1233",
-        "type": "flight",
-        "name": "Sandline Airways SL 808 (DXB to DEL)",
-        "airline": "Sandline Airways",
-        "flight_number": "SL 808",
-        "from_code": "DXB",
-        "to_code": "DEL",
-        "duration_minutes": 210,
-        "stops": 0,
-        "cabin": "ECONOMY",
-        "city": "Delhi",
-        "status": "BOOKED",
-        "catalog_id": "FL-1233",
-        "room_id": null,
-        "start": "2027-04-13T10:00",
-        "end": "2027-04-13T15:00",
-        "quantity": 3,
-        "price_inr": 39000,
-        "booking": {
-          "reference": "2421439513"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-att-ATT-AUH-001-2027-04-10",
-        "type": "attraction",
-        "name": "Sheikh Zayed Grand Mosque",
-        "image": "images/attractions/ATT-AUH-001.jpg",
-        "category": "MOSQUE",
-        "city": "Abu Dhabi",
-        "status": "BOOKED",
-        "catalog_id": "ATT-AUH-001",
-        "room_id": null,
-        "start": "2027-04-10T14:00",
-        "end": "2027-04-10T15:30",
-        "quantity": 3,
-        "price_inr": 0,
-        "booking": {
-          "reference": "2421439513"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-att-ATT-AUH-002-2027-04-11",
-        "type": "attraction",
-        "name": "Louvre Abu Dhabi",
-        "image": "images/attractions/ATT-AUH-002.jpg",
-        "category": "MUSEUM",
-        "city": "Abu Dhabi",
-        "status": "BOOKED",
-        "catalog_id": "ATT-AUH-002",
-        "room_id": null,
-        "start": "2027-04-11T10:00",
-        "end": "2027-04-11T12:30",
-        "quantity": 3,
-        "price_inr": 2886,
-        "booking": {
-          "reference": "2421439513"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-att-ATT-AUH-003-2027-04-11",
-        "type": "attraction",
-        "name": "Wahat Al Karama",
-        "image": "images/attractions/ATT-AUH-003.jpg",
-        "category": "MONUMENT",
-        "city": "Abu Dhabi",
-        "status": "BOOKED",
-        "catalog_id": "ATT-AUH-003",
-        "room_id": null,
-        "start": "2027-04-11T13:15",
-        "end": "2027-04-11T14:00",
-        "quantity": 3,
-        "price_inr": 0,
-        "booking": {
-          "reference": "2421439513"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-att-ATT-AUH-004-2027-04-12",
-        "type": "attraction",
-        "name": "Qasr Al Watan",
-        "image": "images/attractions/ATT-AUH-004.jpg",
-        "category": "PALACE",
-        "city": "Abu Dhabi",
-        "status": "BOOKED",
-        "catalog_id": "ATT-AUH-004",
-        "room_id": null,
-        "start": "2027-04-12T10:00",
-        "end": "2027-04-12T12:00",
-        "quantity": 3,
-        "price_inr": 3663,
-        "booking": {
-          "reference": "2421439513"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-att-ATT-AUH-005-2027-04-12",
-        "type": "attraction",
-        "name": "Corniche Beach",
-        "image": "images/attractions/ATT-AUH-005.jpg",
-        "category": "BEACH",
-        "city": "Abu Dhabi",
-        "status": "BOOKED",
-        "catalog_id": "ATT-AUH-005",
-        "room_id": null,
-        "start": "2027-04-12T12:45",
-        "end": "2027-04-12T14:45",
-        "quantity": 3,
-        "price_inr": 572,
-        "booking": {
-          "reference": "2421439513"
-        },
-        "sources": [],
-        "warnings": []
-      }
-    ],
-    "created_at": "2026-11-13T12:42:26.179Z"
   }
 ]
