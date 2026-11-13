@@ -3,39 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Booking.com · Smart Holiday Planner & Booking Platform</title>
+  <title>TRIPRISE · Smart Holiday Planner & Luxury Travel Engine</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --booking-blue: #003b95;
-      --booking-blue-dark: #00224f;
-      --booking-blue-light: #006ce4;
-      --booking-yellow: #febb02;
-      --booking-yellow-dark: #e5a700;
-      --text-dark: #1a1a1a;
-      --text-muted: #595959;
-      --text-light: #737373;
-      --bg-gray: #f5f5f5;
-      --border-gray: #e7e7e7;
-      --border-dark: #cbd5e1;
-      --green-score: #008234;
-      --green-light: #e8f5e9;
-      --amber-badge: #fff3e0;
-      --amber-text: #e65100;
+      /* Modern Luxury Boutique Theme (Screenshot Palette) */
+      --brand-dark: #1E1B18; /* Warm Deep Espresso */
+      --brand-espresso: #2A241F;
+      --brand-accent: #C28B51; /* Warm Camel / Terracotta Bronze */
+      --brand-accent-hover: #AF773E;
+      --brand-accent-light: #F7EFE4; /* Warm Champagne Cream */
+      --brand-accent-glow: rgba(194, 139, 81, 0.25);
+      --brand-gold: #D4AF37;
+      
+      /* Backward-compatible booking variables */
+      --booking-blue: #1E1B18;
+      --booking-blue-dark: #141210;
+      --booking-blue-light: #C28B51;
+      --booking-yellow: #C28B51;
+      --booking-yellow-dark: #AF773E;
+      
+      --text-dark: #1E1B18;
+      --text-muted: #6E6862;
+      --text-light: #9C948B;
+      --bg-gray: #FAF8F5; /* Warm Porcelain / Linen */
+      --border-gray: #E8E2D8; /* Soft warm border */
+      --border-dark: #D4C9BC;
+      --green-score: #2E7D32;
+      --green-light: #EBF5ED;
+      --amber-badge: #FDF3E7;
+      --amber-text: #B26A1A;
+
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: var(--font-sans);
       -webkit-font-smoothing: antialiased;
     }
 
     body {
-      background-color: #ffffff;
+      background-color: var(--bg-gray);
       color: var(--text-dark);
       line-height: 1.5;
     }
@@ -47,12 +61,14 @@
     }
 
     /* ============================================================== */
-    /* 1. TOP HEADER (ICONIC BOOKING.COM BLUE #003b95)                */
+    /* 1. TOP HEADER (MODERN LUXURY ESPRESSO & WARM CAMEL)             */
     /* ============================================================== */
     .header-booking {
-      background-color: var(--booking-blue);
+      background: linear-gradient(180deg, #181513 0%, #221E1A 100%);
       color: #ffffff;
-      padding: 12px 0 0 0;
+      padding: 14px 0 0 0;
+      border-bottom: 1px solid rgba(194, 139, 81, 0.25);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
 
     .header-top-row {
@@ -72,20 +88,23 @@
     }
 
     .brand-logo-main {
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #FFFFFF;
+      font-family: var(--font-serif);
     }
 
     .brand-logo-sub {
-      font-size: 11px;
-      background: var(--booking-yellow);
-      color: var(--booking-blue-dark);
-      padding: 2px 6px;
+      font-size: 10.5px;
+      background: linear-gradient(135deg, #C28B51 0%, #AF773E 100%);
+      color: #FFFFFF;
+      padding: 3px 8px;
       border-radius: 4px;
       font-weight: 700;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
       text-transform: uppercase;
+      font-family: var(--font-sans);
     }
 
     .header-actions {
@@ -102,7 +121,7 @@
       gap: 6px;
       cursor: pointer;
       padding: 6px 10px;
-      border-radius: 4px;
+      border-radius: 6px;
       transition: background 0.2s;
     }
 
@@ -112,10 +131,10 @@
 
     .btn-header-outline {
       background: transparent;
-      color: #ffffff;
-      border: 1px solid #ffffff;
-      padding: 7px 14px;
-      border-radius: 4px;
+      color: #F2ECE4;
+      border: 1px solid rgba(242, 236, 228, 0.35);
+      padding: 7px 16px;
+      border-radius: 8px;
       font-size: 13.5px;
       font-weight: 600;
       cursor: pointer;
@@ -123,23 +142,27 @@
     }
 
     .btn-header-outline:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: #C28B51;
+      color: #C28B51;
     }
 
     .btn-header-white {
-      background: #ffffff;
-      color: var(--booking-blue);
-      border: 1px solid #ffffff;
-      padding: 7px 14px;
-      border-radius: 4px;
+      background: linear-gradient(135deg, #C28B51 0%, #AF773E 100%);
+      color: #ffffff;
+      border: none;
+      padding: 7px 18px;
+      border-radius: 8px;
       font-size: 13.5px;
       font-weight: 700;
       cursor: pointer;
+      box-shadow: 0 4px 12px rgba(194, 139, 81, 0.3);
       transition: all 0.2s;
     }
 
     .btn-header-white:hover {
-      background: #f0f0f0;
+      background: linear-gradient(135deg, #AF773E 0%, #9C6733 100%);
+      transform: translateY(-1px);
     }
 
     /* SPECIFIC 5-TAB NAVIGATION (CLEAN & NON-OVERFLOWING) */
@@ -147,7 +170,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      padding-bottom: 12px;
+      padding-bottom: 14px;
     }
 
     .tab-item-btn {
@@ -155,11 +178,11 @@
       align-items: center;
       gap: 8px;
       background: transparent;
-      color: #ffffff;
+      color: #D6CBC0;
       border: 1px solid transparent;
-      padding: 9px 18px;
+      padding: 8px 18px;
       border-radius: 100px;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
@@ -167,16 +190,28 @@
     }
 
     .tab-item-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
     }
 
     .tab-item-btn.active {
-      border-color: #ffffff;
-      background: rgba(255, 255, 255, 0.18);
-      font-weight: 800;
+      border-color: #C28B51;
+      background: rgba(194, 139, 81, 0.25);
+      color: #ffffff;
+      font-weight: 700;
     }
 
     .tab-item-btn.badge-special {
+      background: rgba(194, 139, 81, 0.15);
+      border-color: rgba(194, 139, 81, 0.4);
+      color: #F5EBE1;
+    }
+
+    .tab-item-btn.badge-special.active {
+      background: linear-gradient(135deg, #C28B51 0%, #AF773E 100%);
+      color: #ffffff;
+      border-color: #C28B51;
+    }
       background: rgba(254, 187, 2, 0.2);
       border-color: var(--booking-yellow);
       color: #ffffff;
@@ -229,38 +264,48 @@
     }
 
     /* ============================================================== */
-    /* SIGNATURE BOOKING.COM YELLOW SEARCH BOX (#febb02)              */
+    /* LUXURY GLASSMORPHIC SEARCH FRAME (SCREENSHOT MATCH)            */
     /* ============================================================== */
     .search-box-anchor {
       position: relative;
-      margin-top: -30px;
+      margin-top: -34px;
       z-index: 100;
-      margin-bottom: 30px;
+      margin-bottom: 38px;
     }
 
     .yellow-search-frame {
-      background: var(--booking-yellow);
-      border: 4px solid var(--booking-yellow);
-      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(214, 196, 174, 0.65);
+      border-radius: 16px;
       display: grid;
       grid-template-columns: 2.2fr 1.8fr 1.8fr 1.4fr auto;
-      gap: 3px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      gap: 6px;
+      padding: 8px;
+      box-shadow: 0 20px 45px -12px rgba(45, 30, 15, 0.12), 0 4px 14px rgba(0,0,0,0.04);
     }
 
     .search-cell {
-      background: #ffffff;
+      background: #FAF8F5;
       padding: 10px 14px;
       display: flex;
       align-items: center;
       gap: 10px;
       position: relative;
-      border-radius: 4px;
+      border-radius: 10px;
+      border: 1px solid #EAE3D7;
+      transition: all 0.2s;
+    }
+
+    .search-cell:focus-within, .search-cell:hover {
+      background: #FFFFFF;
+      border-color: #C28B51;
+      box-shadow: 0 0 0 3px rgba(194, 139, 81, 0.12);
     }
 
     .search-cell-icon {
-      font-size: 20px;
-      color: var(--text-muted);
+      font-size: 18px;
+      color: #8C6D4C;
     }
 
     .search-cell-content {
@@ -270,19 +315,19 @@
     }
 
     .search-cell-label {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
-      color: var(--text-light);
+      color: #8C847A;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
-      margin-bottom: 1px;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
     }
 
     .search-cell-select, .search-cell-input {
       border: none;
       background: transparent;
       outline: none;
-      font-size: 14.5px;
+      font-size: 14px;
       font-weight: 700;
       color: var(--text-dark);
       cursor: pointer;
@@ -290,23 +335,27 @@
     }
 
     .btn-search-booking {
-      background: var(--booking-blue-light);
+      background: linear-gradient(135deg, #C28B51 0%, #AF773E 100%);
       color: #ffffff;
       border: none;
-      border-radius: 4px;
+      border-radius: 10px;
       padding: 0 28px;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       cursor: pointer;
-      transition: background 0.2s;
+      box-shadow: 0 6px 18px rgba(194, 139, 81, 0.35);
+      transition: all 0.2s ease;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
+      letter-spacing: 0.3px;
     }
 
     .btn-search-booking:hover {
-      background: #0056b3;
+      background: linear-gradient(135deg, #AF773E 0%, #9C6733 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(194, 139, 81, 0.45);
     }
 
     .search-sub-options {
@@ -328,8 +377,10 @@
 
     /* Common Card Styles */
     .section-title {
-      font-size: 24px;
-      font-weight: 800;
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
       margin-bottom: 6px;
       color: var(--text-dark);
     }
@@ -337,98 +388,109 @@
     .section-subtitle {
       font-size: 14.5px;
       color: var(--text-muted);
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     .booking-pill {
       font-size: 11px;
       font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 4px;
+      padding: 3px 10px;
+      border-radius: 100px;
       display: inline-block;
     }
 
-    .pill-green { background: var(--green-light); color: var(--green-score); }
-    .pill-amber { background: var(--amber-badge); color: var(--amber-text); }
-    .pill-blue { background: #e0f2fe; color: #0284c7; }
+    .pill-green { background: #EBF5ED; color: #1E6B30; }
+    .pill-amber { background: #FDF3E7; color: #B26A1A; }
+    .pill-blue { background: #F3ECE2; color: #8C5922; }
 
     .btn-booking-primary {
-      background: var(--booking-blue-light);
+      background: linear-gradient(135deg, #C28B51 0%, #AF773E 100%);
       color: #ffffff;
       border: none;
-      border-radius: 4px;
-      padding: 8px 16px;
+      border-radius: 10px;
+      padding: 9px 18px;
       font-size: 13.5px;
       font-weight: 700;
       cursor: pointer;
-      transition: background 0.2s;
+      box-shadow: 0 4px 14px rgba(194, 139, 81, 0.25);
+      transition: all 0.2s;
     }
 
     .btn-booking-primary:hover {
-      background: #0056b3;
+      background: linear-gradient(135deg, #AF773E 0%, #9C6733 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(194, 139, 81, 0.35);
     }
 
     .btn-booking-outline {
       background: #ffffff;
-      color: var(--booking-blue-light);
-      border: 1px solid var(--booking-blue-light);
-      border-radius: 4px;
-      padding: 6px 14px;
-      font-size: 12.5px;
+      color: #C28B51;
+      border: 1px solid #C28B51;
+      border-radius: 10px;
+      padding: 7px 16px;
+      font-size: 13px;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.2s;
     }
 
     .btn-booking-outline:hover {
-      background: #f0f7ff;
+      background: #FDF9F4;
+      border-color: #AF773E;
+      color: #AF773E;
     }
 
     /* ============================================================== */
-    /* PAGE 1: STAYS / HERO                                           */
+    /* PAGE 1: STAYS / HERO (MODERN LUXURY EDITORIAL STYLE)            */
     /* ============================================================== */
     .hero-banner-section {
-      background: linear-gradient(180deg, var(--booking-blue) 0%, #002b6f 100%);
+      background: linear-gradient(180deg, #1C1917 0%, #2A241F 60%, #383028 100%);
       color: #ffffff;
-      padding: 36px 0 56px 0;
+      padding: 44px 0 68px 0;
       position: relative;
+      border-bottom: 1px solid rgba(232, 226, 216, 0.15);
     }
 
     .hero-sale-badge {
-      font-size: 13.5px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #e2e8f0;
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #D4AF37;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
     }
 
     .hero-title-main {
-      font-size: 40px;
-      font-weight: 800;
-      letter-spacing: -1px;
+      font-family: var(--font-serif);
+      font-size: 46px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
       line-height: 1.15;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      color: #FFFFFF;
     }
 
     .hero-subtitle-main {
-      font-size: 17px;
-      color: #e2e8f0;
-      margin-bottom: 20px;
-      max-width: 650px;
+      font-size: 16.5px;
+      color: #D6CBC0;
+      margin-bottom: 24px;
+      max-width: 680px;
+      line-height: 1.6;
     }
 
     .filter-pills-bar {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
       flex-wrap: wrap;
     }
 
     .filter-btn-pill {
       background: #ffffff;
-      border: 1px solid var(--border-dark);
+      border: 1px solid #E2D9CC;
       border-radius: 100px;
-      padding: 6px 14px;
+      padding: 7px 16px;
       font-size: 13px;
       font-weight: 600;
       color: var(--text-dark);
@@ -436,43 +498,56 @@
       transition: all 0.2s;
     }
 
+    .filter-btn-pill:hover {
+      border-color: #C28B51;
+      color: #C28B51;
+    }
+
     .filter-btn-pill.active {
-      background: var(--booking-blue-light);
-      border-color: var(--booking-blue-light);
+      background: #1E1B18;
+      border-color: #1E1B18;
       color: #ffffff;
+      box-shadow: 0 2px 8px rgba(30, 27, 24, 0.25);
     }
 
     .hotels-grid-catalog {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-bottom: 40px;
+      gap: 24px;
+      margin-bottom: 44px;
     }
 
     .hotel-catalog-card {
       background: #ffffff;
-      border: 1px solid var(--border-gray);
-      border-radius: 8px;
+      border: 1px solid #E8E2D8;
+      border-radius: 16px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: all 0.2s;
+      box-shadow: 0 10px 30px -10px rgba(35, 25, 15, 0.05);
+      transition: all 0.25s ease;
     }
 
     .hotel-catalog-card:hover {
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-      border-color: var(--border-dark);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -12px rgba(35, 25, 15, 0.12);
+      border-color: #D4C9BC;
     }
 
     .hotel-card-img {
       width: 100%;
-      height: 170px;
+      height: 190px;
       object-fit: cover;
       display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .hotel-catalog-card:hover .hotel-card-img {
+      transform: scale(1.03);
     }
 
     .hotel-card-body {
-      padding: 14px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
       flex: 1;
@@ -598,20 +673,21 @@
 
     .flight-card-booking {
       background: #ffffff;
-      border: 1px solid var(--border-gray);
-      border-radius: 8px;
+      border: 1px solid #E8E2D8;
+      border-radius: 14px;
       padding: 18px 20px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       display: grid;
       grid-template-columns: 140px 1fr auto auto;
       gap: 20px;
       align-items: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
       transition: all 0.2s;
     }
 
     .flight-card-booking:hover {
-      border-color: var(--border-dark);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      border-color: #D4C9BC;
+      box-shadow: 0 8px 24px rgba(35, 25, 15, 0.07);
     }
 
     .airline-brand-box {
@@ -623,7 +699,7 @@
     .airline-badge-logo {
       width: 40px;
       height: 40px;
-      border-radius: 8px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -631,9 +707,9 @@
       font-size: 13px;
     }
 
-    .logo-ns { background: #0f172a; color: white; }
-    .logo-av { background: #ffedd5; color: #c2410c; }
-    .logo-sa { background: #ecfdf5; color: #047857; }
+    .logo-ns { background: #1E1B18; color: white; }
+    .logo-av { background: #FAF3EB; color: #C28B51; }
+    .logo-sa { background: #EBF5ED; color: #2E7D32; }
 
     .flight-route-strip {
       display: flex;
@@ -670,7 +746,7 @@
     .trajectory-line-dashed {
       width: 100%;
       height: 2px;
-      border-bottom: 2px dashed #93c5fd;
+      border-bottom: 2px dashed #D4C9BC;
       position: relative;
       margin: 4px 0;
     }
@@ -681,8 +757,8 @@
       left: 50%;
       transform: translate(-50%, -50%);
       background: white;
-      padding: 0 4px;
-      color: var(--booking-blue-light);
+      padding: 0 6px;
+      color: #C28B51;
       font-size: 13px;
     }
 
@@ -719,22 +795,23 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      background: #f8fafc;
-      border: 1.5px solid var(--border-gray);
-      border-radius: 8px;
+      background: #FAF8F5;
+      border: 1.5px solid #E8E2D8;
+      border-radius: 12px;
       padding: 10px 14px;
       cursor: pointer;
       text-align: left;
       transition: all 0.2s ease;
     }
     .priority-strategy-btn:hover {
-      border-color: var(--booking-blue-light);
-      background: #eff6ff;
+      border-color: #C28B51;
+      background: #FFFDF9;
+      transform: translateY(-1px);
     }
     .priority-strategy-btn.active {
-      border-color: var(--booking-blue);
-      background: #eff6ff;
-      box-shadow: 0 2px 6px rgba(0, 108, 228, 0.12);
+      border-color: #C28B51;
+      background: #FDF9F4;
+      box-shadow: 0 4px 14px rgba(194, 139, 81, 0.15);
     }
     .priority-strategy-btn strong {
       font-size: 13px;
@@ -748,19 +825,24 @@
     }
 
     .tier-button {
-      background: transparent;
-      border: 1px solid transparent;
-      border-radius: 6px;
-      padding: 10px 8px;
+      background: #ffffff;
+      border: 1.5px solid #E8E2D8;
+      border-radius: 12px;
+      padding: 12px 10px;
       text-align: center;
       cursor: pointer;
       transition: all 0.2s;
     }
 
+    .tier-button:hover {
+      border-color: #C28B51;
+      transform: translateY(-1px);
+    }
+
     .tier-button.active {
       background: #ffffff;
-      border-color: var(--border-dark);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      border-color: #C28B51;
+      box-shadow: 0 8px 24px rgba(194, 139, 81, 0.18);
     }
 
     .tier-badge-label {
@@ -768,17 +850,18 @@
       font-weight: 700;
       color: var(--text-muted);
       text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .tier-button.active .tier-badge-label {
-      color: var(--booking-blue-light);
+      color: #C28B51;
     }
 
     .tier-price-val {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 800;
       color: var(--text-dark);
-      margin-top: 2px;
+      margin-top: 3px;
     }
 
     .component-group-header {
@@ -802,26 +885,27 @@
 
     .hotel-card-booking {
       background: #ffffff;
-      border: 1px solid var(--border-gray);
-      border-radius: 8px;
-      padding: 16px;
+      border: 1px solid #E8E2D8;
+      border-radius: 14px;
+      padding: 18px;
       margin-bottom: 14px;
       display: grid;
       grid-template-columns: 200px 1fr auto;
       gap: 18px;
       align-items: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
       transition: all 0.2s;
     }
 
     .hotel-card-booking:hover {
-      border-color: var(--border-dark);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      border-color: #D4C9BC;
+      box-shadow: 0 8px 24px rgba(35, 25, 15, 0.07);
     }
 
     .hotel-thumb-img {
       width: 200px;
       height: 140px;
-      border-radius: 6px;
+      border-radius: 10px;
       object-fit: cover;
       display: block;
     }
@@ -839,14 +923,15 @@
     }
 
     .hotel-name-h3 {
-      font-size: 17px;
-      font-weight: 800;
-      color: var(--booking-blue-light);
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
       text-decoration: none;
     }
 
     .stars-badge {
-      color: #f59e0b;
+      color: #D4AF37;
       font-size: 13px;
     }
 
@@ -858,12 +943,12 @@
     }
 
     .score-badge {
-      background: var(--booking-blue);
+      background: #C28B51;
       color: #ffffff;
       font-size: 12px;
       font-weight: 800;
-      padding: 3px 6px;
-      border-radius: 4px 4px 4px 0;
+      padding: 3px 8px;
+      border-radius: 6px;
     }
 
     .score-label {
@@ -887,8 +972,8 @@
 
     .attraction-card-booking {
       background: #ffffff;
-      border: 1px solid var(--border-gray);
-      border-radius: 8px;
+      border: 1px solid #E8E2D8;
+      border-radius: 12px;
       padding: 14px 16px;
       margin-bottom: 10px;
       display: grid;
@@ -899,13 +984,14 @@
     }
 
     .attraction-card-booking:hover {
-      border-color: var(--border-dark);
+      border-color: #D4C9BC;
+      box-shadow: 0 4px 14px rgba(35, 25, 15, 0.05);
     }
 
     .attraction-thumb-img {
       width: 90px;
       height: 70px;
-      border-radius: 6px;
+      border-radius: 8px;
       object-fit: cover;
     }
 
@@ -931,10 +1017,10 @@
     /* Live Itinerary Sticky Card */
     .preview-card-sticky {
       background: #ffffff;
-      border: 1px solid var(--border-gray);
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      border: 1px solid #E8E2D8;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 12px 36px -8px rgba(35, 25, 15, 0.08);
       position: sticky;
       top: 20px;
     }
@@ -944,16 +1030,16 @@
       justify-content: space-between;
       align-items: center;
       padding-bottom: 12px;
-      border-bottom: 1px solid var(--border-gray);
+      border-bottom: 1px solid #E8E2D8;
       margin-bottom: 16px;
     }
 
     .preview-header-title {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 800;
-      color: var(--text-dark);
+      color: #1E1B18;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.8px;
     }
 
     .milestones-stepper {
@@ -969,7 +1055,7 @@
       bottom: 10px;
       left: 10px;
       width: 2px;
-      background: #bfdbfe;
+      background: #E8E2D8;
     }
 
     .milestone-step-item {
@@ -988,7 +1074,7 @@
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      background: var(--booking-blue-light);
+      background: #C28B51;
       color: #ffffff;
       display: flex;
       align-items: center;
@@ -996,7 +1082,7 @@
       font-size: 11px;
       font-weight: 800;
       border: 2px solid #ffffff;
-      box-shadow: 0 0 0 1.5px #bfdbfe;
+      box-shadow: 0 0 0 1.5px #E8E2D8;
     }
 
     .step-title-text {
@@ -1014,9 +1100,10 @@
     }
 
     .summary-costs-panel {
-      background: var(--bg-gray);
-      border-radius: 6px;
-      padding: 14px;
+      background: #FAF8F5;
+      border-radius: 12px;
+      border: 1px solid #E8E2D8;
+      padding: 16px;
       margin-bottom: 16px;
     }
 
@@ -1033,9 +1120,9 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      border-top: 1px solid #d4d4d4;
-      padding-top: 8px;
-      margin-top: 6px;
+      border-top: 1px solid #E2D9CC;
+      padding-top: 10px;
+      margin-top: 10px;
     }
 
     .total-title-bold {
@@ -1081,8 +1168,28 @@
 
     .btn-reserve-full {
       width: 100%;
-      background: var(--booking-blue-light);
+      background: linear-gradient(135deg, #C28B51 0%, #AF773E 100%);
       color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 13px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      box-shadow: 0 4px 14px rgba(194, 139, 81, 0.3);
+      transition: all 0.2s;
+    }
+
+    .btn-reserve-full:hover {
+      background: linear-gradient(135deg, #AF773E 0%, #9C6733 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(194, 139, 81, 0.4);
+    }
       border: none;
       border-radius: 4px;
       padding: 12px;
@@ -1679,15 +1786,15 @@
   </div>
 
   <!-- ============================================================== -->
-  <!-- 1. TOP HEADER (ICONIC BOOKING.COM BLUE)                        -->
+  <!-- 1. TOP HEADER (MODERN LUXURY ESPRESSO & WARM CAMEL)             -->
   <!-- ============================================================== -->
   <header class="header-booking">
     <div class="container">
       <div class="header-top-row">
         <!-- Logo Area -->
         <a class="brand-logo-area" onclick="navigateToPage('stays')">
-          <span class="brand-logo-main">Booking.com</span>
-          <span class="brand-logo-sub">Smart Holiday</span>
+          <span class="brand-logo-main">TRIPRISE</span>
+          <span class="brand-logo-sub">LUXURY HOLIDAYS</span>
         </a>
 
         <!-- Right Header Actions -->
@@ -1729,12 +1836,12 @@
     <!-- Hero Banner with Promo -->
     <section class="hero-banner-section">
       <div class="container">
-        <div class="hero-sale-badge">Our First 11.11 Smart Holiday Sale is Live!</div>
-        <h1 class="hero-title-main">Save 30% or more on dream stays & packages</h1>
+        <div class="hero-sale-badge">✨ LUXURY HOLIDAY ARCHITECTURE · VERIFIED SMART PACKAGES</div>
+        <h1 class="hero-title-main">Enjoy Modern, Elegant Accommodations & Curated Holidays</h1>
         <p class="hero-subtitle-main">
-          Get complete verified packages: Outbound & Return Flights + Certified Hotel Rooms + Airport Transfers + Attraction Passes auto-optimized to your budget.
+          Experience luxury and comfort in meticulously verified holiday packages with flights, private chauffeur transfers, certified family suites & curated passes — auto-optimized to your budget.
         </p>
-        <button class="btn-booking-primary" style="padding: 12px 24px; font-size: 15px;" onclick="navigateToPage('packages')">
+        <button class="btn-booking-primary" style="padding: 12px 28px; font-size: 15px;" onclick="navigateToPage('packages')">
           Explore Auto-Optimized Packages →
         </button>
       </div>
@@ -1799,7 +1906,8 @@
         </div>
 
         <button class="btn-search-booking" onclick="triggerSearchFromHome()">
-          Search
+          <span>Check Availability</span>
+          <span>→</span>
         </button>
       </div>
     </div>
@@ -1808,7 +1916,7 @@
     <div class="container">
       <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px;">
         <div>
-          <h2 class="section-title">Verified Accommodations & Stays</h2>
+          <h2 class="section-title">Discover Your Stay</h2>
           <p class="section-subtitle">Real hotel inventory with verified room-fit formulas and star ratings</p>
         </div>
       </div>
@@ -1859,9 +1967,9 @@
         </div>
       </div>
 
-      <!-- Why Booking.com? -->
-      <h2 class="section-title">Why Booking.com?</h2>
-      <p class="section-subtitle">The world's leading holiday planning platform, powered by rule-based optimization</p>
+      <!-- Why TRIPRISE? -->
+      <h2 class="section-title">Why Choose TRIPRISE?</h2>
+      <p class="section-subtitle">A truly elevated travel platform powered by deterministic constraint architecture</p>
 
       <div class="why-booking-grid">
         <div class="why-card">
@@ -1892,6 +2000,28 @@
             <p class="why-card-text">Certified room fit math ($adults \ge 1$), wheelchair, and pure sattvic food for senior parents.</p>
           </div>
         </div>
+      </div>
+
+      <!-- Luxury Social Proof / Testimonial Banner (Screenshot Match) -->
+      <div class="luxury-quote-container" style="margin: 40px 0 24px 0; background: linear-gradient(135deg, #1E1B18 0%, #2D2722 100%); border-radius: 18px; padding: 32px 36px; color: #FFFFFF; display: flex; align-items: center; justify-content: space-between; gap: 24px; box-shadow: 0 16px 40px -10px rgba(30, 20, 10, 0.25); border: 1px solid rgba(194, 139, 81, 0.25);">
+        <div style="display: flex; align-items: center; gap: 24px;">
+          <div style="text-align: center; border-right: 1px solid rgba(255,255,255,0.15); padding-right: 24px;">
+            <div style="font-size: 42px; font-weight: 800; font-family: var(--font-serif); color: #FFFFFF; line-height: 1;">4.8</div>
+            <div style="color: #D4AF37; font-size: 14px; margin-top: 4px;">★★★★★</div>
+            <div style="font-size: 11px; color: #A89F91; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px;">1,420 Reviews</div>
+          </div>
+          <div>
+            <div style="font-family: var(--font-serif); font-size: 20px; font-weight: 500; color: #F5EBE1; line-height: 1.4;">
+              "A truly elevated hotel & holiday experience from start to finish."
+            </div>
+            <div style="font-size: 13px; color: #C28B51; font-weight: 600; margin-top: 6px;">
+              Menon Family, Bengaluru · Verified 6-Night Japan Package
+            </div>
+          </div>
+        </div>
+        <button class="btn-booking-primary" style="padding: 12px 24px; font-size: 14px; white-space: nowrap;" onclick="navigateToPage('packages')">
+          Explore Curated Packages ↗
+        </button>
       </div>
     </div>
   </div>
@@ -2850,24 +2980,23 @@
         <div>
           <div class="footer-col-title">About</div>
           <div class="footer-col-links">
-            <a href="#">About Booking.com</a>
-            <a href="#">How we work</a>
-            <a href="#">Sustainability</a>
-            <a href="#">Careers</a>
-            <a href="#">Corporate contact</a>
+            <a href="#">About TRIPRISE</a>
+            <a href="#">Deterministic Engine</a>
+            <a href="#">Rule Solver</a>
+            <a href="#">Hackathon Architecture</a>
+            <a href="#">SQLite Schema</a>
           </div>
         </div>
       </div>
 
       <div class="footer-bottom-bar">
-        <div>Booking.com is part of Booking Holdings Inc., the world leader in online travel and related services.</div>
-        <div style="margin-top: 4px; color: #94a3b8;">Copyright © 1996–2027 Booking.com™. All rights reserved. Hackathon Problem 1 Implementation.</div>
+        <div>TRIPRISE is a high-performance holiday packaging engine powered by deterministic constraint solver algorithms.</div>
+        <div style="margin-top: 4px; color: #94a3b8;">Copyright © 2027 TRIPRISE™. All rights reserved. Hackathon Problem 1 Implementation.</div>
         <div class="footer-holdings-logos">
-          <span>Booking.com</span>
-          <span>priceline</span>
-          <span>KAYAK</span>
-          <span>agoda</span>
-          <span>OpenTable</span>
+          <span>TRIPRISE</span>
+          <span>AURA LUXE</span>
+          <span>SOLVER CORE</span>
+          <span>SQLITE 3</span>
         </div>
       </div>
     </div>
