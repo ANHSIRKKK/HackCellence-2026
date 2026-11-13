@@ -13,9 +13,12 @@ const PORT = process.env.PORT || 5001;
 const FRONTEND_DIR = path.resolve(__dirname, '../frontend');
 const IMAGES_DIR = path.resolve(__dirname, '../images');
 
+// In-memory active trips store (for staging modifications)
+const activeTripsCache = new Map();
+
 function setCorsHeaders(res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 }
 
@@ -83,55 +86,159 @@ const server = http.createServer(async (req, res) => {
   const query = parsedUrl.query;
 
   try {
-    // 1. API: Catalog Metadata
-    if (req.method === 'GET' && pathname === '/api/catalog/metadata') {
+    // SECTION 8 REST APIs:
+
+    // 1. GET /api/catalog/destinations
+    if (req.method === 'GET' && (pathname === '/api/catalog/destinations' || pathname === '/api/catalog/metadata')) {
       return sendJson(res, 200, {
         departure_cities: catalog.destinations.departure_cities,
         countries: catalog.destinations.countries.map(c => ({
           code: c.code,
           name: c.name,
+          timezone: c.timezone,
           cities: c.cities.map(ct => ct.name)
         })),
         rules: catalog.destinations.rules
       });
     }
 
-    // 2. API: Generate Package
-    if (req.method === 'POST' && pathname === '/api/packages/generate') {
+    // 2. GET /api/catalog/options
+    if (req.method === 'GET' && pathname === '/api/catalog/options') {
+      return sendJson(res, 200, {
+        destinations: catalog.destinations,
+        airports: catalog.airports,
+        hotelsCount: catalog.hotels.length,
+        attractionsCount: catalog.attractions.length
+      });
+    }
+
+    // 3. POST /api/trips/validate-request
+    if (req.method === 'POST' && pathname === '/api/trips/validate-request') {
       const body = await parseBody(req);
-      const result = planner.buildPackages(body);
+      // Validate mandatory fields
+      const errors = [];
+      if (!body.departureCity) errors.push('departureCity is required');
+      if (!body.destinationCountry) errors.push('destinationCountry is required');
+      if (!body.startDate) errors.push('startDate is required');
+      if (!body.nights || body.nights < 3 || body.nights > 10) errors.push('nights must be between 3 and 10');
+      if (!body.adults || body.adults < 1) errors.push('at least 1 adult is required');
+      if (!body.budget || body.budget <= 0) errors.push('positive budget is required');
+
+      // Normalize preference weights to 100%
+      let prefs = body.preferences || { hotelWeight: 40, flightWeight: 30, experienceWeight: 30 };
+      const sum = (prefs.hotelWeight || 0) + (prefs.flightWeight || 0) + (prefs.experienceWeight || 0);
+      if (sum > 0) {
+        prefs.hotelWeight = Math.round((prefs.hotelWeight / sum) * 100);
+        prefs.flightWeight = Math.round((prefs.flightWeight / sum) * 100);
+        prefs.experienceWeight = 100 - prefs.hotelWeight - prefs.flightWeight;
+      }
+
+      return sendJson(res, 200, {
+        valid: errors.length === 0,
+        errors,
+        normalizedPreferences: prefs
+      });
+    }
+
+    // 4. POST /api/trips/generate & /api/packages/generate
+    if (req.method === 'POST' && (pathname === '/api/trips/generate' || pathname === '/api/packages/generate')) {
+      const body = await parseBody(req);
+      const normalizedRequest = {
+        departure_city: body.departure_city || body.departureCity,
+        country: body.country || body.destinationCountry,
+        start_date: body.start_date || body.startDate,
+        nights: parseInt(body.nights || 6, 10),
+        adults: parseInt(body.adults || 2, 10),
+        children: parseInt(body.children !== undefined ? body.children : (body.childrenAges ? body.childrenAges.length : 0), 10),
+        child_ages: body.child_ages || body.childrenAges || [],
+        budget: parseInt(body.budget || 350000, 10),
+        traveler_name: body.traveler_name || body.travelerName || 'Menon family',
+        preferences: body.preferences || {
+          primaryPriority: body.preference || 'balanced',
+          hotelWeight: 40,
+          flightWeight: 30,
+          experienceWeight: 30
+        }
+      };
+
+      const result = planner.buildPackages(normalizedRequest);
+      if (result.packages) {
+        for (const [key, pkg] of Object.entries(result.packages)) {
+          if (pkg && pkg.trip_id) {
+            activeTripsCache.set(pkg.trip_id, pkg);
+          }
+        }
+      }
       return sendJson(res, 200, result);
     }
 
-    // 3. API: Revalidate Trip
-    if (req.method === 'POST' && pathname === '/api/packages/revalidate') {
+    // 5. GET /api/trips/:id
+    if (req.method === 'GET' && pathname.startsWith('/api/trips/') && !pathname.endsWith('/export')) {
+      const tripId = pathname.replace('/api/trips/', '').trim();
+      const trip = activeTripsCache.get(tripId);
+      if (trip) {
+        return sendJson(res, 200, { success: true, trip });
+      } else {
+        return sendJson(res, 404, { success: false, error: 'Trip not found' });
+      }
+    }
+
+    // 6. POST /api/trips/:id/validate & /api/packages/revalidate
+    if (req.method === 'POST' && (pathname.endsWith('/validate') || pathname === '/api/packages/revalidate')) {
       const body = await parseBody(req);
-      const result = validator.recalculateAndValidateTrip(body.trip);
+      const trip = body.trip || activeTripsCache.get(pathname.split('/')[3]);
+      if (!trip) {
+        return sendJson(res, 400, { success: false, error: 'No trip data provided' });
+      }
+      const result = validator.recalculateAndValidateTrip(trip);
+      if (trip.trip_id) {
+        activeTripsCache.set(trip.trip_id, result.updated_trip);
+      }
       return sendJson(res, 200, result);
     }
 
-    // 4. API: Hotel Options for Swapping
-    if (req.method === 'POST' && pathname === '/api/packages/options/hotels') {
+    // 7. PATCH /api/trips/:id/hotel & Options
+    if (pathname.includes('/options/hotels') || (req.method === 'PATCH' && pathname.endsWith('/hotel'))) {
       const body = await parseBody(req);
-      const options = validator.getHotelSwapOptions(body.trip, body.city);
+      const trip = body.trip || activeTripsCache.get(pathname.split('/')[3]);
+      const options = validator.getHotelSwapOptions(trip, body.city);
       return sendJson(res, 200, { options });
     }
 
-    // 5. API: Flight Options for Swapping
-    if (req.method === 'POST' && pathname === '/api/packages/options/flights') {
+    // 8. PATCH /api/trips/:id/flight & Options
+    if (pathname.includes('/options/flights') || (req.method === 'PATCH' && pathname.endsWith('/flight'))) {
       const body = await parseBody(req);
-      const options = validator.getFlightSwapOptions(body.trip, body.direction);
+      const trip = body.trip || activeTripsCache.get(pathname.split('/')[3]);
+      const options = validator.getFlightSwapOptions(trip, body.direction);
       return sendJson(res, 200, { options });
     }
 
-    // 6. API: Attraction Options for Swapping
-    if (req.method === 'POST' && pathname === '/api/packages/options/attractions') {
+    // 9. Attractions: Add / Remove & Options
+    if (pathname.includes('/options/attractions')) {
       const body = await parseBody(req);
-      const options = validator.getAttractionSwapOptions(body.trip, body.target_date);
+      const trip = body.trip || activeTripsCache.get(pathname.split('/')[3]);
+      const options = validator.getAttractionSwapOptions(trip, body.target_date || body.targetDate);
       return sendJson(res, 200, { options });
     }
 
-    // 7. API: Confirm Booking
+    // 10. GET /api/trips/:id/export
+    if (req.method === 'GET' && pathname.endsWith('/export')) {
+      const parts = pathname.split('/');
+      const tripId = parts[3];
+      const trip = activeTripsCache.get(tripId) || storage.getReservation(tripId);
+      if (trip) {
+        setCorsHeaders(res);
+        res.writeHead(200, {
+          'Content-Type': 'application/json',
+          'Content-Disposition': `attachment; filename="trip_${tripId}.json"`
+        });
+        return res.end(JSON.stringify(trip, null, 2));
+      } else {
+        return sendJson(res, 404, { success: false, error: 'Trip export not found' });
+      }
+    }
+
+    // 11. POST /api/bookings/confirm
     if (req.method === 'POST' && pathname === '/api/bookings/confirm') {
       const body = await parseBody(req);
       if (!body.trip) {
@@ -141,7 +248,7 @@ const server = http.createServer(async (req, res) => {
       return sendJson(res, 200, { success: true, reservation });
     }
 
-    // 8. API: Get Booking by Reference
+    // 12. GET /api/bookings/:reference
     if (req.method === 'GET' && pathname.startsWith('/api/bookings/')) {
       const reference = pathname.replace('/api/bookings/', '').trim();
       const reservation = storage.getReservation(reference);
@@ -152,20 +259,26 @@ const server = http.createServer(async (req, res) => {
       }
     }
 
-    // 9. API: Get All Bookings
+    // 13. GET /api/bookings (All saved reservations)
     if (req.method === 'GET' && pathname === '/api/bookings') {
       const all = storage.getAllReservations();
       return sendJson(res, 200, { success: true, reservations: all });
     }
 
-    // 10. API: NLP Quick Request Parser
+    // 14. GET /api/discovery/recommendations (Page 3)
+    if (req.method === 'GET' && pathname === '/api/discovery/recommendations') {
+      const recs = planner.discoverDestinations(query);
+      return sendJson(res, 200, { success: true, destinations: recs });
+    }
+
+    // 15. POST /api/nlp/parse (Feature S1: Rule-based text parser)
     if (req.method === 'POST' && pathname === '/api/nlp/parse') {
       const body = await parseBody(req);
       const parsed = nlp.parse(body.query);
       return sendJson(res, 200, { success: true, parsed });
     }
 
-    // 11. Static Images Serving
+    // 16. Static Images Serving
     if (pathname.startsWith('/images/')) {
       const relPath = pathname.replace('/images/', '');
       const fullPath = path.join(IMAGES_DIR, relPath);
@@ -174,7 +287,7 @@ const server = http.createServer(async (req, res) => {
       }
     }
 
-    // 12. Static Frontend Serving
+    // 17. Static Frontend Serving
     let staticPath = path.join(FRONTEND_DIR, pathname === '/' ? 'index.html' : pathname);
     if (!fs.existsSync(staticPath)) {
       staticPath = path.join(FRONTEND_DIR, 'index.html');
@@ -193,8 +306,8 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, '127.0.0.1', () => {
   console.log(`=======================================================`);
-  console.log(`🏨 Build My Holiday Server running at http://127.0.0.1:${PORT}`);
-  console.log(`⚡ Zero external dependencies required - Pure Node.js`);
+  console.log(`🏨 Smart Holiday Planner & Booking Platform`);
+  console.log(`📍 Serving on: http://127.0.0.1:${PORT}`);
+  console.log(`🚀 Pure Node.js REST API with zero external dependencies`);
   console.log(`=======================================================`);
 });
-

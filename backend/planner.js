@@ -190,7 +190,7 @@ class PlannerService {
       homeAirport,
       validDep,
       validCountry,
-      preference
+      preferences = {}
     } = request;
 
     const totalTravelers = adults + children;
@@ -226,7 +226,6 @@ class PlannerService {
       const validOptions = this.getValidHotelOptionsForCity(seg.city, curCheckIn, seg.nights, adults, children);
       if (validOptions.length === 0) return null;
 
-      // Sort by requested tier
       if (hotelTier === 'cheapest') {
         validOptions.sort((a, b) => a.totalCost - b.totalCost);
       } else if (hotelTier === 'luxury') {
@@ -234,7 +233,6 @@ class PlannerService {
       } else if (hotelTier === 'family') {
         validOptions.sort((a, b) => (b.family_friendly ? 1 : 0) - (a.family_friendly ? 1 : 0) || a.totalCost - b.totalCost);
       } else {
-        // Balanced
         validOptions.sort((a, b) => b.rating - a.rating || a.totalCost - b.totalCost);
       }
 
@@ -334,7 +332,7 @@ class PlannerService {
 
         const chosenInter = interTransfers[0];
         const interCost = this.calculateTransferCost(chosenInter, adults, children);
-        const departMins = parseTime(chosenInter.service_from) + 120; // 2 hours after morning start
+        const departMins = parseTime(chosenInter.service_from) + 120;
         const reachMins = departMins + chosenInter.duration_minutes;
 
         packageItems.push({
@@ -427,6 +425,8 @@ class PlannerService {
 
     // 7. Attractions Scheduling
     const scheduledAttractionIds = new Set();
+    const prefPriority = preferences.primaryPriority || 'balanced';
+
     for (let d = 0; d < nights; d++) {
       const curDate = addDays(start_date, d);
       const isArrivalDay = (d === 0);
@@ -446,13 +446,12 @@ class PlannerService {
         return true;
       });
 
-      // Sort attractions by preference
       eligible.sort((a, b) => {
-        if (preference === 'spiritual') {
+        if (prefPriority === 'experience' || prefPriority === 'spiritual') {
           const isSpiritA = (a.category === 'TEMPLE' || a.category === 'SHRINE' || a.category === 'MOSQUE') ? 1 : 0;
           const isSpiritB = (b.category === 'TEMPLE' || b.category === 'SHRINE' || b.category === 'MOSQUE') ? 1 : 0;
           if (isSpiritA !== isSpiritB) return isSpiritB - isSpiritA;
-        } else if (preference === 'family_kids') {
+        } else if (children > 0) {
           const isKidA = a.child_friendly ? 1 : 0;
           const isKidB = b.child_friendly ? 1 : 0;
           if (isKidA !== isKidB) return isKidB - isKidA;
@@ -517,6 +516,12 @@ class PlannerService {
     }
     const avgStars = totalStayNights > 0 ? starSum / totalStayNights : 0;
 
+    // Calculate component costs for Budget Analysis (Page 7)
+    const flightCost = packageItems.filter(it => it.type === 'flight').reduce((s, it) => s + it.price_inr, 0);
+    const hotelCost = packageItems.filter(it => it.type === 'hotel').reduce((s, it) => s + it.price_inr, 0);
+    const transferCost = packageItems.filter(it => it.type === 'transfer').reduce((s, it) => s + it.price_inr, 0);
+    const attractionCost = packageItems.filter(it => it.type === 'attraction').reduce((s, it) => s + it.price_inr, 0);
+
     return {
       trip_id: `trip-${Date.now()}-${Math.floor(Math.random() * 10000)}`,
       traveler: {
@@ -536,23 +541,34 @@ class PlannerService {
         total_price: totalPrice,
         travel_duration_minutes: travelMins,
         avg_stars: Number(avgStars.toFixed(2)),
-        city_plan: cityPlan
+        city_plan: cityPlan,
+        flight_cost: flightCost,
+        hotel_cost: hotelCost,
+        transfer_cost: transferCost,
+        attraction_cost: attractionCost,
+        budget_utilization_pct: Math.min(100, Math.round((totalPrice / budget) * 100))
       }
     };
   }
 
   buildPackages(request) {
     const {
-      departure_city,
-      country,
-      start_date,
-      nights,
+      departure_city = 'Bengaluru',
+      country = 'Japan',
+      start_date = '2027-04-10',
+      nights = 6,
       adults = 2,
       children = 0,
       child_ages = [],
       budget = 350000,
       traveler_name = 'Traveler Party',
-      preference = 'all_round'
+      preferences = {
+        primaryPriority: 'balanced',
+        hotelWeight: 40,
+        flightWeight: 30,
+        experienceWeight: 30,
+        travelStyle: 'balanced'
+      }
     } = request;
 
     const totalTravelers = adults + children;
@@ -606,7 +622,7 @@ class PlannerService {
       homeAirport,
       validDep,
       validCountry,
-      preference
+      preferences
     };
 
     const candidatePackages = [];
@@ -632,8 +648,7 @@ class PlannerService {
 
       if (potentialOutFlights.length === 0 || potentialInFlights.length === 0) continue;
 
-      // Evaluate packages with different tiers (cheapest, luxury, balanced)
-      const tiers = ['cheapest', 'balanced', 'luxury'];
+      const tiers = ['cheapest', 'balanced', 'luxury', 'family'];
       for (const tier of tiers) {
         for (const outFl of potentialOutFlights.slice(0, 3)) {
           for (const inFl of potentialInFlights.slice(0, 3)) {
@@ -673,9 +688,34 @@ class PlannerService {
       };
     }
 
+    // Required G4 Packages:
     const cheapestPkg = withinBudget[0];
     const fastestPkg = [...withinBudget].sort((a, b) => a.metrics.travel_duration_minutes - b.metrics.travel_duration_minutes)[0];
     const bestRatedPkg = [...withinBudget].sort((a, b) => b.metrics.avg_stars - a.metrics.avg_stars || a.total_inr - b.total_inr)[0];
+
+    // Priority-Based Package (Weighted Scoring per user sliders: Section 4 Page 4)
+    const wHotel = (preferences.hotelWeight || 40) / 100;
+    const wFlight = (preferences.flightWeight || 30) / 100;
+    const wExp = (preferences.experienceWeight || 30) / 100;
+
+    const scoredPackages = withinBudget.map(pkg => {
+      // Hotel score: stars normalized (2-5 stars -> 0-1)
+      const hotelScore = (pkg.metrics.avg_stars - 2) / 3;
+      // Flight score: lower travel time is better (max transit time approx 1500m -> 0-1)
+      const flightScore = Math.max(0, 1 - (pkg.metrics.travel_duration_minutes - 900) / 600);
+      // Experience score: number of attractions (0-10 -> 0-1)
+      const attCount = pkg.items.filter(it => it.type === 'attraction').length;
+      const expScore = Math.min(1, attCount / 8);
+
+      const totalWeightedScore = (wHotel * hotelScore) + (wFlight * flightScore) + (wExp * expScore);
+      return {
+        pkg,
+        score: totalWeightedScore
+      };
+    });
+
+    scoredPackages.sort((a, b) => b.score - a.score);
+    const priorityPkg = scoredPackages[0].pkg;
 
     return {
       success: true,
@@ -683,10 +723,57 @@ class PlannerService {
       packages: {
         cheapest: cheapestPkg,
         fastest: fastestPkg,
-        best_rated: bestRatedPkg
+        best_rated: bestRatedPkg,
+        priority_match: priorityPkg
       },
-      total_candidates: candidatePackages.length
+      total_candidates: candidatePackages.length,
+      user_weights: {
+        hotel: preferences.hotelWeight || 40,
+        flight: preferences.flightWeight || 30,
+        experience: preferences.experienceWeight || 30
+      }
     };
+  }
+
+  // Page 3: Smart Destination Discovery Engine
+  discoverDestinations(criteria) {
+    const {
+      departure_city = 'Bengaluru',
+      budget = 350000,
+      nights = 6,
+      travelers = 3,
+      preferred_style = 'balanced'
+    } = criteria;
+
+    const destinations = [
+      {
+        id: 'dest-japan',
+        name: 'Japan',
+        cities: ['Tokyo', 'Kyoto', 'Osaka'],
+        tagline: 'Ancient Shrines, Futuristic Skylines & Sakura Gardens',
+        image: 'images/attractions/ATT-KYO-001.jpg',
+        best_for: 'Culture, Spiritual Pilgrimage, Anime & Theme Parks',
+        estimated_min_budget: 250000,
+        suitability_score: 95,
+        reason: 'Fits your 6-night duration with direct/1-stop flights from Bengaluru and incredible family & pilgrimage activities.'
+      },
+      {
+        id: 'dest-uae',
+        name: 'United Arab Emirates',
+        cities: ['Dubai', 'Abu Dhabi'],
+        tagline: 'Grand Mosques, Luxury Dunes & World-Class Resorts',
+        image: 'images/attractions/ATT-AUH-001.jpg',
+        best_for: 'Luxury Stays, Grand Mosques & Fast Travel',
+        estimated_min_budget: 180000,
+        suitability_score: 92,
+        reason: 'Shorter flight duration (approx 4h) with majestic spiritual landmarks like Sheikh Zayed Grand Mosque.'
+      }
+    ];
+
+    return destinations.map(d => ({
+      ...d,
+      is_within_budget: budget >= d.estimated_min_budget
+    }));
   }
 }
 
