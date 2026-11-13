@@ -581,5 +581,397 @@
     "is_pilgrim": true,
     "package_name": "Char Dham Yatra Deluxe (Helicopter VIP Darshan)",
     "created_at": "2026-11-13T17:36:29.225Z"
+  },
+  {
+    "reference": "8774806438",
+    "trip_id": "trip-1794591687313-6707",
+    "traveler": {
+      "name": "Menon family",
+      "home_airport": "BLR",
+      "adults": 2,
+      "children": 1,
+      "child_ages": [
+        6
+      ]
+    },
+    "country": "Japan",
+    "start_date": "2027-04-10",
+    "end_date": "2027-04-16",
+    "budget_inr": 350000,
+    "total_inr": 252504,
+    "items": [
+      {
+        "item_id": "item-fl-out-FL-405",
+        "type": "flight",
+        "name": "Nippon Sky NS 811 (BLR to NRT)",
+        "airline": "Nippon Sky",
+        "flight_number": "NS 811",
+        "from_code": "BLR",
+        "to_code": "NRT",
+        "duration_minutes": 690,
+        "stops": 1,
+        "cabin": "ECONOMY",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "FL-405",
+        "room_id": null,
+        "start": "2027-04-10T06:30",
+        "end": "2027-04-10T21:30",
+        "quantity": 3,
+        "price_inr": 71820,
+        "booking": {
+          "reference": "8774806438"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-tr-arr-TR-NRT-UEN-TAXI",
+        "type": "transfer",
+        "name": "Narita airport taxi to Ueno (NRT to Ueno area hotels)",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "TR-NRT-UEN-TAXI",
+        "room_id": null,
+        "start": "2027-04-10T22:30",
+        "end": "2027-04-10T23:40",
+        "quantity": 1,
+        "price_inr": 12880,
+        "booking": {
+          "reference": "8774806438"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-htl-HTL-TYO-004-2027-04-10",
+        "type": "hotel",
+        "name": "Ueno Garden Inn (Family Room)",
+        "hotel_name": "Ueno Garden Inn",
+        "room_name": "Family Room",
+        "image": "images/hotels/HOTEL-BUSINESS-1.jpg",
+        "stars": 3,
+        "rating": 7.9,
+        "area": "Ueno",
+        "family_friendly": true,
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "HTL-TYO-004",
+        "room_id": "RM-TYO-004-B",
+        "start": "2027-04-10",
+        "end": "2027-04-16",
+        "quantity": 1,
+        "price_inr": 56784,
+        "booking": {
+          "reference": "8774806438"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-tr-dep-TR-HND-UEN-TAXI",
+        "type": "transfer",
+        "name": "Haneda airport taxi to Ueno (Ueno Garden Inn to Ueno area hotels)",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "TR-HND-UEN-TAXI",
+        "room_id": null,
+        "start": "2027-04-16T07:20",
+        "end": "2027-04-16T08:00",
+        "quantity": 1,
+        "price_inr": 5320,
+        "booking": {
+          "reference": "8774806438"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-fl-in-FL-412",
+        "type": "flight",
+        "name": "Nippon Sky NS 806 (HND to BLR)",
+        "airline": "Nippon Sky",
+        "flight_number": "NS 806",
+        "from_code": "HND",
+        "to_code": "BLR",
+        "duration_minutes": 600,
+        "stops": 0,
+        "cabin": "ECONOMY",
+        "city": "Bengaluru",
+        "status": "BOOKED",
+        "catalog_id": "FL-412",
+        "room_id": null,
+        "start": "2027-04-16T11:00",
+        "end": "2027-04-16T17:30",
+        "quantity": 3,
+        "price_inr": 80640,
+        "booking": {
+          "reference": "8774806438"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-001-2027-04-11",
+        "type": "attraction",
+        "name": "teamLab Planets TOKYO",
+        "image": "images/attractions/ATT-TYO-001.jpg",
+        "category": "MUSEUM",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-001",
+        "room_id": null,
+        "start": "2027-04-11T09:30",
+        "end": "2027-04-11T11:30",
+        "quantity": 3,
+        "price_inr": 5096,
+        "booking": {
+          "reference": "8774806438"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-002-2027-04-11",
+        "type": "attraction",
+        "name": "Tokyo Disneyland",
+        "image": "images/attractions/ATT-TYO-002.jpg",
+        "category": "THEME_PARK",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-002",
+        "room_id": null,
+        "start": "2027-04-11T12:15",
+        "end": "2027-04-11T20:15",
+        "quantity": 3,
+        "price_inr": 13664,
+        "booking": {
+          "reference": "8774806438"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-003-2027-04-12",
+        "type": "attraction",
+        "name": "Tokyo Toy Museum",
+        "image": "images/attractions/ATT-TYO-003.jpg",
+        "category": "MUSEUM",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-003",
+        "room_id": null,
+        "start": "2027-04-12T10:00",
+        "end": "2027-04-12T11:30",
+        "quantity": 3,
+        "price_inr": 1680,
+        "booking": {
+          "reference": "8774806438"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-004-2027-04-12",
+        "type": "attraction",
+        "name": "Senso-ji",
+        "image": "images/attractions/ATT-TYO-004.jpg",
+        "category": "TEMPLE",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-004",
+        "room_id": null,
+        "start": "2027-04-12T12:15",
+        "end": "2027-04-12T13:15",
+        "quantity": 3,
+        "price_inr": 0,
+        "booking": {
+          "reference": "8774806438"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-007-2027-04-13",
+        "type": "attraction",
+        "name": "Tokyo Skytree",
+        "image": "images/attractions/ATT-TYO-007.jpg",
+        "category": "VIEWPOINT",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-007",
+        "room_id": null,
+        "start": "2027-04-13T10:00",
+        "end": "2027-04-13T11:30",
+        "quantity": 3,
+        "price_inr": 2884,
+        "booking": {
+          "reference": "8774806438"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-008-2027-04-13",
+        "type": "attraction",
+        "name": "Ueno Park",
+        "image": "images/attractions/ATT-TYO-008.jpg",
+        "category": "PARK",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-008",
+        "room_id": null,
+        "start": "2027-04-13T12:15",
+        "end": "2027-04-13T13:45",
+        "quantity": 3,
+        "price_inr": 0,
+        "booking": {
+          "reference": "8774806438"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-009-2027-04-14",
+        "type": "attraction",
+        "name": "Ameyoko Market",
+        "image": "images/attractions/ATT-TYO-009.jpg",
+        "category": "MARKET",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-009",
+        "room_id": null,
+        "start": "2027-04-14T10:00",
+        "end": "2027-04-14T11:00",
+        "quantity": 3,
+        "price_inr": 0,
+        "booking": {
+          "reference": "8774806438"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-010-2027-04-14",
+        "type": "attraction",
+        "name": "Meiji Jingu",
+        "image": "images/attractions/ATT-TYO-010.jpg",
+        "category": "SHRINE",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-010",
+        "room_id": null,
+        "start": "2027-04-14T11:45",
+        "end": "2027-04-14T12:45",
+        "quantity": 3,
+        "price_inr": 0,
+        "booking": {
+          "reference": "8774806438"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-011-2027-04-15",
+        "type": "attraction",
+        "name": "Shibuya Crossing",
+        "image": "images/attractions/ATT-TYO-011.jpg",
+        "category": "DISTRICT",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-011",
+        "room_id": null,
+        "start": "2027-04-15T09:30",
+        "end": "2027-04-15T10:00",
+        "quantity": 3,
+        "price_inr": 0,
+        "booking": {
+          "reference": "8774806438"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-TYO-012-2027-04-15",
+        "type": "attraction",
+        "name": "Tokyo Tower",
+        "image": "images/attractions/ATT-TYO-012.jpg",
+        "category": "VIEWPOINT",
+        "city": "Tokyo",
+        "status": "BOOKED",
+        "catalog_id": "ATT-TYO-012",
+        "room_id": null,
+        "start": "2027-04-15T10:45",
+        "end": "2027-04-15T11:45",
+        "quantity": 3,
+        "price_inr": 1736,
+        "booking": {
+          "reference": "8774806438"
+        },
+        "sources": [],
+        "warnings": []
+      }
+    ],
+    "is_pilgrim": false,
+    "package_name": "",
+    "created_at": "2026-11-13T17:41:30.424Z"
+  },
+  {
+    "reference": "8804475074",
+    "trip_id": "trip-pilgrim-8804475074",
+    "traveler": {
+      "name": "Pilgrim Family",
+      "seniors_count": 2,
+      "health_notes": "Wheelchair assistance requested"
+    },
+    "country": "India (Sacred Pilgrimage)",
+    "start_date": "2027-04-15",
+    "end_date": "2027-04-24",
+    "budget_inr": 225000,
+    "total_inr": 185000,
+    "items": [
+      {
+        "item_id": "pilgrim-hotel-6140918493",
+        "type": "hotel",
+        "name": "Char Dham Yatra Deluxe (Helicopter VIP Darshan) (Senior Care Ground-Floor Suite)",
+        "city": "Sacred Site",
+        "status": "BOOKED",
+        "start": "2027-04-15T12:00",
+        "end": "2027-04-24T10:00",
+        "price_inr": 101750,
+        "booking": {
+          "reference": "8804475074"
+        }
+      },
+      {
+        "item_id": "pilgrim-transfer-6140918493",
+        "type": "transfer",
+        "name": "VIP Helipad Shuttle & Temple Corridor Golf Cart Buggy",
+        "city": "Pilgrim Corridor",
+        "status": "BOOKED",
+        "start": "2027-04-15T09:00",
+        "end": "2027-04-15T11:00",
+        "price_inr": 46250,
+        "booking": {
+          "reference": "8804475074"
+        }
+      },
+      {
+        "item_id": "pilgrim-darshan-6140918493",
+        "type": "attraction",
+        "name": "VIP Sanctum Darshan & Gotra Sankalp Puja",
+        "city": "Sanctum Corridor",
+        "status": "BOOKED",
+        "start": "2027-04-16T06:00",
+        "end": "2027-04-16T09:00",
+        "price_inr": 37000,
+        "booking": {
+          "reference": "8804475074"
+        }
+      }
+    ],
+    "is_pilgrim": true,
+    "package_name": "Char Dham Yatra Deluxe (Helicopter VIP Darshan)",
+    "created_at": "2026-11-13T17:41:39.295Z"
   }
 ]

@@ -1,5 +1,5 @@
-# Booking.com · Smart Holiday Planner & Booking Platform
-### Hackathon Problem 1 Solution (MERN Stack Architecture)
+# TRIPRISE · Smart Holiday Planner & Luxury Travel Engine
+### Hackathon Problem 1 Solution · Zero-AI Pure Node.js & SQLite Architecture
 
 An end-to-end holiday package planning and booking web application built for the **Hackathon Problem 1**. Designed with the familiar visual layout of **Booking.com**, the platform takes complex multi-party travel constraints and instantly synthesizes complete, validated holiday itineraries with flights, hotels, airport transfers, intercity transfers, and attractions.
 
