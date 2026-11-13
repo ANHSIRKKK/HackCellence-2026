@@ -3,990 +3,972 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Build My Holiday | Booking.com Style Holiday Packages</title>
+  <title>TRIPRISE · Build My Holiday | Smart Package Reservation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --b-blue-dark: #00224f;
-      --b-blue: #003580;
-      --b-blue-light: #006ce4;
-      --b-blue-hover: #0057b8;
-      --b-yellow: #febb02;
-      --b-yellow-dark: #e5a700;
-      --b-yellow-light: #fff8e6;
-      --b-gray-bg: #f5f5f5;
-      --b-gray-border: #e7e7e7;
-      --b-gray-text: #595959;
-      --b-text: #1a1a1a;
-      --b-green: #008009;
-      --b-green-bg: #e6f4ea;
-      --b-red: #d4111e;
-      --b-red-bg: #fde8e8;
+      --bg-gradient: linear-gradient(135deg, #dbe8f7 0%, #eef5fc 45%, #d9e6f6 100%);
+      --card-bg: #ffffff;
+      --primary-blue: #3b82f6;
+      --primary-blue-dark: #2563eb;
+      --dark-btn: #111827;
+      --dark-btn-hover: #1f2937;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --border-color: #f1f5f9;
+      --border-dark: #e2e8f0;
+      --green-badge: #10b981;
+      --green-bg: #ecfdf5;
+      --amber-badge: #f59e0b;
+      --amber-bg: #fffbeb;
+      --purple-badge: #8b5cf6;
+      --purple-bg: #f5f3ff;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     body {
-      background-color: var(--b-gray-bg);
-      color: var(--b-text);
+      background: var(--bg-gradient);
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 28px 20px;
+      color: var(--text-main);
+    }
+
+    /* Main Floating Canvas (Matching Reference Screenshot) */
+    .app-canvas {
+      background: var(--card-bg);
+      width: 100%;
+      max-width: 1320px;
+      border-radius: 32px;
+      box-shadow: 0 25px 70px rgba(15, 34, 58, 0.12), 0 4px 12px rgba(15, 34, 58, 0.04);
+      padding: 28px 36px 40px 36px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.9);
     }
 
     /* Top Navigation Header */
-    header {
-      background-color: var(--b-blue);
-      color: white;
-      padding: 12px 24px;
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
+    .top-nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 24px;
     }
 
-    .brand {
+    .brand-logo {
       display: flex;
       align-items: center;
       gap: 10px;
       text-decoration: none;
-      color: white;
+      color: var(--text-main);
+      font-size: 20px;
       font-weight: 800;
-      font-size: 24px;
-      letter-spacing: -0.5px;
+      letter-spacing: 1px;
     }
 
-    .brand-dot {
-      color: var(--b-yellow);
+    .brand-icon {
+      width: 26px;
+      height: 26px;
+      fill: var(--text-main);
     }
 
-    .brand-sub {
-      font-size: 13px;
-      font-weight: 500;
-      background: rgba(255, 255, 255, 0.15);
-      padding: 2px 8px;
-      border-radius: 4px;
-      margin-left: 6px;
-    }
-
-    .nav-actions {
+    .center-nav-pills {
+      background: #f8fafc;
+      border: 1px solid var(--border-dark);
+      padding: 4px;
+      border-radius: 100px;
       display: flex;
-      align-items: center;
-      gap: 14px;
+      gap: 4px;
     }
 
-    .nav-btn {
+    .nav-pill {
       background: transparent;
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      padding: 8px 14px;
-      border-radius: 4px;
-      font-size: 14px;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 13px;
       font-weight: 600;
+      color: var(--text-muted);
       cursor: pointer;
       transition: all 0.2s;
     }
 
-    .nav-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: white;
+    .nav-pill:hover {
+      color: var(--text-main);
     }
 
-    .nav-btn-primary {
-      background: white;
-      color: var(--b-blue-light);
-      border: none;
-    }
-
-    .nav-btn-primary:hover {
-      background: #f0f0f0;
-    }
-
-    /* Hero Search Bar Area */
-    .hero-banner {
-      background-color: var(--b-blue);
+    .nav-pill.active {
+      background: var(--dark-btn);
       color: white;
-      padding: 20px 24px 60px 24px;
     }
 
-    .hero-content {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .hero-title {
-      font-size: 38px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 8px;
-    }
-
-    .hero-subtitle {
-      font-size: 18px;
-      color: #e0e9f5;
-      font-weight: 400;
-      margin-bottom: 24px;
-    }
-
-    /* The Booking Yellow Search Box */
-    .search-box-wrapper {
-      max-width: 1200px;
-      margin: -40px auto 24px auto;
-      padding: 0 24px;
-      position: relative;
-      z-index: 10;
-    }
-
-    .search-box {
-      background: var(--b-yellow);
-      padding: 5px;
-      border-radius: 8px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-      display: grid;
-      grid-template-columns: 1.2fr 1.2fr 1.2fr 1.5fr 1fr auto;
-      gap: 4px;
-      align-items: center;
-    }
-
-    .search-field {
-      background: white;
-      border-radius: 4px;
-      padding: 10px 14px;
-      height: 56px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-    }
-
-    .search-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--b-gray-text);
-      text-transform: uppercase;
-      margin-bottom: 2px;
-    }
-
-    .search-input, .search-select {
-      border: none;
-      outline: none;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--b-text);
-      background: transparent;
-      width: 100%;
-      cursor: pointer;
-    }
-
-    .search-submit-btn {
-      background: var(--b-blue-light);
-      color: white;
-      border: none;
-      height: 56px;
-      padding: 0 28px;
-      border-radius: 4px;
-      font-size: 17px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s;
-      white-space: nowrap;
-    }
-
-    .search-submit-btn:hover {
-      background: var(--b-blue-hover);
-    }
-
-    /* Natural Language Quick Request Banner (Feature S1) */
-    .quick-prompt-bar {
-      max-width: 1200px;
-      margin: 0 auto 20px auto;
-      padding: 0 24px;
-    }
-
-    .prompt-box {
-      background: white;
-      border: 1px solid var(--b-gray-border);
-      border-radius: 8px;
-      padding: 12px 18px;
+    .nav-right-actions {
       display: flex;
       align-items: center;
       gap: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     }
 
-    .prompt-icon {
-      font-size: 20px;
-    }
-
-    .prompt-input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-size: 14px;
-      color: var(--b-text);
-    }
-
-    .prompt-btn {
-      background: #f0f4f9;
-      border: 1px solid #c9d7e8;
-      color: var(--b-blue-light);
-      padding: 6px 14px;
-      border-radius: 4px;
-      font-weight: 600;
-      font-size: 13px;
-      cursor: pointer;
-    }
-
-    .prompt-btn:hover {
-      background: #e1ebf6;
-    }
-
-    .prompt-chips {
-      display: flex;
-      gap: 8px;
-      margin-top: 8px;
-      flex-wrap: wrap;
-    }
-
-    .chip {
-      background: #ebf3ff;
-      color: var(--b-blue-light);
-      border: 1px solid #d0e2ff;
+    .search-btn-icon {
+      background: transparent;
+      border: 1px solid var(--border-dark);
       border-radius: 100px;
-      padding: 4px 12px;
-      font-size: 12px;
-      font-weight: 500;
-      cursor: pointer;
-    }
-
-    .chip:hover {
-      background: #d8e8ff;
-    }
-
-    /* Preferences / Persona Bar */
-    .preference-bar {
-      max-width: 1200px;
-      margin: 0 auto 24px auto;
-      padding: 0 24px;
+      width: 38px;
+      height: 38px;
       display: flex;
-      gap: 10px;
-      overflow-x: auto;
       align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s;
     }
 
-    .pref-title {
-      font-size: 13px;
+    .search-btn-icon:hover {
+      border-color: #cbd5e1;
+      color: var(--text-main);
+    }
+
+    .avatar-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-main);
       font-weight: 700;
-      color: var(--b-gray-text);
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .pref-pill {
-      background: white;
-      border: 1px solid #ccc;
-      color: var(--b-text);
-      padding: 7px 16px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 14px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-      transition: all 0.2s;
     }
 
-    .pref-pill.active {
-      background: var(--b-blue);
-      color: white;
-      border-color: var(--b-blue);
-    }
-
-    /* Main Container & Layout */
-    .main-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px 60px 24px;
-      flex: 1;
-    }
-
-    /* Budget Alert or Status Banner (M8) */
-    .status-alert {
-      padding: 16px 20px;
-      border-radius: 8px;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-    }
-
-    .status-alert.error {
-      background: var(--b-red-bg);
-      border: 1px solid #f8b4b4;
-      color: #9b1c1c;
-    }
-
-    .status-alert.success {
-      background: var(--b-green-bg);
-      border: 1px solid #bbf7d0;
-      color: #166534;
-    }
-
-    /* 3 Package Comparison Selector Cards (Feature G4) */
-    .packages-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-bottom: 30px;
-    }
-
-    .pkg-card {
-      background: white;
-      border: 2px solid var(--b-gray-border);
-      border-radius: 8px;
-      padding: 18px;
-      cursor: pointer;
-      transition: all 0.2s;
+    /* Hero Section with 3D Plane Banner */
+    .hero-section {
       position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      padding-top: 10px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 22px;
     }
 
-    .pkg-card:hover {
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-      border-color: #a0c4f2;
-    }
-
-    .pkg-card.selected {
-      border-color: var(--b-blue-light);
-      box-shadow: 0 0 0 2px var(--b-blue-light), 0 8px 24px rgba(0, 108, 228, 0.15);
-    }
-
-    .pkg-badge {
-      position: absolute;
-      top: -12px;
-      left: 16px;
-      padding: 3px 10px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
+    .hero-meta {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-light);
+      margin-bottom: 4px;
       letter-spacing: 0.5px;
     }
 
-    .badge-cheapest {
-      background: var(--b-yellow);
-      color: #000;
-    }
-
-    .badge-fastest {
-      background: var(--b-blue-light);
-      color: white;
-    }
-
-    .badge-rated {
-      background: #7a329d;
-      color: white;
-    }
-
-    .pkg-title {
-      font-size: 18px;
+    .hero-title {
+      font-size: 32px;
       font-weight: 800;
-      margin-top: 6px;
-      margin-bottom: 4px;
-    }
-
-    .pkg-cities {
-      font-size: 13px;
-      color: var(--b-gray-text);
-      margin-bottom: 14px;
-    }
-
-    .pkg-price-row {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 12px;
-      border-bottom: 1px dashed #e0e0e0;
-      padding-bottom: 10px;
-    }
-
-    .pkg-price {
-      font-size: 26px;
-      font-weight: 800;
-      color: var(--b-text);
-    }
-
-    .pkg-price-sub {
-      font-size: 12px;
-      color: var(--b-gray-text);
-    }
-
-    .pkg-metric {
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 6px;
-      color: #333;
-    }
-
-    .pkg-select-btn {
-      margin-top: 14px;
-      width: 100%;
-      padding: 10px;
-      border-radius: 4px;
-      border: 1px solid var(--b-blue-light);
-      background: transparent;
-      color: var(--b-blue-light);
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .pkg-card.selected .pkg-select-btn {
-      background: var(--b-blue-light);
-      color: white;
-    }
-
-    /* Itinerary & Sidebar Layout */
-    .itinerary-layout {
-      display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: 24px;
-      align-items: start;
-    }
-
-    /* Day by Day Plan (Feature M4) */
-    .day-card {
-      background: white;
-      border: 1px solid var(--b-gray-border);
-      border-radius: 8px;
-      margin-bottom: 20px;
-      overflow: hidden;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
-    }
-
-    .day-header {
-      background: #f8fafc;
-      border-bottom: 1px solid var(--b-gray-border);
-      padding: 12px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .day-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--b-blue);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .day-city-tag {
-      background: #e2e8f0;
-      color: #334155;
-      font-size: 12px;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-weight: 600;
-    }
-
-    .day-items {
-      padding: 16px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    /* Specific Item Cards */
-    .item-card {
-      border: 1px solid #ebebeb;
-      border-radius: 6px;
-      padding: 14px 16px;
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      position: relative;
-      background: #fff;
-    }
-
-    .item-card.flight { border-left: 4px solid var(--b-blue-light); }
-    .item-card.transfer { border-left: 4px solid #f97316; }
-    .item-card.hotel { border-left: 4px solid #10b981; }
-    .item-card.attraction { border-left: 4px solid #8b5cf6; }
-
-    .item-icon {
-      font-size: 22px;
-      min-width: 32px;
-      text-align: center;
-      padding-top: 2px;
-    }
-
-    .item-info {
-      flex: 1;
-    }
-
-    .item-header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 4px;
-    }
-
-    .item-name {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--b-text);
-    }
-
-    .item-price {
-      font-size: 15px;
-      font-weight: 800;
-      color: var(--b-blue-light);
-    }
-
-    .item-time {
-      font-size: 13px;
-      color: #64748b;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .item-badges {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-top: 6px;
-    }
-
-    .tag-badge {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 4px;
-    }
-
-    .tag-spiritual { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
-    .tag-kids { background: #fce7f3; color: #9d174d; border: 1px solid #fbcfe8; }
-    .tag-accessible { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
-    .tag-roomfit { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; font-weight: 700; }
-
-    .swap-btn {
-      background: white;
-      border: 1px solid var(--b-blue-light);
-      color: var(--b-blue-light);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 8px;
-    }
-
-    .swap-btn:hover {
-      background: #eff6ff;
-    }
-
-    /* Sticky Sidebar Summary (Feature M5) */
-    .summary-sidebar {
-      background: white;
-      border: 1px solid var(--b-gray-border);
-      border-radius: 8px;
-      padding: 20px;
-      position: sticky;
-      top: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-
-    .summary-title {
-      font-size: 18px;
-      font-weight: 800;
-      margin-bottom: 14px;
-      border-bottom: 2px solid var(--b-yellow);
-      padding-bottom: 8px;
-    }
-
-    .cost-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-      margin-bottom: 10px;
-      color: #4b5563;
-    }
-
-    .cost-row.total {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--b-text);
-      border-top: 1px solid #e5e7eb;
-      padding-top: 12px;
-      margin-top: 12px;
-      margin-bottom: 14px;
-    }
-
-    .budget-meter {
-      background: #f1f5f9;
-      border-radius: 6px;
-      padding: 10px 14px;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
       margin-bottom: 18px;
     }
 
-    .meter-bar-container {
-      background: #e2e8f0;
-      height: 8px;
-      border-radius: 4px;
-      overflow: hidden;
-      margin: 8px 0;
+    /* 3D Airplane Illustration in Hero Right */
+    .plane-graphic {
+      position: absolute;
+      top: -15px;
+      right: 140px;
+      width: 340px;
+      pointer-events: none;
+      z-index: 2;
+      filter: drop-shadow(0 15px 25px rgba(37, 99, 235, 0.18));
+      transition: transform 0.4s ease;
     }
 
-    .meter-bar {
+    .hero-mode-toggles {
+      position: absolute;
+      top: 10px;
+      right: 0;
+      display: flex;
+      gap: 6px;
+      background: #f8fafc;
+      padding: 4px;
+      border-radius: 100px;
+      border: 1px solid var(--border-dark);
+      z-index: 5;
+    }
+
+    .mode-btn {
+      padding: 6px 16px;
+      border-radius: 100px;
+      border: none;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mode-btn.active {
+      background: var(--primary-blue);
+      color: white;
+    }
+
+    .mode-btn.inactive {
+      background: transparent;
+      color: var(--text-muted);
+    }
+
+    /* Trip Type & Passenger Selectors Row */
+    .trip-options-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .trip-type-toggles {
+      display: flex;
+      gap: 16px;
+    }
+
+    .trip-type-label {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-main);
+    }
+
+    .party-selectors {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .party-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      color: var(--text-main);
+      background: #f8fafc;
+      padding: 4px 12px;
+      border-radius: 100px;
+      border: 1px solid var(--border-dark);
+    }
+
+    /* Search Bar Row (Clean White Rounded Floating Box) */
+    .search-box-row {
+      background: white;
+      border: 1px solid var(--border-dark);
+      border-radius: 16px;
+      padding: 10px 16px;
+      display: grid;
+      grid-template-columns: 1.3fr 40px 1.3fr 1.2fr 40px 1.2fr auto;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      margin-bottom: 22px;
+    }
+
+    .search-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .search-col-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-light);
+      margin-bottom: 2px;
+    }
+
+    .search-select, .search-date-input {
+      border: none;
+      outline: none;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      background: transparent;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .search-icon-divider {
+      text-align: center;
+      color: var(--text-light);
+      font-size: 16px;
+    }
+
+    .search-submit-pill {
+      background: var(--primary-blue);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      white-space: nowrap;
+    }
+
+    .search-submit-pill:hover {
+      background: var(--primary-blue-dark);
+      transform: translateY(-1px);
+    }
+
+    /* Category Filter Tabs (Flights, Stays, Spiritual, Kids, Packages) */
+    .filter-tabs-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .filter-pill {
+      background: white;
+      border: 1px solid var(--border-dark);
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-pill:hover {
+      border-color: #cbd5e1;
+      color: var(--text-main);
+    }
+
+    .filter-pill.active {
+      background: var(--dark-btn);
+      color: white;
+      border-color: var(--dark-btn);
+    }
+
+    /* Two-Column Grid: Listings vs Live Itinerary Preview */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    /* Left Column: Listings & Package Options */
+    .listings-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .section-date-header {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-color);
+      margin-top: 6px;
+    }
+
+    /* Listing Row Card (Like Reference Flight & Stays Rows) */
+    .listing-card {
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .listing-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+    }
+
+    .listing-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex: 1;
+    }
+
+    .listing-logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: #f8fafc;
+      border: 1px solid var(--border-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .listing-route-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex: 1;
+    }
+
+    .time-point {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .time-main {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .time-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .flight-path-bar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 130px;
+    }
+
+    .duration-text {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+
+    .path-line-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .path-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--primary-blue);
+    }
+
+    .path-line {
+      flex: 1;
+      height: 1px;
+      border-top: 1px dashed #cbd5e1;
+    }
+
+    .path-plane-icon {
+      font-size: 12px;
+      color: var(--primary-blue);
+    }
+
+    .path-subtext {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-top: 3px;
+    }
+
+    .listing-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding-left: 18px;
+      border-left: 1px solid var(--border-color);
+    }
+
+    .price-block {
+      text-align: right;
+    }
+
+    .price-amount {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .price-caption {
+      font-size: 11px;
+      color: var(--text-light);
+    }
+
+    .select-pill-btn {
+      background: var(--dark-btn);
+      color: white;
+      border: none;
+      padding: 9px 20px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .select-pill-btn:hover {
+      background: var(--primary-blue);
+    }
+
+    .select-pill-btn.secondary {
+      background: white;
+      border: 1px solid var(--border-dark);
+      color: var(--text-main);
+    }
+
+    .select-pill-btn.secondary:hover {
+      border-color: var(--primary-blue);
+      color: var(--primary-blue);
+    }
+
+    /* Badges */
+    .custom-tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      margin-right: 4px;
+    }
+
+    .tag-spiritual { background: var(--amber-bg); color: var(--amber-badge); border: 1px solid #fde68a; }
+    .tag-kids { background: #fce7f3; color: #be185d; border: 1px solid #fbcfe8; }
+    .tag-accessible { background: var(--green-bg); color: var(--green-badge); border: 1px solid #a7f3d0; }
+    .tag-roomfit { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; }
+
+    /* Right Column: LIVE ITINERARY PREVIEW (Exact Match to Screenshot) */
+    .preview-card {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 24px;
+      position: sticky;
+      top: 24px;
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .preview-title {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: var(--text-main);
+      text-transform: uppercase;
+    }
+
+    .preview-menu-btn {
+      background: transparent;
+      border: none;
+      font-size: 18px;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    /* Vertical Timeline */
+    .itinerary-timeline {
+      position: relative;
+      padding-left: 32px;
+      margin-bottom: 24px;
+    }
+
+    .timeline-vertical-line {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      bottom: 20px;
+      width: 2px;
+      background: #93c5fd;
+    }
+
+    .timeline-node {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .timeline-node:last-child {
+      margin-bottom: 0;
+    }
+
+    .node-icon-circle {
+      position: absolute;
+      left: -32px;
+      top: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #60a5fa;
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px #bfdbfe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .node-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-main);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 3px;
+    }
+
+    .node-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Summary & Pricing Footer Box inside Preview */
+    .preview-footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 18px;
+    }
+
+    .preview-budget-bar {
+      margin-bottom: 14px;
+    }
+
+    .budget-info-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      background: #e2e8f0;
+      height: 6px;
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
       height: 100%;
+      background: var(--primary-blue);
+      border-radius: 100px;
       transition: width 0.3s;
     }
 
-    .book-btn {
-      background: var(--b-green);
-      color: white;
-      width: 100%;
-      border: none;
-      padding: 14px;
-      border-radius: 4px;
-      font-size: 16px;
+    .preview-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 16px;
+    }
+
+    .preview-grand-total {
+      font-size: 24px;
       font-weight: 800;
-      cursor: pointer;
-      transition: background 0.2s;
-      margin-bottom: 10px;
+      color: var(--text-main);
     }
 
-    .book-btn:hover {
-      background: #006607;
-    }
-
-    .export-btn {
-      background: white;
-      color: var(--b-blue-light);
+    .confirm-btn-primary {
+      background: var(--primary-blue);
+      color: white;
+      border: none;
       width: 100%;
-      border: 1px solid var(--b-blue-light);
-      padding: 10px;
-      border-radius: 4px;
+      padding: 13px;
+      border-radius: 12px;
       font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-bottom: 8px;
+      transition: background 0.2s;
+    }
+
+    .confirm-btn-primary:hover {
+      background: var(--primary-blue-dark);
+    }
+
+    .export-json-pill {
+      background: white;
+      color: var(--text-muted);
+      border: 1px solid var(--border-dark);
+      width: 100%;
+      padding: 10px;
+      border-radius: 12px;
+      font-size: 13px;
       font-weight: 700;
       cursor: pointer;
     }
 
-    .export-btn:hover {
-      background: #f0f7ff;
+    .export-json-pill:hover {
+      border-color: #94a3b8;
+      color: var(--text-main);
     }
 
-    /* Modal Styling */
-    .modal-overlay {
+    /* Modals */
+    .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
       display: none;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       z-index: 1000;
       padding: 20px;
     }
 
-    .modal-card {
+    .modal-box {
       background: white;
-      border-radius: 8px;
-      max-width: 650px;
+      border-radius: 24px;
       width: 100%;
+      max-width: 620px;
       max-height: 85vh;
       overflow-y: auto;
-      padding: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      padding: 28px;
       position: relative;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.2);
     }
 
-    .modal-close {
+    .modal-close-btn {
       position: absolute;
-      top: 18px;
-      right: 20px;
-      font-size: 24px;
+      top: 20px;
+      right: 22px;
       background: none;
       border: none;
+      font-size: 22px;
+      color: var(--text-muted);
       cursor: pointer;
-      color: #64748b;
-    }
-
-    .modal-title {
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 16px;
-      color: var(--b-blue);
-    }
-
-    .option-card {
-      border: 1px solid var(--b-gray-border);
-      border-radius: 6px;
-      padding: 12px 16px;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .option-card:hover {
-      border-color: var(--b-blue-light);
-      background: #f8fbff;
-    }
-
-    .delta-badge {
-      font-size: 12px;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 4px;
-    }
-
-    .delta-plus { background: #fee2e2; color: #b91c1c; }
-    .delta-minus { background: #dcfce7; color: #15803d; }
-    .delta-zero { background: #f1f5f9; color: #475569; }
-
-    /* Footer Attribution */
-    footer {
-      background: white;
-      border-top: 1px solid var(--b-gray-border);
-      padding: 20px 24px;
-      text-align: center;
-      font-size: 12px;
-      color: #64748b;
-      margin-top: auto;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Header Navigation -->
-  <header>
-    <div class="nav-container">
-      <a href="#" class="brand">
-        BuildMyHoliday<span class="brand-dot">.com</span>
-        <span class="brand-sub">HACKATHON EDITION</span>
+  <!-- Floating Canvas Box -->
+  <div class="app-canvas">
+
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+      <a href="#" class="brand-logo">
+        <svg class="brand-icon" viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        TRIPRISE
       </a>
-      <div class="nav-actions">
-        <span style="font-size: 13px; font-weight: 600;">INR ₹</span>
-        <button class="nav-btn" onclick="openFindBookingModal()">🔍 Find Reservation</button>
-        <button class="nav-btn-primary nav-btn" onclick="openAllBookingsModal()">My Bookings</button>
-      </div>
-    </div>
-  </header>
 
-  <!-- Hero Banner -->
-  <div class="hero-banner">
-    <div class="hero-content">
-      <h1 class="hero-title">Custom Holiday Packages Built in Seconds</h1>
-      <p class="hero-subtitle">Flights, hotels, transfers, and attractions in Japan & UAE, validated to perfection.</p>
-    </div>
-  </div>
-
-  <!-- Booking.com Iconic Yellow Search Box (Feature M1) -->
-  <div class="search-box-wrapper">
-    <form id="searchForm" class="search-box" onsubmit="handleSearch(event)">
-      <div class="search-field">
-        <span class="search-label">From (India)</span>
-        <select id="depCity" class="search-select" required>
-          <option value="Bengaluru" selected>Bengaluru (BLR)</option>
-          <option value="Delhi">Delhi (DEL)</option>
-          <option value="Mumbai">Mumbai (BOM)</option>
-          <option value="Chennai">Chennai (MAA)</option>
-        </select>
+      <div class="center-nav-pills">
+        <button class="nav-pill" onclick="setActiveNav(this, 'dashboard')">Dashboard</button>
+        <button class="nav-pill active" onclick="setActiveNav(this, 'planner')">Planner</button>
+        <button class="nav-pill" onclick="setActiveNav(this, 'itinerary')">Itinerary</button>
+        <button class="nav-pill" onclick="openFindBookingModal()">Bookings</button>
+        <button class="nav-pill" onclick="setActiveNav(this, 'settings')">Settings</button>
       </div>
 
-      <div class="search-field">
-        <span class="search-label">Going To</span>
-        <select id="destCountry" class="search-select" required>
-          <option value="Japan" selected>Japan (Tokyo, Kyoto, Osaka)</option>
-          <option value="United Arab Emirates">UAE (Dubai, Abu Dhabi)</option>
-        </select>
+      <div class="nav-right-actions">
+        <button class="search-btn-icon" title="Find Reservation by 10-digit code" onclick="openFindBookingModal()">
+          🔍
+        </button>
+        <button class="search-btn-icon" title="Notifications">
+          🔔
+        </button>
+        <button class="avatar-btn" title="Traveler Profile">
+          M
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero Section with 3D Jetliner Floating Graphic -->
+    <div class="hero-section">
+      <div class="hero-meta" id="currentDateDisplay">Saturday, 10 April, 2027</div>
+      <h1 class="hero-title">RESERVE YOUR JOURNEY</h1>
+
+      <!-- Photorealistic 3D Commercial Jetliner Illustration -->
+      <svg class="plane-graphic" viewBox="0 0 500 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="70%" stop-color="#f1f5f9"/>
+            <stop offset="100%" stop-color="#cbd5e1"/>
+          </linearGradient>
+          <linearGradient id="wingGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3b82f6"/>
+            <stop offset="100%" stop-color="#1d4ed8"/>
+          </linearGradient>
+        </defs>
+        <!-- Jet Fuselage -->
+        <path d="M40 100 C 90 70, 280 60, 420 85 C 470 94, 490 102, 470 108 C 430 118, 260 125, 120 115 Z" fill="url(#bodyGrad)" stroke="#94a3b8" stroke-width="1.5"/>
+        <!-- Cockpit Windows -->
+        <path d="M430 87 Q 450 91 445 95 Q 425 93 430 87 Z" fill="#0f172a"/>
+        <!-- Main Swept Wings -->
+        <path d="M220 98 L 130 170 L 175 172 L 290 105 Z" fill="url(#wingGrad)" opacity="0.95"/>
+        <path d="M260 88 L 330 20 L 350 25 L 305 89 Z" fill="#94a3b8" opacity="0.7"/>
+        <!-- Tail Fin -->
+        <path d="M70 98 L 25 35 L 55 35 L 115 95 Z" fill="url(#wingGrad)"/>
+        <!-- Jet Engine Turbine -->
+        <ellipse cx="230" cy="135" rx="28" ry="12" fill="#475569"/>
+        <ellipse cx="240" cy="135" rx="12" ry="10" fill="#0f172a"/>
+      </svg>
+
+      <!-- Mode Toggles (AI Assist vs Manual) -->
+      <div class="hero-mode-toggles">
+        <button class="mode-btn active" id="modeAi" onclick="toggleMode('ai')">Smart Curation</button>
+        <button class="mode-btn inactive" id="modeManual" onclick="toggleMode('manual')">Manual</button>
       </div>
 
-      <div class="search-field">
-        <span class="search-label">Start Date (1-20 Apr '27)</span>
-        <input type="date" id="startDate" class="search-input" value="2027-04-10" min="2027-04-01" max="2027-04-20" required>
-      </div>
-
-      <div class="search-field">
-        <span class="search-label">Guests & Nights</span>
-        <div style="display: flex; gap: 8px;">
-          <input type="number" id="nightsInput" class="search-input" value="6" min="3" max="10" title="Nights (3-10)" style="width: 50px;" required>
-          <span style="font-size: 12px; align-self: center; color: #777;">Nts ·</span>
-          <input type="number" id="adultsInput" class="search-input" value="2" min="1" max="10" title="Adults" style="width: 45px;" required>
-          <span style="font-size: 12px; align-self: center; color: #777;">Ad ·</span>
-          <input type="number" id="childrenInput" class="search-input" value="1" min="0" max="6" title="Children" style="width: 45px;" required>
-          <span style="font-size: 12px; align-self: center; color: #777;">Ch</span>
+      <!-- Trip Sub-Options (Round trip, Travelers, Class) -->
+      <div class="trip-options-bar">
+        <div class="trip-type-toggles">
+          <label class="trip-type-label">
+            <input type="radio" name="tripType" checked style="accent-color: var(--primary-blue);">
+            ⇄ Round trip
+          </label>
+          <label class="trip-type-label">
+            <input type="radio" name="tripType" style="accent-color: var(--primary-blue);">
+            → One-way trip
+          </label>
         </div>
-      </div>
 
-      <div class="search-field">
-        <span class="search-label">Budget (INR)</span>
-        <input type="number" id="budgetInput" class="search-input" value="350000" step="5000" min="50000" required>
-      </div>
-
-      <button type="submit" class="search-submit-btn">Search Deals</button>
-    </form>
-  </div>
-
-  <!-- Feature S1: Natural Language Quick Prompt -->
-  <div class="quick-prompt-bar">
-    <div class="prompt-box">
-      <span class="prompt-icon">⚡</span>
-      <input type="text" id="promptText" class="prompt-input" placeholder="Type plain English query, e.g. 'Menon family 2 adults 1 child Japan 10 April for 6 nights under 3.5L'">
-      <button class="prompt-btn" onclick="handleQuickPrompt()">Auto-Fill & Build</button>
-    </div>
-    <div class="prompt-chips">
-      <span style="font-size: 11px; font-weight: 700; color: #64748b; align-self: center;">Popular:</span>
-      <span class="chip" onclick="applySamplePrompt('Menon family from Bengaluru to Japan on 10 April for 6 nights 2 adults 1 child age 6 budget 350000')">👨‍👩‍👧 Menon Family (Japan 6 Nights)</span>
-      <span class="chip" onclick="applySamplePrompt('Sharma family 2 adults 2 kids from Delhi to UAE 12 April 5 nights luxury hotel budget 400000')">🏙️ Delhi to UAE (5 Nights Family)</span>
-      <span class="chip" onclick="applySamplePrompt('2 adults from Mumbai to Japan 10 April 7 nights spiritual tirth yatra temple tour budget 300000')">⛩️ Mumbai to Kyoto (Temple Tour)</span>
-    </div>
-  </div>
-
-  <!-- Priority & Persona Bar (Adult, Tirth Yatra, Kids, Luxury) -->
-  <div class="preference-bar">
-    <span class="pref-title">Prioritize:</span>
-    <button class="pref-pill active" onclick="setPreference('all_round', this)">🌟 All Rounder</button>
-    <button class="pref-pill" onclick="setPreference('spiritual', this)">⛩️ Spiritual & Tirth Yatra (Temples & Shrines)</button>
-    <button class="pref-pill" onclick="setPreference('family_kids', this)">🧸 Kids & Family Fun (Theme Parks & Aquariums)</button>
-    <button class="pref-pill" onclick="setPreference('luxury_hotel', this)">🏰 Luxury Stays (Max Stars)</button>
-  </div>
-
-  <!-- Main Content Area -->
-  <div class="main-container">
-    
-    <!-- Status / Notification Area -->
-    <div id="statusBanner" style="display: none;"></div>
-
-    <!-- 3 Package Cards (Feature G4) -->
-    <div id="packagesSection" style="display: none;">
-      <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 16px;">We found 3 tailor-made packages for your group:</h2>
-      <div class="packages-grid">
-        <!-- 1. Cheapest -->
-        <div id="pkgCardCheapest" class="pkg-card selected" onclick="selectPackageTier('cheapest')">
-          <span class="pkg-badge badge-cheapest">Best Value · Cheapest</span>
-          <div class="pkg-title">Budget Smart Choice</div>
-          <div class="pkg-cities" id="cheapestCities">Tokyo · 6 Nights</div>
-          <div class="pkg-price-row">
-            <div>
-              <div class="pkg-price" id="cheapestPrice">₹0</div>
-              <div class="pkg-price-sub">all taxes & fees included</div>
-            </div>
-            <div id="cheapestSavings" style="font-size: 12px; font-weight: 700; color: var(--b-green);">Under budget</div>
+        <div class="party-selectors">
+          <div class="party-badge" onclick="focusGuestsInput()">
+            👤 <span id="partyLabel">2 Adults, 1 Child (Age 6)</span> ⌵
           </div>
-          <div class="pkg-metric">⏱️ <span id="cheapestTravelTime">17 hrs transit</span></div>
-          <div class="pkg-metric">🏨 <span id="cheapestStars">4.0 Avg Hotel Class</span></div>
-          <button class="pkg-select-btn">Active Selection</button>
-        </div>
-
-        <!-- 2. Fastest -->
-        <div id="pkgCardFastest" class="pkg-card" onclick="selectPackageTier('fastest')">
-          <span class="pkg-badge badge-fastest">Fastest Travel</span>
-          <div class="pkg-title">Express Explorer</div>
-          <div class="pkg-cities" id="fastestCities">Tokyo · 6 Nights</div>
-          <div class="pkg-price-row">
-            <div>
-              <div class="pkg-price" id="fastestPrice">₹0</div>
-              <div class="pkg-price-sub">all taxes & fees included</div>
-            </div>
-            <div id="fastestSavings" style="font-size: 12px; font-weight: 700; color: var(--b-green);">Under budget</div>
+          <div class="party-badge">
+            🧳 Economy · INR ₹ ⌵
           </div>
-          <div class="pkg-metric">⏱️ <span id="fastestTravelTime">17 hrs transit</span></div>
-          <div class="pkg-metric">🏨 <span id="fastestStars">4.0 Avg Hotel Class</span></div>
-          <button class="pkg-select-btn">Select Fastest</button>
-        </div>
-
-        <!-- 3. Best Rated -->
-        <div id="pkgCardBestRated" class="pkg-card" onclick="selectPackageTier('best_rated')">
-          <span class="pkg-badge badge-rated">Top Rated · Luxury</span>
-          <div class="pkg-title">Comfort Plus</div>
-          <div class="pkg-cities" id="bestRatedCities">Tokyo · 6 Nights</div>
-          <div class="pkg-price-row">
-            <div>
-              <div class="pkg-price" id="bestRatedPrice">₹0</div>
-              <div class="pkg-price-sub">all taxes & fees included</div>
-            </div>
-            <div id="bestRatedSavings" style="font-size: 12px; font-weight: 700; color: var(--b-green);">Under budget</div>
-          </div>
-          <div class="pkg-metric">⏱️ <span id="bestRatedTravelTime">17 hrs transit</span></div>
-          <div class="pkg-metric">🏨 <span id="bestRatedStars">4.5 Avg Hotel Class</span></div>
-          <button class="pkg-select-btn">Select Best Rated</button>
         </div>
       </div>
+
+      <!-- Search Row Box -->
+      <form id="searchForm" class="search-box-row" onsubmit="handleSearch(event)">
+        <div class="search-col">
+          <span class="search-col-label">From</span>
+          <select id="depCity" class="search-select">
+            <option value="Bengaluru" selected>Bengaluru (BLR)</option>
+            <option value="Delhi">Delhi (DEL)</option>
+            <option value="Mumbai">Mumbai (BOM)</option>
+            <option value="Chennai">Chennai (MAA)</option>
+          </select>
+        </div>
+
+        <div class="search-icon-divider">⇄</div>
+
+        <div class="search-col">
+          <span class="search-col-label">To</span>
+          <select id="destCountry" class="search-select">
+            <option value="Japan" selected>Japan (Tokyo / Kyoto / Osaka)</option>
+            <option value="United Arab Emirates">UAE (Dubai / Abu Dhabi)</option>
+          </select>
+        </div>
+
+        <div class="search-col">
+          <span class="search-col-label">On</span>
+          <input type="date" id="startDate" class="search-date-input" value="2027-04-10" min="2027-04-01" max="2027-04-20" required>
+        </div>
+
+        <div class="search-icon-divider">→</div>
+
+        <div class="search-col">
+          <span class="search-col-label">End</span>
+          <input type="date" id="endDate" class="search-date-input" value="2027-04-16" min="2027-04-01" max="2027-04-20" required>
+        </div>
+
+        <button type="submit" class="search-submit-pill">Search</button>
+      </form>
+
+      <!-- Hidden Inputs for Adults / Children / Budget for Form Sync -->
+      <input type="hidden" id="adultsInput" value="2">
+      <input type="hidden" id="childrenInput" value="1">
+      <input type="hidden" id="budgetInput" value="350000">
+      <input type="hidden" id="nightsInput" value="6">
     </div>
 
-    <!-- Active Package Day-by-Day Itinerary & Sticky Summary -->
-    <div id="itinerarySection" class="itinerary-layout" style="display: none;">
+    <!-- Category Filter Tabs (Pills) -->
+    <div class="filter-tabs-row">
+      <button class="filter-pill active" onclick="setCategoryTab('packages', this)">Packages</button>
+      <button class="filter-pill" onclick="setCategoryTab('flights', this)">Flights</button>
+      <button class="filter-pill" onclick="setCategoryTab('stays', this)">Stays</button>
+      <button class="filter-pill" onclick="setCategoryTab('transfers', this)">Transport</button>
+      <button class="filter-pill" onclick="setCategoryTab('spiritual', this)">⛩️ Spiritual & Tirth Yatra (Adults)</button>
+      <button class="filter-pill" onclick="setCategoryTab('kids', this)">🧸 Kids & Family Fun</button>
+      <button class="filter-pill" onclick="setCategoryTab('luxury', this)">🏰 Luxury 5★</button>
+      <button class="filter-pill" onclick="setCategoryTab('deals', this)">Deals</button>
+    </div>
+
+    <!-- Main Content: Left Listings vs Right Live Preview -->
+    <div class="content-grid">
       
-      <!-- Day by Day Column -->
-      <div id="daysContainer">
-        <!-- Injected via JavaScript -->
+      <!-- Left Column -->
+      <div class="listings-column" id="listingsContainer">
+        <!-- Dynamically Rendered via JS -->
       </div>
 
-      <!-- Sticky Summary Sidebar -->
-      <div class="summary-sidebar">
-        <div class="summary-title">Booking Overview</div>
-        
-        <div class="budget-meter">
-          <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 700;">
-            <span>Budget: <span id="summaryBudget">₹3,50,000</span></span>
-            <span id="budgetDiffTag" style="color: var(--b-green);"></span>
+      <!-- Right Column: Live Itinerary Preview (Exact Match to Screenshot) -->
+      <div class="preview-card">
+        <div class="preview-header">
+          <span class="preview-title">Live Itinerary Preview</span>
+          <button class="preview-menu-btn" title="Options" onclick="openFindBookingModal()">···</button>
+        </div>
+
+        <!-- Vertical Timeline Nodes -->
+        <div class="itinerary-timeline" id="timelineContainer">
+          <div class="timeline-vertical-line"></div>
+          <!-- Injected via JS -->
+        </div>
+
+        <!-- Preview Budget & Cost Summary Footer -->
+        <div class="preview-footer">
+          <div class="preview-budget-bar">
+            <div class="budget-info-row">
+              <span>Budget: <span id="budgetSummaryText">₹3,50,000</span></span>
+              <span id="budgetDiffTag" style="color: var(--green-badge);">₹98,112 Under</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="progressFill" style="width: 72%;"></div>
+            </div>
           </div>
-          <div class="meter-bar-container">
-            <div id="meterBar" class="meter-bar" style="width: 70%; background: var(--b-green);"></div>
+
+          <div class="preview-total-row">
+            <div>
+              <div style="font-size: 11px; font-weight: 700; color: var(--text-light); text-transform: uppercase;">Total Estimated</div>
+              <div class="preview-grand-total" id="previewTotal">₹2,51,888</div>
+            </div>
+            <div style="font-size: 11px; color: var(--text-muted); text-align: right;">All Taxes Included</div>
           </div>
-          <div style="font-size: 11px; color: #64748b;" id="meterSubtext">72% of budget utilized</div>
-        </div>
 
-        <div class="cost-row">
-          <span>✈️ Flights (All Travelers)</span>
-          <span id="costFlights">₹0</span>
-        </div>
-        <div class="cost-row">
-          <span>🏨 Hotels & Stays</span>
-          <span id="costHotels">₹0</span>
-        </div>
-        <div class="cost-row">
-          <span>🚗 Airport & City Transfers</span>
-          <span id="costTransfers">₹0</span>
-        </div>
-        <div class="cost-row">
-          <span>🎡 Attractions & Tickets</span>
-          <span id="costAttractions">₹0</span>
-        </div>
-
-        <div class="cost-row total">
-          <span>Grand Total</span>
-          <span id="costTotal">₹0</span>
-        </div>
-
-        <button class="book-btn" onclick="handleConfirmBooking()">Book Package (Confirm)</button>
-        <button class="export-btn" onclick="handleDownloadJson()">📥 Download Package JSON</button>
-        <div style="font-size: 11px; text-align: center; color: #64748b; margin-top: 8px;">
-          Instant 10-digit reservation number generated · No prepayment needed
+          <button class="confirm-btn-primary" onclick="handleConfirmBooking()">Reserve Journey (Confirm)</button>
+          <button class="export-json-pill" onclick="handleDownloadJson()">📥 Download Package JSON</button>
         </div>
       </div>
 
@@ -994,121 +976,83 @@
 
   </div>
 
-  <!-- Swap Modal (Feature M6, G1, G2) -->
-  <div id="swapModal" class="modal-overlay">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeModal('swapModal')">&times;</button>
-      <div class="modal-title" id="swapModalTitle">Swap Option</div>
-      <div id="swapModalContent">
-        <!-- Injected dynamically -->
-      </div>
-    </div>
-  </div>
-
-  <!-- Reservation Confirmation Pass Modal (Feature M7) -->
-  <div id="bookingModal" class="modal-overlay">
-    <div class="modal-card" style="text-align: center;">
-      <button class="modal-close" onclick="closeModal('bookingModal')">&times;</button>
-      <div style="font-size: 48px; margin-bottom: 10px;">🎉</div>
-      <div style="font-size: 24px; font-weight: 800; color: var(--b-green); margin-bottom: 8px;">Holiday Package Confirmed!</div>
-      <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">Your travel itinerary has been locked into the system database.</p>
-      
-      <div style="background: #f8fafc; border: 2px dashed #006ce4; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
-        <div style="font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase;">10-Digit Reservation Reference</div>
-        <div id="resRefNumber" style="font-size: 36px; font-weight: 900; letter-spacing: 4px; color: var(--b-blue); margin: 8px 0;">0000000000</div>
-        <div style="font-size: 12px; color: #166534; background: #dcfce7; display: inline-block; padding: 3px 12px; border-radius: 100px; font-weight: 700;">Status: BOOKED</div>
-      </div>
-
-      <div style="display: flex; gap: 10px; justify-content: center;">
-        <button class="nav-btn-primary nav-btn" style="background: var(--b-blue); color: white; width: 50%; padding: 12px;" onclick="handleDownloadJson()">Download JSON Export</button>
-        <button class="nav-btn" style="color: #333; border: 1px solid #ccc; width: 50%; padding: 12px;" onclick="closeModal('bookingModal')">Keep Browsing</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Find Booking Modal (Feature M7) -->
-  <div id="findModal" class="modal-overlay">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeModal('findModal')">&times;</button>
-      <div class="modal-title">Retrieve Reservation</div>
-      <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">Enter your 10-digit reservation number to reload your package.</p>
-      <div style="display: flex; gap: 8px; margin-bottom: 18px;">
-        <input type="text" id="findRefInput" placeholder="e.g. 9279894003" maxlength="10" style="flex: 1; padding: 10px 14px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; font-weight: 700;">
-        <button class="search-submit-btn" style="height: auto; padding: 0 20px;" onclick="handleFindReservation()">Find</button>
+  <!-- Find Booking / Modal -->
+  <div id="findBookingModal" class="modal-backdrop">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="closeModal('findBookingModal')">&times;</button>
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 6px;">Lookup Reservation</h3>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 18px;">Enter your 10-digit reservation number to reload your package.</p>
+      <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+        <input type="text" id="findRefInput" placeholder="e.g. 9279894003" maxlength="10" style="flex: 1; padding: 12px 16px; border: 1px solid var(--border-dark); border-radius: 12px; font-size: 16px; font-weight: 800;">
+        <button class="search-submit-pill" style="padding: 12px 24px;" onclick="handleFindReservation()">Find</button>
       </div>
       <div id="findResultArea"></div>
     </div>
   </div>
 
-  <!-- All Bookings Modal -->
-  <div id="allBookingsModal" class="modal-overlay">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeModal('allBookingsModal')">&times;</button>
-      <div class="modal-title">Saved Reservations (SQLite / Storage)</div>
-      <div id="allBookingsList">Loading...</div>
+  <!-- Swap Modal -->
+  <div id="swapModal" class="modal-backdrop">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="closeModal('swapModal')">&times;</button>
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 16px;" id="swapModalTitle">Swap Option</h3>
+      <div id="swapModalContent">Loading options...</div>
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>Build My Holiday · Problem 1 Solution · All catalog prices in INR · Times are local times</p>
-    <p style="margin-top: 4px; color: #94a3b8;">Photos provided under Creative Commons via Wikimedia Commons (Credits in images/ATTRIBUTIONS.md)</p>
-  </footer>
+  <!-- Success Reservation Confirmation Pass Modal -->
+  <div id="successModal" class="modal-backdrop">
+    <div class="modal-box" style="text-align: center;">
+      <button class="modal-close-btn" onclick="closeModal('successModal')">&times;</button>
+      <div style="font-size: 42px; margin-bottom: 8px;">✈️</div>
+      <h2 style="font-size: 22px; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">Journey Reserved!</h2>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Your package has been saved and locked into our document store.</p>
+      
+      <div style="background: #f8fafc; border: 2px dashed #93c5fd; border-radius: 16px; padding: 20px; margin-bottom: 22px;">
+        <div style="font-size: 11px; font-weight: 700; color: var(--text-light); text-transform: uppercase;">10-Digit Reservation Number</div>
+        <div id="displayRefNumber" style="font-size: 34px; font-weight: 900; letter-spacing: 4px; color: var(--primary-blue-dark); margin: 8px 0;">0000000000</div>
+        <div style="font-size: 11px; font-weight: 700; color: #166534; background: #dcfce7; display: inline-block; padding: 3px 12px; border-radius: 100px;">STATUS: BOOKED</div>
+      </div>
+
+      <button class="confirm-btn-primary" onclick="handleDownloadJson()">Download JSON Itinerary</button>
+    </div>
+  </div>
 
   <script>
     // State
-    let currentPreference = 'all_round';
-    let currentPackages = null;
-    let selectedTier = 'cheapest';
     let activeTrip = null;
+    let currentPackages = null;
+    let activeFilter = 'packages';
 
-    // Load initial metadata and run default Menon search
     window.addEventListener('DOMContentLoaded', () => {
+      // Auto-trigger search with Menon defaults
       handleSearch();
     });
 
-    function setPreference(pref, el) {
-      currentPreference = pref;
-      document.querySelectorAll('.pref-pill').forEach(p => p.classList.remove('active'));
-      el.classList.add('active');
-      handleSearch();
+    function setActiveNav(btn, nav) {
+      document.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
     }
 
-    function applySamplePrompt(text) {
-      document.getElementById('promptText').value = text;
-      handleQuickPrompt();
+    function toggleMode(mode) {
+      document.getElementById('modeAi').className = mode === 'ai' ? 'mode-btn active' : 'mode-btn inactive';
+      document.getElementById('modeManual').className = mode === 'manual' ? 'mode-btn active' : 'mode-btn inactive';
     }
 
-    async function handleQuickPrompt() {
-      const q = document.getElementById('promptText').value.trim();
-      if (!q) return;
+    function setCategoryTab(tab, btn) {
+      activeFilter = tab;
+      document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderListings();
+    }
 
-      try {
-        const res = await fetch('/api/nlp/parse', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query: q })
-        });
-        const data = await res.json();
-        if (data.success && data.parsed) {
-          const p = data.parsed;
-          if (p.departure_city) document.getElementById('depCity').value = p.departure_city;
-          if (p.country) document.getElementById('destCountry').value = p.country;
-          if (p.start_date) document.getElementById('startDate').value = p.start_date;
-          if (p.nights) document.getElementById('nightsInput').value = p.nights;
-          if (p.adults) document.getElementById('adultsInput').value = p.adults;
-          if (p.children !== undefined) document.getElementById('childrenInput').value = p.children;
-          if (p.budget) document.getElementById('budgetInput').value = p.budget;
-          if (p.preference) {
-            currentPreference = p.preference;
-            document.querySelectorAll('.pref-pill').forEach(btn => {
-              btn.classList.toggle('active', btn.getAttribute('onclick').includes(p.preference));
-            });
-          }
-          handleSearch();
+    function focusGuestsInput() {
+      const party = prompt("Enter Adults and Children (e.g. '2 adults, 2 kids'):", "2 adults, 1 child");
+      if (party) {
+        if (party.includes('2 kids') || party.includes('2 children')) {
+          document.getElementById('childrenInput').value = 2;
+          document.getElementById('partyLabel').innerText = "2 Adults, 2 Children";
         }
-      } catch (e) {
-        console.error('NLP error:', e);
+        handleSearch();
       }
     }
 
@@ -1118,13 +1062,14 @@
       const depCity = document.getElementById('depCity').value;
       const country = document.getElementById('destCountry').value;
       const startDate = document.getElementById('startDate').value;
-      const nights = parseInt(document.getElementById('nightsInput').value, 10);
+      const endDate = document.getElementById('endDate').value;
       const adults = parseInt(document.getElementById('adultsInput').value, 10);
       const children = parseInt(document.getElementById('childrenInput').value, 10);
       const budget = parseInt(document.getElementById('budgetInput').value, 10);
 
-      const statusBanner = document.getElementById('statusBanner');
-      statusBanner.style.display = 'none';
+      // Calculate nights
+      const nights = Math.max(3, Math.round((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)));
+      document.getElementById('nightsInput').value = nights;
 
       try {
         const res = await fetch('/api/packages/generate', {
@@ -1140,266 +1085,279 @@
             child_ages: Array(children).fill(6),
             budget: budget,
             traveler_name: 'Menon family',
-            preference: currentPreference
+            preference: activeFilter === 'spiritual' ? 'spiritual' : (activeFilter === 'kids' ? 'family_kids' : 'all_round')
           })
         });
 
         const data = await res.json();
-
-        if (!data.success) {
-          // Feature M2: No package possible
-          statusBanner.className = 'status-alert error';
-          statusBanner.innerHTML = `<strong>Package Not Possible:</strong> ${data.error}`;
-          statusBanner.style.display = 'block';
-          document.getElementById('packagesSection').style.display = 'none';
-          document.getElementById('itinerarySection').style.display = 'none';
-          return;
+        if (data.success && data.packages) {
+          currentPackages = data.packages;
+          activeTrip = data.packages.cheapest;
+          renderListings();
+          renderPreview();
+        } else if (data.budget_exceeded) {
+          activeTrip = data.cheapest_package;
+          renderListings();
+          renderPreview();
+          alert(`Budget Warning: Cheapest package is ₹${data.cheapest_package.total_inr.toLocaleString('en-IN')}`);
+        } else {
+          alert("No package possible for this route.");
         }
-
-        if (data.budget_exceeded) {
-          // Feature M8: Budget too small
-          currentPackages = null;
-          statusBanner.className = 'status-alert error';
-          statusBanner.innerHTML = `
-            <div>
-              <div style="font-weight: 800; font-size: 16px; margin-bottom: 4px;">⚠️ ${data.message}</div>
-              <ul style="margin-left: 20px; font-size: 13px; margin-top: 8px;">
-                ${data.suggestions.map(s => `<li>${s}</li>`).join('')}
-              </ul>
-              <button class="nav-btn-primary nav-btn" style="margin-top: 12px; background: #b91c1c; color: white;" onclick="applyCheapestBudget(${data.cheapest_package.total_inr})">
-                Adjust Budget to ₹${data.cheapest_package.total_inr.toLocaleString('en-IN')}
-              </button>
-            </div>
-          `;
-          statusBanner.style.display = 'block';
-          document.getElementById('packagesSection').style.display = 'none';
-          document.getElementById('itinerarySection').style.display = 'none';
-          return;
-        }
-
-        currentPackages = data.packages;
-        document.getElementById('packagesSection').style.display = 'block';
-        document.getElementById('itinerarySection').style.display = 'grid';
-
-        renderPackageComparisonCards();
-        selectPackageTier('cheapest');
-
       } catch (err) {
-        console.error('Search error:', err);
+        console.error(err);
       }
     }
 
-    function applyCheapestBudget(amount) {
-      document.getElementById('budgetInput').value = amount;
-      handleSearch();
-    }
-
-    function renderPackageComparisonCards() {
-      const budget = parseInt(document.getElementById('budgetInput').value, 10);
-      const { cheapest, fastest, best_rated } = currentPackages;
-
-      // Cheapest
-      document.getElementById('cheapestPrice').innerText = `₹${cheapest.total_inr.toLocaleString('en-IN')}`;
-      document.getElementById('cheapestCities').innerText = cheapest.metrics.city_plan.map(s => `${s.city} (${s.nights}N)`).join(' → ');
-      document.getElementById('cheapestTravelTime').innerText = `${Math.floor(cheapest.metrics.travel_duration_minutes / 60)}h ${cheapest.metrics.travel_duration_minutes % 60}m travel`;
-      document.getElementById('cheapestStars').innerText = `${cheapest.metrics.avg_stars}★ Avg Hotel Class`;
-      document.getElementById('cheapestSavings').innerText = `₹${(budget - cheapest.total_inr).toLocaleString('en-IN')} under budget`;
-
-      // Fastest
-      document.getElementById('fastestPrice').innerText = `₹${fastest.total_inr.toLocaleString('en-IN')}`;
-      document.getElementById('fastestCities').innerText = fastest.metrics.city_plan.map(s => `${s.city} (${s.nights}N)`).join(' → ');
-      document.getElementById('fastestTravelTime').innerText = `${Math.floor(fastest.metrics.travel_duration_minutes / 60)}h ${fastest.metrics.travel_duration_minutes % 60}m travel`;
-      document.getElementById('fastestStars').innerText = `${fastest.metrics.avg_stars}★ Avg Hotel Class`;
-      document.getElementById('fastestSavings').innerText = `₹${(budget - fastest.total_inr).toLocaleString('en-IN')} under budget`;
-
-      // Best Rated
-      document.getElementById('bestRatedPrice').innerText = `₹${bestRated.total_inr.toLocaleString('en-IN')}`;
-      document.getElementById('bestRatedCities').innerText = bestRated.metrics.city_plan.map(s => `${s.city} (${s.nights}N)`).join(' → ');
-      document.getElementById('bestRatedTravelTime').innerText = `${Math.floor(bestRated.metrics.travel_duration_minutes / 60)}h ${bestRated.metrics.travel_duration_minutes % 60}m travel`;
-      document.getElementById('bestRatedStars').innerText = `${bestRated.metrics.avg_stars}★ Avg Hotel Class`;
-      document.getElementById('bestRatedSavings').innerText = `₹${(budget - bestRated.total_inr).toLocaleString('en-IN')} under budget`;
-    }
-
-    function selectPackageTier(tier) {
-      selectedTier = tier;
-      document.querySelectorAll('.pkg-card').forEach(c => c.classList.remove('selected'));
-      if (tier === 'cheapest') document.getElementById('pkgCardCheapest').classList.add('selected');
-      if (tier === 'fastest') document.getElementById('pkgCardFastest').classList.add('selected');
-      if (tier === 'best_rated') document.getElementById('pkgCardBestRated').classList.add('selected');
-
-      activeTrip = JSON.parse(JSON.stringify(currentPackages[tier]));
-      renderItinerary();
-      renderSidebar();
-    }
-
-    function renderItinerary() {
-      const container = document.getElementById('daysContainer');
+    function renderListings() {
+      const container = document.getElementById('listingsContainer');
       container.innerHTML = '';
 
-      const nights = Math.round((new Date(activeTrip.end_date) - new Date(activeTrip.start_date)) / (1000 * 60 * 60 * 24));
-      const totalDays = nights + 1; // arrival day to departure day
+      if (!activeTrip) return;
 
-      for (let dayIdx = 0; dayIdx < totalDays; dayIdx++) {
-        const curDate = getOffsetDate(activeTrip.start_date, dayIdx);
-        const isArrival = (dayIdx === 0);
-        const isDeparture = (dayIdx === totalDays - 1);
+      const items = activeTrip.items;
 
-        // Find active hotel for this day
-        const activeHotel = activeTrip.items.find(it => it.type === 'hotel' && curDate >= it.start && curDate < it.end);
-        const city = activeHotel ? activeHotel.city : (isDeparture ? activeTrip.traveler.home_airport : activeTrip.country);
+      // Group items by type or date
+      // 1. Flights Row (Like Screenshot)
+      const flightHeader = document.createElement('div');
+      flightHeader.className = 'section-date-header';
+      flightHeader.innerHTML = `<span>FLIGHTS · ${formatDateHeader(activeTrip.start_date)} - ${formatDateHeader(activeTrip.end_date)}</span><span>${activeTrip.traveler.adults + activeTrip.traveler.children} SEATS</span>`;
+      container.appendChild(flightHeader);
 
-        const dayCard = document.createElement('div');
-        dayCard.className = 'day-card';
+      const flights = items.filter(it => it.type === 'flight');
+      for (const fl of flights) {
+        const card = document.createElement('div');
+        card.className = 'listing-card';
 
-        const dayHeader = document.createElement('div');
-        dayHeader.className = 'day-header';
-        dayHeader.innerHTML = `
-          <div class="day-title">
-            <span>Day ${dayIdx + 1}: ${formatDateNice(curDate)}</span>
-            <span class="day-city-tag">${activeHotel ? activeHotel.city : 'Transit'}</span>
+        const depTime = fl.start.split('T')[1] || '10:30';
+        const arrTime = fl.end.split('T')[1] || '20:30';
+        const isReturn = fl.city === activeTrip.traveler.home_airport;
+
+        card.innerHTML = `
+          <div class="listing-left">
+            <div class="listing-logo-badge">✈️</div>
+            <div class="listing-route-info">
+              <div class="time-point">
+                <span class="time-main">${depTime}</span>
+                <span class="time-sub">${isReturn ? activeTrip.country : activeTrip.traveler.home_airport}</span>
+              </div>
+              <div class="flight-path-bar">
+                <span class="duration-text">${isReturn ? 'Return Flight' : 'Outbound Flight'}</span>
+                <div class="path-line-container">
+                  <span class="path-dot"></span>
+                  <span class="path-line"></span>
+                  <span class="path-plane-icon">✈</span>
+                  <span class="path-line"></span>
+                  <span class="path-dot"></span>
+                </div>
+                <span class="path-subtext">Confirmed Seats: ${fl.quantity}</span>
+              </div>
+              <div class="time-point">
+                <span class="time-main">${arrTime}</span>
+                <span class="time-sub">${fl.city}</span>
+              </div>
+            </div>
           </div>
-          <div style="font-size: 13px; color: #64748b; font-weight: 500;">
-            ${isArrival ? 'Arrival & Welcome' : isDeparture ? 'Return Flight Home' : 'Full Sightseeing Day'}
+          <div class="listing-right">
+            <div class="price-block">
+              <div class="price-amount">₹${fl.price_inr.toLocaleString('en-IN')}</div>
+              <div class="price-caption">all travelers</div>
+            </div>
+            <button class="select-pill-btn secondary" onclick="openSwapFlightModal('${isReturn ? 'inbound' : 'outbound'}')">Swap</button>
           </div>
         `;
-        dayCard.appendChild(dayHeader);
-
-        const dayItems = document.createElement('div');
-        dayItems.className = 'day-items';
-
-        // Filter items for this date
-        const itemsToday = activeTrip.items.filter(it => {
-          if (it.type === 'hotel') {
-            return it.start === curDate; // Show on check-in day
-          }
-          return it.start.startsWith(curDate);
-        });
-
-        // Sort items by time
-        itemsToday.sort((a, b) => (a.start > b.start ? 1 : -1));
-
-        for (const it of itemsToday) {
-          const itemEl = createItemCard(it, curDate);
-          dayItems.appendChild(itemEl);
-        }
-
-        // Add Attraction Button if full day or arrival
-        if (!isDeparture && activeHotel) {
-          const addBtn = document.createElement('button');
-          addBtn.className = 'swap-btn';
-          addBtn.style.alignSelf = 'flex-start';
-          addBtn.innerText = `+ Add Attraction in ${activeHotel.city}`;
-          addBtn.onclick = () => openAddAttractionModal(curDate);
-          dayItems.appendChild(addBtn);
-        }
-
-        dayCard.appendChild(dayItems);
-        container.appendChild(dayCard);
-      }
-    }
-
-    function createItemCard(it, curDate) {
-      const card = document.createElement('div');
-      card.className = `item-card ${it.type}`;
-
-      let icon = '📌';
-      if (it.type === 'flight') icon = '✈️';
-      if (it.type === 'transfer') icon = '🚗';
-      if (it.type === 'hotel') icon = '🏨';
-      if (it.type === 'attraction') icon = '🎡';
-
-      let timeText = '';
-      if (it.type === 'flight') {
-        const dep = it.start.split('T')[1] || '';
-        const arr = it.end.split('T')[1] || '';
-        timeText = `Departs: ${dep} · Arrives: ${arr} (Seats: ${it.quantity})`;
-      } else if (it.type === 'transfer') {
-        const pick = it.start.split('T')[1] || '';
-        const reach = it.end ? it.end.split('T')[1] : '';
-        timeText = `Pickup: ${pick} ${reach ? '· Reaches: ' + reach : ''} (${it.quantity} vehicle/transfer)`;
-      } else if (it.type === 'hotel') {
-        const nights = Math.round((new Date(it.end) - new Date(it.start)) / (1000 * 60 * 60 * 24));
-        timeText = `Check-in: ${it.start} · Check-out: ${it.end} (${nights} nights)`;
-      } else if (it.type === 'attraction') {
-        const st = it.start.split('T')[1] || '';
-        const en = it.end.split('T')[1] || '';
-        timeText = `Visit: ${st} - ${en} (${it.quantity} tickets)`;
+        container.appendChild(card);
       }
 
-      let badgesHtml = '';
-      if (it.type === 'hotel') {
-        badgesHtml += `<span class="tag-badge tag-roomfit">✓ Verified Room Fit (${it.quantity} Room)</span>`;
-      } else if (it.type === 'attraction') {
-        if (it.name.includes('Temple') || it.name.includes('Shrine') || it.name.includes('ji') || it.name.includes('Mosque')) {
-          badgesHtml += `<span class="tag-badge tag-spiritual">⛩️ Spiritual Heritage</span>`;
-        }
-        if (it.name.includes('Disney') || it.name.includes('Universal') || it.name.includes('Aquarium') || it.name.includes('Toy') || it.name.includes('Science')) {
-          badgesHtml += `<span class="tag-badge tag-kids">🧸 Kids & Family Gem</span>`;
-        }
-        badgesHtml += `<span class="tag-badge tag-accessible">♿ Accessible</span>`;
-      }
+      // 2. Stays & Accommodation Row
+      const stayHeader = document.createElement('div');
+      stayHeader.className = 'section-date-header';
+      stayHeader.innerHTML = `<span>ACCOMMODATION · VERIFIED ROOM FIT</span><span>HOTEL CLASS</span>`;
+      container.appendChild(stayHeader);
 
-      let actionsHtml = '';
-      if (it.type === 'hotel') {
-        actionsHtml = `<button class="swap-btn" onclick="openSwapHotelModal('${it.city}')">Swap Hotel</button>`;
-      } else if (it.type === 'flight') {
-        const dir = it.start.startsWith(activeTrip.start_date) ? 'outbound' : 'inbound';
-        actionsHtml = `<button class="swap-btn" onclick="openSwapFlightModal('${dir}')">Swap Flight</button>`;
-      } else if (it.type === 'attraction') {
-        actionsHtml = `<button class="swap-btn" style="color: #b91c1c; border-color: #fca5a5;" onclick="removeAttraction('${it.item_id}')">Remove</button>`;
-      }
+      const hotels = items.filter(it => it.type === 'hotel');
+      for (const htl of hotels) {
+        const card = document.createElement('div');
+        card.className = 'listing-card';
 
-      card.innerHTML = `
-        <div class="item-icon">${icon}</div>
-        <div class="item-info">
-          <div class="item-header-row">
-            <div class="item-name">${it.name}</div>
-            <div class="item-price">₹${it.price_inr.toLocaleString('en-IN')}</div>
+        card.innerHTML = `
+          <div class="listing-left">
+            <div class="listing-logo-badge">🏨</div>
+            <div style="flex: 1;">
+              <div style="font-size: 16px; font-weight: 800; color: var(--text-main); margin-bottom: 2px;">
+                ${htl.name}
+              </div>
+              <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 6px;">
+                ${htl.city} · Check-in: ${htl.start} · Check-out: ${htl.end}
+              </div>
+              <div>
+                <span class="custom-tag tag-roomfit">✓ ${htl.quantity} Room Fits ${activeTrip.traveler.adults}A + ${activeTrip.traveler.children}C</span>
+                <span class="custom-tag tag-accessible">♿ Senior Accessible</span>
+              </div>
+            </div>
           </div>
-          <div class="item-time">${timeText}</div>
-          <div class="item-badges">${badgesHtml}</div>
-          <div>${actionsHtml}</div>
-        </div>
-      `;
+          <div class="listing-right">
+            <div class="price-block">
+              <div class="price-amount">₹${htl.price_inr.toLocaleString('en-IN')}</div>
+              <div class="price-caption">total stay</div>
+            </div>
+            <button class="select-pill-btn secondary" onclick="openSwapHotelModal('${htl.city}')">Swap</button>
+          </div>
+        `;
+        container.appendChild(card);
+      }
 
-      return card;
+      // 3. Ground Transport Row
+      const trHeader = document.createElement('div');
+      trHeader.className = 'section-date-header';
+      trHeader.innerHTML = `<span>TRANSFERS · TIMING BUFFERS ENFORCED</span><span>GROUND LOGISTICS</span>`;
+      container.appendChild(trHeader);
+
+      const transfers = items.filter(it => it.type === 'transfer');
+      for (const tr of transfers) {
+        const card = document.createElement('div');
+        card.className = 'listing-card';
+
+        card.innerHTML = `
+          <div class="listing-left">
+            <div class="listing-logo-badge">🚗</div>
+            <div>
+              <div style="font-size: 15px; font-weight: 800; color: var(--text-main); margin-bottom: 2px;">
+                ${tr.name}
+              </div>
+              <div style="font-size: 12px; color: var(--text-muted);">
+                Pickup: ${tr.start.replace('T', ' ')} ${tr.end ? '· Reach: ' + tr.end.split('T')[1] : ''} (${tr.quantity} vehicle)
+              </div>
+            </div>
+          </div>
+          <div class="listing-right">
+            <div class="price-block">
+              <div class="price-amount">₹${tr.price_inr.toLocaleString('en-IN')}</div>
+              <div class="price-caption">dedicated transfer</div>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      }
+
+      // 4. Attractions & Sightseeing Row
+      const attHeader = document.createElement('div');
+      attHeader.className = 'section-date-header';
+      attHeader.innerHTML = `<span>EXPERIENCES & ATTRACTIONS</span><span>DAILY SIGHTSEEING</span>`;
+      container.appendChild(attHeader);
+
+      const attractions = items.filter(it => it.type === 'attraction');
+      for (const att of attractions) {
+        const card = document.createElement('div');
+        card.className = 'listing-card';
+
+        let badgeType = '';
+        if (att.name.includes('Temple') || att.name.includes('Shrine') || att.name.includes('ji') || att.name.includes('Mosque')) {
+          badgeType = '<span class="custom-tag tag-spiritual">⛩️ Spiritual Pilgrimage</span>';
+        } else if (att.name.includes('Disney') || att.name.includes('Universal') || att.name.includes('Aquarium') || att.name.includes('Toy')) {
+          badgeType = '<span class="custom-tag tag-kids">🧸 Kids & Family Gem</span>';
+        }
+
+        card.innerHTML = `
+          <div class="listing-left">
+            <div class="listing-logo-badge">🎡</div>
+            <div>
+              <div style="font-size: 15px; font-weight: 800; color: var(--text-main); margin-bottom: 2px;">
+                ${att.name} (${att.city})
+              </div>
+              <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px;">
+                Visit Window: ${att.start.replace('T', ' ')} - ${att.end ? att.end.split('T')[1] : ''}
+              </div>
+              <div>
+                ${badgeType}
+                <span class="custom-tag tag-accessible">♿ Accessible</span>
+              </div>
+            </div>
+          </div>
+          <div class="listing-right">
+            <div class="price-block">
+              <div class="price-amount">₹${att.price_inr.toLocaleString('en-IN')}</div>
+              <div class="price-caption">${att.quantity} entry tickets</div>
+            </div>
+            <button class="select-pill-btn secondary" style="color: #ef4444;" onclick="removeAttraction('${att.item_id}')">&times;</button>
+          </div>
+        `;
+        container.appendChild(card);
+      }
     }
 
-    function renderSidebar() {
-      const budget = activeTrip.budget_inr;
+    function renderPreview() {
+      if (!activeTrip) return;
+
+      const timeline = document.getElementById('timelineContainer');
+      // Keep vertical line
+      timeline.innerHTML = '<div class="timeline-vertical-line"></div>';
+
+      const items = activeTrip.items;
+
+      // Extract milestone events
+      const milestones = [
+        {
+          date: formatDateHeader(activeTrip.start_date),
+          title: `ARRIVAL IN ${activeTrip.country.toUpperCase()}`,
+          sub: `✈ ${items.find(it => it.type === 'flight')?.name || 'Flight Arrival'}`
+        },
+        {
+          date: formatDateHeader(activeTrip.start_date),
+          title: `ACCOMMODATION CHECK-IN`,
+          sub: `🏨 ${items.find(it => it.type === 'hotel')?.name || 'Hotel Check-in'}`
+        }
+      ];
+
+      // Add attraction visits
+      const atts = items.filter(it => it.type === 'attraction');
+      for (const att of atts.slice(0, 3)) {
+        milestones.push({
+          date: formatDateHeader(att.start.split('T')[0]),
+          title: att.name.toUpperCase(),
+          sub: `📍 ${att.city} · Visit: ${att.start.split('T')[1] || ''}`
+        });
+      }
+
+      // Add departure
+      milestones.push({
+        date: formatDateHeader(activeTrip.end_date),
+        title: `RETURN FLIGHT TO ${activeTrip.traveler.home_airport}`,
+        sub: `✈ Safe journey home`
+      });
+
+      for (let i = 0; i < milestones.length; i++) {
+        const m = milestones[i];
+        const node = document.createElement('div');
+        node.className = 'timeline-node';
+        node.innerHTML = `
+          <div class="node-icon-circle">✓</div>
+          <div class="node-title">${m.date} - ${m.title}</div>
+          <div class="node-subtitle">${m.sub}</div>
+        `;
+        timeline.appendChild(node);
+      }
+
+      // Update Footer Budget
       const total = activeTrip.total_inr;
-
-      document.getElementById('summaryBudget').innerText = `₹${budget.toLocaleString('en-IN')}`;
-      document.getElementById('costTotal').innerText = `₹${total.toLocaleString('en-IN')}`;
-
-      const flightsCost = activeTrip.items.filter(it => it.type === 'flight').reduce((s, it) => s + it.price_inr, 0);
-      const hotelsCost = activeTrip.items.filter(it => it.type === 'hotel').reduce((s, it) => s + it.price_inr, 0);
-      const transfersCost = activeTrip.items.filter(it => it.type === 'transfer').reduce((s, it) => s + it.price_inr, 0);
-      const attractionsCost = activeTrip.items.filter(it => it.type === 'attraction').reduce((s, it) => s + it.price_inr, 0);
-
-      document.getElementById('costFlights').innerText = `₹${flightsCost.toLocaleString('en-IN')}`;
-      document.getElementById('costHotels').innerText = `₹${hotelsCost.toLocaleString('en-IN')}`;
-      document.getElementById('costTransfers').innerText = `₹${transfersCost.toLocaleString('en-IN')}`;
-      document.getElementById('costAttractions').innerText = `₹${attractionsCost.toLocaleString('en-IN')}`;
-
-      const pct = Math.min(100, Math.round((total / budget) * 100));
-      const meterBar = document.getElementById('meterBar');
-      meterBar.style.width = `${pct}%`;
+      const budget = activeTrip.budget_inr;
+      document.getElementById('previewTotal').innerText = `₹${total.toLocaleString('en-IN')}`;
+      document.getElementById('budgetSummaryText').innerText = `₹${budget.toLocaleString('en-IN')}`;
 
       const diff = budget - total;
       const diffTag = document.getElementById('budgetDiffTag');
-      const subtext = document.getElementById('meterSubtext');
+      const fill = document.getElementById('progressFill');
+
+      const pct = Math.min(100, Math.round((total / budget) * 100));
+      fill.style.width = `${pct}%`;
 
       if (diff >= 0) {
-        meterBar.style.background = 'var(--b-green)';
-        diffTag.style.color = 'var(--b-green)';
-        diffTag.innerText = `₹${diff.toLocaleString('en-IN')} Left`;
-        subtext.innerText = `${pct}% of budget utilized`;
+        diffTag.style.color = 'var(--green-badge)';
+        diffTag.innerText = `₹${diff.toLocaleString('en-IN')} Under`;
+        fill.style.background = 'var(--primary-blue)';
       } else {
-        meterBar.style.background = 'var(--b-red)';
-        diffTag.style.color = 'var(--b-red)';
+        diffTag.style.color = '#ef4444';
         diffTag.innerText = `₹${Math.abs(diff).toLocaleString('en-IN')} Over`;
-        subtext.innerText = `Exceeds budget by ₹${Math.abs(diff).toLocaleString('en-IN')}`;
+        fill.style.background = '#ef4444';
       }
     }
 
@@ -1411,41 +1369,32 @@
     async function openSwapHotelModal(city) {
       document.getElementById('swapModalTitle').innerText = `Swap Hotel in ${city}`;
       const content = document.getElementById('swapModalContent');
-      content.innerHTML = '<div style="padding: 20px; text-align: center;">Finding available hotels & room fits...</div>';
+      content.innerHTML = '<div style="padding: 20px; text-align: center;">Finding available hotel rooms...</div>';
       openModal('swapModal');
 
       try {
         const res = await fetch('/api/packages/options/hotels', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ trip: activeTrip, city: city })
+          body: JSON.stringify({ trip: activeTrip, city })
         });
         const data = await res.json();
         const options = data.options || [];
 
-        if (options.length === 0) {
-          content.innerHTML = '<p>No other hotels available with verified room fit for this date.</p>';
-          return;
-        }
-
-        content.innerHTML = options.map(opt => {
-          const deltaClass = opt.delta_price > 0 ? 'delta-plus' : opt.delta_price < 0 ? 'delta-minus' : 'delta-zero';
-          const deltaText = opt.delta_price > 0 ? `+₹${opt.delta_price.toLocaleString('en-IN')}` : opt.delta_price < 0 ? `-₹${Math.abs(opt.delta_price).toLocaleString('en-IN')}` : 'Same Price';
-          return `
-            <div class="option-card" onclick="applyHotelSwap('${city}', '${opt.hotel_id}', '${opt.room_id}', ${opt.quantity}, ${opt.price_inr})">
-              <div>
-                <div style="font-weight: 800; font-size: 15px;">${opt.hotel_name} ${opt.is_current ? '<span style="color: #006ce4; font-size: 12px;">(Current)</span>' : ''}</div>
-                <div style="font-size: 13px; color: #64748b;">${opt.room_name} (${opt.quantity} room) · ${opt.stars}★ Class · Area: ${opt.area}</div>
-              </div>
-              <div style="text-align: right;">
-                <div style="font-weight: 800; font-size: 15px;">₹${opt.price_inr.toLocaleString('en-IN')}</div>
-                <span class="delta-badge ${deltaClass}">${deltaText}</span>
-              </div>
+        content.innerHTML = options.map(opt => `
+          <div style="border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="applyHotelSwap('${city}', '${opt.hotel_id}', '${opt.room_id}', ${opt.quantity}, ${opt.price_inr})">
+            <div>
+              <div style="font-weight: 800; font-size: 15px;">${opt.hotel_name} ${opt.is_current ? '<span style="color: var(--primary-blue); font-size: 12px;">(Current)</span>' : ''}</div>
+              <div style="font-size: 12px; color: var(--text-muted);">${opt.room_name} (${opt.quantity} room) · ${opt.stars}★ Class · Area: ${opt.area}</div>
             </div>
-          `;
-        }).join('');
-      } catch (err) {
-        console.error('Hotel swap error:', err);
+            <div style="text-align: right;">
+              <div style="font-weight: 800; font-size: 15px;">₹${opt.price_inr.toLocaleString('en-IN')}</div>
+              <button class="select-pill-btn secondary" style="padding: 4px 12px; font-size: 12px; margin-top: 4px;">Select</button>
+            </div>
+          </div>
+        `).join('');
+      } catch (e) {
+        content.innerHTML = 'Error loading hotels.';
       }
     }
 
@@ -1472,29 +1421,25 @@
         const res = await fetch('/api/packages/options/flights', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ trip: activeTrip, direction: direction })
+          body: JSON.stringify({ trip: activeTrip, direction })
         });
         const data = await res.json();
         const options = data.options || [];
 
-        content.innerHTML = options.map(fl => {
-          const deltaClass = fl.delta_price > 0 ? 'delta-plus' : fl.delta_price < 0 ? 'delta-minus' : 'delta-zero';
-          const deltaText = fl.delta_price > 0 ? `+₹${fl.delta_price.toLocaleString('en-IN')}` : fl.delta_price < 0 ? `-₹${Math.abs(fl.delta_price).toLocaleString('en-IN')}` : 'Same Price';
-          return `
-            <div class="option-card" onclick="applyFlightSwap('${direction}', '${fl.flight_id}', '${fl.airline} ${fl.flight_number} (${fl.from} to ${fl.to})', '${fl.departure_local}', '${fl.arrival_local}', ${fl.price_inr})">
-              <div>
-                <div style="font-weight: 800; font-size: 15px;">${fl.airline} ${fl.flight_number} ${fl.is_current ? '<span style="color: #006ce4; font-size: 12px;">(Current)</span>' : ''}</div>
-                <div style="font-size: 13px; color: #64748b;">${fl.from} → ${fl.to} · Dep: ${fl.departure_local.split('T')[1]} · Arr: ${fl.arrival_local.split('T')[1]} · ${fl.duration_minutes}m</div>
-              </div>
-              <div style="text-align: right;">
-                <div style="font-weight: 800; font-size: 15px;">₹${fl.price_inr.toLocaleString('en-IN')}</div>
-                <span class="delta-badge ${deltaClass}">${deltaText}</span>
-              </div>
+        content.innerHTML = options.map(fl => `
+          <div style="border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="applyFlightSwap('${direction}', '${fl.flight_id}', '${fl.airline} ${fl.flight_number} (${fl.from} to ${fl.to})', '${fl.departure_local}', '${fl.arrival_local}', ${fl.price_inr})">
+            <div>
+              <div style="font-weight: 800; font-size: 15px;">${fl.airline} ${fl.flight_number} ${fl.is_current ? '<span style="color: var(--primary-blue); font-size: 12px;">(Current)</span>' : ''}</div>
+              <div style="font-size: 12px; color: var(--text-muted);">${fl.from} → ${fl.to} · Dep: ${fl.departure_local.split('T')[1]} · Arr: ${fl.arrival_local.split('T')[1]}</div>
             </div>
-          `;
-        }).join('');
-      } catch (err) {
-        console.error('Flight swap error:', err);
+            <div style="text-align: right;">
+              <div style="font-weight: 800; font-size: 15px;">₹${fl.price_inr.toLocaleString('en-IN')}</div>
+              <button class="select-pill-btn secondary" style="padding: 4px 12px; font-size: 12px; margin-top: 4px;">Select</button>
+            </div>
+          </div>
+        `).join('');
+      } catch (e) {
+        content.innerHTML = 'Error loading flights.';
       }
     }
 
@@ -1504,7 +1449,6 @@
         if (it.type !== 'flight') return false;
         return direction === 'outbound' ? it.city !== activeTrip.traveler.home_airport : it.city === activeTrip.traveler.home_airport;
       });
-
       if (item) {
         item.catalog_id = flightId;
         item.name = name;
@@ -1512,71 +1456,6 @@
         item.end = arrLocal.substring(0, 16);
         item.price_inr = price;
       }
-      await revalidateActiveTrip();
-    }
-
-    // Add Attraction Modal
-    async function openAddAttractionModal(targetDate) {
-      document.getElementById('swapModalTitle').innerText = `Add Attraction for ${formatDateNice(targetDate)}`;
-      const content = document.getElementById('swapModalContent');
-      content.innerHTML = '<div style="padding: 20px; text-align: center;">Loading available attractions...</div>';
-      openModal('swapModal');
-
-      try {
-        const res = await fetch('/api/packages/options/attractions', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ trip: activeTrip, target_date: targetDate })
-        });
-        const data = await res.json();
-        const options = (data.options || []).filter(o => !o.is_scheduled);
-
-        if (options.length === 0) {
-          content.innerHTML = '<p>No further attractions available on this date.</p>';
-          return;
-        }
-
-        content.innerHTML = options.map(att => `
-          <div class="option-card" onclick="applyAddAttraction('${att.attraction_id}', '${att.name}', '${att.city}', '${targetDate}', '${att.open_from}', '${att.visit_minutes}', ${att.price_inr})">
-            <div>
-              <div style="font-weight: 800; font-size: 15px;">${att.name} (${att.category})</div>
-              <div style="font-size: 13px; color: #64748b;">Open: ${att.open_from} - ${att.open_until} · Visit: ${att.visit_minutes}m</div>
-            </div>
-            <div style="text-align: right;">
-              <div style="font-weight: 800; font-size: 15px;">₹${att.price_inr.toLocaleString('en-IN')}</div>
-              <span class="delta-badge delta-plus">+ Add</span>
-            </div>
-          </div>
-        `).join('');
-      } catch (err) {
-        console.error('Attraction modal error:', err);
-      }
-    }
-
-    async function applyAddAttraction(attId, name, city, date, openFrom, visitMins, price) {
-      closeModal('swapModal');
-      const startMins = parseTime(openFrom) + 60; // 1 hr after open
-      const endMins = startMins + parseInt(visitMins, 10);
-      const startTime = formatMins(startMins);
-      const endTime = formatMins(endMins);
-
-      activeTrip.items.push({
-        item_id: `item-att-${attId}-${Date.now()}`,
-        type: 'attraction',
-        name: name,
-        city: city,
-        status: 'PLANNED',
-        catalog_id: attId,
-        room_id: null,
-        start: `${date}T${startTime}`,
-        end: `${date}T${endTime}`,
-        quantity: activeTrip.traveler.adults + activeTrip.traveler.children,
-        price_inr: price,
-        booking: null,
-        sources: [],
-        warnings: []
-      });
-
       await revalidateActiveTrip();
     }
 
@@ -1595,15 +1474,15 @@
         const data = await res.json();
         if (data.valid && data.updated_trip) {
           activeTrip = data.updated_trip;
-          renderItinerary();
-          renderSidebar();
+          renderListings();
+          renderPreview();
         }
       } catch (e) {
-        console.error('Revalidation error:', e);
+        console.error(e);
       }
     }
 
-    // Confirm Booking (Feature M7)
+    // Confirm Booking
     async function handleConfirmBooking() {
       try {
         const res = await fetch('/api/bookings/confirm', {
@@ -1613,33 +1492,30 @@
         });
         const data = await res.json();
         if (data.success && data.reservation) {
-          const booked = data.reservation;
-          activeTrip.status = 'BOOKED';
-          activeTrip.booking = { reference: booked.reference };
-          document.getElementById('resRefNumber').innerText = booked.reference;
-          openModal('bookingModal');
+          document.getElementById('displayRefNumber').innerText = data.reservation.reference;
+          openModal('successModal');
         }
       } catch (e) {
-        console.error('Booking error:', e);
+        console.error(e);
       }
     }
 
-    // JSON Export (Feature M5)
+    // Download JSON Export
     function handleDownloadJson() {
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(activeTrip, null, 2));
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", `trip_${activeTrip.trip_id || 'export'}.json`);
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
+      const a = document.createElement('a');
+      a.setAttribute("href", dataStr);
+      a.setAttribute("download", `trip_${activeTrip.trip_id || 'package'}.json`);
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
     }
 
-    // Find Booking Modal Handler
+    // Find Booking Modal
     function openFindBookingModal() {
-      document.getElementById('findResultArea').innerHTML = '';
       document.getElementById('findRefInput').value = '';
-      openModal('findModal');
+      document.getElementById('findResultArea').innerHTML = '';
+      openModal('findBookingModal');
     }
 
     async function handleFindReservation() {
@@ -1653,89 +1529,40 @@
         if (data.success && data.reservation) {
           const b = data.reservation;
           area.innerHTML = `
-            <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 6px; padding: 14px; margin-top: 10px;">
-              <div style="font-weight: 800; color: #166534; font-size: 16px;">✓ Reservation Found!</div>
-              <div style="font-size: 13px; margin: 4px 0;"><strong>Traveler:</strong> ${b.traveler.name} (${b.traveler.adults} Adults, ${b.traveler.children} Children)</div>
-              <div style="font-size: 13px; margin: 4px 0;"><strong>Destination:</strong> ${b.country} · ${b.start_date} to ${b.end_date}</div>
+            <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 14px; margin-top: 10px;">
+              <div style="font-weight: 800; color: #166534;">✓ Reservation Confirmed (#${b.reference})</div>
+              <div style="font-size: 13px; margin: 4px 0;"><strong>Traveler:</strong> ${b.traveler.name} · ${b.country}</div>
               <div style="font-size: 13px; margin: 4px 0;"><strong>Total Paid:</strong> ₹${b.total_inr.toLocaleString('en-IN')}</div>
-              <button class="nav-btn-primary nav-btn" style="margin-top: 10px; width: 100%;" onclick="loadFoundReservation('${b.reference}')">Open Itinerary in Workspace</button>
+              <button class="confirm-btn-primary" style="margin-top: 10px;" onclick="loadFoundBooking('${b.reference}')">Open Itinerary</button>
             </div>
           `;
         } else {
-          area.innerHTML = `<div style="color: #b91c1c; font-size: 14px; padding: 10px 0;">No reservation found for reference "${ref}".</div>`;
+          area.innerHTML = '<div style="color: #ef4444; font-size: 13px; margin-top: 10px;">Reservation not found.</div>';
         }
-      } catch (err) {
-        area.innerHTML = `<div style="color: #b91c1c; font-size: 14px;">Error connecting to database.</div>`;
+      } catch (e) {
+        area.innerHTML = '<div style="color: #ef4444;">Error fetching reservation.</div>';
       }
     }
 
-    async function loadFoundReservation(ref) {
+    async function loadFoundBooking(ref) {
       try {
         const res = await fetch(`/api/bookings/${ref}`);
         const data = await res.json();
         if (data.success && data.reservation) {
           activeTrip = data.reservation;
-          closeModal('findModal');
-          document.getElementById('packagesSection').style.display = 'none';
-          document.getElementById('itinerarySection').style.display = 'grid';
-          renderItinerary();
-          renderSidebar();
+          closeModal('findBookingModal');
+          renderListings();
+          renderPreview();
         }
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    async function openAllBookingsModal() {
-      const listEl = document.getElementById('allBookingsList');
-      listEl.innerHTML = 'Loading reservations...';
-      openModal('allBookingsModal');
-
-      try {
-        const res = await fetch('/api/bookings');
-        const data = await res.json();
-        const list = data.reservations || [];
-        if (list.length === 0) {
-          listEl.innerHTML = '<p style="color: #64748b;">No confirmed reservations yet.</p>';
-          return;
-        }
-
-        listEl.innerHTML = list.map(b => `
-          <div style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-              <div style="font-weight: 800; color: #003580;">#${b.reference} · ${b.traveler.name}</div>
-              <div style="font-size: 12px; color: #64748b;">${b.country} (${b.start_date} to ${b.end_date}) · ₹${b.total_inr.toLocaleString('en-IN')}</div>
-            </div>
-            <button class="swap-btn" onclick="loadFoundReservation('${b.reference}'); closeModal('allBookingsModal');">Open</button>
-          </div>
-        `).join('');
       } catch (e) {
-        listEl.innerHTML = 'Failed to load bookings.';
+        console.error(e);
       }
     }
 
-    // Helper functions
-    function getOffsetDate(baseDate, offsetDays) {
-      const [y, m, d] = baseDate.split('-').map(Number);
-      const dt = new Date(y, m - 1, d + offsetDays);
-      return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
-    }
-
-    function formatDateNice(dateStr) {
+    function formatDateHeader(dateStr) {
       const [y, m, d] = dateStr.split('-').map(Number);
       const dt = new Date(y, m - 1, d);
-      return dt.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-    }
-
-    function parseTime(t) {
-      const [h, m] = t.split(':').map(Number);
-      return h * 60 + m;
-    }
-
-    function formatMins(m) {
-      const h = String(Math.floor(m / 60)).padStart(2, '0');
-      const min = String(m % 60).padStart(2, '0');
-      return `${h}:${min}`;
+      return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toUpperCase();
     }
   </script>
 </body>
