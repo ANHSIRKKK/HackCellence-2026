@@ -698,13 +698,53 @@
 
     .package-tier-bar {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 8px;
       margin-bottom: 20px;
       background: var(--bg-gray);
       padding: 6px;
       border-radius: 8px;
       border: 1px solid var(--border-gray);
+    }
+
+    @media (max-width: 900px) {
+      .package-tier-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .priority-strategy-btn {
+      flex: 1;
+      min-width: 170px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f8fafc;
+      border: 1.5px solid var(--border-gray);
+      border-radius: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+    .priority-strategy-btn:hover {
+      border-color: var(--booking-blue-light);
+      background: #eff6ff;
+    }
+    .priority-strategy-btn.active {
+      border-color: var(--booking-blue);
+      background: #eff6ff;
+      box-shadow: 0 2px 6px rgba(0, 108, 228, 0.12);
+    }
+    .priority-strategy-btn strong {
+      font-size: 13px;
+      color: var(--text-dark);
+      display: block;
+    }
+    .priority-strategy-btn small {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.3;
     }
 
     .tier-button {
@@ -1986,6 +2026,48 @@
         <div id="cityPlanPillsContainer" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
       </div>
 
+      <!-- Smart Budget Trade-Off Engine (Customer Priority & Reallocation) -->
+      <div style="background: white; border: 1px solid var(--border-gray); border-radius: 8px; padding: 14px 18px; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+          <div>
+            <span style="font-size: 11px; font-weight: 800; color: var(--booking-blue); text-transform: uppercase; letter-spacing: 0.5px;">🎯 SMART BUDGET TRADE-OFF ENGINE</span>
+            <h4 style="margin: 2px 0 0 0; font-size: 15px; font-weight: 700; color: var(--text-dark);">What would you like to prioritize in your budget?</h4>
+          </div>
+          <button class="btn-booking-outline" style="font-size: 12px; padding: 5px 12px;" onclick="openPriorityWeightsModal()">⚙️ Custom % Sliders</button>
+        </div>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="priority-strategy-btn active" id="btnStrat_hotel" onclick="applyPriorityStrategy('hotel')">
+            <span style="font-size: 20px;">🏨</span>
+            <div>
+              <strong>Luxury Hotel First</strong>
+              <small>Splurge on 4★/5★ Stays · Economize on Flights & Cabs</small>
+            </div>
+          </button>
+          <button class="priority-strategy-btn" id="btnStrat_flight" onclick="applyPriorityStrategy('flight')">
+            <span style="font-size: 20px;">✈️</span>
+            <div>
+              <strong>Fast Transit First</strong>
+              <small>Direct Non-Stop Flights · Cozy 3★ Stays</small>
+            </div>
+          </button>
+          <button class="priority-strategy-btn" id="btnStrat_experience" onclick="applyPriorityStrategy('experience')">
+            <span style="font-size: 20px;">🎡</span>
+            <div>
+              <strong>Max Sightseeing First</strong>
+              <small>Pack Tours & Attractions · Smart Saver Stays</small>
+            </div>
+          </button>
+          <button class="priority-strategy-btn" id="btnStrat_balanced" onclick="applyPriorityStrategy('balanced')">
+            <span style="font-size: 20px;">⚖️</span>
+            <div>
+              <strong>Balanced Optimizer</strong>
+              <small>Even split across comfortable Stay, Flight & Tours</small>
+            </div>
+          </button>
+        </div>
+      </div>
+
       <!-- Package Tier Switcher Buttons -->
       <div class="package-tier-bar">
         <button class="tier-button active" id="btnTierCheapest" onclick="switchTier('cheapest')">
@@ -1999,6 +2081,10 @@
         <button class="tier-button" id="btnTierBest" onclick="switchTier('best_rated')">
           <div class="tier-badge-label">⭐ Best Rated Stays</div>
           <div class="tier-price-val" id="tierPriceBest">₹2,89,000</div>
+        </button>
+        <button class="tier-button" id="btnTierPriority" onclick="switchTier('priority_match')">
+          <div class="tier-badge-label" id="tierLabelPriority">🎯 Priority Match</div>
+          <div class="tier-price-val" id="tierPricePriority">₹2,73,000</div>
         </button>
       </div>
 
@@ -2264,7 +2350,23 @@
     <div class="modal-booking-content">
       <button class="modal-close-booking" onclick="closeWeightsModal()">✕</button>
       <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 4px;">What matters most in your holiday?</h3>
-      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Adjust weights (total 100%) so our algorithm allocates your budget to what matters most.</p>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Pick a quick trade-off strategy or fine-tune weights so our algorithm re-allocates your budget to what matters most.</p>
+
+      <!-- Quick Trade-Off Presets -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 18px;">
+        <button type="button" class="btn-booking-outline" style="text-align: left; padding: 8px 10px; font-size: 12px;" onclick="setWeightsPreset(70, 20, 10)">
+          🏨 <strong>Luxury Hotel First</strong><br><small style="color: var(--text-muted);">70% Hotel / 20% Flight / 10% Exp</small>
+        </button>
+        <button type="button" class="btn-booking-outline" style="text-align: left; padding: 8px 10px; font-size: 12px;" onclick="setWeightsPreset(20, 65, 15)">
+          ✈️ <strong>Fast Transit First</strong><br><small style="color: var(--text-muted);">65% Flight / 20% Hotel / 15% Exp</small>
+        </button>
+        <button type="button" class="btn-booking-outline" style="text-align: left; padding: 8px 10px; font-size: 12px;" onclick="setWeightsPreset(25, 25, 50)">
+          🎡 <strong>Max Sightseeing</strong><br><small style="color: var(--text-muted);">50% Exp / 25% Hotel / 25% Flight</small>
+        </button>
+        <button type="button" class="btn-booking-outline" style="text-align: left; padding: 8px 10px; font-size: 12px;" onclick="setWeightsPreset(40, 30, 30)">
+          ⚖️ <strong>Balanced Split</strong><br><small style="color: var(--text-muted);">40% Hotel / 30% Flight / 30% Exp</small>
+        </button>
+      </div>
 
       <div style="margin-bottom: 16px;">
         <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 13px;">
@@ -3037,6 +3139,7 @@
       if (appPackages.cheapest) document.getElementById('tierPriceCheapest').innerText = `₹${appPackages.cheapest.total_inr.toLocaleString()}`;
       if (appPackages.fastest) document.getElementById('tierPriceFastest').innerText = `₹${appPackages.fastest.total_inr.toLocaleString()}`;
       if (appPackages.best_rated) document.getElementById('tierPriceBest').innerText = `₹${appPackages.best_rated.total_inr.toLocaleString()}`;
+      if (appPackages.priority_match) document.getElementById('tierPricePriority').innerText = `₹${appPackages.priority_match.total_inr.toLocaleString()}`;
     }
 
     function switchTier(tierKey) {
@@ -3045,12 +3148,52 @@
       if (tierKey === 'cheapest') document.getElementById('btnTierCheapest').classList.add('active');
       if (tierKey === 'fastest') document.getElementById('btnTierFastest').classList.add('active');
       if (tierKey === 'best_rated') document.getElementById('btnTierBest').classList.add('active');
+      if (tierKey === 'priority_match') document.getElementById('btnTierPriority').classList.add('active');
 
       if (appPackages && appPackages[tierKey]) {
         activePackageData = appPackages[tierKey];
         renderPackageComponentsList();
         renderLiveItineraryPreview();
       }
+    }
+
+    let currentPriorityStrategy = 'hotel';
+
+    function setWeightsPreset(h, f, e) {
+      document.getElementById('rangeWtHotel').value = h;
+      document.getElementById('rangeWtFlight').value = f;
+      document.getElementById('rangeWtExp').value = e;
+      document.getElementById('labelWtHotel').innerText = `${h}%`;
+      document.getElementById('labelWtFlight').innerText = `${f}%`;
+      document.getElementById('labelWtExp').innerText = `${e}%`;
+    }
+
+    function applyPriorityStrategy(strategy) {
+      currentPriorityStrategy = strategy;
+      document.querySelectorAll('.priority-strategy-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`btnStrat_${strategy}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      if (strategy === 'hotel') {
+        setWeightsPreset(70, 20, 10);
+        document.getElementById('tierLabelPriority').innerText = '🏨 Hotel Splurge Match';
+        showToast('🏨 Strategy: Prioritizing 4★/5★ Luxury Hotel. Flights & transit economized to balance budget!');
+      } else if (strategy === 'flight') {
+        setWeightsPreset(20, 65, 15);
+        document.getElementById('tierLabelPriority').innerText = '✈️ Fast Transit Match';
+        showToast('✈️ Strategy: Prioritizing Fast Direct Flights. Stays adjusted to 3★ cozy hotels to balance budget!');
+      } else if (strategy === 'experience') {
+        setWeightsPreset(25, 25, 50);
+        document.getElementById('tierLabelPriority').innerText = '🎡 Sightseeing Match';
+        showToast('🎡 Strategy: Prioritizing maximum tours & attraction passes!');
+      } else {
+        setWeightsPreset(40, 30, 30);
+        document.getElementById('tierLabelPriority').innerText = '⚖️ Balanced Match';
+        showToast('⚖️ Strategy: Balanced allocation across hotel, flight, and experiences!');
+      }
+
+      selectedTierKey = 'priority_match';
+      executeSmartSearch();
     }
 
     function renderPackageComponentsList(budgetWarningMsg = null, budgetSuggestions = null) {
@@ -3083,6 +3226,37 @@
           </div>
         `;
         container.appendChild(warnCard);
+      }
+
+      // Customer Priority Trade-off Active Badge
+      if (selectedTierKey === 'priority_match') {
+        const tradeBadge = document.createElement('div');
+        tradeBadge.style = 'background: #eff6ff; border: 1.5px solid #93c5fd; border-radius: 8px; padding: 12px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;';
+        
+        let stratTitle = '🏨 Luxury Stay Priority Active';
+        let stratDesc = 'Allocated more budget to 4★/5★ premium accommodation while selecting economical flights to stay strictly within your budget!';
+        if (currentPriorityStrategy === 'flight') {
+          stratTitle = '✈️ Fast Transit Priority Active';
+          stratDesc = 'Allocated budget to fast non-stop direct flights while picking affordable cozy hotels!';
+        } else if (currentPriorityStrategy === 'experience') {
+          stratTitle = '🎡 Sightseeing & Tours Priority Active';
+          stratDesc = 'Maximized curated sightseeing passes & attractions while keeping stays and flights economical!';
+        } else if (currentPriorityStrategy === 'balanced') {
+          stratTitle = '⚖️ Balanced Value Optimizer Active';
+          stratDesc = 'Evenly distributed budget across quality stay, reliable flights, and top city landmarks.';
+        }
+
+        tradeBadge.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="font-size: 24px;">🎯</span>
+            <div>
+              <strong style="color: #1e40af; font-size: 13.5px;">${stratTitle}</strong>
+              <div style="font-size: 12px; color: #1e3a8a; margin-top: 2px;">${stratDesc}</div>
+            </div>
+          </div>
+          <button class="btn-booking-outline" style="font-size: 11.5px; padding: 4px 10px; background: white;" onclick="openPriorityWeightsModal()">Adjust Sliders</button>
+        `;
+        container.appendChild(tradeBadge);
       }
 
       const items = activePackageData.items;

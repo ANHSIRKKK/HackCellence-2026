@@ -789,7 +789,21 @@ class PlannerService {
       const attCount = pkg.items.filter(it => it.type === 'attraction').length;
       const expScore = Math.min(1, attCount / 8);
 
-      const totalWeightedScore = (wHotel * hotelScore) + (wFlight * flightScore) + (wExp * expScore);
+      // Trade-off budget efficiency: rewards economizing on non-priority items to balance overall cost
+      const budgetSavingsScore = Math.max(0, 1 - (pkg.total_inr / budget));
+
+      let totalWeightedScore = (wHotel * hotelScore) + (wFlight * flightScore) + (wExp * expScore);
+      if (wHotel >= 0.50) {
+        // High hotel preference: heavily prioritize 4★/5★ luxury stays + reward economizing flights
+        totalWeightedScore = (hotelScore * 0.70) + (budgetSavingsScore * 0.30);
+      } else if (wFlight >= 0.50) {
+        // High flight preference: prioritize non-stop speed + budget efficiency
+        totalWeightedScore = (flightScore * 0.70) + (budgetSavingsScore * 0.30);
+      } else if (wExp >= 0.45) {
+        // High experience preference: maximize attractions and tour passes
+        totalWeightedScore = (expScore * 0.70) + (budgetSavingsScore * 0.30);
+      }
+
       return {
         pkg,
         score: totalWeightedScore
