@@ -137,3 +137,4 @@ class SqliteDatabase {
 }
 
 module.exports = new SqliteDatabase();
+

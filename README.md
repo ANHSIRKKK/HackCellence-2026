@@ -104,6 +104,46 @@ HackCellence-2026/
 
 ---
 
+## 🏙️ City Selection & Routing Rule (Section 4 Compliance)
+Per problem statement rules, the planner enforces:
+- **Duration**: Trips must be 3 to 10 nights strictly between 1 April and 20 April 2027.
+- **Minimum Stay**: Each city must have at least **2 consecutive nights** (`min_nights_per_city: 2`).
+- **No Repeats**: Each city appears exactly once in the itinerary (no zig-zag revisits).
+- **Intercity Links**: Transitions between cities strictly use official links defined in `destinations.json` (e.g. Bullet Train Shinkansen between Tokyo and Kyoto) scheduled on the check-out day within service operating hours.
+- **Airport Assignment**: Outbound flight lands at an airport serving the first city; return flight departs from an airport serving the last city (e.g. BLR ➔ NRT/HND for Tokyo, and KIX ➔ BLR for Kyoto/Osaka).
+
+---
+
+## ✅ Feature Checklist (What We Finished)
+
+| Category | ID | Feature | Status | Details |
+|---|---|---|---|---|
+| **Must-Have** | **M1** | Request Form | ✅ 100% | 7 mandatory fields, validated against `destinations.json` |
+| | **M2** | Build One Package | ✅ 100% | Constraint solver builds complete package or explains exact bottleneck |
+| | **M3** | Travel Rules Respected | ✅ 100% | All Section 4 rules strictly enforced (buffers, room fit, service hours) |
+| | **M4** | Day-by-Day Plan | ✅ 100% | Chronological timeline (flight ➔ cab ➔ stay ➔ attractions ➔ return) |
+| | **M5** | Total & Budget | ✅ 100% | Live price sum in INR, savings meter, Section 6 JSON export |
+| | **M6** | Change the Package | ✅ 100% | Live swaps for hotels, flights & attractions with recalculated deltas |
+| | **M7** | 10-Digit Reservation | ✅ 100% | Persistent unique 10-digit code surviving server restarts |
+| | **M8** | Budget Too Small | ✅ 100% | Explains shortfall, displays cheapest valid price & 3 suggestions |
+| **Good-to-Have** | **G1** | Buffer Warnings | ✅ 100% | Checks $<60$m arrival buffer, $<180$m departure buffer, attraction overlaps |
+| | **G2** | Price Delta Badges | ✅ 100% | Shows `+₹X` / `-₹Y` differences on all swap options |
+| | **G3** | Change Cities | ✅ 100% | 1-click alternative multi-city route selector pills |
+| | **G4** | Three Packages | ✅ 100% | **Cheapest**, **Fastest Transit**, and **Best Rated Stays** tiers |
+| **Stretch** | **S1** | Rule-Based NLP Parser | ✅ 100% | Zero-AI plain words request parser in `backend/nlp.js` |
+| | **S2** | Live Inventory Decrement | ✅ 100% | Decrements seats & rooms, refuses overbooked reservations |
+| | **S3** | Senior Tirth Yatra Suite | ✅ 100% | Dedicated elder-care pilgrimage customizer (Helipad, Sattvic, Sevak) |
+| **Enterprise** | **DB** | SQLite 3 Database | ✅ 100% | `data/holiday.db` relational schema, SQL console & `npm run db:inspect` |
+
+---
+
+## ⚠️ Known Limitations
+1. **Catalog Date Window**: Flights and hotel room availability exist strictly between **1 April 2027 and 20 April 2027**.
+2. **Aircraft Seat Capacity**: Aircraft in the catalog dataset carry maximum **9 seats** (`seats_left <= 9`). Parties greater than 9 cannot fly on a single flight.
+3. **Read-Only Data**: Mock catalog files in `data/catalog/` are treated as immutable read-only assets per hackathon guidelines.
+
+---
+
 ## 🛡️ Hackathon Constraints Compliance
 - **Zero AI / LLM APIs**: All filtering, ranking, and optimization use deterministic algorithms.
 - **60-Minute Buffers**: Strict transfer cushion validation between flight landing and hotel check-in.

@@ -28,3 +28,4 @@ if (Array.isArray(locks) && locks.length > 0) {
 console.log('\n========================================================================================');
 console.log('Interactive Shell Command: sqlite3 data/holiday.db');
 console.log('========================================================================================');
+
