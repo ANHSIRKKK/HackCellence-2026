@@ -1141,37 +1141,351 @@
     /* ============================================================== */
     /* PAGE 5: SACRED INDIA PILGRIMAGE / TIRTH YATRA                  */
     /* ============================================================== */
-    .yatra-banner-box {
-      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-      border: 1px solid #fde68a;
-      border-radius: 8px;
-      padding: 24px;
+    /* ============================================================== */
+    /* PAGE 5: SACRED INDIA PILGRIMAGE / TIRTH YATRA (DELUXE)         */
+    /* ============================================================== */
+    .yatra-banner-deluxe {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%);
+      border: 1px solid #f59e0b;
+      border-radius: 12px;
+      padding: 22px 26px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.08);
+    }
+
+    .yatra-trust-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
       margin-bottom: 24px;
+    }
+
+    .yatra-trust-item {
+      background: #ffffff;
+      border: 1px solid #fed7aa;
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: all 0.2s;
+    }
+
+    .yatra-trust-item:hover {
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1);
+      border-color: #f59e0b;
+    }
+
+    .yatra-trust-item strong {
+      display: block;
+      font-size: 13px;
+      color: #78350f;
+      margin-bottom: 2px;
+    }
+
+    .yatra-trust-item p {
+      font-size: 11px;
+      color: #92400e;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    .yatra-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .yatra-card-deluxe {
+      background: #ffffff;
+      border: 1px solid #fed7aa;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      transition: all 0.25s ease;
+    }
+
+    .yatra-card-deluxe:hover {
+      border-color: #f59e0b;
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.16);
+      transform: translateY(-2px);
+    }
+
+    .yatra-card-header-img {
+      height: 180px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .yatra-card-header-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+
+    .yatra-card-deluxe:hover .yatra-card-header-img img {
+      transform: scale(1.03);
+    }
+
+    .yatra-img-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.7) 100%);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .yatra-badge-float {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      color: #fde68a;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      align-self: flex-start;
+      border: 1px solid rgba(254, 230, 138, 0.3);
+    }
+
+    .yatra-header-info {
+      color: #ffffff;
+    }
+
+    .yatra-header-info .dest-subtitle {
+      font-size: 11.5px;
+      color: #fed7aa;
+      font-weight: 600;
+    }
+
+    .yatra-header-info .dest-title {
+      font-size: 17.5px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+
+    .yatra-card-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .yatra-rating-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .yatra-route-strip {
+      background: #fffbeb;
+      border: 1px dashed #fcd34d;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 11.5px;
+      color: #78350f;
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+    }
+
+    .yatra-features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .yatra-feature-pill {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 11.5px;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .yatra-tabs-bar {
+      display: flex;
+      border-bottom: 2px solid #fed7aa;
+      margin-bottom: 10px;
+    }
+
+    .yatra-tab-btn {
+      background: transparent;
+      border: none;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #78350f;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s;
+    }
+
+    .yatra-tab-btn.active {
+      color: #b45309;
+      border-bottom-color: #b45309;
+    }
+
+    .yatra-tab-pane {
+      font-size: 12px;
+      color: var(--text-dark);
+      background: #fffdf7;
+      border: 1px solid #fef3c7;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+      min-height: 75px;
+      max-height: 120px;
+      overflow-y: auto;
+      line-height: 1.45;
+    }
+
+    .yatra-bottom-actions {
+      border-top: 1px solid #fed7aa;
+      padding-top: 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .yatra-grid-booking {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    .yatra-card-item {
-      background: #ffffff;
-      border: 1px solid #fde68a;
-      border-radius: 8px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .btn-yatra-customize {
+      background: #fffbeb;
+      color: #b45309;
+      border: 1.5px solid #b45309;
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
       transition: all 0.2s;
     }
 
-    .yatra-card-item:hover {
+    .btn-yatra-customize:hover {
+      background: #fef3c7;
+    }
+
+    .btn-yatra-reserve {
+      background: #b45309;
+      color: #ffffff;
+      border: 1.5px solid #b45309;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-yatra-reserve:hover {
+      background: #92400e;
+    }
+
+    .yatra-custom-modal-window {
+      background: #ffffff;
+      border-radius: 12px;
+      max-width: 760px;
+      width: 95%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 24px;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    }
+
+    .custom-choice-card {
+      border: 1.5px solid #fed7aa;
+      border-radius: 8px;
+      padding: 10px;
+      cursor: pointer;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      transition: all 0.2s;
+      background: white;
+    }
+    .custom-choice-card:hover {
       border-color: #f59e0b;
-      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.12);
+      background: #fffdf7;
+    }
+    .custom-choice-card strong {
+      display: block;
+      font-size: 12.5px;
+      color: #78350f;
+    }
+    .custom-choice-card span {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .custom-choice-row {
+      border: 1.5px solid #fed7aa;
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      transition: all 0.2s;
+      background: white;
+    }
+    .custom-choice-row:hover {
+      border-color: #f59e0b;
+      background: #fffdf7;
+    }
+    .custom-choice-row strong {
+      font-size: 13px;
+      color: #78350f;
+    }
+    .custom-check-pill {
+      border: 1.5px solid #fed7aa;
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      background: white;
+      transition: all 0.2s;
+    }
+    .custom-check-pill:hover {
+      border-color: #f59e0b;
+      background: #fffdf7;
+    }
+    .custom-check-pill strong {
+      display: block;
+      font-size: 12px;
+      color: #78350f;
+    }
+    .custom-check-pill span {
+      font-size: 11px;
+      color: var(--text-muted);
     }
 
     /* ============================================================== */
@@ -1793,101 +2107,78 @@
   <!-- ============================================================== -->
   <!-- PAGE 5: ⛩️ SACRED INDIA PILGRIMAGE / TIRTH YATRA               -->
   <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- PAGE 5: ⛩️ SACRED INDIA PILGRIMAGE / TIRTH YATRA (DELUXE)     -->
+  <!-- ============================================================== -->
   <div id="page-spiritual" class="page-section">
     <div class="container">
-      <div class="yatra-banner-box">
-        <div>
-          <span class="booking-pill pill-amber" style="font-size: 12px; margin-bottom: 6px;">Sacred India Pilgrimages</span>
-          <h1 style="font-size: 24px; font-weight: 800; color: #78350f;">Curated Tirth Yatra for Adults & Senior Parents</h1>
-          <p style="font-size: 14px; color: #92400e; margin-top: 4px; max-width: 720px;">
-            Book complete peace of mind for your senior parents: Helipad priority boarding, golf carts at temple corridors, 100% pure sattvic food, and medical escorts.
+      <!-- Top Sacred Header Banner -->
+      <div class="yatra-banner-deluxe">
+        <div style="flex: 1;">
+          <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px; flex-wrap: wrap;">
+            <span class="booking-pill pill-amber" style="font-weight: 700;">🕉️ Dedicated Elder-Care & Sacred India Pilgrimages</span>
+            <span class="booking-pill pill-green">✓ 100% Verified Parent Reviews</span>
+            <span class="booking-pill pill-blue">Helipad Priority Booking</span>
+          </div>
+          <h1 style="font-size: 26px; font-weight: 800; color: #78350f; margin-bottom: 6px;">
+            Curated Tirth Yatra for Adults & Senior Parents
+          </h1>
+          <p style="font-size: 14px; color: #92400e; line-height: 1.5; max-width: 820px; margin: 0;">
+            Book complete peace of mind for your senior parents: Helipad priority boarding, golf carts at temple corridors, 100% pure sattvic food without onion/garlic, dedicated personal sevak, and round-the-clock medical escorts.
           </p>
         </div>
-        <button class="btn-booking-primary" style="background: #b45309;" onclick="navigateToPage('bookings')">View All Pilgrim Bookings</button>
+        <button class="btn-booking-primary" style="background: #b45309; white-space: nowrap;" onclick="navigateToPage('bookings')">
+          View All Pilgrim Bookings →
+        </button>
       </div>
 
-      <div class="yatra-grid-booking">
-        <!-- Yatra 1 -->
-        <div class="yatra-card-item">
+      <!-- 4 Pillars of Elder Care Trust Strip -->
+      <div class="yatra-trust-strip">
+        <div class="yatra-trust-item">
+          <span style="font-size: 28px;">🩺</span>
           <div>
-            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
-              <span class="booking-pill pill-blue">Uttarakhand Himalayas</span>
-              <strong style="color: #b45309; font-size: 20px;">₹1,85,000 <span style="font-size: 12px; color: var(--text-muted); font-weight: 500;">/ 2 Adults</span></strong>
-            </div>
-            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 6px;">Char Dham Yatra Deluxe (Helipad + VIP Darshan)</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Kedarnath, Badrinath, Gangotri & Yamunotri · 9 Nights / 10 Days</p>
-            <div style="display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; color: var(--text-dark); margin-bottom: 18px;">
-              <div>🚁 <strong>Helicopter Darshan:</strong> Direct flight to Kedarnath helipad (zero trek required)</div>
-              <div>♿ <strong>Elder Care:</strong> Wheelchair assistance & certified porter escort at all shrines</div>
-              <div>🍲 <strong>Sattvic Diet:</strong> 100% pure vegetarian fresh temple prasadam meals</div>
-              <div>🩺 <strong>Medical Kit:</strong> Oxygen cylinder & paramedic support included</div>
-            </div>
+            <strong>24/7 Oxygen & Paramedic</strong>
+            <p>Portable oxygen concentrators & medical escorts for sensitive seniors</p>
           </div>
-          <button class="btn-booking-primary" style="background: #b45309;" onclick="bookPilgrimInstant('Char Dham Yatra Deluxe', 185000)">
-            Reserve for Parents (Instant VIP Pass) →
-          </button>
         </div>
+        <div class="yatra-trust-item">
+          <span style="font-size: 28px;">♿</span>
+          <div>
+            <strong>Zero-Trek & Wheelchair Buggy</strong>
+            <p>Pre-booked battery golf-carts, palki, and dedicated porter sevaks</p>
+          </div>
+        </div>
+        <div class="yatra-trust-item">
+          <span style="font-size: 28px;">🍲</span>
+          <div>
+            <strong>Pure Sattvic / Jain Dining</strong>
+            <p>Fresh temple prasadam cuisine, strictly zero onion/garlic, diabetic care</p>
+          </div>
+        </div>
+        <div class="yatra-trust-item">
+          <span style="font-size: 28px;">🏨</span>
+          <div>
+            <strong>4-Star Senior Stays</strong>
+            <p>Lift-accessible rooms, anti-skid grab rails, 24h hot water & heater</p>
+          </div>
+        </div>
+      </div>
 
-        <!-- Yatra 2 -->
-        <div class="yatra-card-item">
-          <div>
-            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
-              <span class="booking-pill pill-green">Uttar Pradesh Divine Corridor</span>
-              <strong style="color: #b45309; font-size: 20px;">₹68,000 <span style="font-size: 12px; color: var(--text-muted); font-weight: 500;">/ 2 Adults</span></strong>
-            </div>
-            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 6px;">Kashi Vishwanath, Ayodhya Ram Mandir & Prayagraj</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Varanasi Ganga Aarti, Ram Janmabhoomi & Triveni Sangam · 5 Nights / 6 Days</p>
-            <div style="display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; color: var(--text-dark); margin-bottom: 18px;">
-              <div>🛺 <strong>Golf Cart Access:</strong> Fast-track access to Kashi corridor & Ayodhya Mandir</div>
-              <div>⛵ <strong>Private Bajra Boat:</strong> Comfortable reserved seating for Dashashwamedh Aarti</div>
-              <div>🏨 <strong>4-Star Stays:</strong> Hotel Radisson Varanasi & luxury boutique riverside retreats</div>
-              <div>🚗 <strong>Private Innova Crysta:</strong> Chauffeur-driven AC intercity transfers</div>
-            </div>
-          </div>
-          <button class="btn-booking-primary" style="background: #b45309;" onclick="bookPilgrimInstant('Kashi & Ayodhya Yatra', 68000)">
-            Reserve for Parents (Instant VIP Pass) →
-          </button>
-        </div>
+      <!-- Filter Pills -->
+      <div class="filter-pills-bar" style="margin-bottom: 24px;">
+        <span style="font-size: 13px; font-weight: 700; color: var(--text-muted);">SACRED CIRCUITS:</span>
+        <button class="filter-btn-pill active" id="yatra-filter-all" onclick="filterYatraCircuit('all')">All Circuits (6)</button>
+        <button class="filter-btn-pill" id="yatra-filter-HIMALAYAS" onclick="filterYatraCircuit('HIMALAYAS')">🏔️ Char Dham & Himalayas</button>
+        <button class="filter-btn-pill" id="yatra-filter-KASHI_AYODHYA" onclick="filterYatraCircuit('KASHI_AYODHYA')">🛕 Kashi & Ayodhya Corridor</button>
+        <button class="filter-btn-pill" id="yatra-filter-SOUTH_INDIA" onclick="filterYatraCircuit('SOUTH_INDIA')">🌊 South India Jyotirlingas</button>
+        <button class="filter-btn-pill" id="yatra-filter-VAISHNO_DEVI" onclick="filterYatraCircuit('VAISHNO_DEVI')">🙏 Vaishno Devi & Amritsar</button>
+        <button class="filter-btn-pill" id="yatra-filter-GUJARAT" onclick="filterYatraCircuit('GUJARAT')">🌅 Dwarka & Somnath</button>
+        <button class="filter-btn-pill" id="yatra-filter-ODISHA" onclick="filterYatraCircuit('ODISHA')">🛕 Jagannath Puri & Konark</button>
+      </div>
 
-        <!-- Yatra 3 -->
-        <div class="yatra-card-item">
-          <div>
-            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
-              <span class="booking-pill pill-blue">South India Divine Circuit</span>
-              <strong style="color: #b45309; font-size: 20px;">₹84,000 <span style="font-size: 12px; color: var(--text-muted); font-weight: 500;">/ 2 Adults</span></strong>
-            </div>
-            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 6px;">Tirupati Balaji, Madurai Meenakshi & Rameswaram</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Lord Venkateswara Temple, Meenakshi Amman, Ramanathaswamy Jyotirlinga · 6 Nights / 7 Days</p>
-            <div style="display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; color: var(--text-dark); margin-bottom: 18px;">
-              <div>🎟️ <strong>Seeghra Darshan:</strong> Pre-booked VIP special entry tickets with zero waiting</div>
-              <div>🔋 <strong>Battery Car:</strong> Terminal to temple electric buggy transfers</div>
-              <div>🥥 <strong>Traditional Prasadam:</strong> Fresh Tirupati Laddu & temple offerings delivered</div>
-            </div>
-          </div>
-          <button class="btn-booking-primary" style="background: #b45309;" onclick="bookPilgrimInstant('Tirupati & Rameswaram Circuit', 84000)">
-            Reserve for Parents (Instant VIP Pass) →
-          </button>
-        </div>
-
-        <!-- Yatra 4 -->
-        <div class="yatra-card-item">
-          <div>
-            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
-              <span class="booking-pill pill-amber">Jammu & Punjab Sacred Trail</span>
-              <strong style="color: #b45309; font-size: 20px;">₹48,000 <span style="font-size: 12px; color: var(--text-muted); font-weight: 500;">/ 2 Adults</span></strong>
-            </div>
-            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 6px;">Mata Vaishno Devi & Amritsar Golden Temple</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Bhavan Darshan via Helicopter, Harmandir Sahib & Wagah Border · 4 Nights / 5 Days</p>
-            <div style="display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; color: var(--text-dark); margin-bottom: 18px;">
-              <div>🚁 <strong>Helicopter Katra to Sanjichhat:</strong> 8-minute flight avoiding the 13km uphill trek</div>
-              <div>🛺 <strong>Battery Cart to Bhavan:</strong> Seamless connectivity for senior citizens</div>
-              <div>✨ <strong>VIP Attka Aarti:</strong> Reserved seating for morning divine arti</div>
-            </div>
-          </div>
-          <button class="btn-booking-primary" style="background: #b45309;" onclick="bookPilgrimInstant('Vaishno Devi & Golden Temple', 48000)">
-            Reserve for Parents (Instant VIP Pass) →
-          </button>
-        </div>
+      <!-- 6 Deluxe Pilgrimage Cards Grid -->
+      <div class="yatra-cards-grid" id="yatraCardsContainer">
+        <!-- Rendered dynamically by renderYatraCatalog() -->
       </div>
     </div>
   </div>
@@ -2045,6 +2336,223 @@
     </div>
   </div>
 
+  <!-- Interactive Tirth Yatra Customization Modal -->
+  <div id="modalCustomizeYatra" class="modal-overlay-booking">
+    <div class="yatra-custom-modal-window">
+      <button class="modal-close-booking" onclick="closeYatraCustomizer()">✕</button>
+      
+      <div style="border-bottom: 1.5px solid #fed7aa; padding-bottom: 14px; margin-bottom: 18px;">
+        <span class="booking-pill pill-amber" style="font-size: 11px; margin-bottom: 4px;">🕉️ Senior Pilgrim Customization Suite</span>
+        <h2 style="font-size: 20px; font-weight: 800; color: #78350f; margin: 4px 0;" id="custModalTitle">Customize Tirth Yatra for Parents</h2>
+        <div style="font-size: 12.5px; color: #92400e;" id="custModalSubtitle">Char Dham Yatra Deluxe · 9 Nights / 10 Days</div>
+      </div>
+
+      <!-- Live Dynamic Price Banner -->
+      <div style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 1.5px solid #f59e0b; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <span style="font-size: 12px; color: #92400e; font-weight: 600;">Calculated Dynamic Total:</span>
+          <div style="font-size: 26px; font-weight: 800; color: #b45309;" id="custLiveTotalPrice">₹1,85,000</div>
+          <div style="font-size: 11px; color: #78350f;" id="custLivePriceBreakdown">Base ₹1,85,000 · 2 Seniors</div>
+        </div>
+        <button class="btn-yatra-reserve" style="font-size: 13.5px; padding: 10px 18px;" onclick="confirmCustomYatra()">
+          Confirm & Lock Reservation (10-Digit) →
+        </button>
+      </div>
+
+      <!-- Section 1: Number of Travelers -->
+      <div style="margin-bottom: 18px;">
+        <label style="font-size: 13px; font-weight: 700; color: var(--text-dark); display: block; margin-bottom: 6px;">
+          1. Number of Senior Travelers:
+        </label>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+          <label class="custom-choice-card">
+            <input type="radio" name="custTravelers" value="1" onchange="recalculateYatraPrice()">
+            <div>
+              <strong>1 Solo Senior</strong>
+              <span>Single Room</span>
+            </div>
+          </label>
+          <label class="custom-choice-card">
+            <input type="radio" name="custTravelers" value="2" checked onchange="recalculateYatraPrice()">
+            <div>
+              <strong>2 Parents</strong>
+              <span>Double / Twin</span>
+            </div>
+          </label>
+          <label class="custom-choice-card">
+            <input type="radio" name="custTravelers" value="3" onchange="recalculateYatraPrice()">
+            <div>
+              <strong>3 Adults</strong>
+              <span>Triple / Extra Bed</span>
+            </div>
+          </label>
+          <label class="custom-choice-card">
+            <input type="radio" name="custTravelers" value="4" onchange="recalculateYatraPrice()">
+            <div>
+              <strong>4 Family</strong>
+              <span>2 Connecting Rooms</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section 2: Transit & Transport Upgrade -->
+      <div style="margin-bottom: 18px;">
+        <label style="font-size: 13px; font-weight: 700; color: var(--text-dark); display: block; margin-bottom: 6px;">
+          2. Sacred Transit & Helipad Priority Upgrade:
+        </label>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label class="custom-choice-row">
+            <input type="radio" name="custTransit" value="innova" checked onchange="recalculateYatraPrice()">
+            <div style="flex: 1;">
+              <strong>🚗 Chauffeur-Driven AC Innova Crysta</strong>
+              <div style="font-size: 11px; color: var(--text-muted);">Dedicated sanitized AC vehicle for entire tour with patient, experienced senior-care driver</div>
+            </div>
+            <strong style="color: var(--green-score); font-size: 12px;">Included</strong>
+          </label>
+
+          <label class="custom-choice-row">
+            <input type="radio" name="custTransit" value="heli" onchange="recalculateYatraPrice()">
+            <div style="flex: 1;">
+              <strong>🚁 Helipad Priority Shuttle & Mountain Aerial Flight</strong>
+              <div style="font-size: 11px; color: var(--text-muted);">Guaranteed helipad priority access avoiding steep 16km uphill trek (Kedarnath / Vaishno Devi)</div>
+            </div>
+            <strong style="color: #b45309; font-size: 12px;">+₹24,000 / adult</strong>
+          </label>
+
+          <label class="custom-choice-row">
+            <input type="radio" name="custTransit" value="vandebharat" onchange="recalculateYatraPrice()">
+            <div style="flex: 1;">
+              <strong>🚆 Vande Bharat Executive Chair Car Connection</strong>
+              <div style="font-size: 11px; color: var(--text-muted);">Comfortable 180° rotatable executive seats with hot vegetarian breakfast</div>
+            </div>
+            <strong style="color: #b45309; font-size: 12px;">+₹4,500 / adult</strong>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section 3: Accommodation Comfort Tier -->
+      <div style="margin-bottom: 18px;">
+        <label style="font-size: 13px; font-weight: 700; color: var(--text-dark); display: block; margin-bottom: 6px;">
+          3. Accommodation Comfort Tier:
+        </label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <label class="custom-choice-row">
+            <input type="radio" name="custStayTier" value="deluxe" checked onchange="recalculateYatraPrice()">
+            <div style="flex: 1;">
+              <strong>🏨 4-Star Senior Deluxe</strong>
+              <div style="font-size: 11px; color: var(--text-muted);">Elevator priority, ground-floor preference, anti-skid bathroom rails, 24h geyser</div>
+            </div>
+            <strong style="color: var(--green-score); font-size: 12px;">Included</strong>
+          </label>
+
+          <label class="custom-choice-row">
+            <input type="radio" name="custStayTier" value="luxury" onchange="recalculateYatraPrice()">
+            <div style="flex: 1;">
+              <strong>🏰 5-Star Heritage Palace / Ashram</strong>
+              <div style="font-size: 11px; color: var(--text-muted);">Luxury riverside suites, Ayurvedic senior foot massages & private prayer lawns</div>
+            </div>
+            <strong style="color: #b45309; font-size: 12px;">+₹14,000</strong>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section 4: Dietary Preference -->
+      <div style="margin-bottom: 18px;">
+        <label style="font-size: 13px; font-weight: 700; color: var(--text-dark); display: block; margin-bottom: 6px;">
+          4. Holy Meal & Diet Customization:
+        </label>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+          <label class="custom-choice-card">
+            <input type="radio" name="custDiet" value="sattvic" checked>
+            <div>
+              <strong>🍲 Pure Sattvic</strong>
+              <span>Zero onion, zero garlic, temple ghee</span>
+            </div>
+          </label>
+          <label class="custom-choice-card">
+            <input type="radio" name="custDiet" value="jain">
+            <div>
+              <strong>🥗 Jain Sattvic</strong>
+              <span>Zero root vegetables (no potato/onion)</span>
+            </div>
+          </label>
+          <label class="custom-choice-card">
+            <input type="radio" name="custDiet" value="diabetic">
+            <div>
+              <strong>🌾 Diabetic-Care</strong>
+              <span>Low sodium, millets, fresh papaya</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section 5: Elder-Care & Sacred Vedic Add-Ons -->
+      <div style="margin-bottom: 18px;">
+        <label style="font-size: 13px; font-weight: 700; color: var(--text-dark); display: block; margin-bottom: 6px;">
+          5. Elder-Care & Sacred Vedic Add-Ons:
+        </label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <label class="custom-check-pill">
+            <input type="checkbox" id="addWheelchair" checked onchange="recalculateYatraPrice()">
+            <div style="flex: 1;">
+              <strong>♿ Guaranteed Wheelchair & Buggy</strong>
+              <span>Pre-booked at every temple gate with dedicated porter</span>
+            </div>
+            <span style="color: var(--green-score); font-weight: 700; font-size: 12px;">Free</span>
+          </label>
+
+          <label class="custom-check-pill">
+            <input type="checkbox" id="addPuja" onchange="recalculateYatraPrice()">
+            <div style="flex: 1;">
+              <strong>🪔 Special Sankalp Puja in Gotra</strong>
+              <span>Vedic pandit conducts personalized archana for parents</span>
+            </div>
+            <span style="color: #b45309; font-weight: 700; font-size: 12px;">+₹2,500</span>
+          </label>
+
+          <label class="custom-check-pill">
+            <input type="checkbox" id="addSevak" onchange="recalculateYatraPrice()">
+            <div style="flex: 1;">
+              <strong>👨‍✈️ 24/7 Personal Sevak / Escort</strong>
+              <span>Dedicated regional language attendant walking with parents</span>
+            </div>
+            <span style="color: #b45309; font-weight: 700; font-size: 12px;">+₹4,500</span>
+          </label>
+
+          <label class="custom-check-pill">
+            <input type="checkbox" id="addHomePickup" onchange="recalculateYatraPrice()">
+            <div style="flex: 1;">
+              <strong>🏠 Door-to-Door Home Airport Chauffeur</strong>
+              <span>Pickup from residence to airport and return drop</span>
+            </div>
+            <span style="color: #b45309; font-weight: 700; font-size: 12px;">+₹3,000</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section 6: Parents' Info & Health Notes -->
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; margin-bottom: 20px;">
+        <label style="font-size: 13px; font-weight: 700; color: var(--text-dark); display: block; margin-bottom: 6px;">
+          6. Parents' Names & Senior Health Notes:
+        </label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+          <input type="text" id="custParentsNames" placeholder="Parents' Full Names (e.g. Ramesh & Sunita Sharma)" class="search-cell-input" style="background: white; border: 1px solid var(--border-dark); border-radius: 6px; padding: 8px 12px;">
+          <input type="date" id="custTravelDate" value="2027-04-15" min="2027-04-01" class="search-cell-input" style="background: white; border: 1px solid var(--border-dark); border-radius: 6px; padding: 8px 12px;">
+        </div>
+        <textarea id="custHealthNotes" placeholder="Any health conditions, knee trouble, dietary restrictions or wheelchair preferences..." rows="2" style="width: 100%; border: 1px solid var(--border-dark); border-radius: 6px; padding: 8px 12px; font-size: 12.5px; font-family: inherit; resize: none;"></textarea>
+      </div>
+
+      <!-- Bottom Submit Button -->
+      <div style="display: flex; gap: 12px; justify-content: flex-end; align-items: center;">
+        <button class="btn-header-outline" onclick="closeYatraCustomizer()">Cancel</button>
+        <button class="btn-yatra-reserve" style="padding: 12px 24px; font-size: 14px;" onclick="confirmCustomYatra()">
+          Confirm Custom Tirth Yatra & Generate 10-Digit Pass →
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ============================================================== -->
   <!-- FOOTER (SCREENSHOT 3)                                          -->
   <!-- ============================================================== -->
@@ -2166,6 +2674,7 @@
       if (pageId === 'flights') executeFlightCatalogSearch();
       if (pageId === 'packages') { if (!activePackageData) executeSmartSearch(); }
       if (pageId === 'attractions') loadAttractionsCatalog();
+      if (pageId === 'spiritual') renderYatraCatalog();
       if (pageId === 'bookings') loadAllReservations();
     }
 
@@ -2173,6 +2682,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       loadStaysCatalog();
       executeSmartSearch();
+      renderYatraCatalog();
     });
 
     // Quick plan from country cards
@@ -3100,13 +3610,523 @@
       URL.revokeObjectURL(url);
     }
 
+    // ==============================================================
+    // PAGE 5: SACRED TIRTH YATRA CATALOG & CUSTOMIZATION ENGINE
+    // ==============================================================
+    const yatraCatalog = [
+      {
+        id: 'yatra-cd',
+        circuit: 'HIMALAYAS',
+        title: 'Char Dham Yatra Deluxe (Helicopter VIP Darshan)',
+        subtitle: 'Kedarnath, Badrinath, Gangotri & Yamunotri · 9 Nights / 10 Days',
+        region: 'Uttarakhand Himalayas',
+        basePrice: 185000,
+        image: '/images/hotels/HOTEL-RYOKAN-1.jpg',
+        rating: 9.9,
+        reviewsCount: 680,
+        badge: '🚁 Helipad Priority Included',
+        route: ['Dehradun', 'Yamunotri', 'Gangotri', 'Kedarnath', 'Badrinath', 'Rishikesh'],
+        features: [
+          { icon: '🚁', text: 'Direct flight to Kedarnath helipad (zero trek)' },
+          { icon: '♿', text: 'Wheelchair & porter escort at all 4 dhams' },
+          { icon: '🍲', text: '100% pure vegetarian Sattvic temple meals' },
+          { icon: '🩺', text: 'Oxygen cylinder & certified paramedic on board' }
+        ],
+        itinerary: [
+          'Day 1: Dehradun arrival, executive AC transfer to luxury Himalayan resort, Sattvic welcome dinner & doctor checkup.',
+          'Day 2: Morning helicopter flight to Kharsali Helipad, VIP Palki/Doli to Yamunotri Temple for sacred darshan & Divya Shila puja.',
+          'Day 3: Scenic flight to Harsil Valley apple orchards, drive to Gangotri Temple, Bhagirathi river aarti & evening meditation.',
+          'Day 4-5: Sersi/Phata helipad shuttle directly to Kedarnath Shrine, VIP sanctum sanctorum darshan, night stay in heated premium cottage with 24h oxygen.',
+          'Day 6-7: Fly to Badrinath Helipad, VIP Maha Abhishek darshan at Badrinath Temple, visit Mana (first Indian village) & Vyas Gufa.',
+          'Day 8-9: Fly back to Dehradun, drive to Rishikesh, private riverside seating for Parmarth Niketan Ganga Aarti.',
+          'Day 10: Farewell blessing ceremony, holy prasadam delivery & luxury airport chauffeur drop.'
+        ],
+        inclusions: [
+          'Charter helicopter tickets for all 4 Dhams (Dehradun roundtrip)',
+          '9 Nights in top-tier 4-star heated mountain chalets with elevator/ground floor',
+          'All 3 Sattvic meals daily cooked in pure Desi Ghee (zero onion/garlic)',
+          'VIP Darshan slips for Kedarnath, Badrinath, Gangotri & Yamunotri (zero queue)',
+          'Dedicated medical kit with oxygen concentrator and travel escort',
+          'Wheelchair/Palki/Pony assistance pre-booked for both parents'
+        ],
+        reviews: [
+          '“I booked this for my 72-year-old parents. They were so happy with the zero-trek helicopter and wheelchair escort. Highly recommend!” – Rahul S., Bengaluru',
+          '“Food was 100% pure Sattvic and hotel rooms were warm with hot water and oxygen. Best service for elderly.” – Smt. Sunita Verma, Delhi'
+        ]
+      },
+      {
+        id: 'yatra-kv',
+        circuit: 'KASHI_AYODHYA',
+        title: 'Kashi Vishwanath, Ayodhya Ram Mandir & Prayagraj Sangam',
+        subtitle: 'Varanasi Ganga Aarti, Ram Janmabhoomi & Triveni Sangam · 5 Nights / 6 Days',
+        region: 'Uttar Pradesh Divine Corridor',
+        basePrice: 68000,
+        image: '/images/attractions/ATT-KYO-001.jpg',
+        rating: 9.8,
+        reviewsCount: 840,
+        badge: '🛺 Golf Cart & Private Bajra Boat',
+        route: ['Varanasi', 'Kashi Corridor', 'Ayodhya', 'Ram Mandir', 'Prayagraj Sangam'],
+        features: [
+          { icon: '🛺', text: 'Fast-track golf cart access to Kashi & Ayodhya' },
+          { icon: '⛵', text: 'Private reserved bajra boat for Dashashwamedh Aarti' },
+          { icon: '🏨', text: '4-Star luxury riverside stays (Radisson Varanasi)' },
+          { icon: '🚗', text: 'Chauffeur-driven private AC Innova Crysta throughout' }
+        ],
+        itinerary: [
+          'Day 1: Varanasi arrival, luxury chauffeur check-in, sunset private Bajra boat cruise on Ganga with reserved front-row Aarti seating.',
+          'Day 2: Morning Subah-e-Banaras boat ride, golf-cart drop into Kashi Vishwanath Corridor for Sugam Darshan (zero waiting) & Annapurna Temple.',
+          'Day 3: Scenic AC Innova drive to Ayodhya, check-in at luxury boutique heritage stay, evening Saryu River Maha Aarti.',
+          'Day 4: Fast-track VIP entry to Ayodhya Ram Janmabhoomi Mandir, Kanak Bhawan & Hanuman Garhi with dedicated priest escort.',
+          'Day 5: Chauffeur drive to Prayagraj, holy boat ride to Triveni Sangam for holy snan with life-jackets, visit Bade Hanuman Temple.',
+          'Day 6: Return transfer with personalized Kashi Prasad & Ram Lalla brass medallion kit.'
+        ],
+        inclusions: [
+          '5 Nights in 4-Star luxury boutique hotels (ground floor / lift guaranteed)',
+          'Private chauffeur-driven AC Innova Crysta for all interstate transfers',
+          'Sugam Darshan VIP passes at Kashi Vishwanath & Ayodhya Ram Mandir',
+          'Private traditional wooden Bajra boat exclusively for your family',
+          'Pure Sattvic Banarasi and Awadhi vegetarian dining (zero onion/garlic)',
+          'Dedicated local senior care coordinator throughout Varanasi and Ayodhya'
+        ],
+        reviews: [
+          '“My mother has knee arthritis. The golf cart access right up to the sanctum made this trip a breeze.” – Amit P., Mumbai',
+          '“The private Bajra boat for the evening Ganga aarti was breathtaking. Pure bliss for parents.” – Priya N., Chennai'
+        ]
+      },
+      {
+        id: 'yatra-tb',
+        circuit: 'SOUTH_INDIA',
+        title: 'Tirupati Balaji, Madurai Meenakshi & Rameswaram Jyotirlinga',
+        subtitle: 'Lord Venkateswara Temple, Meenakshi Amman, Ramanathaswamy · 6 Nights / 7 Days',
+        region: 'South India Sacred Circuit',
+        basePrice: 84000,
+        image: '/images/attractions/ATT-KYO-003.jpg',
+        rating: 9.7,
+        reviewsCount: 520,
+        badge: '🎟️ Seeghra Darshan (Zero Wait)',
+        route: ['Chennai/BLR', 'Tirumala Hills', 'Madurai', 'Rameswaram', 'Dhanushkodi'],
+        features: [
+          { icon: '🎟️', text: 'Pre-booked Seeghra Darshan with official VIP entry' },
+          { icon: '🔋', text: 'Electric buggy transfers inside temple complexes' },
+          { icon: '🥥', text: 'Fresh authentic Tirupati Laddu prasadam delivered' },
+          { icon: '🏨', text: 'Premium 4-star senior-friendly star hotels' }
+        ],
+        itinerary: [
+          'Day 1: Chennai or Bengaluru home/airport pickup, comfortable drive to Tirupati, check-in at 4-Star Marasa Sarovar Premiere.',
+          'Day 2: Early morning Seeghra Darshan of Lord Venkateswara at Tirumala, VIP laddu collection, Padmavathi Temple visit.',
+          'Day 3: Drive to Madurai in AC Innova, evening visit to Meenakshi Amman Temple with fast-track senior line & Hall of 1000 Pillars.',
+          'Day 4: Drive over iconic Pamban Sea Bridge to Rameswaram Island, evening oceanfront aarti at Agni Theertham.',
+          'Day 5: Early morning 22 Sacred Theerthams holy snan (guided gently for seniors) & Ramanathaswamy Jyotirlinga Spatika Linga Darshan.',
+          'Day 6: Scenic drive to Dhanushkodi (Ram Setu viewpoint) & Dr. APJ Abdul Kalam Memorial.',
+          'Day 7: Return chauffeur transfer to Madurai or Chennai with sacred prasadam kit.'
+        ],
+        inclusions: [
+          'Official Seeghra Darshan special entry tickets booked in parents\' names',
+          '6 Nights 4-Star deluxe accommodation with breakfast & Sattvic South Indian meals',
+          'Private AC Innova Crysta with water bottles, first-aid, and toll taxes',
+          'Electric battery buggy rides inside temple premises',
+          'Special puja sankalpam performed by head priests in parents\' gotra',
+          'Official TTD Laddu Prasadam (4 per adult) securely packaged'
+        ],
+        reviews: [
+          '“We skipped the 6-hour lines thanks to the Seeghra pass. The chauffeur took care of my father like family.” – Karthik M., Hyderabad',
+          '“Everything in Rameswaram was peaceful. The hotel had hot water and lift right to the dining hall.” – Geeta R., Pune'
+        ]
+      },
+      {
+        id: 'yatra-vd',
+        circuit: 'VAISHNO_DEVI',
+        title: 'Mata Vaishno Devi Bhawan & Amritsar Golden Temple',
+        subtitle: 'Bhavan Darshan via Helicopter, Harmandir Sahib & Wagah · 4 Nights / 5 Days',
+        region: 'Jammu & Punjab Sacred Trail',
+        basePrice: 48000,
+        image: '/images/hotels/HOTEL-BUSINESS-2.jpg',
+        rating: 9.9,
+        reviewsCount: 710,
+        badge: '🚁 Helicopter Katra to Sanjichhat',
+        route: ['Jammu', 'Katra Helipad', 'Vaishno Devi Bhawan', 'Amritsar', 'Golden Temple'],
+        features: [
+          { icon: '🚁', text: '8-minute Katra-to-Sanjichhat helicopter roundtrip' },
+          { icon: '🛺', text: 'Battery cart transfer directly from helipad to Bhawan' },
+          { icon: '✨', text: 'Reserved seating for morning VIP divine Attka Aarti' },
+          { icon: '🏨', text: '4-Star Katra & Amritsar luxury boutique properties' }
+        ],
+        itinerary: [
+          'Day 1: Jammu Tawi or airport pickup, 1-hour scenic drive to Katra 4-Star Fortune Park, orientation & medical checkup.',
+          'Day 2: Morning VIP helicopter flight to Sanjichhat, electric cart to Bhawan, priority darshan of Holy Pindies & Attka Aarti.',
+          'Day 3: Bhairon Baba cable ropeway visit, return helicopter flight to Katra, relaxation & hot spring bath.',
+          'Day 4: AC Innova drive to Amritsar, check-in near Golden Temple, night Palki Sahib golden palanquin procession ceremony.',
+          'Day 5: Morning Harmandir Sahib darshan, holy langar tasting, Wagah Border VIP flag ceremony seating, evening airport drop.'
+        ],
+        inclusions: [
+          'Confirmed roundtrip helicopter tickets (Katra ⇄ Sanjichhat)',
+          'Battery cart tickets from Sanjichhat to Bhawan and back for seniors',
+          '4 Nights in 4-Star hotels with wheelchair accessibility',
+          'All vegetarian meals included with fresh fruits and light snacks',
+          'Wagah Border Beating Retreat VIP gallery passes',
+          'Door-to-door luggage porter assistance at all checkpoints'
+        ],
+        reviews: [
+          '“My mother couldn\'t walk 13km. With helicopter and battery car, she reached Bhawan in 20 minutes without any fatigue!” – Vikas G., Delhi',
+          '“The Golden Temple Palki ceremony was a spiritual dream come true. Flawless organization.” – Simranjit K., Chandigarh'
+        ]
+      },
+      {
+        id: 'yatra-gj',
+        circuit: 'GUJARAT',
+        title: 'Dwarka Jagat Mandir, Somnath Jyotirlinga & Nageshwar Circuit',
+        subtitle: 'Lord Krishna\'s Kingdom, First Jyotirlinga & Bet Dwarka · 5 Nights / 6 Days',
+        region: 'Saurashtra Sacred Coast',
+        basePrice: 56000,
+        image: '/images/hotels/HOTEL-LUXURY-1.jpg',
+        rating: 9.8,
+        reviewsCount: 390,
+        badge: '🛕 1st Jyotirlinga VIP Darshan',
+        route: ['Ahmedabad', 'Dwarka', 'Bet Dwarka', 'Nageshwar', 'Porbandar', 'Somnath'],
+        features: [
+          { icon: '🛕', text: 'VIP fast-track darshan at Dwarkadhish & Somnath' },
+          { icon: '🚤', text: 'Comfortable private ferry boat to Bet Dwarka' },
+          { icon: '🍲', text: 'Authentic Kathiyawadi Sattvic vegetarian thalis' },
+          { icon: '🚗', text: 'Private AC Innova Crysta for Saurashtra highways' }
+        ],
+        itinerary: [
+          'Day 1: Ahmedabad or Rajkot arrival, scenic highway drive to holy city of Dwarka, check-in at 4-Star Hawthorn Suites.',
+          'Day 2: Morning Mangla Aarti at Dwarkadhish Jagat Mandir, Gomti River holy dip, private boat cruise to Bet Dwarka island.',
+          'Day 3: Darshan at Nageshwar Jyotirlinga (one of 12 Jyotirlingas), Gopi Talav holy pond, Rukmini Devi Temple.',
+          'Day 4: Drive via coastal route to Porbandar (Kirti Mandir, Sudama Temple), arrive at holy Somnath by sunset.',
+          'Day 5: VIP Darshan at Somnath Mahadev Jyotirlinga on shores of Arabian Sea, reserved seating for spectacular Sound-and-Light show.',
+          'Day 6: Return transfer to Rajkot or Ahmedabad airport with blessed temple prasadam.'
+        ],
+        inclusions: [
+          '5 Nights in 4-Star senior-friendly hotels with hot water and lifts',
+          'All interstate AC travel in sanitized Innova Crysta',
+          'VIP Darshan passes at Dwarkadhish & Somnath Temple',
+          'Pure Sattvic Gujarati & Jain thalis (low spice, digestive food for seniors)',
+          'Reserved seating for evening Somnath Light & Sound Laser Show',
+          'Dedicated senior care driver familiar with temple gates and wheelchair paths'
+        ],
+        reviews: [
+          '“The coastal roads were smooth and the driver was extremely polite and helpful with my mother\'s wheelchair.” – Snehal D., Surat',
+          '“Attending Mangla Aarti at Dwarka without any crowd hassle was an unforgettable memory.” – Bhavin P., Vadodara'
+        ]
+      },
+      {
+        id: 'yatra-or',
+        circuit: 'ODISHA',
+        title: 'Jagannath Puri, Konark Sun Temple & Bhubaneswar Golden Triangle',
+        subtitle: 'Lord of the Universe, 56 Bhog Mahaprasad & Sun Temple · 4 Nights / 5 Days',
+        region: 'Odisha Sacred Triangle',
+        basePrice: 44000,
+        image: '/images/attractions/ATT-TYO-004.jpg',
+        rating: 9.7,
+        reviewsCount: 340,
+        badge: '🛕 Mahaprasadam Feast Included',
+        route: ['Bhubaneswar', 'Lingaraj Temple', 'Dhauli', 'Konark', 'Puri Beach', 'Jagannath'],
+        features: [
+          { icon: '🛕', text: 'Special Jagannath temple VIP entry with head sevak' },
+          { icon: '🍲', text: 'Sacred Chhappan Bhog (56 delicacies) feast for parents' },
+          { icon: '🌊', text: 'Peaceful luxury beachfront resort stay in Puri' },
+          { icon: '🚗', text: 'Comfortable AC Innova with senior priority parking' }
+        ],
+        itinerary: [
+          'Day 1: Bhubaneswar airport welcome, visit ancient 11th-century Lingaraj Temple & Dhauli Shanti Stupa, drive to Puri luxury beach resort.',
+          'Day 2: Early morning VIP Darshan of Lord Jagannath, Balabhadra & Subhadra with certified Panda escort, sacred 56 Bhog Mahaprasad lunch.',
+          'Day 3: Scenic coastal drive to Konark Sun Temple (UNESCO World Heritage Site), gentle battery cart tour around chariot wheels.',
+          'Day 4: Peaceful boat ride at Chilika Lake (Satapada) to view friendly dolphins and Alarnath Temple visit.',
+          'Day 5: Raghurajpur heritage crafts village visit, shopping for sacred Pattachitra art, return transfer to Bhubaneswar airport.'
+        ],
+        inclusions: [
+          '4 Nights in premium 4-Star oceanfront resort with serene private gardens',
+          'Authorized Panda / Sevak guide for personalized Jagannath Temple entry',
+          'Sacred earthen-pot Anand Bazaar Mahaprasadam feast included',
+          'Private AC Innova Crysta with complimentary tender coconut water daily',
+          'Battery cart rides at Konark Temple complex for effortless sightseeing',
+          'Luggage handling and airport assistance for senior travelers'
+        ],
+        reviews: [
+          '“Tasting the Mahaprasad at Puri inside the temple with our private guide was a spiritual high.” – Ananya D., Kolkata',
+          '“Very thoughtful arrangements for my elderly parents. The beach resort was quiet and relaxing.” – Debashish M., Bhubaneswar'
+        ]
+      }
+    ];
+
+    let currentCustomYatra = null;
+    let activeYatraCircuit = 'all';
+
+    function renderYatraCatalog(filter = 'all') {
+      activeYatraCircuit = filter;
+      const container = document.getElementById('yatraCardsContainer');
+      if (!container) return;
+
+      const filtered = filter === 'all' ? yatraCatalog : yatraCatalog.filter(y => y.circuit === filter);
+
+      container.innerHTML = '';
+      filtered.forEach((y) => {
+        const card = document.createElement('div');
+        card.className = 'yatra-card-deluxe';
+        card.id = `card-${y.id}`;
+
+        const routePillsHtml = y.route.map(r => `<span>${r}</span>`).join('<span style="color:#d97706;">➔</span>');
+        const featuresHtml = y.features.map(f => `
+          <div class="yatra-feature-pill">
+            <span style="font-size: 15px;">${f.icon}</span>
+            <span>${f.text}</span>
+          </div>
+        `).join('');
+
+        const emiPerMonth = Math.round(y.basePrice / 12);
+
+        card.innerHTML = `
+          <div class="yatra-card-header-img">
+            <img src="${y.image}" alt="${y.title}" onerror="this.src='/images/hotels/HOTEL-BUSINESS-1.jpg';">
+            <div class="yatra-img-overlay">
+              <span class="yatra-badge-float">${y.badge}</span>
+              <div class="yatra-header-info">
+                <div class="dest-subtitle">📍 ${y.region} · ${y.subtitle.split('·')[1] || 'Deluxe Tour'}</div>
+                <div class="dest-title">${y.title}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="yatra-card-body">
+            <div>
+              <div class="yatra-rating-row">
+                <span class="booking-pill pill-amber" style="font-weight: 700;">${y.region}</span>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="font-size: 12px; font-weight: 700; color: #78350f;">Exceptional</span>
+                  <span class="hotel-score-badge" style="background:#b45309;">${y.rating}</span>
+                  <span style="font-size: 11px; color: var(--text-muted);">(${y.reviewsCount} reviews)</span>
+                </div>
+              </div>
+
+              <div class="yatra-route-strip">
+                <span style="font-size: 14px;">🚩</span> ${routePillsHtml}
+              </div>
+
+              <div class="yatra-features-grid">
+                ${featuresHtml}
+              </div>
+
+              <!-- Interactive Tabs inside Card -->
+              <div class="yatra-tabs-bar">
+                <button class="yatra-tab-btn active" id="btn-tab-plan-${y.id}" onclick="switchYatraCardTab('${y.id}', 'plan')">📋 Day Plan</button>
+                <button class="yatra-tab-btn" id="btn-tab-inc-${y.id}" onclick="switchYatraCardTab('${y.id}', 'inc')">🛡️ Inclusions</button>
+                <button class="yatra-tab-btn" id="btn-tab-rev-${y.id}" onclick="switchYatraCardTab('${y.id}', 'rev')">⭐ Reviews</button>
+              </div>
+
+              <div class="yatra-tab-pane" id="pane-${y.id}">
+                ${y.itinerary.slice(0, 3).map(it => `<div style="margin-bottom: 4px;">• ${it}</div>`).join('')}
+                <div style="font-size: 11px; color: #b45309; font-weight: 700; margin-top: 4px;">+ Click "Customize Yatra" to view full ${y.itinerary.length}-day schedule</div>
+              </div>
+            </div>
+
+            <div class="yatra-bottom-actions">
+              <div>
+                <div style="font-size: 11px; color: var(--text-muted);">Starting price for 2 Seniors:</div>
+                <strong style="font-size: 22px; color: #b45309;">₹${y.basePrice.toLocaleString()}</strong>
+                <span style="font-size: 11px; color: var(--text-muted); font-weight: 600;"> / 2 Adults</span>
+                <div style="font-size: 10.5px; color: #16a34a; font-weight: 700;">Zero-Cost EMI from ₹${emiPerMonth.toLocaleString()}/mo</div>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <button class="btn-yatra-customize" onclick="openYatraCustomizer('${y.id}')">
+                  ⚙️ Customize Yatra
+                </button>
+                <button class="btn-yatra-reserve" onclick="bookPilgrimInstant('${y.title.replace(/'/g, "\\'")}', ${y.basePrice})">
+                  Reserve (10-Digit) →
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function switchYatraCardTab(cardId, tabName) {
+      const yatra = yatraCatalog.find(y => y.id === cardId);
+      if (!yatra) return;
+
+      const pane = document.getElementById(`pane-${cardId}`);
+      const btnPlan = document.getElementById(`btn-tab-plan-${cardId}`);
+      const btnInc = document.getElementById(`btn-tab-inc-${cardId}`);
+      const btnRev = document.getElementById(`btn-tab-rev-${cardId}`);
+
+      if (btnPlan) btnPlan.classList.remove('active');
+      if (btnInc) btnInc.classList.remove('active');
+      if (btnRev) btnRev.classList.remove('active');
+
+      const activeBtn = document.getElementById(`btn-tab-${tabName}-${cardId}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      if (tabName === 'plan') {
+        pane.innerHTML = yatra.itinerary.slice(0, 3).map(it => `<div style="margin-bottom: 4px;">• ${it}</div>`).join('') +
+          `<div style="font-size: 11px; color: #b45309; font-weight: 700; margin-top: 4px;">+ Click "Customize Yatra" to view full ${yatra.itinerary.length}-day schedule</div>`;
+      } else if (tabName === 'inc') {
+        pane.innerHTML = yatra.inclusions.map(inc => `<div style="margin-bottom: 3px;">✓ ${inc}</div>`).join('');
+      } else {
+        pane.innerHTML = yatra.reviews.map(rev => `<div style="margin-bottom: 6px; font-style: italic; color: #334155;">${rev}</div>`).join('');
+      }
+    }
+
+    function filterYatraCircuit(circuit) {
+      document.querySelectorAll('.filter-btn-pill').forEach(b => {
+        if (b.id && b.id.startsWith('yatra-filter-')) b.classList.remove('active');
+      });
+      const activeBtn = document.getElementById(`yatra-filter-${circuit}`);
+      if (activeBtn) activeBtn.classList.add('active');
+      renderYatraCatalog(circuit);
+    }
+
+    function openYatraCustomizer(cardId) {
+      currentCustomYatra = yatraCatalog.find(y => y.id === cardId);
+      if (!currentCustomYatra) return;
+
+      document.getElementById('custModalTitle').innerText = `Customize: ${currentCustomYatra.title}`;
+      document.getElementById('custModalSubtitle').innerText = `${currentCustomYatra.region} · ${currentCustomYatra.subtitle}`;
+      
+      // Reset radio defaults
+      const radioTravelers = document.querySelector('input[name="custTravelers"][value="2"]');
+      if (radioTravelers) radioTravelers.checked = true;
+      const radioTransit = document.querySelector('input[name="custTransit"][value="innova"]');
+      if (radioTransit) radioTransit.checked = true;
+      const radioStay = document.querySelector('input[name="custStayTier"][value="deluxe"]');
+      if (radioStay) radioStay.checked = true;
+      const radioDiet = document.querySelector('input[name="custDiet"][value="sattvic"]');
+      if (radioDiet) radioDiet.checked = true;
+
+      // Checkboxes defaults
+      document.getElementById('addWheelchair').checked = true;
+      document.getElementById('addPuja').checked = false;
+      document.getElementById('addSevak').checked = false;
+      document.getElementById('addHomePickup').checked = false;
+
+      recalculateYatraPrice();
+      document.getElementById('modalCustomizeYatra').style.display = 'flex';
+    }
+
+    function closeYatraCustomizer() {
+      document.getElementById('modalCustomizeYatra').style.display = 'none';
+    }
+
+    function recalculateYatraPrice() {
+      if (!currentCustomYatra) return;
+
+      const travelerRadio = document.querySelector('input[name="custTravelers"]:checked');
+      const travelerCount = travelerRadio ? parseInt(travelerRadio.value, 10) : 2;
+
+      let base = currentCustomYatra.basePrice;
+      if (travelerCount === 1) base = Math.round(base * 0.55);
+      else if (travelerCount === 3) base = Math.round(base * 1.5);
+      else if (travelerCount === 4) base = Math.round(base * 1.9);
+
+      let addOnsTotal = 0;
+      let notes = [];
+
+      // Transit
+      const transitRadio = document.querySelector('input[name="custTransit"]:checked');
+      if (transitRadio && transitRadio.value === 'heli') {
+        const heliCost = 24000 * travelerCount;
+        addOnsTotal += heliCost;
+        notes.push(`Helicopter Priority (+₹${heliCost.toLocaleString()})`);
+      } else if (transitRadio && transitRadio.value === 'vandebharat') {
+        const vbCost = 4500 * travelerCount;
+        addOnsTotal += vbCost;
+        notes.push(`Vande Bharat Executive (+₹${vbCost.toLocaleString()})`);
+      }
+
+      // Stay Tier
+      const stayRadio = document.querySelector('input[name="custStayTier"]:checked');
+      if (stayRadio && stayRadio.value === 'luxury') {
+        addOnsTotal += 14000;
+        notes.push(`5-Star Luxury Palace (+₹14,000)`);
+      }
+
+      // Add-ons
+      if (document.getElementById('addPuja').checked) {
+        addOnsTotal += 2500;
+        notes.push(`Gotra Sankalp Puja (+₹2,500)`);
+      }
+      if (document.getElementById('addSevak').checked) {
+        addOnsTotal += 4500;
+        notes.push(`24/7 Personal Sevak (+₹4,500)`);
+      }
+      if (document.getElementById('addHomePickup').checked) {
+        addOnsTotal += 3000;
+        notes.push(`Home Airport Chauffeur (+₹3,000)`);
+      }
+
+      const total = base + addOnsTotal;
+
+      document.getElementById('custLiveTotalPrice').innerText = `₹${total.toLocaleString()}`;
+      document.getElementById('custLivePriceBreakdown').innerText = `Base ₹${base.toLocaleString()} (${travelerCount} Seniors) ${notes.length > 0 ? '· ' + notes.join(', ') : '· Standard Inclusions'}`;
+    }
+
+    async function confirmCustomYatra() {
+      if (!currentCustomYatra) return;
+
+      const travelerRadio = document.querySelector('input[name="custTravelers"]:checked');
+      const travelerCount = travelerRadio ? parseInt(travelerRadio.value, 10) : 2;
+      const parentsNames = document.getElementById('custParentsNames').value.trim() || 'Senior Pilgrim Parents';
+      const travelDate = document.getElementById('custTravelDate').value || '2027-04-15';
+      const healthNotes = document.getElementById('custHealthNotes').value.trim();
+
+      const rawPrice = document.getElementById('custLiveTotalPrice').innerText.replace(/[^0-9]/g, '');
+      const finalPrice = parseInt(rawPrice, 10) || currentCustomYatra.basePrice;
+
+      const ref = `${Math.floor(1000000000 + Math.random() * 9000000000)}`;
+
+      const bookingRecord = {
+        reference: ref,
+        booking_reference: ref,
+        confirmed_at: new Date().toISOString(),
+        total_inr: finalPrice,
+        total_price_inr: finalPrice,
+        traveler: {
+          name: parentsNames,
+          seniors_count: travelerCount,
+          health_notes: healthNotes || 'Wheelchair assistance requested'
+        },
+        trip: {
+          destination_country: `India Pilgrimage (${currentCustomYatra.region})`,
+          package_name: currentCustomYatra.title,
+          start_date: travelDate,
+          nights: parseInt(currentCustomYatra.subtitle.match(/\d+/)?.[0] || '6', 10),
+          travelers_count: travelerCount,
+          total_price_inr: finalPrice
+        }
+      };
+
+      try {
+        await fetch('/api/bookings/confirm', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ trip: bookingRecord, package: bookingRecord })
+        });
+      } catch (err) {
+        console.warn('Persist booking local error:', err);
+      }
+
+      confirmedReservationData = bookingRecord;
+      closeYatraCustomizer();
+
+      document.getElementById('confRefCode').innerText = ref;
+      document.getElementById('confTraveler').innerText = `${parentsNames} (${travelerCount} Seniors) · ${currentCustomYatra.title}`;
+      document.getElementById('confDates').innerText = `${formatDateDisplay(travelDate)} (Confirmed VIP Pilgrim Pass)`;
+      document.getElementById('confTotal').innerText = `₹${finalPrice.toLocaleString()}`;
+      document.getElementById('modalConfirmed').style.display = 'flex';
+
+      showToast(`✓ Custom Tirth Yatra confirmed for parents with 10-digit code #${ref}!`);
+    }
+
     function bookPilgrimInstant(name, price) {
       const ref = `${Math.floor(1000000000 + Math.random() * 9000000000)}`;
       document.getElementById('confRefCode').innerText = ref;
       document.getElementById('confTraveler').innerText = `Pilgrim Family (2 Seniors) - ${name}`;
-      document.getElementById('confDates').innerText = `April 15, 2027 – April 24, 2027`;
+      document.getElementById('confDates').innerText = `April 15, 2027 – April 24, 2027 (Confirmed VIP Pass)`;
       document.getElementById('confTotal').innerText = `₹${price.toLocaleString()}`;
       document.getElementById('modalConfirmed').style.display = 'flex';
+      showToast(`✓ Reserved VIP Pilgrimage Pass #${ref} for parents!`);
     }
 
     // Guest Modal
