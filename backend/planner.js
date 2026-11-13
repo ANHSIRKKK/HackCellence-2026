@@ -631,9 +631,19 @@ class PlannerService {
       return { success: false, error: `At least 1 adult traveler is required.` };
     }
 
-    const cityPlans = this.generateCityPlans(validCountry.name, nights);
+    let cityPlans = this.generateCityPlans(validCountry.name, nights);
     if (cityPlans.length === 0) {
       return { success: false, error: `No valid city sequence possible for ${nights} nights in ${validCountry.name}.` };
+    }
+
+    const allValidCityPlans = cityPlans;
+    const requestedCityPlan = request.city_plan || request.cityPlan;
+    if (requestedCityPlan && Array.isArray(requestedCityPlan) && requestedCityPlan.length > 0) {
+      const targetSig = requestedCityPlan.map(s => `${s.city}_${s.nights}`).join('-');
+      const foundPlan = cityPlans.find(cp => cp.map(s => `${s.city}_${s.nights}`).join('-') === targetSig);
+      if (foundPlan) {
+        cityPlans = [foundPlan];
+      }
     }
 
     const reqContext = {
@@ -751,6 +761,10 @@ class PlannerService {
         best_rated: bestRatedPkg,
         priority_match: priorityPkg
       },
+      available_city_plans: allValidCityPlans.map(cp => ({
+        label: cp.map(s => `${s.city} (${s.nights}N)`).join(' ➔ '),
+        plan: cp
+      })),
       total_candidates: candidatePackages.length,
       user_weights: {
         hotel: preferences.hotelWeight || 40,

@@ -22,5 +22,53 @@
     "catalog_id": "FL-412",
     "quantity": 3,
     "timestamp": "2026-11-13T08:16:37.423Z"
+  },
+  {
+    "reference": "3780924952",
+    "resource_type": "FLIGHT",
+    "catalog_id": "FL-405",
+    "quantity": 3,
+    "timestamp": "2026-11-13T12:35:12.406Z"
+  },
+  {
+    "reference": "3780924952",
+    "resource_type": "ROOM",
+    "room_id": "RM-TYO-004-B",
+    "catalog_id": "HTL-TYO-004",
+    "start": "2027-04-10",
+    "end": "2027-04-16",
+    "quantity": 1,
+    "timestamp": "2026-11-13T12:35:12.406Z"
+  },
+  {
+    "reference": "3780924952",
+    "resource_type": "FLIGHT",
+    "catalog_id": "FL-412",
+    "quantity": 3,
+    "timestamp": "2026-11-13T12:35:12.406Z"
+  },
+  {
+    "reference": "2421439513",
+    "resource_type": "FLIGHT",
+    "catalog_id": "FL-1177",
+    "quantity": 3,
+    "timestamp": "2026-11-13T12:42:26.179Z"
+  },
+  {
+    "reference": "2421439513",
+    "resource_type": "ROOM",
+    "room_id": "RM-AUH-002-B",
+    "catalog_id": "HTL-AUH-002",
+    "start": "2027-04-10",
+    "end": "2027-04-13",
+    "quantity": 2,
+    "timestamp": "2026-11-13T12:42:26.179Z"
+  },
+  {
+    "reference": "2421439513",
+    "resource_type": "FLIGHT",
+    "catalog_id": "FL-1233",
+    "quantity": 3,
+    "timestamp": "2026-11-13T12:42:26.179Z"
   }
 ]

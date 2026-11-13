@@ -4,7 +4,15 @@ class NlpService {
       return null;
     }
 
-    const lower = text.toLowerCase();
+    let lower = text.toLowerCase();
+    // Normalize word numbers to digits (e.g. "two adults, one child" -> "2 adults, 1 child")
+    const wordNums = {
+      'zero': '0', 'one': '1', 'two': '2', 'three': '3', 'four': '4',
+      'five': '5', 'six': '6', 'seven': '7', 'eight': '8', 'nine': '9', 'ten': '10'
+    };
+    for (const [w, n] of Object.entries(wordNums)) {
+      lower = lower.replace(new RegExp(`\\b${w}\\b`, 'g'), n);
+    }
     const result = {
       traveler_name: 'Traveler Party',
       departure_city: 'Bengaluru',

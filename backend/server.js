@@ -204,6 +204,7 @@ const server = http.createServer(async (req, res) => {
         child_ages: body.child_ages || body.childrenAges || [],
         budget: parseInt(body.budget || 350000, 10),
         traveler_name: body.traveler_name || body.travelerName || 'Menon family',
+        city_plan: body.city_plan || body.cityPlan || null,
         preferences: body.preferences || {
           primaryPriority: body.preference || 'balanced',
           hotelWeight: 40,
@@ -296,8 +297,12 @@ const server = http.createServer(async (req, res) => {
       if (!tripData) {
         return sendJson(res, 400, { success: false, error: 'Missing trip data' });
       }
-      const reservation = storage.createReservation(tripData);
-      return sendJson(res, 200, { success: true, reservation });
+      try {
+        const reservation = storage.createReservation(tripData);
+        return sendJson(res, 200, { success: true, reservation });
+      } catch (err) {
+        return sendJson(res, 409, { success: false, refused: true, error: err.message });
+      }
     }
 
     // 12. GET /api/bookings/:reference or DELETE

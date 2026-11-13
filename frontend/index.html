@@ -1979,6 +1979,12 @@
         </div>
       </div>
 
+      <!-- City Plan Alternative Routes (Feature G3) -->
+      <div id="cityPlanSelectorBar" style="background: white; border: 1px solid var(--border-gray); border-radius: 8px; padding: 12px 18px; margin-bottom: 20px; display: none; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <span style="font-size: 12px; font-weight: 700; color: var(--booking-blue); text-transform: uppercase;">🗺️ Alternative Routes (G3):</span>
+        <div id="cityPlanPillsContainer" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+      </div>
+
       <!-- Package Tier Switcher Buttons -->
       <div class="package-tier-bar">
         <button class="tier-button active" id="btnTierCheapest" onclick="switchTier('cheapest')">
@@ -2775,8 +2781,13 @@
       executeSmartSearch();
     }
 
+    let currentActiveCityPlan = null;
+
     // Core Package Search via REST API (PAGE 3)
-    async function executeSmartSearch() {
+    async function executeSmartSearch(chosenCityPlan = null) {
+      if (chosenCityPlan) {
+        currentActiveCityPlan = chosenCityPlan;
+      }
       const dep = document.getElementById('homeDepCity').value;
       const dest = document.getElementById('homeDestCountry').value;
       const start = document.getElementById('homeStartDate').value;
@@ -2798,25 +2809,30 @@
       `;
 
       try {
+        const payload = {
+          departureCity: dep,
+          destinationCountry: dest,
+          startDate: start,
+          nights: nights,
+          adults: guestState.adults,
+          childrenAges: guestState.childAges,
+          budget: budget,
+          travelerName: 'Menon family',
+          preferences: {
+            hotelWeight: parseInt(document.getElementById('rangeWtHotel').value, 10),
+            flightWeight: parseInt(document.getElementById('rangeWtFlight').value, 10),
+            experienceWeight: parseInt(document.getElementById('rangeWtExp').value, 10),
+            travelStyle: 'balanced'
+          }
+        };
+        if (currentActiveCityPlan) {
+          payload.city_plan = currentActiveCityPlan;
+        }
+
         const res = await fetch('/api/trips/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            departureCity: dep,
-            destinationCountry: dest,
-            startDate: start,
-            nights: nights,
-            adults: guestState.adults,
-            childrenAges: guestState.childAges,
-            budget: budget,
-            travelerName: 'Menon family',
-            preferences: {
-              hotelWeight: parseInt(document.getElementById('rangeWtHotel').value, 10),
-              flightWeight: parseInt(document.getElementById('rangeWtFlight').value, 10),
-              experienceWeight: parseInt(document.getElementById('rangeWtExp').value, 10),
-              travelStyle: 'balanced'
-            }
-          })
+          body: JSON.stringify(payload)
         });
 
         const data = await res.json();
@@ -2824,6 +2840,7 @@
           appPackages = data.packages;
           activePackageData = appPackages[selectedTierKey] || appPackages.cheapest;
           updateTierPriceDisplay();
+          renderCityPlanPills(data.available_city_plans);
           renderPackageComponentsList();
           renderLiveItineraryPreview();
         } else if (data.budget_exceeded) {
@@ -2840,6 +2857,39 @@
         console.error('Search error:', err);
         listEl.innerHTML = `<div style="padding: 30px; text-align: center; color: #dc2626;">Server communication error. Ensure backend is active.</div>`;
       }
+    }
+
+    function renderCityPlanPills(availablePlans) {
+      const bar = document.getElementById('cityPlanSelectorBar');
+      const container = document.getElementById('cityPlanPillsContainer');
+      if (!bar || !container) return;
+      if (!availablePlans || availablePlans.length <= 1) {
+        bar.style.display = 'none';
+        return;
+      }
+
+      bar.style.display = 'flex';
+      container.innerHTML = '';
+
+      const activePlanSig = activePackageData && activePackageData.metrics && activePackageData.metrics.city_plan 
+        ? activePackageData.metrics.city_plan.map(s => `${s.city}_${s.nights}`).join('-') 
+        : '';
+
+      availablePlans.slice(0, 6).forEach(cp => {
+        const sig = cp.plan.map(s => `${s.city}_${s.nights}`).join('-');
+        const isCur = sig === activePlanSig;
+        const btn = document.createElement('button');
+        btn.className = `filter-btn-pill ${isCur ? 'active' : ''}`;
+        btn.style.fontSize = '12px';
+        btn.style.padding = '6px 12px';
+        btn.style.cursor = 'pointer';
+        btn.innerText = cp.label;
+        btn.onclick = () => {
+          currentActiveCityPlan = cp.plan;
+          executeSmartSearch(cp.plan);
+        };
+        container.appendChild(btn);
+      });
     }
 
     function updateTierPriceDisplay() {
@@ -3585,6 +3635,8 @@
           document.getElementById('confDates').innerText = `${formatDateDisplay(data.reservation.start_date)} to ${formatDateDisplay(data.reservation.end_date)}`;
           document.getElementById('confTotal').innerText = `₹${data.reservation.total_inr.toLocaleString()}`;
           document.getElementById('modalConfirmed').style.display = 'flex';
+        } else if (data.refused || data.error) {
+          alert(data.error || 'Booking refused: required seats or hotel rooms are no longer available.');
         }
       } catch (e) {
         const mockRef = `${Math.floor(1000000000 + Math.random() * 9000000000)}`;
