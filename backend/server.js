@@ -7,7 +7,6 @@ const catalog = require('./catalog');
 const storage = require('./storage');
 const planner = require('./planner');
 const validator = require('./validator');
-const nlp = require('./nlp');
 
 const PORT = process.env.PORT || 5001;
 const FRONTEND_DIR = path.resolve(__dirname, '../frontend');
@@ -342,13 +341,6 @@ const server = http.createServer(async (req, res) => {
     if (req.method === 'GET' && pathname === '/api/discovery/recommendations') {
       const recs = planner.discoverDestinations(query);
       return sendJson(res, 200, { success: true, destinations: recs });
-    }
-
-    // 15. POST /api/nlp/parse & /api/quick-request/parse (Feature S1: Rule-based text parser)
-    if (req.method === 'POST' && (pathname === '/api/nlp/parse' || pathname === '/api/quick-request/parse')) {
-      const body = await parseBody(req);
-      const parsed = nlp.parse(body.query);
-      return sendJson(res, 200, { success: true, parsed });
     }
 
     // 15b. GET /api/database/schema & POST /api/database/query (Enterprise SQLite Database Console)
