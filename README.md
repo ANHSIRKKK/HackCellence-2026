@@ -16,11 +16,6 @@ npm start
 Open your browser at:
 👉 **`http://localhost:5001`**
 
-### 2. Optional: React / Vite Frontend Dev Server (Port 3000)
-```bash
-cd frontend && npm run dev
-```
-
 ---
 
 ## 🏛️ System Architecture
@@ -29,7 +24,7 @@ The system strictly adheres to the rule that **the backend holds all business lo
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                   Frontend (React + Booking.com UI)                    │
+│                   Frontend (Interactive Booking.com UI Engine)         │
 │  - 5 Streamlined Core Tabs: Stays, Flights, Flight+Hotel, Attractions, │
 │    and Sacred Tirth Yatra (Adults / Parents Pilgrimage)                │
 │  - Sticky Live Itinerary Preview & Budget Progress Meter               │
@@ -84,15 +79,7 @@ HackCellence-2026/
 │   ├── storage.js         # Persistent JSON document store & inventory locks
 │   └── sqlite_db.js       # Enterprise SQLite 3 database adapter & queries
 ├── frontend/
-│   ├── index.html         # Booking.com styled application entry point
-│   ├── package.json       # React 18/19, Lucide-React & Vite config
-│   ├── vite.config.js     # Vite configuration with API proxying
-│   └── src/
-│       ├── main.jsx       # React DOM root entry point
-│       ├── App.jsx        # Core state container (useState, useEffect)
-│       ├── api.js         # Centralized backend REST API client
-│       ├── index.css      # Full Booking.com CSS design system
-│       └── components/    # Modular React components (Navbar, Stays, Flights, etc.)
+│   └── index.html         # Standalone Booking.com luxury platform & booking engine
 ├── images/
 │   ├── attractions/       # 56 verified catalog attraction photographs
 │   └── hotels/            # Real hotel room & luxury property imagery

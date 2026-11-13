@@ -1,33 +1,20 @@
 {
   "name": "build-my-holiday",
   "version": "1.0.0",
-  "description": "Smart Holiday Planner & Booking Platform - Hackathon Problem 1 Solution (MERN Stack)",
+  "description": "Smart Holiday Planner & Booking Platform - Hackathon Problem 1 Solution",
   "main": "backend/server.js",
   "scripts": {
     "start": "node backend/server.js",
     "server": "node backend/server.js",
     "dev": "node backend/server.js",
     "db:inspect": "node scripts/inspect_db.js",
-    "db:shell": "sqlite3 data/holiday.db",
-    "frontend:dev": "cd frontend && npm run dev",
-    "frontend:build": "cd frontend && npm run build"
-  },
-  "dependencies": {
-    "lucide-react": "^0.453.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.2",
-    "vite": "^5.4.18"
+    "db:shell": "sqlite3 data/holiday.db"
   },
   "keywords": [
     "hackathon",
     "holiday-package",
     "travel-planner",
-    "booking-com",
-    "react",
-    "mern"
+    "booking-com"
   ],
   "author": "HackCellence Team",
   "license": "ISC"

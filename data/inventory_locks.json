@@ -101,5 +101,36 @@
     "start": "2027-04-15T12:00",
     "end": "2027-04-24T10:00",
     "timestamp": "2026-11-13T17:34:30.917Z"
+  },
+  {
+    "reference": "6646796504",
+    "resource_type": "FLIGHT",
+    "catalog_id": "FL-1166",
+    "quantity": 3,
+    "timestamp": "2026-11-13T17:35:53.273Z"
+  },
+  {
+    "reference": "6646796504",
+    "resource_type": "ROOM",
+    "room_id": "RM-TYO-012-B",
+    "catalog_id": "HTL-TYO-012",
+    "start": "2027-04-10",
+    "end": "2027-04-14",
+    "quantity": 1,
+    "timestamp": "2026-11-13T17:35:53.273Z"
+  },
+  {
+    "reference": "6646796504",
+    "resource_type": "FLIGHT",
+    "catalog_id": "FL-1241",
+    "quantity": 3,
+    "timestamp": "2026-11-13T17:35:53.273Z"
+  },
+  {
+    "reference": "8363218969",
+    "resource_type": "ROOM",
+    "start": "2027-04-15T12:00",
+    "end": "2027-04-24T10:00",
+    "timestamp": "2026-11-13T17:36:29.225Z"
   }
 ]
