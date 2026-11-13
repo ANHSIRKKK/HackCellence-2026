@@ -45,7 +45,10 @@ function getContentType(ext) {
   switch (ext.toLowerCase()) {
     case '.html': return 'text/html';
     case '.css': return 'text/css';
-    case '.js': return 'application/javascript';
+    case '.js': 
+    case '.jsx':
+    case '.ts':
+    case '.tsx': return 'application/javascript';
     case '.json': return 'application/json';
     case '.jpg':
     case '.jpeg': return 'image/jpeg';
