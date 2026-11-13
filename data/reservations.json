@@ -1,88 +1,5 @@
 [
   {
-    "reference": "5892147361",
-    "trip_id": "trip-pilgrim-5892147361",
-    "traveler": {
-      "name": "Ramesh & Sunita Sharma",
-      "seniors_count": 2,
-      "health_notes": "Wheelchair assistance & Sattvic dining requested"
-    },
-    "country": "India (Uttarakhand Sacred Pilgrimage)",
-    "package_name": "Char Dham Yatra Deluxe (Helicopter VIP Darshan)",
-    "is_pilgrim": true,
-    "start_date": "2027-04-12",
-    "end_date": "2027-04-21",
-    "budget_inr": 320000,
-    "total_inr": 288000,
-    "items": [
-      {
-        "item_id": "pilgrim-fl-5892147361",
-        "type": "flight",
-        "name": "Dehradun Airport VIP Helicopter Transfer to Kedarnath & Badrinath",
-        "city": "Dehradun",
-        "status": "BOOKED",
-        "catalog_id": "PILGRIM-HELI-01",
-        "room_id": null,
-        "start": "2027-04-12T07:30",
-        "end": "2027-04-12T08:45",
-        "quantity": 2,
-        "price_inr": 48000,
-        "booking": {
-          "reference": "5892147361"
-        }
-      },
-      {
-        "item_id": "pilgrim-htl-5892147361",
-        "type": "hotel",
-        "name": "Himalayan Luxury Senior Ashram & Spa (Ground Floor Lift-Access Suite)",
-        "city": "Rishikesh",
-        "status": "BOOKED",
-        "catalog_id": "PILGRIM-HTL-01",
-        "room_id": "RM-PILGRIM-01",
-        "start": "2027-04-12T12:00",
-        "end": "2027-04-21T10:00",
-        "quantity": 1,
-        "price_inr": 168000,
-        "booking": {
-          "reference": "5892147361"
-        }
-      },
-      {
-        "item_id": "pilgrim-tr-5892147361",
-        "type": "transfer",
-        "name": "Temple Corridor Battery Golf Cart Buggy & Dedicated Personal Sevak",
-        "city": "Kedarnath",
-        "status": "BOOKED",
-        "catalog_id": "PILGRIM-TR-01",
-        "room_id": null,
-        "start": "2027-04-13T09:00",
-        "end": "2027-04-13T12:00",
-        "quantity": 2,
-        "price_inr": 22000,
-        "booking": {
-          "reference": "5892147361"
-        }
-      },
-      {
-        "item_id": "pilgrim-att-5892147361",
-        "type": "attraction",
-        "name": "VIP Sanctum Darshan & Special Gotra Sankalp Puja (Kedarnath & Badrinath)",
-        "city": "Kedarnath",
-        "status": "BOOKED",
-        "catalog_id": "PILGRIM-ATT-01",
-        "room_id": null,
-        "start": "2027-04-14T06:00",
-        "end": "2027-04-14T09:00",
-        "quantity": 2,
-        "price_inr": 50000,
-        "booking": {
-          "reference": "5892147361"
-        }
-      }
-    ],
-    "created_at": "2026-11-13T16:30:00.704Z"
-  },
-  {
     "reference": "9279894003",
     "trip_id": "trip-1794557797393-1196",
     "traveler": {
@@ -374,335 +291,295 @@
     "created_at": "2026-11-13T08:16:37.423Z"
   },
   {
-    "reference": "3780924952",
-    "trip_id": "trip-1794573312377-2453",
+    "reference": "6283331105",
+    "trip_id": "trip-1794591155376-851",
     "traveler": {
       "name": "Menon family",
-      "home_airport": "BLR",
+      "home_airport": "BOM",
       "adults": 2,
       "children": 1,
       "child_ages": [
         6
       ]
     },
-    "country": "Japan",
+    "country": "United Arab Emirates",
     "start_date": "2027-04-10",
-    "end_date": "2027-04-16",
+    "end_date": "2027-04-13",
     "budget_inr": 350000,
-    "total_inr": 252504,
+    "total_inr": 233880,
     "items": [
       {
-        "item_id": "item-fl-out-FL-405",
+        "item_id": "item-fl-out-FL-1179",
         "type": "flight",
-        "name": "Nippon Sky NS 811 (BLR to NRT)",
-        "airline": "Nippon Sky",
-        "flight_number": "NS 811",
-        "from_code": "BLR",
-        "to_code": "NRT",
-        "duration_minutes": 690,
-        "stops": 1,
-        "cabin": "ECONOMY",
-        "city": "Tokyo",
-        "status": "BOOKED",
-        "catalog_id": "FL-405",
-        "room_id": null,
-        "start": "2027-04-10T06:30",
-        "end": "2027-04-10T21:30",
-        "quantity": 3,
-        "price_inr": 71820,
-        "booking": {
-          "reference": "3780924952"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-tr-arr-TR-NRT-UEN-TAXI",
-        "type": "transfer",
-        "name": "Narita airport taxi to Ueno (NRT to Ueno area hotels)",
-        "city": "Tokyo",
-        "status": "BOOKED",
-        "catalog_id": "TR-NRT-UEN-TAXI",
-        "room_id": null,
-        "start": "2027-04-10T22:30",
-        "end": "2027-04-10T23:40",
-        "quantity": 1,
-        "price_inr": 12880,
-        "booking": {
-          "reference": "3780924952"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-htl-HTL-TYO-004-2027-04-10",
-        "type": "hotel",
-        "name": "Ueno Garden Inn (Family Room)",
-        "hotel_name": "Ueno Garden Inn",
-        "room_name": "Family Room",
-        "image": "images/hotels/HOTEL-BUSINESS-1.jpg",
-        "stars": 3,
-        "rating": 7.9,
-        "area": "Ueno",
-        "family_friendly": true,
-        "city": "Tokyo",
-        "status": "BOOKED",
-        "catalog_id": "HTL-TYO-004",
-        "room_id": "RM-TYO-004-B",
-        "start": "2027-04-10",
-        "end": "2027-04-16",
-        "quantity": 1,
-        "price_inr": 56784,
-        "booking": {
-          "reference": "3780924952"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-tr-dep-TR-HND-UEN-TAXI",
-        "type": "transfer",
-        "name": "Haneda airport taxi to Ueno (Ueno Garden Inn to Ueno area hotels)",
-        "city": "Tokyo",
-        "status": "BOOKED",
-        "catalog_id": "TR-HND-UEN-TAXI",
-        "room_id": null,
-        "start": "2027-04-16T07:20",
-        "end": "2027-04-16T08:00",
-        "quantity": 1,
-        "price_inr": 5320,
-        "booking": {
-          "reference": "3780924952"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-fl-in-FL-412",
-        "type": "flight",
-        "name": "Nippon Sky NS 806 (HND to BLR)",
-        "airline": "Nippon Sky",
-        "flight_number": "NS 806",
-        "from_code": "HND",
-        "to_code": "BLR",
-        "duration_minutes": 600,
+        "name": "Sandline Airways SL 834 (BOM to DXB)",
+        "airline": "Sandline Airways",
+        "flight_number": "SL 834",
+        "from_code": "BOM",
+        "to_code": "DXB",
+        "duration_minutes": 200,
         "stops": 0,
         "cabin": "ECONOMY",
-        "city": "Bengaluru",
+        "city": "Dubai",
         "status": "BOOKED",
-        "catalog_id": "FL-412",
+        "catalog_id": "FL-1179",
         "room_id": null,
-        "start": "2027-04-16T11:00",
-        "end": "2027-04-16T17:30",
+        "start": "2027-04-10T03:00",
+        "end": "2027-04-10T04:50",
         "quantity": 3,
-        "price_inr": 80640,
+        "price_inr": 57000,
         "booking": {
-          "reference": "3780924952"
+          "reference": "6283331105"
         },
         "sources": [],
         "warnings": []
       },
       {
-        "item_id": "item-att-ATT-TYO-001-2027-04-11",
+        "item_id": "item-tr-arr-TR-DXB-ABU-TAXI",
+        "type": "transfer",
+        "name": "Dubai airport taxi to Abu Dhabi (DXB to Abu Dhabi hotels (all areas))",
+        "city": "Abu Dhabi",
+        "status": "BOOKED",
+        "catalog_id": "TR-DXB-ABU-TAXI",
+        "room_id": null,
+        "start": "2027-04-10T05:50",
+        "end": "2027-04-10T07:30",
+        "quantity": 1,
+        "price_inr": 7328,
+        "booking": {
+          "reference": "6283331105"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-htl-HTL-AUH-004-2027-04-10",
+        "type": "hotel",
+        "name": "Saadiyat Sands Resort (Family Room)",
+        "hotel_name": "Saadiyat Sands Resort",
+        "room_name": "Family Room",
+        "image": "images/hotels/HOTEL-LUXURY-1.jpg",
+        "stars": 5,
+        "rating": 9.1,
+        "area": "Saadiyat",
+        "family_friendly": true,
+        "city": "Abu Dhabi",
+        "status": "BOOKED",
+        "catalog_id": "HTL-AUH-004",
+        "room_id": "RM-AUH-004-B",
+        "start": "2027-04-10",
+        "end": "2027-04-13",
+        "quantity": 1,
+        "price_inr": 116103,
+        "booking": {
+          "reference": "6283331105"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-tr-dep-TR-DXB-ABU-TAXI",
+        "type": "transfer",
+        "name": "Dubai airport taxi to Abu Dhabi (Saadiyat Sands Resort to Abu Dhabi hotels (all areas))",
+        "city": "Abu Dhabi",
+        "status": "BOOKED",
+        "catalog_id": "TR-DXB-ABU-TAXI",
+        "room_id": null,
+        "start": "2027-04-13T16:20",
+        "end": "2027-04-13T18:00",
+        "quantity": 1,
+        "price_inr": 7328,
+        "booking": {
+          "reference": "6283331105"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-fl-in-FL-1235",
+        "type": "flight",
+        "name": "AirVeda AV 105 (DXB to BOM)",
+        "airline": "AirVeda",
+        "flight_number": "AV 105",
+        "from_code": "DXB",
+        "to_code": "BOM",
+        "duration_minutes": 185,
+        "stops": 0,
+        "cabin": "ECONOMY",
+        "city": "Mumbai",
+        "status": "BOOKED",
+        "catalog_id": "FL-1235",
+        "room_id": null,
+        "start": "2027-04-13T21:00",
+        "end": "2027-04-14T01:35",
+        "quantity": 3,
+        "price_inr": 39000,
+        "booking": {
+          "reference": "6283331105"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-AUH-001-2027-04-10",
         "type": "attraction",
-        "name": "teamLab Planets TOKYO",
-        "image": "images/attractions/ATT-TYO-001.jpg",
+        "name": "Sheikh Zayed Grand Mosque",
+        "image": "images/attractions/ATT-AUH-001.jpg",
+        "category": "MOSQUE",
+        "city": "Abu Dhabi",
+        "status": "BOOKED",
+        "catalog_id": "ATT-AUH-001",
+        "room_id": null,
+        "start": "2027-04-10T14:00",
+        "end": "2027-04-10T15:30",
+        "quantity": 3,
+        "price_inr": 0,
+        "booking": {
+          "reference": "6283331105"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-AUH-002-2027-04-11",
+        "type": "attraction",
+        "name": "Louvre Abu Dhabi",
+        "image": "images/attractions/ATT-AUH-002.jpg",
         "category": "MUSEUM",
-        "city": "Tokyo",
+        "city": "Abu Dhabi",
         "status": "BOOKED",
-        "catalog_id": "ATT-TYO-001",
+        "catalog_id": "ATT-AUH-002",
         "room_id": null,
-        "start": "2027-04-11T09:30",
-        "end": "2027-04-11T11:30",
+        "start": "2027-04-11T10:00",
+        "end": "2027-04-11T12:30",
         "quantity": 3,
-        "price_inr": 5096,
+        "price_inr": 2886,
         "booking": {
-          "reference": "3780924952"
+          "reference": "6283331105"
         },
         "sources": [],
         "warnings": []
       },
       {
-        "item_id": "item-att-ATT-TYO-002-2027-04-11",
+        "item_id": "item-att-ATT-AUH-003-2027-04-11",
         "type": "attraction",
-        "name": "Tokyo Disneyland",
-        "image": "images/attractions/ATT-TYO-002.jpg",
-        "category": "THEME_PARK",
-        "city": "Tokyo",
+        "name": "Wahat Al Karama",
+        "image": "images/attractions/ATT-AUH-003.jpg",
+        "category": "MONUMENT",
+        "city": "Abu Dhabi",
         "status": "BOOKED",
-        "catalog_id": "ATT-TYO-002",
+        "catalog_id": "ATT-AUH-003",
         "room_id": null,
-        "start": "2027-04-11T12:15",
-        "end": "2027-04-11T20:15",
+        "start": "2027-04-11T13:15",
+        "end": "2027-04-11T14:00",
         "quantity": 3,
-        "price_inr": 13664,
+        "price_inr": 0,
         "booking": {
-          "reference": "3780924952"
+          "reference": "6283331105"
         },
         "sources": [],
         "warnings": []
       },
       {
-        "item_id": "item-att-ATT-TYO-003-2027-04-12",
+        "item_id": "item-att-ATT-AUH-004-2027-04-12",
         "type": "attraction",
-        "name": "Tokyo Toy Museum",
-        "image": "images/attractions/ATT-TYO-003.jpg",
-        "category": "MUSEUM",
-        "city": "Tokyo",
+        "name": "Qasr Al Watan",
+        "image": "images/attractions/ATT-AUH-004.jpg",
+        "category": "PALACE",
+        "city": "Abu Dhabi",
         "status": "BOOKED",
-        "catalog_id": "ATT-TYO-003",
+        "catalog_id": "ATT-AUH-004",
         "room_id": null,
         "start": "2027-04-12T10:00",
-        "end": "2027-04-12T11:30",
+        "end": "2027-04-12T12:00",
         "quantity": 3,
-        "price_inr": 1680,
+        "price_inr": 3663,
         "booking": {
-          "reference": "3780924952"
+          "reference": "6283331105"
         },
         "sources": [],
         "warnings": []
       },
       {
-        "item_id": "item-att-ATT-TYO-004-2027-04-12",
+        "item_id": "item-att-ATT-AUH-005-2027-04-12",
         "type": "attraction",
-        "name": "Senso-ji",
-        "image": "images/attractions/ATT-TYO-004.jpg",
-        "category": "TEMPLE",
-        "city": "Tokyo",
+        "name": "Corniche Beach",
+        "image": "images/attractions/ATT-AUH-005.jpg",
+        "category": "BEACH",
+        "city": "Abu Dhabi",
         "status": "BOOKED",
-        "catalog_id": "ATT-TYO-004",
+        "catalog_id": "ATT-AUH-005",
         "room_id": null,
-        "start": "2027-04-12T12:15",
-        "end": "2027-04-12T13:15",
+        "start": "2027-04-12T12:45",
+        "end": "2027-04-12T14:45",
         "quantity": 3,
-        "price_inr": 0,
+        "price_inr": 572,
         "booking": {
-          "reference": "3780924952"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-att-ATT-TYO-007-2027-04-13",
-        "type": "attraction",
-        "name": "Tokyo Skytree",
-        "image": "images/attractions/ATT-TYO-007.jpg",
-        "category": "VIEWPOINT",
-        "city": "Tokyo",
-        "status": "BOOKED",
-        "catalog_id": "ATT-TYO-007",
-        "room_id": null,
-        "start": "2027-04-13T10:00",
-        "end": "2027-04-13T11:30",
-        "quantity": 3,
-        "price_inr": 2884,
-        "booking": {
-          "reference": "3780924952"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-att-ATT-TYO-008-2027-04-13",
-        "type": "attraction",
-        "name": "Ueno Park",
-        "image": "images/attractions/ATT-TYO-008.jpg",
-        "category": "PARK",
-        "city": "Tokyo",
-        "status": "BOOKED",
-        "catalog_id": "ATT-TYO-008",
-        "room_id": null,
-        "start": "2027-04-13T12:15",
-        "end": "2027-04-13T13:45",
-        "quantity": 3,
-        "price_inr": 0,
-        "booking": {
-          "reference": "3780924952"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-att-ATT-TYO-009-2027-04-14",
-        "type": "attraction",
-        "name": "Ameyoko Market",
-        "image": "images/attractions/ATT-TYO-009.jpg",
-        "category": "MARKET",
-        "city": "Tokyo",
-        "status": "BOOKED",
-        "catalog_id": "ATT-TYO-009",
-        "room_id": null,
-        "start": "2027-04-14T10:00",
-        "end": "2027-04-14T11:00",
-        "quantity": 3,
-        "price_inr": 0,
-        "booking": {
-          "reference": "3780924952"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-att-ATT-TYO-010-2027-04-14",
-        "type": "attraction",
-        "name": "Meiji Jingu",
-        "image": "images/attractions/ATT-TYO-010.jpg",
-        "category": "SHRINE",
-        "city": "Tokyo",
-        "status": "BOOKED",
-        "catalog_id": "ATT-TYO-010",
-        "room_id": null,
-        "start": "2027-04-14T11:45",
-        "end": "2027-04-14T12:45",
-        "quantity": 3,
-        "price_inr": 0,
-        "booking": {
-          "reference": "3780924952"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-att-ATT-TYO-011-2027-04-15",
-        "type": "attraction",
-        "name": "Shibuya Crossing",
-        "image": "images/attractions/ATT-TYO-011.jpg",
-        "category": "DISTRICT",
-        "city": "Tokyo",
-        "status": "BOOKED",
-        "catalog_id": "ATT-TYO-011",
-        "room_id": null,
-        "start": "2027-04-15T09:30",
-        "end": "2027-04-15T10:00",
-        "quantity": 3,
-        "price_inr": 0,
-        "booking": {
-          "reference": "3780924952"
-        },
-        "sources": [],
-        "warnings": []
-      },
-      {
-        "item_id": "item-att-ATT-TYO-012-2027-04-15",
-        "type": "attraction",
-        "name": "Tokyo Tower",
-        "image": "images/attractions/ATT-TYO-012.jpg",
-        "category": "VIEWPOINT",
-        "city": "Tokyo",
-        "status": "BOOKED",
-        "catalog_id": "ATT-TYO-012",
-        "room_id": null,
-        "start": "2027-04-15T10:45",
-        "end": "2027-04-15T11:45",
-        "quantity": 3,
-        "price_inr": 1736,
-        "booking": {
-          "reference": "3780924952"
+          "reference": "6283331105"
         },
         "sources": [],
         "warnings": []
       }
     ],
-    "created_at": "2026-11-13T12:35:12.406Z"
+    "is_pilgrim": false,
+    "package_name": "",
+    "created_at": "2026-11-13T17:32:38.195Z"
+  },
+  {
+    "reference": "9389496355",
+    "trip_id": "trip-pilgrim-9389496355",
+    "traveler": {
+      "name": "Pilgrim Family",
+      "seniors_count": 2,
+      "health_notes": "Wheelchair assistance requested"
+    },
+    "country": "India (Sacred Pilgrimage)",
+    "start_date": "2027-04-15",
+    "end_date": "2027-04-24",
+    "budget_inr": 225000,
+    "total_inr": 185000,
+    "items": [
+      {
+        "item_id": "pilgrim-hotel-8920341632",
+        "type": "hotel",
+        "name": "Char Dham Yatra Deluxe (Helicopter VIP Darshan) (Senior Care Ground-Floor Suite)",
+        "city": "Sacred Site",
+        "status": "BOOKED",
+        "start": "2027-04-15T12:00",
+        "end": "2027-04-24T10:00",
+        "price_inr": 101750,
+        "booking": {
+          "reference": "9389496355"
+        }
+      },
+      {
+        "item_id": "pilgrim-transfer-8920341632",
+        "type": "transfer",
+        "name": "VIP Helipad Shuttle & Temple Corridor Golf Cart Buggy",
+        "city": "Pilgrim Corridor",
+        "status": "BOOKED",
+        "start": "2027-04-15T09:00",
+        "end": "2027-04-15T11:00",
+        "price_inr": 46250,
+        "booking": {
+          "reference": "9389496355"
+        }
+      },
+      {
+        "item_id": "pilgrim-darshan-8920341632",
+        "type": "attraction",
+        "name": "VIP Sanctum Darshan & Gotra Sankalp Puja",
+        "city": "Sanctum Corridor",
+        "status": "BOOKED",
+        "start": "2027-04-16T06:00",
+        "end": "2027-04-16T09:00",
+        "price_inr": 37000,
+        "booking": {
+          "reference": "9389496355"
+        }
+      }
+    ],
+    "is_pilgrim": true,
+    "package_name": "Char Dham Yatra Deluxe (Helicopter VIP Darshan)",
+    "created_at": "2026-11-13T17:34:30.917Z"
   }
 ]

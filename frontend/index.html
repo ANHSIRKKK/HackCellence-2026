@@ -532,141 +532,6 @@
       box-shadow: 0 2px 8px rgba(30, 27, 24, 0.25);
     }
 
-    .hotels-grid-catalog {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-bottom: 44px;
-    }
-
-    .hotel-catalog-card {
-      background: #ffffff;
-      border: 1px solid #E8E2D8;
-      border-radius: 16px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 10px 30px -10px rgba(35, 25, 15, 0.05);
-      transition: all 0.25s ease;
-    }
-
-    .hotel-catalog-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px -12px rgba(35, 25, 15, 0.12);
-      border-color: #D4C9BC;
-    }
-
-    .hotel-card-img {
-      width: 100%;
-      height: 190px;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-
-    .hotel-catalog-card:hover .hotel-card-img {
-      transform: scale(1.03);
-    }
-
-    .hotel-card-body {
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      justify-content: space-between;
-    }
-
-    .why-booking-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 40px;
-    }
-
-    .why-card {
-      background: #ffffff;
-      border: 1px solid var(--border-gray);
-      border-radius: 8px;
-      padding: 16px;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      transition: all 0.2s;
-    }
-
-    .why-card:hover {
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    }
-
-    .why-icon {
-      font-size: 28px;
-    }
-
-    .why-card-title {
-      font-size: 14.5px;
-      font-weight: 700;
-      color: var(--text-dark);
-      margin-bottom: 2px;
-    }
-
-    .why-card-text {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    .explore-country-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 40px;
-    }
-
-    .country-thumb-card {
-      border-radius: 8px;
-      overflow: hidden;
-      position: relative;
-      height: 200px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    .country-thumb-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s;
-    }
-
-    .country-thumb-card:hover img {
-      transform: scale(1.04);
-    }
-
-    .country-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.85) 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 18px;
-      color: #ffffff;
-    }
-
-    .country-title-overlay {
-      font-size: 20px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .country-price-overlay {
-      font-size: 13px;
-      color: #e2e8f0;
-      margin-top: 2px;
-    }
-
     /* ============================================================== */
     /* PAGE 2: FLIGHTS                                                */
     /* ============================================================== */
@@ -1793,8 +1658,8 @@
     @media (max-width: 992px) {
       .yellow-search-frame { grid-template-columns: 1fr; }
       .results-split-container { grid-template-columns: 1fr; }
-      .attractions-cards-grid, .why-booking-grid, .hotels-grid-catalog { grid-template-columns: repeat(2, 1fr); }
-      .explore-country-grid, .yatra-grid-booking { grid-template-columns: 1fr; }
+    .attractions-cards-grid { grid-template-columns: repeat(2, 1fr); }
+    .yatra-grid-booking { grid-template-columns: 1fr; }
       .footer-columns-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
@@ -2923,7 +2788,6 @@
     let guestState = { adults: 2, children: 1, childAges: [6] };
     let confirmedReservationData = null;
     let fullCatalogAttractions = [];
-    let fullCatalogHotels = [];
     let currentSwapTarget = null;
 
     // Toast Notification
@@ -2966,7 +2830,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
       // Page-specific loaders
-      if (pageId === 'stays') loadStaysCatalog();
       if (pageId === 'flights') executeFlightCatalogSearch();
       if (pageId === 'packages') { if (!activePackageData) executeSmartSearch(); }
       if (pageId === 'attractions') loadAttractionsCatalog();
@@ -3008,7 +2871,6 @@
       // Initialize base state for back navigation
       window.history.replaceState({ pageId: initialPage, extraParam: initialFilter }, '', window.location.hash || `#${initialPage}`);
 
-      loadStaysCatalog();
       executeSmartSearch();
       renderYatraCatalog();
 
@@ -3017,93 +2879,7 @@
       }
     });
 
-    // Quick plan from country cards
-    function quickPlanCountry(country) {
-      document.getElementById('homeDestCountry').value = country;
-      triggerSearchFromHome();
-    }
-
     function triggerSearchFromHome() {
-      navigateToPage('packages');
-      executeSmartSearch();
-    }
-
-    // STAYS / HOTELS CATALOG LOADER (PAGE 1)
-    async function loadStaysCatalog(filterCity = 'all') {
-      const grid = document.getElementById('hotelsCatalogGrid');
-      if (!grid) return;
-      grid.innerHTML = '<div style="padding: 20px;">Loading catalog stays...</div>';
-
-      try {
-        let endpoint = '/api/catalog/hotels';
-        if (filterCity !== 'all') endpoint += `?city=${encodeURIComponent(filterCity)}`;
-
-        const res = await fetch(endpoint);
-        const data = await res.json();
-
-        if (data.success && data.hotels) {
-          fullCatalogHotels = data.hotels;
-          renderStaysGrid(fullCatalogHotels);
-        }
-      } catch (err) {
-        grid.innerHTML = '<div style="padding: 20px; color: #dc2626;">Error loading hotels.</div>';
-      }
-    }
-
-    function renderStaysGrid(hotels) {
-      const grid = document.getElementById('hotelsCatalogGrid');
-      if (!grid) return;
-      grid.innerHTML = '';
-
-      hotels.slice(0, 12).forEach(h => {
-        let imgPath = h.image || 'images/hotels/HOTEL-TWIN-1.jpg';
-        if (!imgPath.startsWith('images/')) imgPath = 'images/' + imgPath;
-
-        const card = document.createElement('div');
-        card.className = 'hotel-catalog-card';
-
-        const estPrice = (h.stars || 4) * 6200 * 6;
-
-        card.innerHTML = `
-          <img src="${imgPath}" alt="${h.name}" class="hotel-card-img" onerror="this.src='images/hotels/HOTEL-BUSINESS-1.jpg'">
-          <div class="hotel-card-body">
-            <div>
-              <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                <span class="booking-pill pill-blue">${h.city}</span>
-                <span class="stars-badge">${'★'.repeat(h.stars || 4)}</span>
-              </div>
-              <h4 style="font-size: 16px; font-weight: 800; margin: 6px 0 2px 0;">${h.name}</h4>
-              <p style="font-size: 12.5px; color: var(--text-muted);">${h.area || 'City Center'} · Very Good 8.6</p>
-              <div style="margin-top: 6px;">
-                <span class="booking-pill pill-green">✓ Validated Room Fit ($adults \ge 1$)</span>
-              </div>
-            </div>
-
-            <div style="border-top: 1px solid var(--border-gray); padding-top: 10px; margin-top: 12px; display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <span style="font-size: 11px; color: var(--text-muted);">6 nights from</span>
-                <strong style="display: block; font-size: 16px; color: var(--text-dark);">₹${estPrice.toLocaleString()}</strong>
-              </div>
-              <button class="btn-booking-primary" onclick="planWithSpecificHotel('${h.city}', '${h.name}')">
-                Plan Package →
-              </button>
-            </div>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    function filterStaysCity(city) {
-      document.querySelectorAll('#page-stays .filter-pills-bar:first-of-type .filter-btn-pill').forEach(b => b.classList.remove('active'));
-      event.currentTarget.classList.add('active');
-      loadStaysCatalog(city);
-    }
-
-    function planWithSpecificHotel(city, hotelName) {
-      const country = (city === 'Dubai' || city === 'Abu Dhabi') ? 'United Arab Emirates' : 'Japan';
-      document.getElementById('homeDestCountry').value = country;
-      showToast(`Selected ${hotelName} (${city})! Building package...`);
       navigateToPage('packages');
       executeSmartSearch();
     }
@@ -3190,7 +2966,7 @@
           document.getElementById('tierPriceBest').innerText = '—';
           document.querySelectorAll('.tier-button').forEach(b => b.classList.remove('active'));
 
-          const previewEl = document.getElementById('liveItineraryScroll');
+          const previewEl = document.getElementById('liveMilestonesContainer');
           if (previewEl) {
             previewEl.innerHTML = `
               <div style="padding: 40px 15px; text-align: center; color: var(--text-muted); font-size: 13.5px;">
