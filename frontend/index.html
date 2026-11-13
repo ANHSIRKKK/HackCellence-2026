@@ -2286,7 +2286,10 @@
           <h1 class="section-title">My Bookings & Confirmed Trips</h1>
           <p class="section-subtitle">Inspect your 10-digit reservations, locked inventory, and vouchers</p>
         </div>
-        <button class="btn-booking-primary" onclick="loadAllReservations()">🔄 Refresh Bookings</button>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="btn-booking-outline" onclick="openSqlDatabaseModal()">🏛️ Inspect SQLite Database (SQL Console)</button>
+          <button class="btn-booking-primary" onclick="loadAllReservations()">🔄 Refresh Bookings</button>
+        </div>
       </div>
 
       <!-- Lookup by 10-digit reference -->
@@ -2743,6 +2746,48 @@
         <button class="btn-yatra-reserve" style="padding: 12px 24px; font-size: 14px;" onclick="confirmCustomYatra()">
           Confirm Custom Tirth Yatra & Generate 10-Digit Pass →
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SQLite Relational Database Console Modal -->
+  <div id="modalSqlConsole" class="modal-overlay-booking">
+    <div class="modal-booking-content" style="max-width: 900px; width: 95%;">
+      <button class="modal-close-booking" onclick="closeSqlDatabaseModal()">✕</button>
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-gray); padding-bottom: 12px; margin-bottom: 16px;">
+        <div>
+          <div style="font-size: 11px; font-weight: 800; color: var(--booking-blue); text-transform: uppercase;">ENTERPRISE RELATIONAL STORAGE</div>
+          <h2 style="font-size: 20px; font-weight: 800; margin: 2px 0 0 0;">SQLite 3 Database Console</h2>
+        </div>
+        <span class="booking-pill pill-green" style="font-size: 12px; padding: 4px 10px;">🟢 data/holiday.db (ACID Online)</span>
+      </div>
+
+      <!-- Quick SQL Query Presets -->
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+        <button class="btn-booking-outline" style="font-size: 12px; padding: 6px 12px;" onclick="runSqlQuery('SELECT reference, traveler_name, country, budget_inr, total_inr, created_at FROM reservations ORDER BY created_at DESC;')">
+          📋 SELECT * FROM reservations
+        </button>
+        <button class="btn-booking-outline" style="font-size: 12px; padding: 6px 12px;" onclick="runSqlQuery('SELECT id, reference, resource_type, catalog_id, room_id, quantity, created_at FROM inventory_locks ORDER BY id DESC LIMIT 15;')">
+          🔒 SELECT * FROM inventory_locks
+        </button>
+        <button class="btn-booking-outline" style="font-size: 12px; padding: 6px 12px;" onclick="runSqlQuery('PRAGMA table_info(reservations);')">
+          🏛️ PRAGMA table_info(reservations)
+        </button>
+        <button class="btn-booking-outline" style="font-size: 12px; padding: 6px 12px;" onclick="runSqlQuery('PRAGMA table_info(inventory_locks);')">
+          🏛️ PRAGMA table_info(inventory_locks)
+        </button>
+      </div>
+
+      <!-- SQL Input Box -->
+      <div style="position: relative; margin-bottom: 14px;">
+        <textarea id="sqlQueryInput" rows="2" style="width: 100%; font-family: monospace; font-size: 13px; padding: 10px 14px; border: 1.5px solid var(--border-dark); border-radius: 6px; background: #0f172a; color: #38bdf8; resize: none;" placeholder="Type your custom SQL query here (e.g. SELECT * FROM reservations WHERE total_inr > 200000;)">SELECT reference, traveler_name, country, budget_inr, total_inr, created_at FROM reservations ORDER BY created_at DESC;</textarea>
+        <button class="btn-booking-primary" style="position: absolute; right: 10px; bottom: 12px; padding: 6px 14px; font-size: 12px;" onclick="executeCustomSql()">▶ Run SQL Query</button>
+      </div>
+
+      <!-- SQL Results Container -->
+      <div id="sqlQueryResultContainer" style="max-height: 380px; overflow-y: auto; border: 1px solid var(--border-gray); border-radius: 6px; background: white;">
+        <div style="padding: 24px; text-align: center; color: var(--text-muted);">Loading SQL table...</div>
       </div>
     </div>
   </div>
@@ -3946,6 +3991,71 @@
             URL.revokeObjectURL(url);
           }
         });
+    }
+
+    // SQL DATABASE CONSOLE MODAL HANDLERS
+    async function openSqlDatabaseModal() {
+      document.getElementById('modalSqlConsole').style.display = 'flex';
+      runSqlQuery('SELECT reference, traveler_name, country, budget_inr, total_inr, created_at FROM reservations ORDER BY created_at DESC;');
+    }
+
+    function closeSqlDatabaseModal() {
+      document.getElementById('modalSqlConsole').style.display = 'none';
+    }
+
+    function executeCustomSql() {
+      const q = document.getElementById('sqlQueryInput').value.trim();
+      if (q) runSqlQuery(q);
+    }
+
+    async function runSqlQuery(sql) {
+      document.getElementById('sqlQueryInput').value = sql;
+      const container = document.getElementById('sqlQueryResultContainer');
+      container.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-muted);">Executing query on data/holiday.db...</div>';
+
+      try {
+        const res = await fetch('/api/database/query', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sql })
+        });
+        const data = await res.json();
+        if (!data.success || (data.rows && data.rows.error)) {
+          container.innerHTML = `<div style="padding: 20px; color: #dc2626; font-family: monospace;">Error: ${(data.rows && data.rows.error) || 'SQL Execution Error'}</div>`;
+          return;
+        }
+
+        const rows = data.rows;
+        if (!Array.isArray(rows) || rows.length === 0) {
+          container.innerHTML = '<div style="padding: 20px; color: var(--text-muted); font-family: monospace;">Query executed successfully. 0 rows returned.</div>';
+          return;
+        }
+
+        const cols = Object.keys(rows[0]);
+        let html = `
+          <table style="width: 100%; border-collapse: collapse; font-size: 12.5px; text-align: left; font-family: monospace;">
+            <thead>
+              <tr style="background: #f1f5f9; border-bottom: 2px solid var(--border-gray);">
+                ${cols.map(c => `<th style="padding: 8px 12px; font-weight: 700; color: #334155;">${c}</th>`).join('')}
+              </tr>
+            </thead>
+            <tbody>
+              ${rows.map((r, idx) => `
+                <tr style="border-bottom: 1px solid #f1f5f9; background: ${idx % 2 === 0 ? '#ffffff' : '#f8fafc'};">
+                  ${cols.map(c => `<td style="padding: 8px 12px; color: #1e293b; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${typeof r[c] === 'object' ? JSON.stringify(r[c]) : (r[c] !== null ? r[c] : 'NULL')}</td>`).join('')}
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+          <div style="padding: 8px 14px; background: #f8fafc; border-top: 1px solid var(--border-gray); font-size: 11.5px; color: var(--text-muted); display: flex; justify-content: space-between;">
+            <span>Rows: ${rows.length}</span>
+            <span>SQLite 3 · Query: ${sql.length > 55 ? sql.substring(0, 55) + '...' : sql}</span>
+          </div>
+        `;
+        container.innerHTML = html;
+      } catch (err) {
+        container.innerHTML = `<div style="padding: 20px; color: #dc2626;">Network error communicating with SQLite backend.</div>`;
+      }
     }
 
     // CONFIRM BOOKING & 10-DIGIT NUMBER GENERATOR

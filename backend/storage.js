@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const sqliteDb = require('./sqlite_db');
 
 const DB_FILE = path.resolve(__dirname, '../data/reservations.json');
 const LOCKS_FILE = path.resolve(__dirname, '../data/inventory_locks.json');
@@ -37,6 +38,16 @@ class StorageService {
     } catch (err) {
       console.error('Error loading inventory locks:', err);
     }
+
+    // Mirror existing data into SQLite tables
+    try {
+      for (const item of this.reservations.values()) {
+        sqliteDb.syncReservation(item);
+      }
+      sqliteDb.syncLocks(this.inventoryLocks);
+    } catch (sqlErr) {
+      console.warn('SQLite initial sync warning:', sqlErr.message);
+    }
   }
 
   saveData() {
@@ -44,6 +55,12 @@ class StorageService {
       const arr = Array.from(this.reservations.values());
       fs.writeFileSync(DB_FILE, JSON.stringify(arr, null, 2), 'utf8');
       fs.writeFileSync(LOCKS_FILE, JSON.stringify(this.inventoryLocks, null, 2), 'utf8');
+
+      // Mirror to SQLite database
+      for (const item of arr) {
+        sqliteDb.syncReservation(item);
+      }
+      sqliteDb.syncLocks(this.inventoryLocks);
     } catch (err) {
       console.error('Error saving storage:', err);
     }

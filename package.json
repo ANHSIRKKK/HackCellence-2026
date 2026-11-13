@@ -7,6 +7,8 @@
     "start": "node backend/server.js",
     "server": "node backend/server.js",
     "dev": "node backend/server.js",
+    "db:inspect": "node scripts/inspect_db.js",
+    "db:shell": "sqlite3 data/holiday.db",
     "frontend:dev": "cd frontend && npm run dev",
     "frontend:build": "cd frontend && npm run build"
   },

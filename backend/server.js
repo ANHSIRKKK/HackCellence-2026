@@ -351,6 +351,20 @@ const server = http.createServer(async (req, res) => {
       return sendJson(res, 200, { success: true, parsed });
     }
 
+    // 15b. GET /api/database/schema & POST /api/database/query (Enterprise SQLite Database Console)
+    if (req.method === 'GET' && pathname === '/api/database/schema') {
+      const sqliteDb = require('./sqlite_db');
+      return sendJson(res, 200, { success: true, database: sqliteDb.getSchemaDetails() });
+    }
+
+    if (req.method === 'POST' && pathname === '/api/database/query') {
+      const sqliteDb = require('./sqlite_db');
+      const body = await parseBody(req);
+      const sql = (body.sql || 'SELECT reference, traveler_name, country, budget_inr, total_inr, created_at FROM reservations;').trim();
+      const rows = sqliteDb.queryJson(sql);
+      return sendJson(res, 200, { success: !rows.error, sql, rows });
+    }
+
     // 16. Static Images Serving
     if (pathname.startsWith('/images/')) {
       const relPath = pathname.replace('/images/', '');
