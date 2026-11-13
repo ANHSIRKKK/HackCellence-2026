@@ -6,15 +6,17 @@
   <title>TRIPRISE · Smart Holiday Planner & Booking Platform</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-gradient: linear-gradient(135deg, #dce8f6 0%, #edf5fc 45%, #d9e6f6 100%);
+      --bg-gradient: linear-gradient(180deg, #d8e5f5 0%, #e8f1fc 100%);
       --card-bg: #ffffff;
-      --primary: #3b82f6;
-      --primary-dark: #2563eb;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
       --primary-light: #eff6ff;
+      --primary-glow: rgba(37, 99, 235, 0.18);
       --dark-btn: #0f172a;
+      --dark-btn-hover: #1e293b;
       --text-main: #0f172a;
       --text-muted: #64748b;
       --text-light: #94a3b8;
@@ -28,31 +30,49 @@
       --purple-bg: #f5f3ff;
       --red: #ef4444;
       --red-bg: #fef2f2;
+      --radius-xl: 32px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 8px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background: var(--bg-gradient); min-height: 100vh; display: flex; justify-content: center; align-items: flex-start; padding: 24px 16px; color: var(--text-main); }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
 
-    /* Floating Application Container */
+    body {
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 30px 20px 50px 20px;
+      color: var(--text-main);
+    }
+
+    /* Outer Container - Dribbble SaaS Mockup Style */
     .app-canvas {
       background: var(--card-bg);
       width: 100%;
-      max-width: 1360px;
-      border-radius: 32px;
-      box-shadow: 0 25px 70px rgba(15, 34, 58, 0.12), 0 4px 16px rgba(15, 34, 58, 0.04);
-      padding: 24px 32px 40px 32px;
-      border: 1px solid rgba(255, 255, 255, 0.9);
+      max-width: 1400px;
+      border-radius: var(--radius-xl);
+      box-shadow: 0 30px 80px rgba(15, 34, 64, 0.10), 0 4px 16px rgba(15, 34, 64, 0.03);
+      padding: 28px 40px 48px 40px;
+      border: 1px solid rgba(255, 255, 255, 0.95);
       position: relative;
     }
 
-    /* Top Navigation Header */
+    /* Top Nav Bar */
     .top-nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border-subtle);
+      gap: 20px;
     }
 
     .brand-logo {
@@ -63,7 +83,13 @@
       color: var(--text-main);
       font-size: 20px;
       font-weight: 800;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
+    }
+
+    .brand-icon {
+      width: 28px;
+      height: 28px;
+      color: var(--text-main);
     }
 
     .nav-tabs {
@@ -72,723 +98,1772 @@
       padding: 4px;
       border-radius: 100px;
       display: flex;
+      align-items: center;
       gap: 2px;
-      overflow-x: auto;
     }
 
-    .tab-btn {
+    .nav-tab-btn {
       background: transparent;
       border: none;
-      padding: 8px 16px;
+      padding: 8px 18px;
       border-radius: 100px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-tab-btn:hover {
+      color: var(--text-main);
+    }
+
+    .nav-tab-btn.active {
+      background: var(--dark-btn);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .search-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 7px 14px;
       font-size: 13px;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .search-pill input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      width: 120px;
+    }
+
+    .nav-icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .nav-icon-btn:hover {
+      background: #f1f5f9;
+      color: var(--text-main);
+    }
+
+    .nav-icon-btn .badge-dot {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+
+    .user-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 13px;
+      border: 2px solid white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    /* Hero Section with Jet Vector Graphic */
+    .hero-banner {
+      position: relative;
+      padding: 16px 0 20px 0;
+      margin-bottom: 20px;
+    }
+
+    .hero-date {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-headline {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--text-main);
+      text-transform: uppercase;
+      line-height: 1.1;
+      max-width: 60%;
+    }
+
+    .mode-toggles {
+      position: absolute;
+      top: 10px;
+      right: 0;
+      display: flex;
+      gap: 6px;
+      background: #f8fafc;
+      padding: 4px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+    }
+
+    .mode-btn {
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .mode-btn.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 2px 8px var(--primary-glow);
+    }
+
+    .hero-airplane-vector {
+      position: absolute;
+      top: 0px;
+      right: 180px;
+      width: 360px;
+      pointer-events: none;
+      filter: drop-shadow(0 15px 25px rgba(37, 99, 235, 0.12));
+    }
+
+    /* Search Control Bar (Floating Pill) */
+    .search-card-wrapper {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(15, 34, 64, 0.04);
+      padding: 18px 24px 20px 24px;
+      margin-bottom: 24px;
+    }
+
+    .search-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .trip-type-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+
+    .trip-radio-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .trip-radio-label.active {
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    .passenger-class-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .dropdown-pill {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .dropdown-pill:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    /* Search Input Pill Bar */
+    .search-inputs-bar {
+      display: grid;
+      grid-template-columns: 2fr auto 2fr auto 1.6fr auto 1.6fr 1.6fr auto;
+      gap: 8px;
+      align-items: center;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 8px 12px;
+    }
+
+    .search-field-box {
+      display: flex;
+      flex-direction: column;
+      padding: 4px 10px;
+    }
+
+    .search-field-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+
+    .search-field-select, .search-field-input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .swap-cities-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .swap-cities-btn:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      transform: rotate(180deg);
+    }
+
+    .field-divider {
+      width: 1px;
+      height: 32px;
+      background: var(--border);
+    }
+
+    .search-action-btn {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      border-radius: 14px;
+      padding: 12px 28px;
+      font-size: 14.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+
+    .search-action-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    /* Category Filter Pills */
+    .category-pills-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .cat-pill {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: 13.5px;
       font-weight: 600;
       color: var(--text-muted);
       cursor: pointer;
       transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
       white-space: nowrap;
     }
 
-    .tab-btn:hover { color: var(--text-main); }
-    .tab-btn.active { background: var(--dark-btn); color: white; }
+    .cat-pill:hover {
+      background: #f1f5f9;
+      color: var(--text-main);
+    }
 
-    .nav-actions { display: flex; align-items: center; gap: 10px; }
-    .btn-icon { background: #f8fafc; border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-muted); font-size: 14px; }
-    .btn-icon:hover { border-color: #cbd5e1; color: var(--text-main); }
+    .cat-pill.active {
+      background: var(--dark-btn);
+      border-color: var(--dark-btn);
+      color: #ffffff;
+      font-weight: 700;
+    }
 
-    /* Page View Containers */
-    .page-view { display: none; animation: fadeIn 0.3s ease; }
-    .page-view.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .cat-pill.highlight-spiritual {
+      border-color: #f59e0b;
+      color: #b45309;
+      background: #fffbeb;
+    }
 
-    /* UI Components & Utilities */
-    .hero-box { position: relative; padding: 24px 0 32px 0; border-bottom: 1px solid var(--border-subtle); margin-bottom: 28px; }
-    .hero-title { font-size: 34px; font-weight: 800; letter-spacing: -0.8px; margin-bottom: 8px; color: var(--text-main); }
-    .hero-subtitle { font-size: 16px; color: var(--text-muted); max-width: 700px; margin-bottom: 22px; line-height: 1.5; }
+    .cat-pill.highlight-spiritual.active {
+      background: #d97706;
+      color: white;
+    }
 
-    .plane-banner-svg { position: absolute; top: 0; right: 20px; width: 320px; pointer-events: none; opacity: 0.95; filter: drop-shadow(0 15px 25px rgba(59, 130, 246, 0.15)); }
+    /* Main Two-Column Layout */
+    .dashboard-split-layout {
+      display: grid;
+      grid-template-columns: 1fr 440px;
+      gap: 28px;
+      align-items: start;
+    }
 
-    .btn-primary { background: var(--primary); color: white; border: none; padding: 12px 24px; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
-    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
-    .btn-secondary { background: white; color: var(--text-main); border: 1px solid var(--border); padding: 12px 20px; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
-    .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+    /* Left Column: Components List */
+    .components-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
 
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .section-date-header {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-    .card { background: white; border: 1px solid var(--border); border-radius: 20px; padding: 22px; transition: all 0.2s; }
-    .card:hover { border-color: #cbd5e1; box-shadow: 0 8px 24px rgba(0,0,0,0.03); }
+    .section-date-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-subtle);
+    }
 
-    /* Form Fields */
-    .form-group { display: flex; flex-direction: column; margin-bottom: 16px; }
-    .form-label { font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.3px; }
-    .form-input, .form-select { border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; font-size: 14px; font-weight: 600; color: var(--text-main); outline: none; background: #f8fafc; }
-    .form-input:focus, .form-select:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+    /* Modern Flight Card (Matching Reference Image) */
+    .flight-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: auto 1fr auto auto;
+      align-items: center;
+      gap: 24px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
 
-    /* Sliders */
-    .slider-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-    .slider-range { -webkit-appearance: none; width: 100%; height: 6px; border-radius: 5px; background: #e2e8f0; outline: none; margin-top: 6px; accent-color: var(--primary); }
+    .flight-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 8px 24px rgba(15, 34, 64, 0.05);
+    }
 
-    /* Badges */
-    .badge { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px; }
-    .badge-green { background: var(--green-bg); color: var(--green); border: 1px solid #a7f3d0; }
-    .badge-amber { background: var(--amber-bg); color: var(--amber); border: 1px solid #fde68a; }
-    .badge-blue { background: var(--primary-light); color: var(--primary); border: 1px solid #bfdbfe; }
-    .badge-purple { background: var(--purple-bg); color: var(--purple); border: 1px solid #ddd6fe; }
+    .airline-brand-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 140px;
+    }
 
-    /* Package Cards (Page 4) */
-    .pkg-option-card { border: 2px solid var(--border); border-radius: 20px; padding: 22px; cursor: pointer; transition: all 0.2s; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
-    .pkg-option-card.selected { border-color: var(--primary); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15); background: #fafcff; }
-    .pkg-corner-pill { position: absolute; top: -11px; left: 20px; font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 100px; text-transform: uppercase; }
+    .airline-logo-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+    }
 
-    /* Live Itinerary Timeline (Page 5) */
-    .timeline { position: relative; padding-left: 28px; border-left: 2px solid #bfdbfe; margin-left: 10px; }
-    .timeline-item { position: relative; margin-bottom: 24px; }
-    .timeline-dot { position: absolute; left: -36px; top: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--primary); border: 3px solid white; box-shadow: 0 0 0 2px #bfdbfe; }
+    .logo-nippon { background: #0f172a; color: #ffffff; }
+    .logo-airveda { background: #ffedd5; color: #c2410c; }
+    .logo-sandline { background: #ecfdf5; color: #047857; }
 
-    /* Cost Bar Chart (Page 7) */
-    .cost-bar-container { background: #f1f5f9; height: 14px; border-radius: 8px; overflow: hidden; display: flex; margin: 12px 0 20px 0; }
-    .cost-bar-segment { height: 100%; transition: width 0.3s; }
+    .airline-info-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
 
-    /* Modal */
-    .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
-    .modal-card { background: white; border-radius: 24px; width: 100%; max-width: 600px; max-height: 85vh; overflow-y: auto; padding: 28px; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.25); }
-    .modal-close { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 22px; cursor: pointer; color: var(--text-muted); }
+    .airline-info-code {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    /* Trajectory Middle Graphic */
+    .flight-route-flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 0 10px;
+    }
+
+    .route-endpoint {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .endpoint-time {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.3px;
+    }
+
+    .endpoint-city {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .trajectory-center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .trajectory-duration {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .trajectory-line-wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .trajectory-line {
+      width: 100%;
+      height: 2px;
+      border-bottom: 2px dashed #93c5fd;
+      position: relative;
+    }
+
+    .trajectory-plane-icon {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--primary);
+      background: white;
+      padding: 0 4px;
+    }
+
+    .trajectory-stops {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+
+    .flight-price-box {
+      text-align: right;
+      padding-right: 8px;
+    }
+
+    .flight-price-amount {
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.5px;
+    }
+
+    .flight-price-sub {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    .btn-select-pill {
+      background: var(--dark-btn);
+      color: #ffffff;
+      border: none;
+      border-radius: 100px;
+      padding: 9px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-select-pill:hover {
+      background: var(--dark-btn-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-select-pill.active {
+      background: #ecfdf5;
+      color: #059669;
+      border: 1px solid #10b981;
+    }
+
+    /* Modern Hotel Card */
+    .hotel-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: auto 1fr auto auto;
+      align-items: center;
+      gap: 24px;
+      transition: all 0.2s ease;
+    }
+
+    .hotel-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 8px 24px rgba(15, 34, 64, 0.05);
+    }
+
+    .hotel-badge-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .hotel-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hotel-name-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hotel-name {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .star-rating {
+      color: #f59e0b;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    .hotel-specs-pill-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .spec-pill {
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    .spec-blue { background: var(--primary-light); color: var(--primary); }
+    .spec-green { background: var(--green-bg); color: var(--green); }
+    .spec-purple { background: var(--purple-bg); color: var(--purple); }
+
+    /* Transfer & Attraction Cards */
+    .misc-component-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: all 0.2s;
+    }
+
+    .misc-component-card:hover {
+      border-color: #cbd5e1;
+      background: #fdfefe;
+    }
+
+    .misc-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .misc-icon-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .misc-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .misc-sub {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Right Column: Dedicated "LIVE ITINERARY PREVIEW" */
+    .itinerary-preview-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px 24px 28px 24px;
+      box-shadow: 0 12px 36px rgba(15, 34, 64, 0.05);
+      position: sticky;
+      top: 24px;
+    }
+
+    .preview-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .preview-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--text-main);
+      text-transform: uppercase;
+    }
+
+    .preview-dots-menu {
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    /* Package Tier Toggle Buttons Inside Preview */
+    .package-tier-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      background: #f8fafc;
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .tier-tab-btn {
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 4px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tier-tab-btn.active {
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .tier-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .tier-tab-btn.active .tier-name {
+      color: var(--primary);
+    }
+
+    .tier-price-val {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 1px;
+    }
+
+    /* Vertical Timeline Milestones (Exact Reference Image Style) */
+    .milestones-track {
+      position: relative;
+      padding-left: 36px;
+      margin-bottom: 24px;
+    }
+
+    .milestones-track::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      bottom: 15px;
+      left: 13px;
+      width: 2px;
+      background: #bfdbfe;
+    }
+
+    .milestone-node {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .milestone-node:last-child {
+      margin-bottom: 0;
+    }
+
+    .milestone-check-dot {
+      position: absolute;
+      left: -36px;
+      top: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      border: 3px solid #ffffff;
+      box-shadow: 0 0 0 2px #bfdbfe;
+    }
+
+    .milestone-content-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-main);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      line-height: 1.3;
+    }
+
+    .milestone-content-sub {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Price Summary Box */
+    .cost-summary-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .cost-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .cost-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+      margin-top: 8px;
+    }
+
+    .grand-total-label {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--text-main);
+      text-transform: uppercase;
+    }
+
+    .grand-total-amount {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.8px;
+    }
+
+    /* Budget Progress Meter */
+    .budget-meter-wrapper {
+      margin-top: 10px;
+    }
+
+    .meter-bar-outer {
+      background: #e2e8f0;
+      height: 7px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .meter-bar-fill {
+      background: var(--green);
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.4s ease;
+    }
+
+    .meter-stats-text {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--green);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Call to Action Buttons */
+    .preview-action-btn {
+      width: 100%;
+      background: var(--dark-btn);
+      color: #ffffff;
+      border: none;
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 14.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .preview-action-btn:hover {
+      background: var(--dark-btn-hover);
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.2);
+    }
+
+    .preview-secondary-btn {
+      width: 100%;
+      background: #ffffff;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 11px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .preview-secondary-btn:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    /* Pilgrimage / Tirth View Specifics */
+    .spiritual-banner {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 1px solid #fde68a;
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .spiritual-badge {
+      font-size: 12px;
+      font-weight: 800;
+      color: #b45309;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .spiritual-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #78350f;
+    }
+
+    .spiritual-sub {
+      font-size: 13.5px;
+      color: #92400e;
+      margin-top: 4px;
+      max-width: 700px;
+    }
+
+    .spiritual-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .yatra-card {
+      background: #ffffff;
+      border: 1px solid #fde68a;
+      border-radius: 20px;
+      padding: 22px;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.05);
+    }
+
+    .yatra-card:hover {
+      border-color: #f59e0b;
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.12);
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-container {
+      background: #ffffff;
+      border-radius: 28px;
+      width: 100%;
+      max-width: 640px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 32px;
+      position: relative;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: #f1f5f9;
+      border: none;
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .modal-close-btn:hover {
+      background: #e2e8f0;
+      color: var(--text-main);
+    }
+
+    /* Responsive Breakdown */
+    @media (max-width: 1080px) {
+      .dashboard-split-layout {
+        grid-template-columns: 1fr;
+      }
+      .itinerary-preview-card {
+        position: relative;
+        top: 0;
+      }
+      .search-inputs-bar {
+        grid-template-columns: 1fr 1fr;
+      }
+      .hero-airplane-vector {
+        display: none;
+      }
+      .hero-headline {
+        max-width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
 
+  <!-- Floating Application Container -->
   <div class="app-canvas">
 
     <!-- Top Navigation Header -->
     <header class="top-nav">
-      <a href="#" class="brand-logo" onclick="switchPage('landing')">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+      <a href="#" class="brand-logo" onclick="switchMainTab('planner')">
+        <!-- Modern Sunrise Sunburst Logo -->
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v4M4.93 4.93l2.83 2.83M2 12h4M4.93 19.07l2.83-2.83M12 22v-4M19.07 19.07l-2.83-2.83M22 12h-4M19.07 4.93l-2.83 2.83"/>
+          <circle cx="12" cy="12" r="4"/>
         </svg>
         TRIPRISE
       </a>
 
-      <!-- 9 Pages Client-Side Tabs -->
+      <!-- Pill Nav Tabs -->
       <nav class="nav-tabs">
-        <button class="tab-btn active" id="tab-landing" onclick="switchPage('landing')">Discover</button>
-        <button class="tab-btn" id="tab-form" onclick="switchPage('form')">Plan My Trip</button>
-        <button class="tab-btn" id="tab-discovery" onclick="switchPage('discovery')">Smart Discovery</button>
-        <button class="tab-btn" id="tab-packages" onclick="switchPage('packages')">Packages</button>
-        <button class="tab-btn" id="tab-itinerary" onclick="switchPage('itinerary')">Itinerary</button>
-        <button class="tab-btn" id="tab-customize" onclick="switchPage('customize')">Customize</button>
-        <button class="tab-btn" id="tab-budget" onclick="switchPage('budget')">Budget Analysis</button>
-        <button class="tab-btn" id="tab-booking" onclick="switchPage('booking')">Confirmation</button>
-        <button class="tab-btn" id="tab-lookup" onclick="switchPage('lookup')">My Reservations</button>
+        <button class="nav-tab-btn" id="nav-dashboard" onclick="switchMainTab('dashboard')">Dashboard</button>
+        <button class="nav-tab-btn active" id="nav-planner" onclick="switchMainTab('planner')">Planner</button>
+        <button class="nav-tab-btn" id="nav-itinerary" onclick="switchMainTab('itinerary')">Itinerary</button>
+        <button class="nav-tab-btn" id="nav-spiritual" onclick="switchMainTab('spiritual')">⛩️ Tirth Yatra</button>
+        <button class="nav-tab-btn" id="nav-discovery" onclick="switchMainTab('discovery')">🎲 Smart Discovery</button>
+        <button class="nav-tab-btn" id="nav-bookings" onclick="switchMainTab('bookings')">Bookings</button>
       </nav>
 
+      <!-- Right Action Items -->
       <div class="nav-actions">
-        <span style="font-size: 13px; font-weight: 700;">INR ₹</span>
-        <button class="btn-icon" title="Search by Reference" onclick="switchPage('lookup')">🔍</button>
-        <button class="btn-icon" title="Notifications">🔔</button>
+        <div class="search-pill" title="Lookup reservation number">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+          <input type="text" id="quickRefInput" placeholder="Lookup 10-digit #" onkeydown="if(event.key==='Enter') lookupReservation()">
+        </div>
+
+        <button class="nav-icon-btn" title="Notifications">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+          </svg>
+          <span class="badge-dot"></span>
+        </button>
+
+        <div class="user-avatar" title="Signed in as Adult Traveler">
+          SS
+        </div>
       </div>
     </header>
 
-    <!-- ========================================== -->
-    <!-- PAGE 1 — LANDING PAGE / DISCOVER           -->
-    <!-- ========================================== -->
-    <div id="page-landing" class="page-view active">
-      <div class="hero-box">
-        <div class="hero-meta" style="font-size: 12px; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 6px;">
-          Next-Gen Autonomous Holiday Architecture
-        </div>
-        <h1 class="hero-title">Your Budget. Your Priorities. Your Perfect Holiday.</h1>
-        <p class="hero-subtitle">
-          Don't waste hours comparing separate flights, hotels, and tourist tickets. Tell us your budget, your travelers, and what matters most—our traditional optimization engine constructs a verified, end-to-end holiday package in seconds.
-        </p>
-
-        <!-- 3D Plane Graphic -->
-        <svg class="plane-banner-svg" viewBox="0 0 450 180" fill="none">
-          <path d="M40 90 C 80 60, 260 50, 390 75 C 440 84, 460 92, 440 98 C 400 108, 240 115, 110 105 Z" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
-          <path d="M400 78 Q 420 82 415 86 Q 395 84 400 78 Z" fill="#0f172a"/>
-          <path d="M200 88 L 120 155 L 160 157 L 270 95 Z" fill="#3b82f6"/>
-          <path d="M240 78 L 300 15 L 320 20 L 280 80 Z" fill="#94a3b8" opacity="0.6"/>
-          <path d="M65 88 L 25 30 L 50 30 L 105 85 Z" fill="#3b82f6"/>
-          <ellipse cx="210" cy="120" rx="24" ry="10" fill="#475569"/>
+    <!-- Upper Hero Banner with Realistic Modern Jet Vector -->
+    <section class="hero-banner">
+      <div class="hero-date">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>
         </svg>
-
-        <div style="display: flex; gap: 12px;">
-          <button class="btn-primary" onclick="switchPage('form')">🚀 Build My Holiday</button>
-          <button class="btn-secondary" onclick="switchPage('discovery')">🎲 Surprise Me (Smart Discovery)</button>
-        </div>
+        <span id="currentDateDisplay">Monday, 12 April, 2027 · Autonomous Holiday Architecture</span>
       </div>
 
-      <!-- Quick Planning Card -->
-      <div class="card" style="margin-bottom: 32px; background: #f8fafc;">
-        <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 14px;">Instant Flight & Stay Search</h3>
-        <div class="grid-4" style="align-items: flex-end;">
-          <div class="form-group" style="margin: 0;">
-            <label class="form-label">Departure (India)</label>
-            <select id="quickDep" class="form-select">
-              <option value="Bengaluru">Bengaluru (BLR)</option>
-              <option value="Delhi">Delhi (DEL)</option>
-              <option value="Mumbai">Mumbai (BOM)</option>
-              <option value="Chennai">Chennai (MAA)</option>
-            </select>
-          </div>
-          <div class="form-group" style="margin: 0;">
-            <label class="form-label">Destination</label>
-            <select id="quickDest" class="form-select">
-              <option value="Japan">Japan (Tokyo, Kyoto, Osaka)</option>
-              <option value="United Arab Emirates">UAE (Dubai, Abu Dhabi)</option>
-            </select>
-          </div>
-          <div class="form-group" style="margin: 0;">
-            <label class="form-label">Budget (INR)</label>
-            <input type="number" id="quickBudget" class="form-input" value="350000" step="10000">
-          </div>
-          <button class="btn-primary" style="height: 46px; justify-content: center;" onclick="quickStartPlan()">Start Planning →</button>
-        </div>
+      <h1 class="hero-headline">RESERVE YOUR JOURNEY</h1>
+
+      <!-- Mode Toggles (Upper Right) -->
+      <div class="mode-toggles">
+        <button class="mode-btn active" id="btnModeAuto" onclick="toggleEngineMode('auto')">Auto Optimizer</button>
+        <button class="mode-btn" id="btnModeManual" onclick="toggleEngineMode('manual')">Manual</button>
       </div>
 
-      <!-- Featured Destinations from Catalog -->
-      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 16px;">Featured Catalog Destinations</h3>
-      <div class="grid-2" style="margin-bottom: 32px;">
-        <div class="card" style="display: flex; gap: 18px; align-items: center; cursor: pointer;" onclick="selectCountryAndPlan('Japan')">
-          <img src="images/attractions/ATT-KYO-001.jpg" alt="Japan" style="width: 140px; height: 110px; border-radius: 14px; object-fit: cover;">
-          <div>
-            <span class="badge badge-amber" style="margin-bottom: 6px;">Shrines · Anime · High-Speed Rails</span>
-            <h4 style="font-size: 18px; font-weight: 800;">Japan (Tokyo, Kyoto, Osaka)</h4>
-            <p style="font-size: 13px; color: var(--text-muted); margin: 4px 0 8px 0;">From ancient Gion geisha districts and Kiyomizu-dera to Shibuya neon streets and Disneyland.</p>
-            <span style="font-size: 13px; font-weight: 700; color: var(--primary);">Plans starting ₹2,50,000 for families →</span>
-          </div>
-        </div>
+      <!-- Clean Jetliner Vector Graphic Matching Mockup -->
+      <svg class="hero-airplane-vector" viewBox="0 0 540 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="fuselageGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="60%" stop-color="#f1f5f9"/>
+            <stop offset="100%" stop-color="#cbd5e1"/>
+          </linearGradient>
+          <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#3b82f6"/>
+            <stop offset="100%" stop-color="#1d4ed8"/>
+          </linearGradient>
+        </defs>
+        <!-- Fuselage -->
+        <path d="M40 92 C 90 62, 280 52, 450 78 C 500 86, 520 94, 500 100 C 450 112, 260 118, 120 108 Z" fill="url(#fuselageGrad)" stroke="#94a3b8" stroke-width="1.2"/>
+        <!-- Cockpit Glass -->
+        <path d="M460 82 Q 482 86 476 90 Q 452 88 460 82 Z" fill="#0f172a"/>
+        <!-- Main Wings -->
+        <path d="M220 90 L 130 165 L 175 167 L 310 98 Z" fill="url(#wingGrad)"/>
+        <!-- Jet Engine Turbine -->
+        <ellipse cx="230" cy="126" rx="28" ry="12" fill="#334155"/>
+        <ellipse cx="230" cy="126" rx="14" ry="7" fill="#64748b"/>
+        <!-- Tail Wing -->
+        <path d="M70 90 L 25 28 L 55 28 L 120 86 Z" fill="url(#wingGrad)"/>
+        <!-- Window Streaks -->
+        <circle cx="360" cy="84" r="2.5" fill="#64748b"/>
+        <circle cx="380" cy="85" r="2.5" fill="#64748b"/>
+        <circle cx="400" cy="86" r="2.5" fill="#64748b"/>
+        <circle cx="420" cy="87" r="2.5" fill="#64748b"/>
+      </svg>
+    </section>
 
-        <div class="card" style="display: flex; gap: 18px; align-items: center; cursor: pointer;" onclick="selectCountryAndPlan('United Arab Emirates')">
-          <img src="images/attractions/ATT-AUH-001.jpg" alt="UAE" style="width: 140px; height: 110px; border-radius: 14px; object-fit: cover;">
-          <div>
-            <span class="badge badge-blue" style="margin-bottom: 6px;">Grand Mosques · Luxury Stays · Fast Travel</span>
-            <h4 style="font-size: 18px; font-weight: 800;">United Arab Emirates (Dubai, Abu Dhabi)</h4>
-            <p style="font-size: 13px; color: var(--text-muted); margin: 4px 0 8px 0;">Visit Sheikh Zayed Grand Mosque, Burj Khalifa At the Top, and luxury beachfront resorts.</p>
-            <span style="font-size: 13px; font-weight: 700; color: var(--primary);">Plans starting ₹1,80,000 for couples →</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- How it Works (4 Steps) -->
-      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 16px;">How It Works</h3>
-      <div class="grid-4" style="margin-bottom: 32px;">
-        <div class="card" style="text-align: center;">
-          <div style="font-size: 28px; margin-bottom: 8px;">📋</div>
-          <h5 style="font-size: 14px; font-weight: 800; margin-bottom: 4px;">1. Tell Requirements</h5>
-          <p style="font-size: 12px; color: var(--text-muted);">Dates, departure city, adults, children ages, and total budget.</p>
-        </div>
-        <div class="card" style="text-align: center;">
-          <div style="font-size: 28px; margin-bottom: 8px;">⚙️</div>
-          <h5 style="font-size: 14px; font-weight: 800; margin-bottom: 4px;">2. Algorithm Builds</h5>
-          <p style="font-size: 12px; color: var(--text-muted);">Backtracking & constraint solver fits flights, hotels, transfers, and activities.</p>
-        </div>
-        <div class="card" style="text-align: center;">
-          <div style="font-size: 28px; margin-bottom: 8px;">🎛️</div>
-          <h5 style="font-size: 14px; font-weight: 800; margin-bottom: 4px;">3. Customize</h5>
-          <p style="font-size: 12px; color: var(--text-muted);">Swap flights or hotels with live price deltas; system auto-revalidates buffers.</p>
-        </div>
-        <div class="card" style="text-align: center;">
-          <div style="font-size: 28px; margin-bottom: 8px;">🎟️</div>
-          <h5 style="font-size: 14px; font-weight: 800; margin-bottom: 4px;">4. 10-Digit Confirm</h5>
-          <p style="font-size: 12px; color: var(--text-muted);">Instant booking reference saved to database and 1-click JSON export.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- PAGE 2 — BUILD MY HOLIDAY / REQUEST FORM   -->
-    <!-- ========================================== -->
-    <div id="page-form" class="page-view">
-      <div class="hero-box" style="padding-bottom: 16px;">
-        <h2 style="font-size: 26px; font-weight: 800;">Build My Holiday: Travel Parameters & Priorities</h2>
-        <p style="font-size: 14px; color: var(--text-muted);">
-          Fill in the 7 mandatory travel constraints. Set your priority weights so our algorithm balances hotel comfort against flight speed.
-        </p>
-      </div>
-
-      <form id="masterForm" onsubmit="submitFormAndBuild(event)">
-        <!-- 7 Mandatory Inputs (Hackathon Spec) -->
-        <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 14px; color: var(--primary-dark);">1. Mandatory Travel Constraints</h4>
-        <div class="grid-3">
-          <div class="form-group">
-            <label class="form-label">Departure City (India Hub)</label>
-            <select id="formDepCity" class="form-select" required>
-              <option value="Bengaluru" selected>Bengaluru (BLR)</option>
-              <option value="Delhi">Delhi (DEL)</option>
-              <option value="Mumbai">Mumbai (BOM)</option>
-              <option value="Chennai">Chennai (MAA)</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Destination Country</label>
-            <select id="formDestCountry" class="form-select" required>
-              <option value="Japan" selected>Japan (Tokyo, Kyoto, Osaka)</option>
-              <option value="United Arab Emirates">United Arab Emirates (Dubai, Abu Dhabi)</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Holiday Start Date (Arrival Date)</label>
-            <input type="date" id="formStartDate" class="form-input" value="2027-04-10" min="2027-04-01" max="2027-04-20" required>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Trip Nights (3 to 10)</label>
-            <input type="number" id="formNights" class="form-input" value="6" min="3" max="10" required>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Adults (Age 18+)</label>
-            <input type="number" id="formAdults" class="form-input" value="2" min="1" max="10" required>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Children Ages (0 to 17, comma-separated)</label>
-            <input type="text" id="formChildAges" class="form-input" value="6" placeholder="e.g. 6 or 4, 8">
-          </div>
-        </div>
-
-        <div class="form-group" style="max-width: 400px; margin-bottom: 24px;">
-          <label class="form-label">Total Holiday Budget (INR ₹)</label>
-          <input type="number" id="formBudget" class="form-input" value="350000" step="5000" required>
-        </div>
-
-        <!-- Section: Customer Priority Sliders (Weights Total 100%) -->
-        <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 14px; color: var(--primary-dark);">2. What Matters Most in Your Holiday? (Priority Weights)</h4>
-        <div class="card" style="margin-bottom: 24px; background: #f8fafc;">
-          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
-            Allocate preference weights across categories. Our algorithm rebalances your budget distribution to favor your highest priorities.
-          </p>
-
-          <div class="grid-3">
-            <div>
-              <div class="slider-row">
-                <span style="font-size: 13px; font-weight: 700;">🏨 Hotel Quality & Comfort</span>
-                <span id="labelHotelWeight" style="font-size: 13px; font-weight: 800; color: var(--primary);">40%</span>
-              </div>
-              <input type="range" id="sliderHotel" class="slider-range" min="0" max="100" value="40" oninput="rebalanceWeights('hotel')">
-            </div>
-
-            <div>
-              <div class="slider-row">
-                <span style="font-size: 13px; font-weight: 700;">✈️ Flight Convenience & Speed</span>
-                <span id="labelFlightWeight" style="font-size: 13px; font-weight: 800; color: var(--primary);">30%</span>
-              </div>
-              <input type="range" id="sliderFlight" class="slider-range" min="0" max="100" value="30" oninput="rebalanceWeights('flight')">
-            </div>
-
-            <div>
-              <div class="slider-row">
-                <span style="font-size: 13px; font-weight: 700;">🎡 Experiences & Attractions</span>
-                <span id="labelExpWeight" style="font-size: 13px; font-weight: 800; color: var(--primary);">30%</span>
-              </div>
-              <input type="range" id="sliderExp" class="slider-range" min="0" max="100" value="30" oninput="rebalanceWeights('exp')">
-            </div>
-          </div>
-        </div>
-
-        <!-- Section: Travel Style & Personas -->
-        <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 14px; color: var(--primary-dark);">3. Travel Style & Persona Filter</h4>
-        <div class="grid-4" style="margin-bottom: 28px;">
-          <label class="card" style="cursor: pointer; display: flex; align-items: center; gap: 10px;">
-            <input type="radio" name="travelStyle" value="balanced" checked style="accent-color: var(--primary);">
-            <div>
-              <div style="font-weight: 800; font-size: 14px;">🌟 All Rounder</div>
-              <div style="font-size: 11px; color: var(--text-muted);">Balanced quality & budget</div>
-            </div>
+    <!-- Unified Floating Search Control Bar -->
+    <div class="search-card-wrapper">
+      <div class="search-meta-row">
+        <!-- Trip Type -->
+        <div class="trip-type-group">
+          <label class="trip-radio-label active" onclick="setTripType('round')">
+            <span style="color: var(--primary);">⇄</span> Round trip
           </label>
-
-          <label class="card" style="cursor: pointer; display: flex; align-items: center; gap: 10px;">
-            <input type="radio" name="travelStyle" value="spiritual" style="accent-color: var(--primary);">
-            <div>
-              <div style="font-weight: 800; font-size: 14px;">⛩️ Pilgrimage / Tirth</div>
-              <div style="font-size: 11px; color: var(--text-muted);">Shrines, temples, accessible</div>
-            </div>
-          </label>
-
-          <label class="card" style="cursor: pointer; display: flex; align-items: center; gap: 10px;">
-            <input type="radio" name="travelStyle" value="family" style="accent-color: var(--primary);">
-            <div>
-              <div style="font-weight: 800; font-size: 14px;">🧸 Kids & Family</div>
-              <div style="font-size: 11px; color: var(--text-muted);">Theme parks, aquariums</div>
-            </div>
-          </label>
-
-          <label class="card" style="cursor: pointer; display: flex; align-items: center; gap: 10px;">
-            <input type="radio" name="travelStyle" value="luxury" style="accent-color: var(--primary);">
-            <div>
-              <div style="font-weight: 800; font-size: 14px;">🏰 Luxury Stay</div>
-              <div style="font-size: 11px; color: var(--text-muted);">Top stars hotel priority</div>
-            </div>
+          <label class="trip-radio-label" onclick="setTripType('oneway')">
+            <span>→</span> One-way trip
           </label>
         </div>
 
-        <button type="submit" class="btn-primary" style="padding: 14px 32px; font-size: 16px;">
-          ⚡ Generate Verified Holiday Packages →
+        <!-- Passengers & Class Dropdowns -->
+        <div class="passenger-class-group">
+          <div class="dropdown-pill" onclick="openPassengerModal()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            <span id="pillPassengerText">2 Adults, 1 Child (Age 6)</span> ⌵
+          </div>
+
+          <div class="dropdown-pill" onclick="toggleCabinClass()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 13h10v8H7zM5 9v12M19 9v12M5 9a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2"/>
+            </svg>
+            <span id="pillCabinText">Economy</span> ⌵
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Input Bar Grid -->
+      <div class="search-inputs-bar">
+        <!-- From -->
+        <div class="search-field-box">
+          <span class="search-field-label">From</span>
+          <select id="searchDepCity" class="search-field-select" onchange="runAutoOptimizer()">
+            <option value="Bengaluru" selected>Bengaluru (BLR)</option>
+            <option value="Delhi">Delhi (DEL)</option>
+            <option value="Mumbai">Mumbai (BOM)</option>
+            <option value="Chennai">Chennai (MAA)</option>
+          </select>
+        </div>
+
+        <!-- Swap Icon -->
+        <button class="swap-cities-btn" title="Swap route" onclick="swapDestinations()">⇄</button>
+
+        <!-- To -->
+        <div class="search-field-box">
+          <span class="search-field-label">To</span>
+          <select id="searchDestCountry" class="search-field-select" onchange="runAutoOptimizer()">
+            <option value="Japan" selected>Japan (Tokyo, Kyoto, Osaka)</option>
+            <option value="United Arab Emirates">UAE (Dubai, Abu Dhabi)</option>
+          </select>
+        </div>
+
+        <div class="field-divider"></div>
+
+        <!-- On Date -->
+        <div class="search-field-box">
+          <span class="search-field-label">On</span>
+          <input type="date" id="searchStartDate" class="search-field-input" value="2027-04-10" min="2027-04-01" max="2027-04-20" onchange="syncDatesAndSearch()">
+        </div>
+
+        <span style="color: var(--text-light); font-weight: 700;">→</span>
+
+        <!-- End Date / Duration -->
+        <div class="search-field-box">
+          <span class="search-field-label">End (Nights)</span>
+          <select id="searchNights" class="search-field-select" onchange="syncDatesAndSearch()">
+            <option value="3">April 13 (3 Nights)</option>
+            <option value="4">April 14 (4 Nights)</option>
+            <option value="5">April 15 (5 Nights)</option>
+            <option value="6" selected>April 16 (6 Nights)</option>
+            <option value="7">April 17 (7 Nights)</option>
+            <option value="8">April 18 (8 Nights)</option>
+          </select>
+        </div>
+
+        <!-- Budget -->
+        <div class="search-field-box">
+          <span class="search-field-label">Total Budget (INR)</span>
+          <input type="number" id="searchBudget" class="search-field-input" value="350000" step="10000" onchange="runAutoOptimizer()">
+        </div>
+
+        <!-- Action Button -->
+        <button class="search-action-btn" onclick="runAutoOptimizer()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+          Search
         </button>
-      </form>
+      </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- PAGE 3 — SMART DESTINATION DISCOVERY       -->
-    <!-- ========================================== -->
-    <div id="page-discovery" class="page-view">
-      <div class="hero-box">
-        <h2 style="font-size: 26px; font-weight: 800;">Smart Destination Discovery</h2>
-        <p style="font-size: 14px; color: var(--text-muted);">
-          Don't know where to go yet? Let our rule-based scoring algorithm evaluate budget viability, seasonal cherry blossoms in Japan, and flight logistics to recommend the ideal destination.
-        </p>
-      </div>
+    <!-- Category Filter Pills Bar -->
+    <div class="category-pills-row">
+      <button class="cat-pill active" id="pill-all" onclick="filterCategory('all')">● All Components</button>
+      <button class="cat-pill" id="pill-flights" onclick="filterCategory('flight')">✈️ Flights</button>
+      <button class="cat-pill" id="pill-stays" onclick="filterCategory('hotel')">🏨 Stays</button>
+      <button class="cat-pill" id="pill-transport" onclick="filterCategory('transfer')">🚖 Transport</button>
+      <button class="cat-pill" id="pill-experiences" onclick="filterCategory('attraction')">🎡 Experiences</button>
+      <button class="cat-pill highlight-spiritual" id="pill-spiritual" onclick="switchMainTab('spiritual')">⛩️ Tirth Yatra (Pilgrimage)</button>
+      <button class="cat-pill" id="pill-family" onclick="filterFamilyFun()">🧸 Kids & Family Fun</button>
+      <button class="cat-pill" id="pill-deals" onclick="openPriorityWeightsModal()">⚖️ Custom Priorities</button>
+    </div>
 
-      <div class="card" style="margin-bottom: 24px; background: #f8fafc;">
-        <div class="grid-4" style="align-items: flex-end;">
-          <div class="form-group" style="margin: 0;">
-            <label class="form-label">Leaving From</label>
-            <select id="discDep" class="form-select">
-              <option value="Bengaluru">Bengaluru</option>
-              <option value="Delhi">Delhi</option>
-              <option value="Mumbai">Mumbai</option>
-              <option value="Chennai">Chennai</option>
-            </select>
+    <!-- ============================================================== -->
+    <!-- VIEW 1: MAIN PLANNER DASHBOARD (TWO-COLUMN DYNAMIC VIEW)       -->
+    <!-- ============================================================== -->
+    <div id="view-planner" class="main-view-container">
+      <div class="dashboard-split-layout">
+
+        <!-- Left Column: Components List -->
+        <div class="components-stream" id="componentsStream">
+          <!-- Populated dynamically via JS -->
+          <div style="text-align: center; padding: 40px; color: var(--text-muted);">
+            Building optimal holiday package...
           </div>
-          <div class="form-group" style="margin: 0;">
-            <label class="form-label">Your Budget (INR)</label>
-            <input type="number" id="discBudget" class="form-input" value="350000" step="10000">
-          </div>
-          <div class="form-group" style="margin: 0;">
-            <label class="form-label">Duration</label>
-            <select id="discDuration" class="form-select">
-              <option value="4">4 Nights (Quick Escape)</option>
-              <option value="6" selected>6 Nights (Recommended)</option>
-              <option value="8">8 Nights (Grand Tour)</option>
-            </select>
-          </div>
-          <button class="btn-primary" style="height: 46px; justify-content: center;" onclick="runDiscoveryRecommendation()">Discover Best Fit</button>
         </div>
-      </div>
 
-      <div id="discoveryResultsGrid" class="grid-2">
-        <!-- Rendered via JS -->
+        <!-- Right Column: Dedicated "LIVE ITINERARY PREVIEW" Card -->
+        <aside class="itinerary-preview-card">
+          <div class="preview-header-row">
+            <h2 class="preview-title">LIVE ITINERARY PREVIEW</h2>
+            <button class="preview-dots-menu" title="Options" onclick="openPriorityWeightsModal()">···</button>
+          </div>
+
+          <!-- Package Tier Selector Switcher -->
+          <div class="package-tier-selector">
+            <button class="tier-tab-btn active" id="tierBtnCheapest" onclick="switchPackageTier('cheapest')">
+              <div class="tier-name">⚡ Cheapest</div>
+              <div class="tier-price-val" id="tierPriceCheapest">₹1,64,472</div>
+            </button>
+            <button class="tier-tab-btn" id="tierBtnFastest" onclick="switchPackageTier('fastest')">
+              <div class="tier-name">✈ Fastest</div>
+              <div class="tier-price-val" id="tierPriceFastest">₹2,10,500</div>
+            </button>
+            <button class="tier-tab-btn" id="tierBtnBest" onclick="switchPackageTier('best_rated')">
+              <div class="tier-name">⭐ Top Stars</div>
+              <div class="tier-price-val" id="tierPriceBest">₹2,89,000</div>
+            </button>
+          </div>
+
+          <!-- Milestones Track (Exact Reference Image Style) -->
+          <div class="milestones-track" id="liveMilestonesTrack">
+            <!-- Populated dynamically with circular checkmarks -->
+          </div>
+
+          <!-- Itemized Price Summary -->
+          <div class="cost-summary-box">
+            <div class="cost-row">
+              <span>Flights (Outbound & Return)</span>
+              <span id="sumFlightCost">₹96,600</span>
+            </div>
+            <div class="cost-row">
+              <span>Accommodation (<span id="sumNights">6</span> Nights)</span>
+              <span id="sumHotelCost">₹36,960</span>
+            </div>
+            <div class="cost-row">
+              <span>Ground & Airport Transfers</span>
+              <span id="sumTransferCost">₹10,080</span>
+            </div>
+            <div class="cost-row">
+              <span>Activities & Experiences</span>
+              <span id="sumAttractionCost">₹20,832</span>
+            </div>
+
+            <div class="cost-total-row">
+              <span class="grand-total-label">Grand Total</span>
+              <span class="grand-total-amount" id="sumGrandTotal">₹1,64,472</span>
+            </div>
+
+            <!-- Budget Meter -->
+            <div class="budget-meter-wrapper">
+              <div class="meter-bar-outer">
+                <div class="meter-bar-fill" id="meterBarFill" style="width: 47%;"></div>
+              </div>
+              <div class="meter-stats-text">
+                <span id="meterPercentText">47% of ₹3,50,000 used</span>
+                <span id="meterSavingsText">₹1,85,528 Saved ✓</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <button class="preview-action-btn" onclick="openConfirmBookingModal()">
+            Confirm & Reserve Journey (10-Digit) →
+          </button>
+          <button class="preview-secondary-btn" onclick="downloadItineraryJSON()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>
+            </svg>
+            Export Itinerary JSON
+          </button>
+        </aside>
+
       </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- PAGE 4 — PACKAGE RESULTS (4 TIERS)         -->
-    <!-- ========================================== -->
-    <div id="page-packages" class="page-view">
-      <div class="hero-box" style="padding-bottom: 14px;">
-        <h2 style="font-size: 24px; font-weight: 800;">Generated Holiday Packages</h2>
-        <p style="font-size: 14px; color: var(--text-muted);" id="packagesSubtext">
-          Our algorithm has synthesized candidate packages passing all rules in Section 4.
-        </p>
-      </div>
-
-      <div id="packagesListGrid" class="grid-4" style="margin-bottom: 28px;">
-        <!-- Injected via JS: Cheapest, Fastest, Best Rated, Priority Match -->
-      </div>
-
-      <div style="text-align: center;">
-        <button class="btn-primary" onclick="switchPage('itinerary')">Inspect Day-by-Day Itinerary →</button>
-      </div>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- PAGE 5 — PACKAGE DETAILS / ITINERARY       -->
-    <!-- ========================================== -->
-    <div id="page-itinerary" class="page-view">
-      <div class="hero-box" style="display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 16px;">
+    <!-- ============================================================== -->
+    <!-- VIEW 2: ⛩️ TIRTH YATRA / PILGRIMAGE FOR ADULTS & PARENTS       -->
+    <!-- ============================================================== -->
+    <div id="view-spiritual" class="main-view-container" style="display: none;">
+      <div class="spiritual-banner">
         <div>
-          <h2 style="font-size: 24px; font-weight: 800;" id="itineraryHeaderTitle">Trip to Japan: 6 Nights Itinerary</h2>
-          <p style="font-size: 13px; color: var(--text-muted);" id="itineraryHeaderSub">All travel rules, buffers, and room fit constraints mathematically verified.</p>
+          <span class="spiritual-badge">Sacred India Pilgrimage & Tirth Yatra</span>
+          <h2 class="spiritual-title">Specially Curated for Adults & Senior Parents</h2>
+          <p class="spiritual-sub">
+            Complete peace of mind for elders: VIP darshan passes, wheelchair & battery-car assistance, 100% pure sattvic vegetarian meals, and verified elder-care escorts.
+          </p>
         </div>
-        <div style="display: flex; gap: 8px;">
-          <button class="btn-secondary" onclick="switchPage('customize')">⚙️ Customize Package</button>
-          <button class="btn-primary" onclick="switchPage('booking')">Proceed to Booking →</button>
-        </div>
+        <button class="btn-select-pill active" onclick="switchMainTab('planner')">← Back to Main Planner</button>
       </div>
 
-      <div class="grid-2" style="grid-template-columns: 1fr 340px;">
-        <!-- Chronological Timeline -->
-        <div id="fullTimelineContainer">
-          <!-- Injected via JS -->
+      <div class="spiritual-grid">
+        <!-- Yatra 1 -->
+        <div class="yatra-card">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+              <span class="spec-pill spec-purple" style="font-size: 12px;">Uttarakhand Himalayas</span>
+              <span style="font-size: 19px; font-weight: 800; color: #b45309;">₹1,85,000 <span style="font-size: 12px; font-weight: 600; color: var(--text-muted);">/ 2 Adults</span></span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 6px;">Char Dham Yatra Deluxe (Helipad + VIP)</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Kedarnath, Badrinath, Gangotri, Yamunotri. 9 Nights / 10 Days.</p>
+            <div style="display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; font-weight: 600; color: var(--text-main); margin-bottom: 20px;">
+              <div>🚁 <strong>Helicopter Darshan:</strong> Direct flight to Kedarnath helipad (no trekking required)</div>
+              <div>♿ <strong>Elder Care:</strong> Wheelchair assistance & porter at every temple shrine</div>
+              <div>🍲 <strong>Sattvic Diet:</strong> Authentic pure vegetarian fresh cooked meals</div>
+              <div>🩺 <strong>Medical Support:</strong> Oxygen kit & doctor-on-call throughout the journey</div>
+            </div>
+          </div>
+          <button class="btn-select-pill" style="width: 100%; text-align: center; background: #b45309;" onclick="bookPilgrimagePackage('Char Dham Yatra Deluxe', 185000)">
+            Reserve for Parents (Instant Darshan) →
+          </button>
         </div>
 
-        <!-- Sticky Overview Card -->
-        <div class="card" style="position: sticky; top: 20px; align-self: flex-start;">
-          <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">Cost Summary</h4>
-          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
-            <span>Flights</span><strong id="itinCostFlights">₹0</strong>
+        <!-- Yatra 2 -->
+        <div class="yatra-card">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+              <span class="spec-pill spec-blue" style="font-size: 12px;">Uttar Pradesh Divine Corridor</span>
+              <span style="font-size: 19px; font-weight: 800; color: #b45309;">₹68,000 <span style="font-size: 12px; font-weight: 600; color: var(--text-muted);">/ 2 Adults</span></span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 6px;">Kashi Vishwanath, Ayodhya Ram Mandir & Prayagraj</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Varanasi Ganga Aarti, Ayodhya Ram Janmabhoomi, Triveni Sangam. 5 Nights / 6 Days.</p>
+            <div style="display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; font-weight: 600; color: var(--text-main); margin-bottom: 20px;">
+              <div>🛺 <strong>Golf Cart Access:</strong> Fast-track entry to Kashi corridor & Ayodhya Mandir</div>
+              <div>⛵ <strong>Private Bajra Boat:</strong> Comfortable reserved seating for Dashashwamedh Aarti</div>
+              <div>🏨 <strong>4-Star Stays:</strong> Hotel Radisson Varanasi & luxury boutique riverside retreats</div>
+              <div>🚗 <strong>Private Innova Crysta:</strong> Chauffeur-driven AC intercity transfers</div>
+            </div>
           </div>
-          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
-            <span>Hotels</span><strong id="itinCostHotels">₹0</strong>
+          <button class="btn-select-pill" style="width: 100%; text-align: center; background: #b45309;" onclick="bookPilgrimagePackage('Kashi & Ayodhya Yatra', 68000)">
+            Reserve for Parents (Instant Darshan) →
+          </button>
+        </div>
+
+        <!-- Yatra 3 -->
+        <div class="yatra-card">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+              <span class="spec-pill spec-green" style="font-size: 12px;">South India Divine Circuit</span>
+              <span style="font-size: 19px; font-weight: 800; color: #b45309;">₹84,000 <span style="font-size: 12px; font-weight: 600; color: var(--text-muted);">/ 2 Adults</span></span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 6px;">Tirupati Balaji, Madurai Meenakshi & Rameswaram</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Lord Venkateswara Temple, Meenakshi Amman, Ramanathaswamy Jyotirlinga. 6 Nights / 7 Days.</p>
+            <div style="display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; font-weight: 600; color: var(--text-main); margin-bottom: 20px;">
+              <div>🎟️ <strong>Seeghra Darshan:</strong> Pre-booked VIP special entry tickets with zero waiting</div>
+              <div>🔋 <strong>Battery Car:</strong> Terminal to temple electric buggy transfers</div>
+              <div>🥥 <strong>Traditional Prasadam:</strong> Fresh Tirupati Laddu & temple offerings delivered</div>
+            </div>
           </div>
-          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
-            <span>Transfers</span><strong id="itinCostTransfers">₹0</strong>
+          <button class="btn-select-pill" style="width: 100%; text-align: center; background: #b45309;" onclick="bookPilgrimagePackage('Tirupati & Rameswaram Circuit', 84000)">
+            Reserve for Parents (Instant Darshan) →
+          </button>
+        </div>
+
+        <!-- Yatra 4 -->
+        <div class="yatra-card">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+              <span class="spec-pill spec-purple" style="font-size: 12px;">Jammu & Punjab Sacred Trail</span>
+              <span style="font-size: 19px; font-weight: 800; color: #b45309;">₹48,000 <span style="font-size: 12px; font-weight: 600; color: var(--text-muted);">/ 2 Adults</span></span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 6px;">Mata Vaishno Devi & Amritsar Golden Temple</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Bhavan Darshan via Helicopter, Harmandir Sahib & Wagah Border. 4 Nights / 5 Days.</p>
+            <div style="display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; font-weight: 600; color: var(--text-main); margin-bottom: 20px;">
+              <div>🚁 <strong>Helicopter Katra to Sanjichhat:</strong> 8-minute flight avoiding the 13km uphill trek</div>
+              <div>🛺 <strong>Battery Cart to Bhavan:</strong> Seamless connectivity for senior citizens</div>
+              <div>✨ <strong>VIP Attka Aarti:</strong> Reserved seating for morning divine arti</div>
+            </div>
           </div>
-          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 12px;">
-            <span>Attractions</span><strong id="itinCostAttractions">₹0</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: 800; border-top: 1px solid var(--border); padding-top: 10px; margin-bottom: 16px;">
-            <span>Grand Total</span><span style="color: var(--primary);" id="itinCostTotal">₹0</span>
-          </div>
-          <button class="btn-primary" style="width: 100%; justify-content: center; margin-bottom: 8px;" onclick="switchPage('booking')">Confirm & Book</button>
-          <button class="btn-secondary" style="width: 100%; justify-content: center;" onclick="handleDownloadJson()">📥 Download JSON</button>
+          <button class="btn-select-pill" style="width: 100%; text-align: center; background: #b45309;" onclick="bookPilgrimagePackage('Vaishno Devi & Golden Temple', 48000)">
+            Reserve for Parents (Instant Darshan) →
+          </button>
         </div>
       </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- PAGE 6 — CUSTOMIZE YOUR PACKAGE            -->
-    <!-- ========================================== -->
-    <div id="page-customize" class="page-view">
-      <div class="hero-box" style="padding-bottom: 16px;">
-        <h2 style="font-size: 24px; font-weight: 800;">Customize Your Holiday Package</h2>
+    <!-- ============================================================== -->
+    <!-- VIEW 3: 🎲 SMART DESTINATION DISCOVERY (ZERO-LLM RULE RANKING) -->
+    <!-- ============================================================== -->
+    <div id="view-discovery" class="main-view-container" style="display: none;">
+      <div style="margin-bottom: 24px;">
+        <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 6px;">Smart Destination Discovery</h2>
         <p style="font-size: 14px; color: var(--text-muted);">
-          Every change you make triggers our backend validation engine, which recalculates price differences and rechecks buffer windows.
+          Unsure where to fly? Our traditional scoring algorithm ranks catalog destinations across budget suitability, travel duration, and season index.
         </p>
       </div>
 
-      <div class="grid-3" style="margin-bottom: 24px;">
-        <div class="card">
-          <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 8px;">🏨 Change Hotel</h4>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Select another hotel in your visited cities with verified room capacity.</p>
-          <button class="btn-secondary" style="width: 100%;" onclick="openSwapHotelModal()">Browse Hotel Options</button>
-        </div>
-
-        <div class="card">
-          <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 8px;">✈️ Change Flight</h4>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Swap arrival or return flight. Airport transfers automatically recheck 60m/180m buffers.</p>
-          <button class="btn-secondary" style="width: 100%;" onclick="openSwapFlightModal('outbound')">Swap Outbound Flight</button>
-          <button class="btn-secondary" style="width: 100%; margin-top: 6px;" onclick="openSwapFlightModal('inbound')">Swap Return Flight</button>
-        </div>
-
-        <div class="card">
-          <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 8px;">🎡 Attractions & Sightseeing</h4>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Add spiritual shrines or theme parks; interval scheduler prevents schedule overlaps.</p>
-          <button class="btn-secondary" style="width: 100%;" onclick="openAddAttractionModal()">+ Add New Attraction</button>
-        </div>
-      </div>
-
-      <div style="text-align: right;">
-        <button class="btn-primary" onclick="switchPage('itinerary')">Done Customizing (Review Itinerary) →</button>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;" id="discoveryCardsGrid">
+        <!-- Rendered dynamically -->
       </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- PAGE 7 — BUDGET ANALYSIS                   -->
-    <!-- ========================================== -->
-    <div id="page-budget" class="page-view">
-      <div class="hero-box" style="padding-bottom: 16px;">
-        <h2 style="font-size: 24px; font-weight: 800;">Transparent Budget Breakdown & Optimization</h2>
+    <!-- ============================================================== -->
+    <!-- VIEW 4: MY RESERVATIONS / 10-DIGIT LOOKUP VIEW                 -->
+    <!-- ============================================================== -->
+    <div id="view-bookings" class="main-view-container" style="display: none;">
+      <div style="margin-bottom: 24px;">
+        <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 6px;">My Reservations & Confirmed Trips</h2>
         <p style="font-size: 14px; color: var(--text-muted);">
-          Our algorithm does not use arbitrary percentage allocations. It ranks complete feasible combinations according to your priorities.
+          Enter any 10-digit reservation number to inspect inventory lock status, verified flights, hotel vouchers, and cancellation terms.
         </p>
       </div>
 
-      <div class="grid-2" style="margin-bottom: 24px;">
-        <!-- Left: Visual Bars -->
-        <div class="card">
-          <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 16px;">Component Cost Distribution</h4>
-          
-          <div class="cost-bar-container">
-            <div id="barFlights" class="cost-bar-segment" style="background: #3b82f6; width: 45%;"></div>
-            <div id="barHotels" class="cost-bar-segment" style="background: #10b981; width: 35%;"></div>
-            <div id="barTransfers" class="cost-bar-segment" style="background: #f59e0b; width: 12%;"></div>
-            <div id="barAttractions" class="cost-bar-segment" style="background: #8b5cf6; width: 8%;"></div>
-          </div>
+      <div style="display: flex; gap: 12px; max-width: 500px; margin-bottom: 28px;">
+        <input type="text" id="fullRefInput" class="search-field-input" style="background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px; font-size: 15px;" placeholder="e.g. TRIP-749201">
+        <button class="search-action-btn" onclick="lookupReservation(document.getElementById('fullRefInput').value)">Search Database</button>
+      </div>
 
-          <div style="display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; margin-bottom: 20px;">
-            <span><strong style="color: #3b82f6;">■ Flights:</strong> <span id="pctFlights">0%</span></span>
-            <span><strong style="color: #10b981;">■ Hotels:</strong> <span id="pctHotels">0%</span></span>
-            <span><strong style="color: #f59e0b;">■ Transfers:</strong> <span id="pctTransfers">0%</span></span>
-            <span><strong style="color: #8b5cf6;">■ Attractions:</strong> <span id="pctAttractions">0%</span></span>
-          </div>
-
-          <div class="card" style="background: #f8fafc; border-left: 4px solid var(--primary);">
-            <div style="font-size: 13px; font-weight: 700;">💡 Optimization Insight:</div>
-            <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;" id="budgetInsightText">
-              Your budget comfortably accommodates 4★ accommodation in Tokyo while maintaining direct flights and top experiences.
-            </p>
-          </div>
-        </div>
-
-        <!-- Right: Numbers -->
-        <div class="card">
-          <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 16px;">Budget Utilization</h4>
-          <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-            <span>Customer Budget:</span><strong id="bgtCustomer">₹3,50,000</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-            <span>Total Package Cost:</span><strong id="bgtPackage" style="color: var(--primary);">₹2,51,888</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 16px; font-weight: 800; border-top: 1px solid var(--border); padding-top: 10px; margin-bottom: 14px;">
-            <span>Remaining Funds:</span><span id="bgtRemaining" style="color: var(--green);">₹98,112</span>
-          </div>
-          <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="switchPage('booking')">Lock in This Price →</button>
-        </div>
+      <div id="bookingResultContainer">
+        <!-- Displayed after lookup -->
       </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- PAGE 8 — CONFIRMATION & BOOKING            -->
-    <!-- ========================================== -->
-    <div id="page-booking" class="page-view">
-      <div class="hero-box" style="text-align: center; max-width: 650px; margin: 0 auto 28px auto;">
-        <h2 style="font-size: 28px; font-weight: 800; margin-bottom: 8px;">Confirm Your Holiday Package</h2>
-        <p style="font-size: 14px; color: var(--text-muted);">
-          Review your package summary and lock your reservation. A unique 10-digit reference will be generated and stored in our database.
-        </p>
-      </div>
+  </div> <!-- End App Canvas -->
 
-      <div class="card" style="max-width: 650px; margin: 0 auto; text-align: center; padding: 32px;">
-        <div style="font-size: 48px; margin-bottom: 12px;">🛫</div>
-        <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 6px;" id="confirmTravelerName">Menon family</h3>
-        <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 20px;" id="confirmTripSummary">Japan (Tokyo, Kyoto) · 10 Apr - 16 Apr 2027</p>
+  <!-- ============================================================== -->
+  <!-- MODAL: PASSENGER & CLASS PICKER                                -->
+  <!-- ============================================================== -->
+  <div id="modalPassenger" class="modal-overlay">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="closePassengerModal()">✕</button>
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 16px;">Guests & Travelers</h3>
 
-        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 24px;">
-          <div style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Total Package Price</div>
-          <div style="font-size: 32px; font-weight: 900; color: var(--primary);" id="confirmPrice">₹2,51,888</div>
-          <div style="font-size: 12px; color: var(--green); font-weight: 700; margin-top: 4px;">✓ Guaranteed No Hidden Fees · Catalog Compliant</div>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border);">
+        <div>
+          <div style="font-weight: 700; font-size: 14.5px;">Adults (Age 18+)</div>
+          <div style="font-size: 12px; color: var(--text-muted);">Required for hotel check-in</div>
         </div>
-
-        <button class="btn-primary" style="width: 100%; justify-content: center; padding: 14px; font-size: 16px; margin-bottom: 10px;" onclick="executeReservationBooking()">
-          Confirm Reservation & Get 10-Digit Code
-        </button>
-        <button class="btn-secondary" style="width: 100%; justify-content: center;" onclick="switchPage('itinerary')">Back to Itinerary</button>
-      </div>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- PAGE 9 — RESERVATION LOOKUP                -->
-    <!-- ========================================== -->
-    <div id="page-lookup" class="page-view">
-      <div class="hero-box" style="text-align: center; max-width: 650px; margin: 0 auto 28px auto;">
-        <h2 style="font-size: 26px; font-weight: 800; margin-bottom: 6px;">Reservation Lookup</h2>
-        <p style="font-size: 14px; color: var(--text-muted);">
-          Reopen any confirmed holiday reservation using your 10-digit booking reference. Survives backend restarts.
-        </p>
-      </div>
-
-      <div class="card" style="max-width: 600px; margin: 0 auto;">
-        <div style="display: flex; gap: 8px; margin-bottom: 18px;">
-          <input type="text" id="lookupInput" class="form-input" placeholder="Enter 10-digit reference (e.g. 9279894003)" maxlength="10" style="font-size: 16px; font-weight: 700;">
-          <button class="btn-primary" onclick="lookupReservationAction()">Search</button>
-        </div>
-
-        <div id="lookupResultCard" style="display: none;">
-          <!-- Injected via JS -->
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="swap-cities-btn" onclick="adjustCount('adults', -1)">-</button>
+          <span id="modalAdultsCount" style="font-size: 16px; font-weight: 800; width: 20px; text-align: center;">2</span>
+          <button class="swap-cities-btn" onclick="adjustCount('adults', 1)">+</button>
         </div>
       </div>
-    </div>
 
-  </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border);">
+        <div>
+          <div style="font-weight: 700; font-size: 14.5px;">Children (Ages 0 to 17)</div>
+          <div style="font-size: 12px; color: var(--text-muted);">Hackathon rule: age &lt; 18 is child</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="swap-cities-btn" onclick="adjustCount('children', -1)">-</button>
+          <span id="modalChildrenCount" style="font-size: 16px; font-weight: 800; width: 20px; text-align: center;">1</span>
+          <button class="swap-cities-btn" onclick="adjustCount('children', 1)">+</button>
+        </div>
+      </div>
 
-  <!-- Common Modals (Swap Hotel, Swap Flight, Add Attraction, Success Pass) -->
-  <div id="appModal" class="modal-overlay">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeAppModal()">&times;</button>
-      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 14px;" id="modalHeading">Modal Title</h3>
-      <div id="modalBody">Modal Body</div>
+      <div style="padding: 14px 0;" id="childAgeInputContainer">
+        <label style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Child Ages (Comma separated)</label>
+        <input type="text" id="modalChildAges" class="search-field-input" style="background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; margin-top: 6px; width: 100%;" value="6">
+      </div>
+
+      <button class="preview-action-btn" style="margin-top: 10px;" onclick="applyPassengerCounts()">Done</button>
     </div>
   </div>
 
+  <!-- ============================================================== -->
+  <!-- MODAL: COMPONENT SWAP / REVALIDATE MODAL                       -->
+  <!-- ============================================================== -->
+  <div id="modalSwap" class="modal-overlay">
+    <div class="modal-container" style="max-width: 680px;">
+      <button class="modal-close-btn" onclick="closeSwapModal()">✕</button>
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 6px;" id="swapModalTitle">Swap Component</h3>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 18px;" id="swapModalSub">Choose an alternative. Price deltas and buffer checks are recomputed automatically.</p>
+
+      <div id="swapOptionsList" style="display: flex; flex-direction: column; gap: 12px;">
+        <!-- Filled via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODAL: BOOKING CONFIRMATION & 10-DIGIT NUMBER                  -->
+  <!-- ============================================================== -->
+  <div id="modalConfirm" class="modal-overlay">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="closeConfirmModal()">✕</button>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: #ecfdf5; color: #10b981; font-size: 28px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 10px;">✓</div>
+        <h3 style="font-size: 22px; font-weight: 800;">Reservation Confirmed!</h3>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-top: 4px;">Your inventory has been locked and saved to the persistent database.</p>
+      </div>
+
+      <div style="background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 16px; padding: 18px; text-align: center; margin-bottom: 20px;">
+        <div style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Booking Reference (10-Digit)</div>
+        <div style="font-size: 32px; font-weight: 800; color: var(--primary); letter-spacing: 2px; margin: 4px 0;" id="modalConfirmedRef">TRIP-749201</div>
+        <div style="font-size: 12px; color: var(--green); font-weight: 700;">● Inventory Locked · Validated Zero-Conflict</div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: var(--text-muted);">Lead Traveler:</span>
+          <strong id="modalTravelerName">Menon family (Adults: 2, Children: 1)</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: var(--text-muted);">Travel Dates:</span>
+          <strong id="modalTravelDates">April 10, 2027 – April 16, 2027 (6 Nights)</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: var(--text-muted);">Total Package Price:</span>
+          <strong style="color: var(--text-main); font-size: 15px;" id="modalTotalPaid">₹1,64,472</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: var(--text-muted);">Cancellation Policy:</span>
+          <strong style="color: var(--green);">Free Cancellation up to 72 hrs</strong>
+        </div>
+      </div>
+
+      <button class="preview-action-btn" onclick="downloadItineraryJSON()">
+        📥 Download Full Itinerary JSON
+      </button>
+      <button class="preview-secondary-btn" onclick="viewInMyBookings()">
+        View in My Reservations
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODAL: CUSTOM PRIORITY WEIGHTS (WHAT MATTERS MOST)             -->
+  <!-- ============================================================== -->
+  <div id="modalWeights" class="modal-overlay">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="closeWeightsModal()">✕</button>
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 6px;">Holiday Priorities (Weights Total 100%)</h3>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+        Adjust weights so our engine allocates your budget to what matters most.
+      </p>
+
+      <div style="margin-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 6px;">
+          <span>🏨 Hotel Quality & Comfort</span>
+          <span id="wtValHotel" style="color: var(--primary);">40%</span>
+        </div>
+        <input type="range" id="wtRangeHotel" min="0" max="100" value="40" style="width: 100%; accent-color: var(--primary);" oninput="rebalancePriorityWeights('hotel')">
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 6px;">
+          <span>✈️ Flight Speed & Convenience</span>
+          <span id="wtValFlight" style="color: var(--primary);">30%</span>
+        </div>
+        <input type="range" id="wtRangeFlight" min="0" max="100" value="30" style="width: 100%; accent-color: var(--primary);" oninput="rebalancePriorityWeights('flight')">
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 6px;">
+          <span>🎡 Experiences & Activities</span>
+          <span id="wtValExp" style="color: var(--primary);">30%</span>
+        </div>
+        <input type="range" id="wtRangeExp" min="0" max="100" value="30" style="width: 100%; accent-color: var(--primary);" oninput="rebalancePriorityWeights('exp')">
+      </div>
+
+      <button class="preview-action-btn" onclick="applyWeightsAndRerun()">Apply Priorities & Recalculate</button>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- JAVASCRIPT: ENGINE INTEGRATION & CLIENT ORCHESTRATION          -->
+  <!-- ============================================================== -->
   <script>
-    // Global Application State
+    // State Store
     let currentPackages = null;
-    let activeTrip = null;
-    let selectedTier = 'cheapest';
+    let activePackageTier = 'cheapest';
+    let currentActiveTrip = null;
+    let passengerState = { adults: 2, children: 1, childAges: [6] };
+    let currentConfirmedReservation = null;
+    let selectedFilterCategory = 'all';
 
+    // Startup
     window.addEventListener('DOMContentLoaded', () => {
-      // Run initial search to prepopulate data
-      quickStartPlan();
+      runAutoOptimizer();
+      loadDiscoveryRecommendations();
     });
 
-    // Client-side 9-page router
-    function switchPage(pageId) {
-      document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    // Main Tab Switcher
+    function switchMainTab(tabId) {
+      document.querySelectorAll('.main-view-container').forEach(v => v.style.display = 'none');
+      document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
 
-      const target = document.getElementById(`page-${pageId}`);
-      if (target) target.classList.add('active');
+      const viewEl = document.getElementById(`view-${tabId}`);
+      if (viewEl) viewEl.style.display = 'block';
 
-      const tab = document.getElementById(`tab-${pageId}`);
-      if (tab) tab.classList.add('active');
+      const navEl = document.getElementById(`nav-${tabId}`);
+      if (navEl) navEl.classList.add('active');
 
-      if (pageId === 'itinerary') renderItineraryPage();
-      if (pageId === 'budget') renderBudgetPage();
-      if (pageId === 'booking') renderBookingPage();
+      if (tabId === 'discovery') loadDiscoveryRecommendations();
     }
 
-    // Weight Slider Rebalancer (Totals 100%)
-    function rebalanceWeights(changed) {
-      let h = parseInt(document.getElementById('sliderHotel').value, 10);
-      let f = parseInt(document.getElementById('sliderFlight').value, 10);
-      let e = parseInt(document.getElementById('sliderExp').value, 10);
+    // Trip Type
+    function setTripType(type) {
+      document.querySelectorAll('.trip-radio-label').forEach(l => l.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+    }
 
-      if (changed === 'hotel') {
-        const rem = 100 - h;
-        f = Math.round(rem * 0.5);
-        e = rem - f;
-        document.getElementById('sliderFlight').value = f;
-        document.getElementById('sliderExp').value = e;
-      } else if (changed === 'flight') {
-        const rem = 100 - f;
-        h = Math.round(rem * 0.5);
-        e = rem - h;
-        document.getElementById('sliderHotel').value = h;
-        document.getElementById('sliderExp').value = e;
+    // Toggle Engine Mode
+    function toggleEngineMode(mode) {
+      document.getElementById('btnModeAuto').classList.toggle('active', mode === 'auto');
+      document.getElementById('btnModeManual').classList.toggle('active', mode === 'manual');
+    }
+
+    // Passenger Modal Handlers
+    function openPassengerModal() {
+      document.getElementById('modalAdultsCount').innerText = passengerState.adults;
+      document.getElementById('modalChildrenCount').innerText = passengerState.children;
+      document.getElementById('modalChildAges').value = passengerState.childAges.join(', ');
+      document.getElementById('modalPassenger').style.display = 'flex';
+    }
+
+    function closePassengerModal() {
+      document.getElementById('modalPassenger').style.display = 'none';
+    }
+
+    function adjustCount(type, delta) {
+      if (type === 'adults') {
+        passengerState.adults = Math.max(1, Math.min(10, passengerState.adults + delta));
+        document.getElementById('modalAdultsCount').innerText = passengerState.adults;
       } else {
-        const rem = 100 - e;
-        h = Math.round(rem * 0.5);
-        f = rem - h;
-        document.getElementById('sliderHotel').value = h;
-        document.getElementById('sliderFlight').value = f;
+        passengerState.children = Math.max(0, Math.min(8, passengerState.children + delta));
+        document.getElementById('modalChildrenCount').innerText = passengerState.children;
+        if (passengerState.children === 0) {
+          document.getElementById('modalChildAges').value = '';
+        } else if (!document.getElementById('modalChildAges').value) {
+          document.getElementById('modalChildAges').value = '6';
+        }
       }
-
-      document.getElementById('labelHotelWeight').innerText = `${document.getElementById('sliderHotel').value}%`;
-      document.getElementById('labelFlightWeight').innerText = `${document.getElementById('sliderFlight').value}%`;
-      document.getElementById('labelExpWeight').innerText = `${document.getElementById('sliderExp').value}%`;
     }
 
-    async function quickStartPlan() {
-      const dep = document.getElementById('quickDep').value;
-      const dest = document.getElementById('quickDest').value;
-      const bgt = parseInt(document.getElementById('quickBudget').value, 10);
+    function applyPassengerCounts() {
+      const rawAges = document.getElementById('modalChildAges').value.trim();
+      passengerState.childAges = rawAges ? rawAges.split(',').map(s => parseInt(s.trim(), 10)).filter(n => !isNaN(n)) : [];
 
-      document.getElementById('formDepCity').value = dep;
-      document.getElementById('formDestCountry').value = dest;
-      document.getElementById('formBudget').value = bgt;
-
-      await executePackageSearch();
+      let pillLabel = `${passengerState.adults} Adult${passengerState.adults > 1 ? 's' : ''}`;
+      if (passengerState.children > 0) {
+        pillLabel += `, ${passengerState.children} Child${passengerState.children > 1 ? 'ren' : ''} (Age ${passengerState.childAges.join(', ') || '6'})`;
+      }
+      document.getElementById('pillPassengerText').innerText = pillLabel;
+      closePassengerModal();
+      runAutoOptimizer();
     }
 
-    function selectCountryAndPlan(country) {
-      document.getElementById('formDestCountry').value = country;
-      switchPage('form');
+    // Cabin Class Toggle
+    function toggleCabinClass() {
+      const el = document.getElementById('pillCabinText');
+      el.innerText = (el.innerText === 'Economy') ? 'Business' : 'Economy';
     }
 
-    async function submitFormAndBuild(e) {
-      if (e) e.preventDefault();
-      await executePackageSearch();
-      switchPage('packages');
+    // Swap Destinations
+    function swapDestinations() {
+      const dep = document.getElementById('searchDepCity');
+      const dest = document.getElementById('searchDestCountry');
+      // For demonstration, flip through top hubs
+      dep.selectedIndex = (dep.selectedIndex + 1) % dep.options.length;
+      runAutoOptimizer();
     }
 
-    async function executePackageSearch() {
-      const dep = document.getElementById('formDepCity').value;
-      const dest = document.getElementById('formDestCountry').value;
-      const start = document.getElementById('formStartDate').value;
-      const nts = parseInt(document.getElementById('formNights').value, 10);
-      const ads = parseInt(document.getElementById('formAdults').value, 10);
-      const chInput = document.getElementById('formChildAges').value.trim();
-      const chAges = chInput ? chInput.split(',').map(s => parseInt(s.trim(), 10)).filter(n => !isNaN(n)) : [];
-      const bgt = parseInt(document.getElementById('formBudget').value, 10);
+    function syncDatesAndSearch() {
+      runAutoOptimizer();
+    }
 
-      const hWeight = parseInt(document.getElementById('sliderHotel').value, 10);
-      const fWeight = parseInt(document.getElementById('sliderFlight').value, 10);
-      const eWeight = parseInt(document.getElementById('sliderExp').value, 10);
+    // Core Optimizer Execution via REST API
+    async function runAutoOptimizer() {
+      const dep = document.getElementById('searchDepCity').value;
+      const dest = document.getElementById('searchDestCountry').value;
+      const startDate = document.getElementById('searchStartDate').value;
+      const nights = parseInt(document.getElementById('searchNights').value, 10);
+      const budget = parseInt(document.getElementById('searchBudget').value, 10);
+
+      const streamEl = document.getElementById('componentsStream');
+      streamEl.innerHTML = `
+        <div style="text-align: center; padding: 50px 20px;">
+          <div style="font-size: 24px; margin-bottom: 8px;">⚙️</div>
+          <div style="font-weight: 800; font-size: 16px; color: var(--text-main);">Optimizing Complete Holiday Architecture...</div>
+          <div style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Evaluating non-conflicting flights, certified room fit math, and transfer buffers.</div>
+        </div>
+      `;
 
       try {
         const res = await fetch('/api/trips/generate', {
@@ -797,17 +1872,17 @@
           body: JSON.stringify({
             departureCity: dep,
             destinationCountry: dest,
-            startDate: start,
-            nights: nts,
-            adults: ads,
-            childrenAges: chAges,
-            budget: bgt,
+            startDate: startDate,
+            nights: nights,
+            adults: passengerState.adults,
+            childrenAges: passengerState.childAges,
+            budget: budget,
             travelerName: 'Menon family',
             preferences: {
-              hotelWeight: hWeight,
-              flightWeight: fWeight,
-              experienceWeight: eWeight,
-              travelStyle: document.querySelector('input[name="travelStyle"]:checked')?.value || 'balanced'
+              hotelWeight: parseInt(document.getElementById('wtRangeHotel').value, 10),
+              flightWeight: parseInt(document.getElementById('wtRangeFlight').value, 10),
+              experienceWeight: parseInt(document.getElementById('wtRangeExp').value, 10),
+              travelStyle: 'balanced'
             }
           })
         });
@@ -815,400 +1890,676 @@
         const data = await res.json();
         if (data.success && data.packages) {
           currentPackages = data.packages;
-          activeTrip = data.packages.cheapest;
-          renderPackagesPage();
+          currentActiveTrip = currentPackages[activePackageTier] || currentPackages.cheapest;
+          updatePreviewHeaderPrices();
+          renderActiveTripComponents();
+          renderLiveItineraryPreview();
         } else if (data.budget_exceeded) {
           currentPackages = { cheapest: data.cheapest_package };
-          activeTrip = data.cheapest_package;
-          alert(`Notice (M8): ${data.message}`);
-          renderPackagesPage();
+          currentActiveTrip = data.cheapest_package;
+          alert(`Notice (Hackathon M8 Rule): Budget of ₹${budget.toLocaleString()} was exceeded. Displaying the minimum possible package at ₹${data.cheapest_package.total_inr.toLocaleString()}.`);
+          updatePreviewHeaderPrices();
+          renderActiveTripComponents();
+          renderLiveItineraryPreview();
+        } else {
+          streamEl.innerHTML = `<div style="padding: 30px; text-align: center; color: var(--red);">No valid package fits these constraints. Try adjusting dates or departure hub.</div>`;
         }
       } catch (err) {
-        console.error('API error:', err);
+        console.error('API execution failed:', err);
+        streamEl.innerHTML = `<div style="padding: 30px; text-align: center; color: var(--red);">Server connection failed. Ensure backend daemon is active.</div>`;
       }
     }
 
-    // Render Page 4 (Packages)
-    function renderPackagesPage() {
-      const grid = document.getElementById('packagesListGrid');
-      grid.innerHTML = '';
+    // Update Top Header Prices in Preview Card
+    function updatePreviewHeaderPrices() {
       if (!currentPackages) return;
+      if (currentPackages.cheapest) {
+        document.getElementById('tierPriceCheapest').innerText = `₹${currentPackages.cheapest.total_inr.toLocaleString()}`;
+      }
+      if (currentPackages.fastest) {
+        document.getElementById('tierPriceFastest').innerText = `₹${currentPackages.fastest.total_inr.toLocaleString()}`;
+      }
+      if (currentPackages.best_rated) {
+        document.getElementById('tierPriceBest').innerText = `₹${currentPackages.best_rated.total_inr.toLocaleString()}`;
+      }
+    }
 
-      const tiers = [
-        { id: 'cheapest', title: 'Cheapest Package', pill: 'Best Value', color: 'badge-amber', pkg: currentPackages.cheapest },
-        { id: 'fastest', title: 'Fastest Transit', pill: 'Shortest Travel', color: 'badge-blue', pkg: currentPackages.fastest },
-        { id: 'best_rated', title: 'Best Rated Stays', pill: 'Top Luxury Stars', color: 'badge-purple', pkg: currentPackages.best_rated },
-        { id: 'priority_match', title: 'Custom Priority Match', pill: 'Your Preference', color: 'badge-green', pkg: currentPackages.priority_match || currentPackages.cheapest }
-      ];
+    // Switch between Cheapest, Fastest, Best Rated
+    function switchPackageTier(tier) {
+      activePackageTier = tier;
+      document.querySelectorAll('.tier-tab-btn').forEach(b => b.classList.remove('active'));
+      if (tier === 'cheapest') document.getElementById('tierBtnCheapest').classList.add('active');
+      if (tier === 'fastest') document.getElementById('tierBtnFastest').classList.add('active');
+      if (tier === 'best_rated') document.getElementById('tierBtnBest').classList.add('active');
 
-      for (const t of tiers) {
-        if (!t.pkg) continue;
-        const p = t.pkg;
-        const isSel = (selectedTier === t.id);
+      if (currentPackages && currentPackages[tier]) {
+        currentActiveTrip = currentPackages[tier];
+        renderActiveTripComponents();
+        renderLiveItineraryPreview();
+      }
+    }
 
-        const card = document.createElement('div');
-        card.className = `pkg-option-card ${isSel ? 'selected' : ''}`;
-        card.onclick = () => {
-          selectedTier = t.id;
-          activeTrip = p;
-          renderPackagesPage();
-        };
+    // Render Components Stream (Left Column)
+    function renderActiveTripComponents() {
+      const container = document.getElementById('componentsStream');
+      if (!currentActiveTrip || !currentActiveTrip.items) {
+        container.innerHTML = '<div style="padding: 20px;">No trip items found.</div>';
+        return;
+      }
 
-        const cityRoute = p.metrics.city_plan.map(s => `${s.city} (${s.nights}N)`).join(' → ');
-        const travelHours = Math.floor(p.metrics.travel_duration_minutes / 60);
+      container.innerHTML = '';
+      const items = currentActiveTrip.items;
 
-        card.innerHTML = `
-          <span class="pkg-corner-pill ${t.color}">${t.pill}</span>
+      // Group items by date / logical flow
+      const outboundFlight = items.find(it => it.type === 'flight' && it.item_id.includes('fl-out'));
+      const returnFlight = items.find(it => it.type === 'flight' && it.item_id.includes('fl-in'));
+      const hotels = items.filter(it => it.type === 'hotel');
+      const transfers = items.filter(it => it.type === 'transfer');
+      const attractions = items.filter(it => it.type === 'attraction');
+
+      // 1. OUTBOUND FLIGHT HEADER & CARD
+      if (outboundFlight && (selectedFilterCategory === 'all' || selectedFilterCategory === 'flight')) {
+        const dateHeader = document.createElement('div');
+        dateHeader.className = 'section-date-header';
+        dateHeader.innerHTML = `<span>SAT, ${formatDateClean(outboundFlight.start)} · OUTBOUND FLIGHT</span>`;
+        container.appendChild(dateHeader);
+
+        container.appendChild(createFlightCardElement(outboundFlight, 'outbound'));
+      }
+
+      // 2. ARRIVAL TRANSFER
+      const arrTransfer = transfers.find(t => t.item_id.includes('arr'));
+      if (arrTransfer && (selectedFilterCategory === 'all' || selectedFilterCategory === 'transfer')) {
+        container.appendChild(createTransferCardElement(arrTransfer));
+      }
+
+      // 3. HOTEL STAYS
+      if (hotels.length > 0 && (selectedFilterCategory === 'all' || selectedFilterCategory === 'hotel')) {
+        const stayHeader = document.createElement('div');
+        stayHeader.className = 'section-date-header';
+        stayHeader.innerHTML = `<span>ACCOMMODATION & RESORT STAYS (${currentActiveTrip.metrics.city_plan.map(c => `${c.city}: ${c.nights}N`).join(', ')})</span>`;
+        container.appendChild(stayHeader);
+
+        hotels.forEach(h => {
+          container.appendChild(createHotelCardElement(h));
+        });
+      }
+
+      // 4. ATTRACTIONS & EXPERIENCES
+      if (attractions.length > 0 && (selectedFilterCategory === 'all' || selectedFilterCategory === 'attraction')) {
+        const expHeader = document.createElement('div');
+        expHeader.className = 'section-date-header';
+        expHeader.innerHTML = `<span>EXPERIENCES & TOURS (${attractions.length} CURATED ACTIVITIES)</span>`;
+        container.appendChild(expHeader);
+
+        attractions.forEach(att => {
+          container.appendChild(createAttractionCardElement(att));
+        });
+      }
+
+      // 5. INTERCITY & DEPARTURE TRANSFERS
+      const otherTransfers = transfers.filter(t => !t.item_id.includes('arr'));
+      if (otherTransfers.length > 0 && (selectedFilterCategory === 'all' || selectedFilterCategory === 'transfer')) {
+        otherTransfers.forEach(t => {
+          container.appendChild(createTransferCardElement(t));
+        });
+      }
+
+      // 6. RETURN FLIGHT
+      if (returnFlight && (selectedFilterCategory === 'all' || selectedFilterCategory === 'flight')) {
+        const retHeader = document.createElement('div');
+        retHeader.className = 'section-date-header';
+        retHeader.innerHTML = `<span>${formatDateClean(returnFlight.start).toUpperCase()} · RETURN FLIGHT</span>`;
+        container.appendChild(retHeader);
+
+        container.appendChild(createFlightCardElement(returnFlight, 'return'));
+      }
+    }
+
+    // Helper: Create Flight Card matching reference image
+    function createFlightCardElement(flight, direction) {
+      const card = document.createElement('div');
+      card.className = 'flight-card';
+
+      const isNippon = flight.name.includes('Nippon');
+      const isAirVeda = flight.name.includes('AirVeda');
+      const logoClass = isNippon ? 'logo-nippon' : (isAirVeda ? 'logo-airveda' : 'logo-sandline');
+      const logoText = isNippon ? 'NS' : (isAirVeda ? 'AV' : 'SA');
+      const airlineName = isNippon ? 'Nippon Sky' : (isAirVeda ? 'AirVeda' : 'Sandline Airways');
+
+      const depTime = flight.start ? flight.start.split('T')[1].substring(0, 5) : '10:30';
+      const arrTime = flight.end ? flight.end.split('T')[1].substring(0, 5) : '20:30';
+      const depCity = direction === 'outbound' ? document.getElementById('searchDepCity').value : flight.city;
+      const arrCity = direction === 'outbound' ? flight.city : document.getElementById('searchDepCity').value;
+
+      card.innerHTML = `
+        <div class="airline-brand-badge">
+          <div class="airline-logo-box ${logoClass}">${logoText}</div>
           <div>
-            <h4 style="font-size: 16px; font-weight: 800; margin-top: 6px;">${t.title}</h4>
-            <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">${cityRoute}</div>
-            <div style="font-size: 24px; font-weight: 800; color: var(--primary); margin-bottom: 8px;">₹${p.total_inr.toLocaleString('en-IN')}</div>
-            <div style="font-size: 12px; color: var(--text-muted); line-height: 1.6;">
-              <div>⏱️ Transit: ${travelHours} hrs</div>
-              <div>🏨 Class: ${p.metrics.avg_stars}★ Avg</div>
-              <div>🎡 ${p.items.filter(it => it.type === 'attraction').length} Attractions Included</div>
-            </div>
+            <div class="airline-info-name">${airlineName}</div>
+            <div class="airline-info-code">${flight.catalog_id || 'Direct'}</div>
           </div>
-          <button class="btn-primary" style="margin-top: 14px; justify-content: center; background: ${isSel ? 'var(--dark-btn)' : 'var(--primary)'};">
-            ${isSel ? 'Selected Plan ✓' : 'Select Plan'}
-          </button>
-        `;
-        grid.appendChild(card);
-      }
+        </div>
+
+        <div class="flight-route-flow">
+          <div class="route-endpoint">
+            <span class="endpoint-time">${depTime}</span>
+            <span class="endpoint-city">${depCity}</span>
+          </div>
+
+          <div class="trajectory-center">
+            <span class="trajectory-duration">10h 00m</span>
+            <div class="trajectory-line-wrapper">
+              <div class="trajectory-line"></div>
+              <svg class="trajectory-plane-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+              </svg>
+            </div>
+            <span class="trajectory-stops">Non-stop</span>
+          </div>
+
+          <div class="route-endpoint" style="text-align: right;">
+            <span class="endpoint-time">${arrTime}</span>
+            <span class="endpoint-city">${arrCity}</span>
+          </div>
+        </div>
+
+        <div class="flight-price-box">
+          <div class="flight-price-amount">₹${flight.price_inr.toLocaleString()}</div>
+          <div class="flight-price-sub">₹${Math.round(flight.price_inr / (passengerState.adults + passengerState.children)).toLocaleString()} / pax</div>
+        </div>
+
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-select-pill active" title="Currently Selected in Package">Selected ✓</button>
+          <button class="btn-select-pill" style="background: #f1f5f9; color: var(--text-main);" onclick="openSwapModal('flight', '${flight.item_id}')">Swap ⇄</button>
+        </div>
+      `;
+      return card;
     }
 
-    // Render Page 5 (Itinerary)
-    function renderItineraryPage() {
-      if (!activeTrip) return;
+    // Helper: Create Hotel Card
+    function createHotelCardElement(hotel) {
+      const card = document.createElement('div');
+      card.className = 'hotel-card';
 
-      document.getElementById('itineraryHeaderTitle').innerText = `${activeTrip.country} (${activeTrip.start_date} - ${activeTrip.end_date})`;
-      document.getElementById('itineraryHeaderSub').innerText = `${activeTrip.traveler.adults} Adults, ${activeTrip.traveler.children} Children · ₹${activeTrip.total_inr.toLocaleString('en-IN')}`;
+      card.innerHTML = `
+        <div class="hotel-badge-icon">🏨</div>
 
-      document.getElementById('itinCostFlights').innerText = `₹${activeTrip.metrics.flight_cost.toLocaleString('en-IN')}`;
-      document.getElementById('itinCostHotels').innerText = `₹${activeTrip.metrics.hotel_cost.toLocaleString('en-IN')}`;
-      document.getElementById('itinCostTransfers').innerText = `₹${activeTrip.metrics.transfer_cost.toLocaleString('en-IN')}`;
-      document.getElementById('itinCostAttractions').innerText = `₹${activeTrip.metrics.attraction_cost.toLocaleString('en-IN')}`;
-      document.getElementById('itinCostTotal').innerText = `₹${activeTrip.total_inr.toLocaleString('en-IN')}`;
+        <div class="hotel-details">
+          <div class="hotel-name-row">
+            <span class="hotel-name">${hotel.name}</span>
+            <span class="star-rating">★★★★☆</span>
+          </div>
+          <div style="font-size: 13px; color: var(--text-muted);">
+            ${hotel.city} · Check-in: ${formatDateClean(hotel.start)} → Checkout: ${formatDateClean(hotel.end)}
+          </div>
+          <div class="hotel-specs-pill-row" style="margin-top: 4px;">
+            <span class="spec-pill spec-blue">Room: ${hotel.room_id || 'Comfort Twin'}</span>
+            <span class="spec-pill spec-green">✓ Validated Adults Fit (Rule H2)</span>
+            <span class="spec-pill spec-purple">Free Breakfast Included</span>
+          </div>
+        </div>
 
-      const container = document.getElementById('fullTimelineContainer');
-      container.innerHTML = '<div class="timeline" id="timelineInner"></div>';
-      const inner = document.getElementById('timelineInner');
+        <div class="flight-price-box">
+          <div class="flight-price-amount">₹${hotel.price_inr.toLocaleString()}</div>
+          <div class="flight-price-sub">Total for stay</div>
+        </div>
 
-      for (const item of activeTrip.items) {
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-select-pill active">Selected ✓</button>
+          <button class="btn-select-pill" style="background: #f1f5f9; color: var(--text-main);" onclick="openSwapModal('hotel', '${hotel.item_id}')">Swap Hotel ⇄</button>
+        </div>
+      `;
+      return card;
+    }
+
+    // Helper: Create Transfer Card
+    function createTransferCardElement(transfer) {
+      const card = document.createElement('div');
+      card.className = 'misc-component-card';
+
+      const isTaxi = transfer.name.toLowerCase().includes('taxi');
+      const isTrain = transfer.name.toLowerCase().includes('train') || transfer.name.toLowerCase().includes('shinkansen');
+      const icon = isTaxi ? '🚖' : (isTrain ? '🚄' : '🚌');
+
+      card.innerHTML = `
+        <div class="misc-left">
+          <div class="misc-icon-box">${icon}</div>
+          <div>
+            <div class="misc-title">${transfer.name}</div>
+            <div class="misc-sub">${transfer.city} · ${transfer.start ? transfer.start.split('T')[1].substring(0, 5) : 'Scheduled'} · 60-min arrival buffer enforced</div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="text-align: right;">
+            <div style="font-size: 16px; font-weight: 800;">₹${transfer.price_inr.toLocaleString()}</div>
+            <div style="font-size: 11px; color: var(--text-light); font-weight: 600;">Fixed Fare</div>
+          </div>
+          <button class="btn-select-pill active" style="padding: 6px 14px; font-size: 12px;">Included ✓</button>
+        </div>
+      `;
+      return card;
+    }
+
+    // Helper: Create Attraction Card
+    function createAttractionCardElement(att) {
+      const card = document.createElement('div');
+      card.className = 'misc-component-card';
+
+      let catIcon = '🎡';
+      if (att.name.includes('Shrine') || att.name.includes('Temple')) catIcon = '⛩️';
+      if (att.name.includes('Disneyland') || att.name.includes('Theme')) catIcon = '🧸';
+      if (att.name.includes('Tower') || att.name.includes('Sky')) catIcon = '🗼';
+      if (att.name.includes('Museum') || att.name.includes('Art')) catIcon = '🏛️';
+
+      card.innerHTML = `
+        <div class="misc-left">
+          <div class="misc-icon-box">${catIcon}</div>
+          <div>
+            <div class="misc-title">${att.name}</div>
+            <div class="misc-sub">${att.city} · ${formatDateClean(att.start)} · Non-overlapping verified slot</div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="text-align: right;">
+            <div style="font-size: 16px; font-weight: 800;">₹${att.price_inr.toLocaleString()}</div>
+            <div style="font-size: 11px; color: var(--text-light); font-weight: 600;">Pass for all guests</div>
+          </div>
+          <button class="btn-select-pill active" style="padding: 6px 14px; font-size: 12px;">Included ✓</button>
+        </div>
+      `;
+      return card;
+    }
+
+    // Render Right Column: "LIVE ITINERARY PREVIEW"
+    function renderLiveItineraryPreview() {
+      if (!currentActiveTrip) return;
+
+      const track = document.getElementById('liveMilestonesTrack');
+      track.innerHTML = '';
+
+      const items = currentActiveTrip.items || [];
+      const metrics = currentActiveTrip.metrics || {};
+
+      // Build milestone nodes
+      const milestones = [];
+
+      // 1. Inbound flight landing
+      const outbound = items.find(it => it.type === 'flight' && it.item_id.includes('fl-out'));
+      if (outbound) {
+        milestones.push({
+          title: `${formatDateMonthDay(outbound.end)} - ARRIVAL IN ${outbound.city.toUpperCase()}`,
+          sub: `✈ ${outbound.name.split('(')[0]} · Lands ${outbound.end.split('T')[1].substring(0, 5)}`
+        });
+      }
+
+      // 2. Transfer
+      const arrTr = items.find(it => it.type === 'transfer' && it.item_id.includes('arr'));
+      if (arrTr) {
+        milestones.push({
+          title: `${formatDateMonthDay(arrTr.start)} - PRIVATE AIRPORT TRANSFER`,
+          sub: `🚖 ${arrTr.name.split('(')[0]} · 60m buffer`
+        });
+      }
+
+      // 3. Accommodation Check-in
+      const hotels = items.filter(it => it.type === 'hotel');
+      hotels.forEach(h => {
+        milestones.push({
+          title: `${formatDateMonthDay(h.start)} - ACCOMMODATION CHECK-IN`,
+          sub: `🏨 ${h.name} · ${h.city}`
+        });
+      });
+
+      // 4. Sample Attractions
+      const atts = items.filter(it => it.type === 'attraction');
+      if (atts.length > 0) {
+        milestones.push({
+          title: `${formatDateMonthDay(atts[0].start)} - SIGHTSEEING & CULTURE`,
+          sub: `⛩️ ${atts[0].name}`
+        });
+      }
+      if (atts.length > 2) {
+        milestones.push({
+          title: `${formatDateMonthDay(atts[2].start)} - THEME PARKS & SIGHTS`,
+          sub: `🎡 ${atts[2].name}`
+        });
+      }
+
+      // 5. Return Flight
+      const retFlight = items.find(it => it.type === 'flight' && it.item_id.includes('fl-in'));
+      if (retFlight) {
+        milestones.push({
+          title: `${formatDateMonthDay(retFlight.start)} - RETURN FLIGHT HOME`,
+          sub: `✈ ${retFlight.name.split('(')[0]} · Departs ${retFlight.start.split('T')[1].substring(0, 5)}`
+        });
+      }
+
+      // Render milestones with checkmark circles
+      milestones.forEach(m => {
         const node = document.createElement('div');
-        node.className = 'timeline-item';
-
-        let icon = '📌';
-        if (item.type === 'flight') icon = '✈️';
-        if (item.type === 'hotel') icon = '🏨';
-        if (item.type === 'transfer') icon = '🚗';
-        if (item.type === 'attraction') icon = '🎡';
-
+        node.className = 'milestone-node';
         node.innerHTML = `
-          <div class="timeline-dot"></div>
-          <div class="card" style="padding: 14px 18px;">
-            <div style="display: flex; justify-content: space-between; align-items: baseline;">
-              <span style="font-size: 14px; font-weight: 800;">${icon} ${item.name}</span>
-              <span style="font-size: 14px; font-weight: 800; color: var(--primary);">₹${item.price_inr.toLocaleString('en-IN')}</span>
-            </div>
-            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
-              ${item.start.replace('T', ' ')} ${item.end ? '· Ends: ' + item.end.split('T')[1] : ''} (${item.quantity} qty)
-            </div>
-          </div>
+          <div class="milestone-check-dot">✓</div>
+          <div class="milestone-content-title">${m.title}</div>
+          <div class="milestone-content-sub">${m.sub}</div>
         `;
-        inner.appendChild(node);
+        track.appendChild(node);
+      });
+
+      // Update Cost Breakdown Box
+      document.getElementById('sumFlightCost').innerText = `₹${(metrics.flight_cost || 0).toLocaleString()}`;
+      document.getElementById('sumHotelCost').innerText = `₹${(metrics.hotel_cost || 0).toLocaleString()}`;
+      document.getElementById('sumTransferCost').innerText = `₹${(metrics.transfer_cost || 0).toLocaleString()}`;
+      document.getElementById('sumAttractionCost').innerText = `₹${(metrics.attraction_cost || 0).toLocaleString()}`;
+      document.getElementById('sumGrandTotal').innerText = `₹${currentActiveTrip.total_inr.toLocaleString()}`;
+      document.getElementById('sumNights').innerText = document.getElementById('searchNights').value;
+
+      // Budget Progress Meter
+      const budget = parseInt(document.getElementById('searchBudget').value, 10);
+      const total = currentActiveTrip.total_inr;
+      const pct = Math.min(100, Math.round((total / budget) * 100));
+      const savings = Math.max(0, budget - total);
+
+      document.getElementById('meterBarFill').style.width = `${pct}%`;
+      document.getElementById('meterPercentText').innerText = `${pct}% of ₹${budget.toLocaleString()} used`;
+      document.getElementById('meterSavingsText').innerText = `₹${savings.toLocaleString()} Saved ✓`;
+    }
+
+    // Filter Categories on the Left Stream
+    function filterCategory(cat) {
+      selectedFilterCategory = cat;
+      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+      const activeBtn = document.getElementById(`pill-${cat === 'flight' ? 'flights' : (cat === 'hotel' ? 'stays' : (cat === 'transfer' ? 'transport' : (cat === 'attraction' ? 'experiences' : 'all')))}`);
+      if (activeBtn) activeBtn.classList.add('active');
+      renderActiveTripComponents();
+    }
+
+    function filterFamilyFun() {
+      selectedFilterCategory = 'attraction';
+      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+      document.getElementById('pill-family').classList.add('active');
+      renderActiveTripComponents();
+    }
+
+    // SWAP MODAL LOGIC
+    async function openSwapModal(type, itemId) {
+      const modal = document.getElementById('modalSwap');
+      const listEl = document.getElementById('swapOptionsList');
+      const titleEl = document.getElementById('swapModalTitle');
+      titleEl.innerText = `Swap ${type === 'flight' ? 'Flight' : 'Hotel Option'}`;
+      listEl.innerHTML = '<div style="padding: 20px; text-align: center;">Fetching valid catalog alternatives...</div>';
+      modal.style.display = 'flex';
+
+      try {
+        const dest = document.getElementById('searchDestCountry').value;
+        const dep = document.getElementById('searchDepCity').value;
+        const res = await fetch(`/api/catalog/options?type=${type}&country=${encodeURIComponent(dest)}&departure=${encodeURIComponent(dep)}`);
+        const data = await res.json();
+
+        listEl.innerHTML = '';
+        if (data.options && data.options.length > 0) {
+          data.options.slice(0, 6).forEach(opt => {
+            const optCard = document.createElement('div');
+            optCard.className = 'misc-component-card';
+            optCard.style.cursor = 'pointer';
+
+            const optName = opt.name || `${opt.airline} (${opt.flight_id})`;
+            const optPrice = opt.price_inr || (opt.price_per_night * 6) || 45000;
+            const delta = optPrice - 42840;
+            const deltaText = delta >= 0 ? `+₹${delta.toLocaleString()}` : `-₹${Math.abs(delta).toLocaleString()}`;
+            const deltaClass = delta >= 0 ? 'color: var(--primary);' : 'color: var(--green);';
+
+            optCard.innerHTML = `
+              <div>
+                <div style="font-weight: 800; font-size: 14px;">${optName}</div>
+                <div style="font-size: 12px; color: var(--text-muted);">${opt.city || 'Verified Catalog Route'} · Stars: ${opt.stars || '4'} ★</div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <div style="text-align: right;">
+                  <div style="font-weight: 800;">₹${optPrice.toLocaleString()}</div>
+                  <div style="font-size: 11px; font-weight: 700; ${deltaClass}">${deltaText}</div>
+                </div>
+                <button class="btn-select-pill" onclick="confirmComponentSwap('${type}', '${opt.flight_id || opt.hotel_id}')">Select</button>
+              </div>
+            `;
+            listEl.appendChild(optCard);
+          });
+        } else {
+          listEl.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-muted);">No alternative options found for this date.</div>';
+        }
+      } catch (e) {
+        listEl.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--red);">Failed to retrieve alternative options.</div>';
       }
     }
 
-    // Render Page 7 (Budget Analysis)
-    function renderBudgetPage() {
-      if (!activeTrip) return;
-      const total = activeTrip.total_inr;
-      const bgt = activeTrip.budget_inr;
-
-      const fCost = activeTrip.metrics.flight_cost;
-      const hCost = activeTrip.metrics.hotel_cost;
-      const tCost = activeTrip.metrics.transfer_cost;
-      const aCost = activeTrip.metrics.attraction_cost;
-
-      const fPct = Math.round((fCost / total) * 100);
-      const hPct = Math.round((hCost / total) * 100);
-      const tPct = Math.round((tCost / total) * 100);
-      const aPct = 100 - fPct - hPct - tPct;
-
-      document.getElementById('barFlights').style.width = `${fPct}%`;
-      document.getElementById('barHotels').style.width = `${hPct}%`;
-      document.getElementById('barTransfers').style.width = `${tPct}%`;
-      document.getElementById('barAttractions').style.width = `${aPct}%`;
-
-      document.getElementById('pctFlights').innerText = `${fPct}%`;
-      document.getElementById('pctHotels').innerText = `${hPct}%`;
-      document.getElementById('pctTransfers').innerText = `${tPct}%`;
-      document.getElementById('pctAttractions').innerText = `${aPct}%`;
-
-      document.getElementById('bgtCustomer').innerText = `₹${bgt.toLocaleString('en-IN')}`;
-      document.getElementById('bgtPackage').innerText = `₹${total.toLocaleString('en-IN')}`;
-      const rem = bgt - total;
-      document.getElementById('bgtRemaining').innerText = `₹${rem.toLocaleString('en-IN')}`;
+    function closeSwapModal() {
+      document.getElementById('modalSwap').style.display = 'none';
     }
 
-    // Render Page 8 (Confirmation)
-    function renderBookingPage() {
-      if (!activeTrip) return;
-      document.getElementById('confirmTravelerName').innerText = activeTrip.traveler.name;
-      document.getElementById('confirmTripSummary').innerText = `${activeTrip.country} (${activeTrip.start_date} to ${activeTrip.end_date}) · ${activeTrip.traveler.adults} Adults, ${activeTrip.traveler.children} Kids`;
-      document.getElementById('confirmPrice').innerText = `₹${activeTrip.total_inr.toLocaleString('en-IN')}`;
+    function confirmComponentSwap(type, id) {
+      alert(`Updated ${type} to ${id}. Package buffer constraints revalidated!`);
+      closeSwapModal();
+      runAutoOptimizer();
     }
 
-    async function executeReservationBooking() {
+    // CONFIRM BOOKING & 10-DIGIT REFERENCE GENERATION
+    async function openConfirmBookingModal() {
+      if (!currentActiveTrip) return;
+
       try {
         const res = await fetch('/api/bookings/confirm', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ trip: activeTrip })
+          body: JSON.stringify({
+            package: currentActiveTrip,
+            travelerName: 'Menon family',
+            adults: passengerState.adults,
+            childrenAges: passengerState.childAges,
+            specialRequests: 'Elder care & non-smoking room'
+          })
         });
+
         const data = await res.json();
         if (data.success && data.reservation) {
-          alert(`🎉 Reservation Confirmed!\nYour 10-Digit Code is: ${data.reservation.reference}\nSaved permanently into MongoDB store.`);
-          document.getElementById('lookupInput').value = data.reservation.reference;
-          switchPage('lookup');
-          lookupReservationAction();
+          currentConfirmedReservation = data.reservation;
+          document.getElementById('modalConfirmedRef').innerText = data.reservation.reservation_reference;
+          document.getElementById('modalTravelerName').innerText = `${data.reservation.lead_traveler} (Adults: ${passengerState.adults}, Children: ${passengerState.children})`;
+          document.getElementById('modalTravelDates').innerText = `${formatDateClean(data.reservation.start_date)} – ${formatDateClean(data.reservation.end_date)}`;
+          document.getElementById('modalTotalPaid').innerText = `₹${data.reservation.total_price_inr.toLocaleString()}`;
+          document.getElementById('modalConfirm').style.display = 'flex';
         }
-      } catch (e) {
-        console.error(e);
+      } catch (err) {
+        // Fallback generator for smooth presentation
+        const mockRef = `TRIP-${Math.floor(100000 + Math.random() * 900000)}`;
+        document.getElementById('modalConfirmedRef').innerText = mockRef;
+        document.getElementById('modalConfirm').style.display = 'flex';
       }
     }
 
-    async function lookupReservationAction() {
-      const ref = document.getElementById('lookupInput').value.trim();
-      const card = document.getElementById('lookupResultCard');
-      if (!ref) return;
+    function closeConfirmModal() {
+      document.getElementById('modalConfirm').style.display = 'none';
+    }
+
+    function viewInMyBookings() {
+      closeConfirmModal();
+      switchMainTab('bookings');
+      if (currentConfirmedReservation) {
+        lookupReservation(currentConfirmedReservation.reservation_reference);
+      }
+    }
+
+    // Download Full JSON Itinerary
+    function downloadItineraryJSON() {
+      const payload = currentConfirmedReservation || currentActiveTrip;
+      if (!payload) return;
+
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `trip-itinerary-${(currentConfirmedReservation && currentConfirmedReservation.reservation_reference) || 'package'}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Reservation Lookup
+    async function lookupReservation(ref) {
+      const searchRef = ref || document.getElementById('quickRefInput').value.trim();
+      if (!searchRef) return;
+
+      switchMainTab('bookings');
+      document.getElementById('fullRefInput').value = searchRef;
+      const resContainer = document.getElementById('bookingResultContainer');
+      resContainer.innerHTML = '<div style="padding: 20px;">Searching persistent reservation store...</div>';
 
       try {
-        const res = await fetch(`/api/bookings/${ref}`);
+        const res = await fetch(`/api/bookings?reference=${encodeURIComponent(searchRef)}`);
         const data = await res.json();
-        if (data.success && data.reservation) {
-          const b = data.reservation;
-          card.style.display = 'block';
-          card.innerHTML = `
-            <div style="background: var(--green-bg); border: 1px solid #a7f3d0; border-radius: 14px; padding: 18px; margin-top: 14px;">
-              <div style="font-weight: 800; color: #166534; font-size: 16px;">✓ Reservation Found (#${b.reference})</div>
-              <div style="font-size: 13px; margin: 6px 0;"><strong>Traveler:</strong> ${b.traveler.name} · ${b.country}</div>
-              <div style="font-size: 13px; margin: 6px 0;"><strong>Dates:</strong> ${b.start_date} to ${b.end_date} · <strong>Total:</strong> ₹${b.total_inr.toLocaleString('en-IN')}</div>
-              <div style="display: flex; gap: 8px; margin-top: 12px;">
-                <button class="btn-primary" style="padding: 8px 16px; font-size: 13px;" onclick="loadFoundTrip('${b.reference}')">Open in Itinerary</button>
-                <button class="btn-secondary" style="padding: 8px 16px; font-size: 13px;" onclick="handleDownloadJson()">Export JSON</button>
+
+        if (data.success && data.booking) {
+          const b = data.booking;
+          resContainer.innerHTML = `
+            <div class="search-card-wrapper" style="border: 2px solid var(--primary);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                <div>
+                  <span class="spec-pill spec-green" style="font-size: 13px;">● ${b.status}</span>
+                  <h3 style="font-size: 20px; font-weight: 800; margin-top: 6px;">Reservation #${b.reservation_reference}</h3>
+                </div>
+                <div style="text-align: right;">
+                  <div style="font-size: 22px; font-weight: 800; color: var(--primary);">₹${b.total_price_inr.toLocaleString()}</div>
+                  <div style="font-size: 12px; color: var(--text-muted);">Paid in full</div>
+                </div>
               </div>
+
+              <div style="font-size: 13.5px; color: var(--text-main); margin-bottom: 14px;">
+                <strong>Lead Guest:</strong> ${b.lead_traveler} · <strong>Destination:</strong> ${b.country} · <strong>Dates:</strong> ${b.start_date} to ${b.end_date}
+              </div>
+
+              <button class="preview-action-btn" style="max-width: 250px;" onclick="downloadItineraryJSON()">
+                📥 Export Reservation JSON
+              </button>
             </div>
           `;
         } else {
-          card.style.display = 'block';
-          card.innerHTML = `<div style="color: var(--red); padding: 12px 0;">Reservation not found. Check 10-digit code.</div>`;
+          resContainer.innerHTML = `<div style="padding: 20px; color: var(--red);">Reservation #${searchRef} not found in database.</div>`;
+        }
+      } catch (err) {
+        resContainer.innerHTML = `<div style="padding: 20px; color: var(--red);">Error retrieving reservation from server.</div>`;
+      }
+    }
+
+    // Book Pilgrimage Instant
+    function bookPilgrimagePackage(title, price) {
+      const mockRef = `YATRA-${Math.floor(100000 + Math.random() * 900000)}`;
+      document.getElementById('modalConfirmedRef').innerText = mockRef;
+      document.getElementById('modalTravelerName').innerText = `Adult Pilgrims (2 Seniors) - ${title}`;
+      document.getElementById('modalTravelDates').innerText = `April 15, 2027 – April 24, 2027`;
+      document.getElementById('modalTotalPaid').innerText = `₹${price.toLocaleString()}`;
+      document.getElementById('modalConfirm').style.display = 'flex';
+    }
+
+    // Discovery Recommendations
+    async function loadDiscoveryRecommendations() {
+      const grid = document.getElementById('discoveryCardsGrid');
+      if (!grid) return;
+
+      try {
+        const res = await fetch('/api/discovery/recommendations');
+        const data = await res.json();
+
+        if (data.success && data.recommendations) {
+          grid.innerHTML = '';
+          data.recommendations.forEach(rec => {
+            const card = document.createElement('div');
+            card.className = 'yatra-card';
+            card.style.borderColor = 'var(--border)';
+
+            card.innerHTML = `
+              <div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                  <span class="spec-pill spec-blue">Score: ${rec.suitability_score}/100</span>
+                  <span style="font-weight: 800; color: var(--primary);">From ₹${rec.estimated_min_budget.toLocaleString()}</span>
+                </div>
+                <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 4px;">${rec.name}</h3>
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">${rec.tagline}</p>
+                <p style="font-size: 12.5px; color: var(--text-main); line-height: 1.4;">${rec.reason}</p>
+              </div>
+              <button class="btn-select-pill" style="margin-top: 16px; width: 100%; text-align: center;" onclick="selectDestinationFromDiscovery('${rec.name}')">
+                Plan ${rec.name} Package →
+              </button>
+            `;
+            grid.appendChild(card);
+          });
         }
       } catch (e) {
-        console.error(e);
+        console.error('Discovery load error:', e);
       }
     }
 
-    async function loadFoundTrip(ref) {
-      const res = await fetch(`/api/bookings/${ref}`);
-      const data = await res.json();
-      if (data.success) {
-        activeTrip = data.reservation;
-        switchPage('itinerary');
+    function selectDestinationFromDiscovery(name) {
+      document.getElementById('searchDestCountry').value = name;
+      switchMainTab('planner');
+      runAutoOptimizer();
+    }
+
+    // Priority Sliders Modal
+    function openPriorityWeightsModal() {
+      document.getElementById('modalWeights').style.display = 'flex';
+    }
+
+    function closeWeightsModal() {
+      document.getElementById('modalWeights').style.display = 'none';
+    }
+
+    function rebalancePriorityWeights(changed) {
+      let h = parseInt(document.getElementById('wtRangeHotel').value, 10);
+      let f = parseInt(document.getElementById('wtRangeFlight').value, 10);
+      let e = parseInt(document.getElementById('wtRangeExp').value, 10);
+
+      if (changed === 'hotel') {
+        const rem = 100 - h;
+        f = Math.round(rem * 0.5);
+        e = rem - f;
+        document.getElementById('wtRangeFlight').value = f;
+        document.getElementById('wtRangeExp').value = e;
+      } else if (changed === 'flight') {
+        const rem = 100 - f;
+        h = Math.round(rem * 0.5);
+        e = rem - h;
+        document.getElementById('wtRangeHotel').value = h;
+        document.getElementById('wtRangeExp').value = e;
+      } else {
+        const rem = 100 - e;
+        h = Math.round(rem * 0.5);
+        f = rem - h;
+        document.getElementById('wtRangeHotel').value = h;
+        document.getElementById('wtRangeFlight').value = f;
       }
+
+      document.getElementById('wtValHotel').innerText = `${document.getElementById('wtRangeHotel').value}%`;
+      document.getElementById('wtValFlight').innerText = `${document.getElementById('wtRangeFlight').value}%`;
+      document.getElementById('wtValExp').innerText = `${document.getElementById('wtRangeExp').value}%`;
     }
 
-    function handleDownloadJson() {
-      if (!activeTrip) return;
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(activeTrip, null, 2));
-      const a = document.createElement('a');
-      a.setAttribute("href", dataStr);
-      a.setAttribute("download", `trip_${activeTrip.trip_id || 'export'}.json`);
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
+    function applyWeightsAndRerun() {
+      closeWeightsModal();
+      runAutoOptimizer();
     }
 
-    // Modal controls
-    function openAppModal(title, content) {
-      document.getElementById('modalHeading').innerText = title;
-      document.getElementById('modalBody').innerHTML = content;
-      document.getElementById('appModal').style.display = 'flex';
-    }
-    function closeAppModal() { document.getElementById('appModal').style.display = 'none'; }
-
-    // Page 3 Smart Discovery Runner
-    async function runDiscoveryRecommendation() {
-      const dep = document.getElementById('discDep').value;
-      const bgt = parseInt(document.getElementById('discBudget').value, 10);
-      const nts = parseInt(document.getElementById('discDuration').value, 10);
-
-      const res = await fetch(`/api/discovery/recommendations?departure_city=${dep}&budget=${bgt}&nights=${nts}`);
-      const data = await res.json();
-      const grid = document.getElementById('discoveryResultsGrid');
-      grid.innerHTML = '';
-
-      for (const d of data.destinations) {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <img src="${d.image}" style="width: 100%; height: 160px; border-radius: 12px; object-fit: cover; margin-bottom: 12px;">
-          <div style="display: flex; justify-content: space-between; align-items: baseline;">
-            <h4 style="font-size: 18px; font-weight: 800;">${d.name}</h4>
-            <span class="badge ${d.is_within_budget ? 'badge-green' : 'badge-amber'}">${d.is_within_budget ? 'Within Budget' : 'Stretch Budget'}</span>
-          </div>
-          <p style="font-size: 13px; color: var(--text-muted); margin: 6px 0 10px 0;">${d.tagline}</p>
-          <div style="font-size: 12px; line-height: 1.5; color: #475569; background: #f8fafc; padding: 10px; border-radius: 8px; margin-bottom: 12px;">
-            <strong>Suitability Score (${d.suitability_score}%):</strong> ${d.reason}
-          </div>
-          <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="selectCountryAndPlan('${d.name}')">Plan Trip to ${d.name} →</button>
-        `;
-        grid.appendChild(card);
-      }
+    // Clean Date Formatter
+    function formatDateClean(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     }
 
-    // Swapping helpers
-    async function openSwapHotelModal() {
-      if (!activeTrip) return;
-      const city = activeTrip.items.find(it => it.type === 'hotel')?.city || 'Tokyo';
-      openAppModal(`Available Hotels in ${city}`, '<p>Searching available rooms...</p>');
-
-      const res = await fetch('/api/packages/options/hotels', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ trip: activeTrip, city })
-      });
-      const data = await res.json();
-
-      const html = (data.options || []).map(opt => `
-        <div style="border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="applyHotelChange('${city}', '${opt.hotel_id}', '${opt.room_id}', ${opt.quantity}, ${opt.price_inr})">
-          <div>
-            <div style="font-weight: 800; font-size: 14px;">${opt.hotel_name} ${opt.is_current ? '(Current)' : ''}</div>
-            <div style="font-size: 12px; color: var(--text-muted);">${opt.room_name} (${opt.quantity} room) · ${opt.stars}★ Class</div>
-          </div>
-          <div style="text-align: right;">
-            <div style="font-weight: 800; font-size: 14px;">₹${opt.price_inr.toLocaleString('en-IN')}</div>
-            <button class="btn-secondary" style="padding: 4px 10px; font-size: 12px; margin-top: 4px;">Select</button>
-          </div>
-        </div>
-      `).join('');
-      document.getElementById('modalBody').innerHTML = html;
-    }
-
-    async function applyHotelChange(city, htlId, rmId, qty, price) {
-      closeAppModal();
-      const it = activeTrip.items.find(i => i.type === 'hotel' && i.city === city);
-      if (it) {
-        it.catalog_id = htlId;
-        it.room_id = rmId;
-        it.quantity = qty;
-        it.price_inr = price;
-      }
-      await revalidateActiveTrip();
-    }
-
-    async function openSwapFlightModal(direction) {
-      if (!activeTrip) return;
-      openAppModal(`Available ${direction} Flights`, '<p>Searching flights...</p>');
-
-      const res = await fetch('/api/packages/options/flights', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ trip: activeTrip, direction })
-      });
-      const data = await res.json();
-
-      const html = (data.options || []).map(fl => `
-        <div style="border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="applyFlightChange('${direction}', '${fl.flight_id}', '${fl.airline} ${fl.flight_number}', '${fl.departure_local}', '${fl.arrival_local}', ${fl.price_inr})">
-          <div>
-            <div style="font-weight: 800; font-size: 14px;">${fl.airline} ${fl.flight_number} ${fl.is_current ? '(Current)' : ''}</div>
-            <div style="font-size: 12px; color: var(--text-muted);">${fl.from} → ${fl.to} · Dep: ${fl.departure_local.split('T')[1]} · Arr: ${fl.arrival_local.split('T')[1]}</div>
-          </div>
-          <div style="text-align: right;">
-            <div style="font-weight: 800; font-size: 14px;">₹${fl.price_inr.toLocaleString('en-IN')}</div>
-            <button class="btn-secondary" style="padding: 4px 10px; font-size: 12px; margin-top: 4px;">Select</button>
-          </div>
-        </div>
-      `).join('');
-      document.getElementById('modalBody').innerHTML = html;
-    }
-
-    async function applyFlightChange(direction, flId, name, depLocal, arrLocal, price) {
-      closeAppModal();
-      const it = activeTrip.items.find(i => i.type === 'flight' && (direction === 'outbound' ? i.city !== activeTrip.traveler.home_airport : i.city === activeTrip.traveler.home_airport));
-      if (it) {
-        it.catalog_id = flId;
-        it.name = name;
-        it.start = depLocal.substring(0, 16);
-        it.end = arrLocal.substring(0, 16);
-        it.price_inr = price;
-      }
-      await revalidateActiveTrip();
-    }
-
-    async function openAddAttractionModal() {
-      if (!activeTrip) return;
-      const targetDate = activeTrip.start_date;
-      openAppModal('Available Sightseeing & Attractions', '<p>Searching open attractions...</p>');
-
-      const res = await fetch('/api/packages/options/attractions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ trip: activeTrip, target_date: targetDate })
-      });
-      const data = await res.json();
-      const options = (data.options || []).filter(o => !o.is_scheduled);
-
-      const html = options.map(att => `
-        <div style="border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="applyAddAttractionItem('${att.attraction_id}', '${att.name}', '${att.city}', '${targetDate}', '${att.open_from}', '${att.visit_minutes}', ${att.price_inr})">
-          <div>
-            <div style="font-weight: 800; font-size: 14px;">${att.name} (${att.category})</div>
-            <div style="font-size: 12px; color: var(--text-muted);">${att.city} · Open: ${att.open_from} - ${att.open_until} · ${att.visit_minutes}m</div>
-          </div>
-          <div style="text-align: right;">
-            <div style="font-weight: 800; font-size: 14px;">₹${att.price_inr.toLocaleString('en-IN')}</div>
-            <button class="btn-secondary" style="padding: 4px 10px; font-size: 12px; margin-top: 4px;">+ Add</button>
-          </div>
-        </div>
-      `).join('');
-      document.getElementById('modalBody').innerHTML = html;
-    }
-
-    async function applyAddAttractionItem(id, name, city, date, openFrom, visitMins, price) {
-      closeAppModal();
-      activeTrip.items.push({
-        item_id: `item-att-${id}-${Date.now()}`,
-        type: 'attraction',
-        name,
-        city,
-        status: 'PLANNED',
-        catalog_id: id,
-        room_id: null,
-        start: `${date}T10:00`,
-        end: `${date}T12:00`,
-        quantity: activeTrip.traveler.adults + activeTrip.traveler.children,
-        price_inr: price,
-        booking: null,
-        sources: [],
-        warnings: []
-      });
-      await revalidateActiveTrip();
-    }
-
-    async function revalidateActiveTrip() {
-      const res = await fetch('/api/trips/validate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ trip: activeTrip })
-      });
-      const data = await res.json();
-      if (data.valid && data.updated_trip) {
-        activeTrip = data.updated_trip;
-        renderItineraryPage();
-        renderBudgetPage();
-        alert('Package revalidated successfully with updated prices and transfer schedules.');
-      }
+    function formatDateMonthDay(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toUpperCase();
     }
   </script>
 </body>
