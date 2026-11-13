@@ -1,3 +1,9 @@
+/**
+ * Validator & Re-optimization Service (Features M6, G1, G2)
+ * 100% Deterministic Rule Engine (No AI / LLM)
+ * Validates swaps for hotels, flights, and attractions, calculates real-time price deltas,
+ * and warns about buffer cushions and scheduling conflicts.
+ */
 const catalog = require('./catalog');
 const storage = require('./storage');
 const planner = require('./planner');

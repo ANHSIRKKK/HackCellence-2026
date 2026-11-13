@@ -1,3 +1,14 @@
+/**
+ * Combinatorial Constraint Solver & Package Builder
+ * Strict Section 4 & Section 7 Compliance (Deterministic Algorithm / Zero AI)
+ * Enforces all Hackathon Problem 1 constraints:
+ * - Dates: 3 to 10 nights strictly between 1 April 2027 and 20 April 2027
+ * - Cities: At least 2 nights in a row per city, no repeated cities
+ * - Flights: Outbound landing in first city, return departing last city, seats_left >= travelers
+ * - Buffers: >= 60 min after landing, >= 180 min before departure
+ * - Room Fit Math: adults <= k*max_adults, adults+children <= k*(max_adults+max_children), adults >= k
+ * - Pricing: Sum of flights, hotels, transfers, and attractions in INR
+ */
 const catalog = require('./catalog');
 const storage = require('./storage');
 

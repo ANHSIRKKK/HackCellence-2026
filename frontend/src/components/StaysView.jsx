@@ -256,7 +256,7 @@ export default function StaysView({
             <span className="why-icon">👨‍👩‍👧</span>
             <div>
               <div className="why-card-title">Child & Family Policy</div>
-              <div className="why-card-text">Room capacities accurately checked with zero AI hallucinations or hidden surprises.</div>
+              <div className="why-card-text">Room capacities accurately checked with deterministic room capacity formulas.</div>
             </div>
           </div>
           <div className="why-card">

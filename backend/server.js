@@ -344,8 +344,8 @@ const server = http.createServer(async (req, res) => {
       return sendJson(res, 200, { success: true, destinations: recs });
     }
 
-    // 15. POST /api/nlp/parse (Feature S1: Rule-based text parser)
-    if (req.method === 'POST' && pathname === '/api/nlp/parse') {
+    // 15. POST /api/nlp/parse & /api/quick-request/parse (Feature S1: Rule-based text parser)
+    if (req.method === 'POST' && (pathname === '/api/nlp/parse' || pathname === '/api/quick-request/parse')) {
       const body = await parseBody(req);
       const parsed = nlp.parse(body.query);
       return sendJson(res, 200, { success: true, parsed });

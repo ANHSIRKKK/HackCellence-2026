@@ -45,7 +45,7 @@ export default function PackagesView({
       <div className="active-package-banner">
         <div>
           <span className="booking-pill pill-green" style={{ marginBottom: '6px', display: 'inline-block' }}>
-            ✓ Deterministic Engine Validated · Zero AI Hallucinations
+            ✓ Deterministic Engine Validated · Section 4 Rules Certified
           </span>
           <h2 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--text-dark)', margin: 0 }}>
             {searchParams.departureCity} → {searchParams.destinationCountry} Holiday Package

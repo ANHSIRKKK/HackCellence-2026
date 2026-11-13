@@ -1,3 +1,8 @@
+/**
+ * Feature S1: Quick Request Rule Parser
+ * PDF Specification: "The traveler types a short request in plain words. Your code reads it with rules (no AI) and fills the form."
+ * 100% Deterministic Regex & String Extraction Rules (Zero AI / LLM).
+ */
 class NlpService {
   parse(text) {
     if (!text || typeof text !== 'string') {
