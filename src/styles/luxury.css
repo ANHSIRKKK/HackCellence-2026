@@ -1,0 +1,1942 @@
+:root {
+      /* Modern Luxury Boutique Theme (Screenshot Palette) */
+      --brand-dark: #1E1B18;
+      /* Warm Deep Espresso */
+      --brand-espresso: #2A241F;
+      --brand-accent: #C28B51;
+      /* Warm Camel / Terracotta Bronze */
+      --brand-accent-hover: #AF773E;
+      --brand-accent-light: #F7EFE4;
+      /* Warm Champagne Cream */
+      --brand-accent-glow: rgba(194, 139, 81, 0.25);
+      --brand-gold: #D4AF37;
+
+      /* Backward-compatible booking variables */
+      --booking-blue: #1E1B18;
+      --booking-blue-dark: #141210;
+      --booking-blue-light: #C28B51;
+      --booking-yellow: #C28B51;
+      --booking-yellow-dark: #AF773E;
+
+      --text-dark: #1E1B18;
+      --text-muted: #6E6862;
+      --text-light: #9C948B;
+      --bg-gray: #FAF8F5;
+      /* Warm Porcelain / Linen */
+      --border-gray: #E8E2D8;
+      /* Soft warm border */
+      --border-dark: #D4C9BC;
+      --green-score: #2E7D32;
+      --green-light: #EBF5ED;
+      --amber-badge: #FDF3E7;
+      --amber-text: #B26A1A;
+
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg-gray);
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ============================================================== */
+    /* 1. TOP HEADER (IPHONE DYNAMIC ISLAND FLOATING PILL)             */
+    /* ============================================================== */
+    .header-dynamic-island-wrapper {
+      position: sticky;
+      top: 14px;
+      z-index: 1000;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 0 16px;
+      pointer-events: none;
+    }
+
+    .header-booking {
+      pointer-events: auto;
+      background: rgba(22, 18, 15, 0.92);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      outline: 1px solid rgba(194, 139, 81, 0.28);
+      border-radius: 9999px;
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.7), 0 4px 18px rgba(194, 139, 81, 0.15);
+      color: #ffffff;
+      padding: 7px 14px 7px 22px;
+      width: auto;
+      min-width: 680px;
+      max-width: 980px;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .header-booking:hover {
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.55), 0 0 0 1.5px rgba(194, 139, 81, 0.45), 0 6px 22px rgba(194, 139, 81, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .header-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .brand-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: #ffffff;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .brand-logo-main {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #FFFFFF;
+      font-family: var(--font-serif);
+    }
+
+    .brand-logo-sub {
+      font-size: 9px;
+      background: linear-gradient(135deg, #C28B51 0%, #AF773E 100%);
+      color: #FFFFFF;
+      padding: 2.5px 7px;
+      border-radius: 9999px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      font-family: var(--font-sans);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .btn-header-yatra {
+      background: rgba(194, 139, 81, 0.18);
+      color: #F7EFE4;
+      border: 1px solid rgba(194, 139, 81, 0.45);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s ease;
+    }
+
+    .btn-header-yatra:hover,
+    .btn-header-yatra.active {
+      background: linear-gradient(135deg, #C28B51 0%, #AF773E 100%);
+      color: #ffffff;
+      border-color: #C28B51;
+      box-shadow: 0 4px 14px rgba(194, 139, 81, 0.4);
+      transform: scale(1.02);
+    }
+
+    .currency-pill {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 12.5px;
+      color: #E2DCD5;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.2s;
+    }
+
+    .currency-pill:hover {
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+    }
+
+    .btn-header-white {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-header-white:hover {
+      background: #C28B51;
+      border-color: #C28B51;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(194, 139, 81, 0.35);
+      transform: scale(1.02);
+    }
+
+    @media (max-width: 768px) {
+      .header-booking {
+        min-width: 0;
+        width: 100%;
+        border-radius: 20px;
+        padding: 8px 14px;
+      }
+
+      .brand-logo-main {
+        font-size: 17px;
+      }
+
+      .brand-logo-sub {
+        display: none;
+      }
+    }
+
+    .btn-header-white {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-header-white:hover {
+      background: #C28B51;
+      border-color: #C28B51;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(194, 139, 81, 0.35);
+      transform: scale(1.02);
+    }
+
+    @media (max-width: 768px) {
+      .header-booking {
+        min-width: 0;
+        width: 100%;
+        border-radius: 20px;
+        padding: 8px 14px;
+      }
+      .brand-logo-main { font-size: 17px; }
+      .brand-logo-sub { display: none; }
+    }
+
+    .btn-header-outline {
+      background: transparent;
+      color: #F2ECE4;
+      border: 1px solid rgba(242, 236, 228, 0.35);
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-header-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: #C28B51;
+      color: #C28B51;
+    }
+
+    .btn-header-white {
+      background: linear-gradient(135deg, #C28B51 0%, #AF773E 100%);
+      color: #ffffff;
+      border: none;
+      padding: 7px 18px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(194, 139, 81, 0.3);
+      transition: all 0.2s;
+    }
+
+    .btn-header-white:hover {
+      background: linear-gradient(135deg, #AF773E 0%, #9C6733 100%);
+      transform: translateY(-1px);
+    }
+
+    /* SPECIFIC 5-TAB NAVIGATION (CLEAN & NON-OVERFLOWING) */
+    .header-nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 14px;
+    }
+
+    .tab-item-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #D6CBC0;
+      border: 1px solid transparent;
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .tab-item-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    .tab-item-btn.active {
+      border-color: #C28B51;
+      background: rgba(194, 139, 81, 0.25);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .tab-item-btn.badge-special {
+      background: rgba(194, 139, 81, 0.15);
+      border-color: rgba(194, 139, 81, 0.4);
+      color: #F5EBE1;
+    }
+
+    .tab-item-btn.badge-special.active {
+      background: linear-gradient(135deg, #C28B51 0%, #AF773E 100%);
+      color: #ffffff;
+      border-color: #C28B51;
+    }
+
+    /* Toast Notification */
+    .toast-banner {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--booking-blue-dark);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 2000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      display: none;
+      align-items: center;
+      gap: 10px;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Multi-Page Views Display */
+    .page-section {
+      display: none;
+      padding: 24px 0 50px 0;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ============================================================== */
+    /* LUXURY GLASSMORPHIC SEARCH FRAME (SCREENSHOT MATCH)            */
+    /* ============================================================== */
+    .search-box-anchor {
+      position: relative;
+      margin-top: 0;
+      z-index: 100;
+      margin-bottom: 38px;
+    }
+
+    .yellow-search-frame {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(214, 196, 174, 0.7);
+      border-radius: 16px;
+      display: grid;
+      grid-template-columns: 2.3fr 1.6fr 1.5fr 1.1fr auto;
+      gap: 8px;
+      padding: 8px;
+      box-shadow: 0 20px 45px -12px rgba(45, 30, 15, 0.12), 0 4px 14px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Quick Suggestion Pills Under Search Frame */
+    .quick-suggestion-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .suggestion-lead-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #8C847A;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .suggestion-chip {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid #E4DCD0;
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 12.5px;
+      color: var(--text-dark);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+
+    .suggestion-chip:hover {
+      background: #FFFFFF;
+      border-color: #C28B51;
+      color: #C28B51;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(194, 139, 81, 0.18);
+    }
+
+    /* Explore by Country / Trending Suggestion Cards */
+    .explore-country-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .country-thumb-card {
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      height: 220px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(214, 196, 174, 0.5);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .country-thumb-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .country-thumb-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px -8px rgba(45, 30, 15, 0.16);
+      border-color: #C28B51;
+    }
+
+    .country-thumb-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .country-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 30%, rgba(20, 17, 15, 0.88) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      color: #ffffff;
+    }
+
+    .country-title-overlay {
+      font-size: 20px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-serif);
+    }
+
+    .country-price-overlay {
+      font-size: 13px;
+      color: #f1ede4;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .search-cell {
+      background: #FAF8F5;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      border-radius: 10px;
+      border: 1px solid #EAE3D7;
+      transition: all 0.2s;
+    }
+
+    .search-cell:focus-within,
+    .search-cell:hover {
+      background: #FFFFFF;
+      border-color: #C28B51;
+      box-shadow: 0 0 0 3px rgba(194, 139, 81, 0.12);
+    }
+
+    .search-cell-icon {
+      font-size: 18px;
+      color: #8C6D4C;
+    }
+
+    .search-cell-content {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .search-cell-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #8C847A;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+
+    .search-cell-select,
+    .search-cell-input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .btn-search-booking {
+      background: linear-gradient(135deg, #C28B51 0%, #AF773E 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 0 28px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(194, 139, 81, 0.35);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-search-booking:hover {
+      background: linear-gradient(135deg, #AF773E 0%, #9C6733 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(194, 139, 81, 0.45);
+    }
+
+    .search-sub-options {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 10px;
+      font-size: 13.5px;
+      color: var(--text-dark);
+    }
+
+    .search-checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    /* Common Card Styles */
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      margin-bottom: 6px;
+      color: var(--text-dark);
+    }
+
+    .section-subtitle {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+    }
+
+    .booking-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      display: inline-block;
+    }
+
+    .pill-green {
+      background: #EBF5ED;
+      color: #1E6B30;
+    }
+
+    .pill-amber {
+      background: #FDF3E7;
+      color: #B26A1A;
+    }
+
+    .pill-blue {
+      background: #F3ECE2;
+      color: #8C5922;
+    }
+
+    .btn-booking-primary {
+      background: linear-gradient(135deg, #C28B51 0%, #AF773E 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 9px 18px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(194, 139, 81, 0.25);
+      transition: all 0.2s;
+    }
+
+    .btn-booking-primary:hover {
+      background: linear-gradient(135deg, #AF773E 0%, #9C6733 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(194, 139, 81, 0.35);
+    }
+
+    .btn-booking-outline {
+      background: #ffffff;
+      color: #C28B51;
+      border: 1px solid #C28B51;
+      border-radius: 10px;
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-booking-outline:hover {
+      background: #FDF9F4;
+      border-color: #AF773E;
+      color: #AF773E;
+    }
+
+    /* ============================================================== */
+    /* PAGE 1: STAYS / HERO (MODERN LUXURY EDITORIAL STYLE)            */
+    /* ============================================================== */
+    .hero-banner-section {
+      background: linear-gradient(180deg, #1C1917 0%, #2A241F 60%, #383028 100%);
+      color: #ffffff;
+      padding: 44px 0 68px 0;
+      position: relative;
+      border-bottom: 1px solid rgba(232, 226, 216, 0.15);
+    }
+
+    .hero-sale-badge {
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #D4AF37;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .hero-title-main {
+      font-family: var(--font-serif);
+      font-size: 46px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      color: #FFFFFF;
+    }
+
+    .hero-subtitle-main {
+      font-size: 16.5px;
+      color: #D6CBC0;
+      margin-bottom: 24px;
+      max-width: 680px;
+      line-height: 1.6;
+    }
+
+    .filter-pills-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn-pill {
+      background: #ffffff;
+      border: 1px solid #E2D9CC;
+      border-radius: 100px;
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn-pill:hover {
+      border-color: #C28B51;
+      color: #C28B51;
+    }
+
+    .filter-btn-pill.active {
+      background: #1E1B18;
+      border-color: #1E1B18;
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(30, 27, 24, 0.25);
+    }
+
+    /* ============================================================== */
+    /* PAGE 2: FLIGHTS                                                */
+    /* ============================================================== */
+    .flight-banner-box {
+      background: var(--booking-blue);
+      color: #ffffff;
+      padding: 32px 0;
+      margin-bottom: 24px;
+    }
+
+    .flight-filter-strip {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .flight-radio-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .flight-card-booking {
+      background: #ffffff;
+      border: 1px solid #E8E2D8;
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      display: grid;
+      grid-template-columns: 140px 1fr auto auto;
+      gap: 20px;
+      align-items: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s;
+    }
+
+    .flight-card-booking:hover {
+      border-color: #D4C9BC;
+      box-shadow: 0 8px 24px rgba(35, 25, 15, 0.07);
+    }
+
+    .airline-brand-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .airline-badge-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .logo-ns {
+      background: #1E1B18;
+      color: white;
+    }
+
+    .logo-av {
+      background: #FAF3EB;
+      color: #C28B51;
+    }
+
+    .logo-sa {
+      background: #EBF5ED;
+      color: #2E7D32;
+    }
+
+    .flight-route-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .time-city-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .flight-time-large {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .flight-city-sub {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .trajectory-center-bar {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .trajectory-line-dashed {
+      width: 100%;
+      height: 2px;
+      border-bottom: 2px dashed #D4C9BC;
+      position: relative;
+      margin: 4px 0;
+    }
+
+    .trajectory-airplane-glyph {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 0 6px;
+      color: #C28B51;
+      font-size: 13px;
+    }
+
+    /* ============================================================== */
+    /* PAGE 3: PACKAGES (FLAGSHIP 2-COLUMN VIEW & LIVE PREVIEW)       */
+    /* ============================================================== */
+    .results-split-container {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .package-tier-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 20px;
+      background: var(--bg-gray);
+      padding: 6px;
+      border-radius: 8px;
+      border: 1px solid var(--border-gray);
+    }
+
+    @media (max-width: 900px) {
+      .package-tier-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .priority-strategy-btn {
+      flex: 1;
+      min-width: 170px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #FAF8F5;
+      border: 1.5px solid #E8E2D8;
+      border-radius: 12px;
+      padding: 10px 14px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .priority-strategy-btn:hover {
+      border-color: #C28B51;
+      background: #FFFDF9;
+      transform: translateY(-1px);
+    }
+
+    .priority-strategy-btn.active {
+      border-color: #C28B51;
+      background: #FDF9F4;
+      box-shadow: 0 4px 14px rgba(194, 139, 81, 0.15);
+    }
+
+    .priority-strategy-btn strong {
+      font-size: 13px;
+      color: var(--text-dark);
+      display: block;
+    }
+
+    .priority-strategy-btn small {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    .tier-button {
+      background: #ffffff;
+      border: 1.5px solid #E8E2D8;
+      border-radius: 12px;
+      padding: 12px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tier-button:hover {
+      border-color: #C28B51;
+      transform: translateY(-1px);
+    }
+
+    .tier-button.active {
+      background: #ffffff;
+      border-color: #C28B51;
+      box-shadow: 0 8px 24px rgba(194, 139, 81, 0.18);
+    }
+
+    .tier-badge-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tier-button.active .tier-badge-label {
+      color: #C28B51;
+    }
+
+    .tier-price-val {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-top: 3px;
+    }
+
+    .component-group-header {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 18px 0 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .component-group-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-gray);
+    }
+
+    .hotel-card-booking {
+      background: #ffffff;
+      border: 1px solid #E8E2D8;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 14px;
+      display: grid;
+      grid-template-columns: 200px 1fr auto;
+      gap: 18px;
+      align-items: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s;
+    }
+
+    .hotel-card-booking:hover {
+      border-color: #D4C9BC;
+      box-shadow: 0 8px 24px rgba(35, 25, 15, 0.07);
+    }
+
+    .hotel-thumb-img {
+      width: 200px;
+      height: 140px;
+      border-radius: 10px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hotel-info-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hotel-header-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hotel-name-h3 {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-decoration: none;
+    }
+
+    .stars-badge {
+      color: #D4AF37;
+      font-size: 13px;
+    }
+
+    .hotel-review-score-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .score-badge {
+      background: #C28B51;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .score-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .hotel-room-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .hotel-specs-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .attraction-card-booking {
+      background: #ffffff;
+      border: 1px solid #E8E2D8;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .attraction-card-booking:hover {
+      border-color: #D4C9BC;
+      box-shadow: 0 4px 14px rgba(35, 25, 15, 0.05);
+    }
+
+    .attraction-thumb-img {
+      width: 90px;
+      height: 70px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .price-and-cta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .price-main-val {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .price-sub-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Live Itinerary Sticky Card */
+    .preview-card-sticky {
+      background: #ffffff;
+      border: 1px solid #E8E2D8;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 12px 36px -8px rgba(35, 25, 15, 0.08);
+      position: sticky;
+      top: 20px;
+    }
+
+    .preview-header-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #E8E2D8;
+      margin-bottom: 16px;
+    }
+
+    .preview-header-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #1E1B18;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .milestones-stepper {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 20px;
+    }
+
+    .milestones-stepper::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      bottom: 10px;
+      left: 10px;
+      width: 2px;
+      background: #E8E2D8;
+    }
+
+    .milestone-step-item {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    .milestone-step-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .step-dot-circle {
+      position: absolute;
+      left: -28px;
+      top: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #C28B51;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1.5px #E8E2D8;
+    }
+
+    .step-title-text {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      line-height: 1.25;
+    }
+
+    .step-sub-text {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .summary-costs-panel {
+      background: #FAF8F5;
+      border-radius: 12px;
+      border: 1px solid #E8E2D8;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .cost-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .cost-line-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-top: 1px solid #E2D9CC;
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+
+    .total-title-bold {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-dark);
+      text-transform: uppercase;
+    }
+
+    .total-amount-huge {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.5px;
+    }
+
+    .meter-progress-container {
+      margin-top: 8px;
+    }
+
+    .meter-bar-track {
+      background: #e2e8f0;
+      height: 6px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+
+    .meter-bar-fill-inner {
+      background: var(--green-score);
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.3s ease;
+    }
+
+    .meter-caption-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--green-score);
+    }
+
+    .btn-reserve-full {
+      width: 100%;
+      background: linear-gradient(135deg, #C28B51 0%, #AF773E 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 13px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      box-shadow: 0 4px 14px rgba(194, 139, 81, 0.3);
+      transition: all 0.2s;
+    }
+
+    .btn-reserve-full:hover {
+      background: linear-gradient(135deg, #AF773E 0%, #9C6733 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(194, 139, 81, 0.4);
+    }
+
+    .btn-export-outline {
+      width: 100%;
+      background: #ffffff;
+      color: var(--text-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: 4px;
+      padding: 10px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-export-outline:hover {
+      background: var(--bg-gray);
+    }
+
+    /* ============================================================== */
+    /* PAGE 4: ATTRACTIONS                                            */
+    /* ============================================================== */
+    .attractions-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .attraction-spotlight-card {
+      background: #ffffff;
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s;
+    }
+
+    .attraction-spotlight-card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .spotlight-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .spotlight-info {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .spotlight-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .spotlight-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .spotlight-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-gray);
+      padding-top: 10px;
+      margin-top: auto;
+    }
+
+    /* ============================================================== */
+    /* PAGE 5: SACRED INDIA PILGRIMAGE / TIRTH YATRA                  */
+    /* ============================================================== */
+    /* ============================================================== */
+    /* PAGE 5: SACRED INDIA PILGRIMAGE / TIRTH YATRA (DELUXE)         */
+    /* ============================================================== */
+    .yatra-banner-deluxe {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%);
+      border: 1px solid #f59e0b;
+      border-radius: 12px;
+      padding: 22px 26px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.08);
+    }
+
+    .yatra-trust-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .yatra-trust-item {
+      background: #ffffff;
+      border: 1px solid #fed7aa;
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: all 0.2s;
+    }
+
+    .yatra-trust-item:hover {
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1);
+      border-color: #f59e0b;
+    }
+
+    .yatra-trust-item strong {
+      display: block;
+      font-size: 13px;
+      color: #78350f;
+      margin-bottom: 2px;
+    }
+
+    .yatra-trust-item p {
+      font-size: 11px;
+      color: #92400e;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    .yatra-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .yatra-card-deluxe {
+      background: #ffffff;
+      border: 1px solid #fed7aa;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      transition: all 0.25s ease;
+    }
+
+    .yatra-card-deluxe:hover {
+      border-color: #f59e0b;
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.16);
+      transform: translateY(-2px);
+    }
+
+    .yatra-card-header-img {
+      height: 180px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .yatra-card-header-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+
+    .yatra-card-deluxe:hover .yatra-card-header-img img {
+      transform: scale(1.03);
+    }
+
+    .yatra-img-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.7) 100%);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .yatra-badge-float {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      color: #fde68a;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      align-self: flex-start;
+      border: 1px solid rgba(254, 230, 138, 0.3);
+    }
+
+    .yatra-header-info {
+      color: #ffffff;
+    }
+
+    .yatra-header-info .dest-subtitle {
+      font-size: 11.5px;
+      color: #fed7aa;
+      font-weight: 600;
+    }
+
+    .yatra-header-info .dest-title {
+      font-size: 17.5px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+
+    .yatra-card-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .yatra-rating-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .yatra-route-strip {
+      background: #fffbeb;
+      border: 1px dashed #fcd34d;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 11.5px;
+      color: #78350f;
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+    }
+
+    .yatra-features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .yatra-feature-pill {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 11.5px;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .yatra-tabs-bar {
+      display: flex;
+      border-bottom: 2px solid #fed7aa;
+      margin-bottom: 10px;
+    }
+
+    .yatra-tab-btn {
+      background: transparent;
+      border: none;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #78350f;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s;
+    }
+
+    .yatra-tab-btn.active {
+      color: #b45309;
+      border-bottom-color: #b45309;
+    }
+
+    .yatra-tab-pane {
+      font-size: 12px;
+      color: var(--text-dark);
+      background: #fffdf7;
+      border: 1px solid #fef3c7;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+      min-height: 75px;
+      max-height: 120px;
+      overflow-y: auto;
+      line-height: 1.45;
+    }
+
+    .yatra-bottom-actions {
+      border-top: 1px solid #fed7aa;
+      padding-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-yatra-customize {
+      background: #fffbeb;
+      color: #b45309;
+      border: 1.5px solid #b45309;
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-yatra-customize:hover {
+      background: #fef3c7;
+    }
+
+    .btn-yatra-reserve {
+      background: #b45309;
+      color: #ffffff;
+      border: 1.5px solid #b45309;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-yatra-reserve:hover {
+      background: #92400e;
+    }
+
+    .yatra-custom-modal-window {
+      background: #ffffff;
+      border-radius: 12px;
+      max-width: 760px;
+      width: 95%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 24px;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .custom-choice-card {
+      border: 1.5px solid #fed7aa;
+      border-radius: 8px;
+      padding: 10px;
+      cursor: pointer;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      transition: all 0.2s;
+      background: white;
+    }
+
+    .custom-choice-card:hover {
+      border-color: #f59e0b;
+      background: #fffdf7;
+    }
+
+    .custom-choice-card strong {
+      display: block;
+      font-size: 12.5px;
+      color: #78350f;
+    }
+
+    .custom-choice-card span {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .custom-choice-row {
+      border: 1.5px solid #fed7aa;
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      transition: all 0.2s;
+      background: white;
+    }
+
+    .custom-choice-row:hover {
+      border-color: #f59e0b;
+      background: #fffdf7;
+    }
+
+    .custom-choice-row strong {
+      font-size: 13px;
+      color: #78350f;
+    }
+
+    .custom-check-pill {
+      border: 1.5px solid #fed7aa;
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      background: white;
+      transition: all 0.2s;
+    }
+
+    .custom-check-pill:hover {
+      border-color: #f59e0b;
+      background: #fffdf7;
+    }
+
+    .custom-check-pill strong {
+      display: block;
+      font-size: 12px;
+      color: #78350f;
+    }
+
+    .custom-check-pill span {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* ============================================================== */
+    /* PAGE 6: MY RESERVATIONS                                       */
+    /* ============================================================== */
+    .reservations-list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .res-card-full {
+      background: #ffffff;
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s;
+    }
+
+    .res-card-full:hover {
+      border-color: var(--booking-blue-light);
+    }
+
+    /* Modals */
+    .modal-overlay-booking {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(2px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 16px;
+    }
+
+    .modal-booking-content {
+      background: #ffffff;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 28px;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-close-booking {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    .footer-booking {
+      background: #ffffff;
+      border-top: 1px solid var(--border-gray);
+      padding: 40px 0 20px 0;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .footer-dest-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--booking-blue-light);
+    }
+
+    .footer-dest-pills span {
+      cursor: pointer;
+    }
+
+    .footer-dest-pills span:hover {
+      text-decoration: underline;
+    }
+
+    .footer-columns-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .footer-col-title {
+      font-weight: 800;
+      font-size: 13.5px;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+
+    .footer-col-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-col-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer-col-links a:hover {
+      text-decoration: underline;
+      color: var(--booking-blue-light);
+    }
+
+    .footer-bottom-bar {
+      border-top: 1px solid var(--border-gray);
+      padding-top: 20px;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .footer-holdings-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      margin-top: 12px;
+      font-weight: 800;
+      font-size: 14px;
+      color: #94a3b8;
+    }
+
+    @media (max-width: 992px) {
+      .yellow-search-frame {
+        grid-template-columns: 1fr;
+      }
+
+      .results-split-container {
+        grid-template-columns: 1fr;
+      }
+
+      .attractions-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .explore-country-grid,
+      .yatra-grid-booking {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-columns-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Print Stylesheet for Travel Receipt / Voucher */
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+
+      #modalTravelReceipt,
+      #modalTravelReceipt * {
+        visibility: visible !important;
+      }
+
+      #modalTravelReceipt {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        background: #ffffff !important;
+        display: block !important;
+        padding: 0 !important;
+      }
+
+      .receipt-no-print {
+        display: none !important;
+      }
+
+      #modalTravelReceipt .modal-booking-content {
+        max-width: 100% !important;
+        width: 100% !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+      }
+
+      #receiptVoucherContent {
+        padding: 10px 15px !important;
+      }
+    }

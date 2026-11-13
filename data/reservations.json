@@ -1031,5 +1031,359 @@
     "is_pilgrim": true,
     "package_name": "Char Dham Yatra Deluxe (Helicopter VIP Darshan)",
     "created_at": "2026-11-13T18:29:25.991Z"
+  },
+  {
+    "reference": "5832568666",
+    "trip_id": "trip-1794596459270-8066",
+    "traveler": {
+      "name": "Menon family",
+      "home_airport": "BLR",
+      "adults": 2,
+      "children": 1,
+      "child_ages": [
+        6
+      ]
+    },
+    "country": "Japan",
+    "start_date": "2027-04-10",
+    "end_date": "2027-04-16",
+    "budget_inr": 350000,
+    "total_inr": 273000,
+    "items": [
+      {
+        "item_id": "item-fl-out-FL-740",
+        "type": "flight",
+        "name": "AirVeda AV 832 (BLR to KIX)",
+        "airline": "AirVeda",
+        "flight_number": "AV 832",
+        "from_code": "BLR",
+        "to_code": "KIX",
+        "duration_minutes": 490,
+        "stops": 0,
+        "cabin": "ECONOMY",
+        "city": "Osaka",
+        "status": "BOOKED",
+        "catalog_id": "FL-740",
+        "room_id": null,
+        "start": "2027-04-09T21:40",
+        "end": "2027-04-10T09:20",
+        "quantity": 3,
+        "price_inr": 103320,
+        "booking": {
+          "reference": "5832568666"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-tr-arr-TR-KIX-KYO-TAXI",
+        "type": "transfer",
+        "name": "Kansai airport taxi to Kyoto (KIX to Kyoto hotels (all areas))",
+        "city": "Kyoto",
+        "status": "BOOKED",
+        "catalog_id": "TR-KIX-KYO-TAXI",
+        "room_id": null,
+        "start": "2027-04-10T10:20",
+        "end": "2027-04-10T11:50",
+        "quantity": 1,
+        "price_inr": 16800,
+        "booking": {
+          "reference": "5832568666"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-htl-HTL-KYO-004-2027-04-10",
+        "type": "hotel",
+        "name": "Sakura Garden Hotel (Family Room)",
+        "hotel_name": "Sakura Garden Hotel",
+        "room_name": "Family Room",
+        "image": "images/hotels/HOTEL-TWIN-1.jpg",
+        "stars": 4,
+        "rating": 8.7,
+        "area": "Higashiyama",
+        "family_friendly": true,
+        "city": "Kyoto",
+        "status": "BOOKED",
+        "catalog_id": "HTL-KYO-004",
+        "room_id": "RM-KYO-004-B",
+        "start": "2027-04-10",
+        "end": "2027-04-16",
+        "quantity": 1,
+        "price_inr": 48720,
+        "booking": {
+          "reference": "5832568666"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-tr-dep-TR-KIX-KYO-TAXI",
+        "type": "transfer",
+        "name": "Kansai airport taxi to Kyoto (Sakura Garden Hotel to Kyoto hotels (all areas))",
+        "city": "Kyoto",
+        "status": "BOOKED",
+        "catalog_id": "TR-KIX-KYO-TAXI",
+        "room_id": null,
+        "start": "2027-04-16T07:30",
+        "end": "2027-04-16T09:00",
+        "quantity": 1,
+        "price_inr": 16800,
+        "booking": {
+          "reference": "5832568666"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-fl-in-FL-411",
+        "type": "flight",
+        "name": "AirVeda AV 515 (KIX to BLR)",
+        "airline": "AirVeda",
+        "flight_number": "AV 515",
+        "from_code": "KIX",
+        "to_code": "BLR",
+        "duration_minutes": 570,
+        "stops": 0,
+        "cabin": "ECONOMY",
+        "city": "Bengaluru",
+        "status": "BOOKED",
+        "catalog_id": "FL-411",
+        "room_id": null,
+        "start": "2027-04-16T12:00",
+        "end": "2027-04-16T18:00",
+        "quantity": 3,
+        "price_inr": 78120,
+        "booking": {
+          "reference": "5832568666"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-KYO-003-2027-04-10",
+        "type": "attraction",
+        "name": "Kinkaku-ji",
+        "image": "images/attractions/ATT-KYO-003.jpg",
+        "category": "TEMPLE",
+        "city": "Kyoto",
+        "status": "BOOKED",
+        "catalog_id": "ATT-KYO-003",
+        "room_id": null,
+        "start": "2027-04-10T14:00",
+        "end": "2027-04-10T15:00",
+        "quantity": 3,
+        "price_inr": 728,
+        "booking": {
+          "reference": "5832568666"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-KYO-004-2027-04-11",
+        "type": "attraction",
+        "name": "Arashiyama Bamboo Grove",
+        "image": "images/attractions/ATT-KYO-004.jpg",
+        "category": "NATURE",
+        "city": "Kyoto",
+        "status": "BOOKED",
+        "catalog_id": "ATT-KYO-004",
+        "room_id": null,
+        "start": "2027-04-11T09:30",
+        "end": "2027-04-11T10:30",
+        "quantity": 3,
+        "price_inr": 0,
+        "booking": {
+          "reference": "5832568666"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-KYO-005-2027-04-11",
+        "type": "attraction",
+        "name": "Nishiki Market",
+        "image": "images/attractions/ATT-KYO-005.jpg",
+        "category": "MARKET",
+        "city": "Kyoto",
+        "status": "BOOKED",
+        "catalog_id": "ATT-KYO-005",
+        "room_id": null,
+        "start": "2027-04-11T11:15",
+        "end": "2027-04-11T12:15",
+        "quantity": 3,
+        "price_inr": 0,
+        "booking": {
+          "reference": "5832568666"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-KYO-006-2027-04-12",
+        "type": "attraction",
+        "name": "Gion District",
+        "image": "images/attractions/ATT-KYO-006.jpg",
+        "category": "DISTRICT",
+        "city": "Kyoto",
+        "status": "BOOKED",
+        "catalog_id": "ATT-KYO-006",
+        "room_id": null,
+        "start": "2027-04-12T09:30",
+        "end": "2027-04-12T11:00",
+        "quantity": 3,
+        "price_inr": 0,
+        "booking": {
+          "reference": "5832568666"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-KYO-007-2027-04-12",
+        "type": "attraction",
+        "name": "Philosopher's Path",
+        "image": "images/attractions/ATT-KYO-007.jpg",
+        "category": "NATURE",
+        "city": "Kyoto",
+        "status": "BOOKED",
+        "catalog_id": "ATT-KYO-007",
+        "room_id": null,
+        "start": "2027-04-12T11:45",
+        "end": "2027-04-12T12:45",
+        "quantity": 3,
+        "price_inr": 0,
+        "booking": {
+          "reference": "5832568666"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-KYO-008-2027-04-13",
+        "type": "attraction",
+        "name": "Kyoto Railway Museum",
+        "image": "images/attractions/ATT-KYO-008.jpg",
+        "category": "MUSEUM",
+        "city": "Kyoto",
+        "status": "BOOKED",
+        "catalog_id": "ATT-KYO-008",
+        "room_id": null,
+        "start": "2027-04-13T10:00",
+        "end": "2027-04-13T12:00",
+        "quantity": 3,
+        "price_inr": 1960,
+        "booking": {
+          "reference": "5832568666"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-KYO-009-2027-04-13",
+        "type": "attraction",
+        "name": "Nijo Castle",
+        "image": "images/attractions/ATT-KYO-009.jpg",
+        "category": "CASTLE",
+        "city": "Kyoto",
+        "status": "BOOKED",
+        "catalog_id": "ATT-KYO-009",
+        "room_id": null,
+        "start": "2027-04-13T12:45",
+        "end": "2027-04-13T14:15",
+        "quantity": 3,
+        "price_inr": 1680,
+        "booking": {
+          "reference": "5832568666"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-KYO-011-2027-04-14",
+        "type": "attraction",
+        "name": "Kyoto Aquarium",
+        "image": "images/attractions/ATT-KYO-011.jpg",
+        "category": "AQUARIUM",
+        "city": "Kyoto",
+        "status": "BOOKED",
+        "catalog_id": "ATT-KYO-011",
+        "room_id": null,
+        "start": "2027-04-14T10:00",
+        "end": "2027-04-14T12:00",
+        "quantity": 3,
+        "price_inr": 3360,
+        "booking": {
+          "reference": "5832568666"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-KYO-001-2027-04-14",
+        "type": "attraction",
+        "name": "Kiyomizu-dera",
+        "image": "images/attractions/ATT-KYO-001.jpg",
+        "category": "TEMPLE",
+        "city": "Kyoto",
+        "status": "BOOKED",
+        "catalog_id": "ATT-KYO-001",
+        "room_id": null,
+        "start": "2027-04-14T12:45",
+        "end": "2027-04-14T14:15",
+        "quantity": 3,
+        "price_inr": 672,
+        "booking": {
+          "reference": "5832568666"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-KYO-002-2027-04-15",
+        "type": "attraction",
+        "name": "Fushimi Inari Taisha",
+        "image": "images/attractions/ATT-KYO-002.jpg",
+        "category": "SHRINE",
+        "city": "Kyoto",
+        "status": "BOOKED",
+        "catalog_id": "ATT-KYO-002",
+        "room_id": null,
+        "start": "2027-04-15T09:30",
+        "end": "2027-04-15T11:30",
+        "quantity": 3,
+        "price_inr": 0,
+        "booking": {
+          "reference": "5832568666"
+        },
+        "sources": [],
+        "warnings": []
+      },
+      {
+        "item_id": "item-att-ATT-KYO-010-2027-04-15",
+        "type": "attraction",
+        "name": "Sanjusangen-do",
+        "image": "images/attractions/ATT-KYO-010.jpg",
+        "category": "TEMPLE",
+        "city": "Kyoto",
+        "status": "BOOKED",
+        "catalog_id": "ATT-KYO-010",
+        "room_id": null,
+        "start": "2027-04-15T12:15",
+        "end": "2027-04-15T13:00",
+        "quantity": 3,
+        "price_inr": 840,
+        "booking": {
+          "reference": "5832568666"
+        },
+        "sources": [],
+        "warnings": []
+      }
+    ],
+    "is_pilgrim": false,
+    "package_name": "",
+    "created_at": "2026-11-13T19:01:03.587Z"
   }
 ]

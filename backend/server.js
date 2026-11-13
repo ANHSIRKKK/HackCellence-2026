@@ -9,7 +9,8 @@ const planner = require('./planner');
 const validator = require('./validator');
 
 const PORT = process.env.PORT || 5001;
-const FRONTEND_DIR = path.resolve(__dirname, '../frontend');
+const DIST_DIR = path.resolve(__dirname, '../dist');
+const SRC_DIR = path.resolve(__dirname, '../src');
 const IMAGES_DIR = path.resolve(__dirname, '../images');
 
 // In-memory active trips store (for staging modifications)
@@ -44,7 +45,7 @@ function getContentType(ext) {
   switch (ext.toLowerCase()) {
     case '.html': return 'text/html';
     case '.css': return 'text/css';
-    case '.js': 
+    case '.js':
     case '.jsx':
     case '.ts':
     case '.tsx': return 'application/javascript';
@@ -366,10 +367,27 @@ const server = http.createServer(async (req, res) => {
       }
     }
 
-    // 17. Static Frontend Serving
-    let staticPath = path.join(FRONTEND_DIR, pathname === '/' ? 'index.html' : pathname);
+    // 16b. Static /src/ React Components Serving
+    if (pathname.startsWith('/src/')) {
+      const relPath = pathname.replace('/src/', '');
+      const fullPath = path.join(SRC_DIR, relPath);
+      if (fs.existsSync(fullPath)) {
+        return sendFile(res, fullPath, getContentType(path.extname(fullPath)));
+      }
+    }
+
+    // 17. Static React 18 Frontend Serving
+    if (pathname.startsWith('/assets/')) {
+      const relPath = pathname.replace('/assets/', '');
+      const fullPath = path.join(DIST_DIR, 'assets', relPath);
+      if (fs.existsSync(fullPath)) {
+        return sendFile(res, fullPath, getContentType(path.extname(fullPath)));
+      }
+    }
+
+    let staticPath = path.join(DIST_DIR, pathname === '/' ? 'index.html' : pathname);
     if (!fs.existsSync(staticPath)) {
-      staticPath = path.join(FRONTEND_DIR, 'index.html');
+      staticPath = path.join(DIST_DIR, 'index.html');
     }
     if (fs.existsSync(staticPath)) {
       return sendFile(res, staticPath, getContentType(path.extname(staticPath)));

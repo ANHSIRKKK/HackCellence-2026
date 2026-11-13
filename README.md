@@ -1,35 +1,41 @@
 # TRIPRISE · Smart Holiday Planner & Luxury Travel Engine
-### Hackathon Problem 1 Solution · Zero-AI Pure Node.js & SQLite Architecture
+### Hackathon Problem 1 Solution · Pure React 18 & Node.js Zero-AI Architecture
 
-An end-to-end holiday package planning and booking web application built for the **Hackathon Problem 1**. Designed with the familiar visual layout of **Booking.com**, the platform takes complex multi-party travel constraints and instantly synthesizes complete, validated holiday itineraries with flights, hotels, airport transfers, intercity transfers, and attractions.
+An end-to-end holiday package planning and booking web application built for the **Hackathon Problem 1**. Designed with the familiar luxury layout of **Booking.com**, the platform is built with a modular **React 18 Component Architecture** backed by a high-performance **Node.js REST Service** and **SQLite 3 Persistent Database**. The engine takes complex multi-party travel constraints and instantly synthesizes complete, validated holiday itineraries with flights, hotels, airport transfers, intercity transfers, and attractions.
 
 ---
 
 ## 🚀 Quick Start (Instant Run)
 
-### 1. Start Backend & Full Platform (Port 5001)
+### 1. Start Server & React Platform (Port 5001)
 ```bash
 npm start
 ```
 *(Or `node backend/server.js`)*
 
 Open your browser at:
-👉 **`http://localhost:5001`**
+👉 **`http://localhost:5001`** *(Served with React 18 production build)*
+
+### 2. (Optional) Run React in Vite Development Mode
+```bash
+npm run dev:react
+```
+Open Vite dev server at: **`http://localhost:3000`** *(Hot Module Replacement + auto-proxy to backend)*
 
 ---
 
 ## 🏛️ System Architecture
 
-The system strictly adheres to the rule that **the backend holds all business logic** while the frontend communicates exclusively through REST API endpoints. All optimization and recommendation algorithms are **100% deterministic rule-based (Zero AI / LLM APIs)** per hackathon specifications.
+The system strictly adheres to the rule that **the backend holds all business logic** while the React frontend communicates exclusively through REST API endpoints. All optimization and recommendation algorithms are **100% deterministic rule-based (Zero AI / LLM APIs)** per hackathon specifications.
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                   Frontend (Interactive Booking.com UI Engine)         │
-│  - 5 Streamlined Core Tabs: Stays, Flights, Flight+Hotel, Attractions, │
-│    and Sacred Tirth Yatra (Adults / Parents Pilgrimage)                │
+│                   Frontend (React 18 Component Architecture)           │
+│  - Modular Components: Header, SearchFrame, StaysView, FlightsView,    │
+│    PackageView, AttractionsView, SpiritualView, BookingsView           │
+│  - Modals: SwapModal, TravelReceiptModal, YatraModal, GuestModal       │
 │  - Sticky Live Itinerary Preview & Budget Progress Meter               │
 │  - Senior Tirth Yatra Customization Suite (Helipad, Puja, Diet, Sevak) │
-│  - Component Swap Modals with Real-Time Price Deltas                   │
 │  - 10-Digit Numeric Reservation Pass & 1-Click JSON Export             │
 └───────────────────────────────────▲────────────────────────────────────┘
                                     │ REST API (JSON)
