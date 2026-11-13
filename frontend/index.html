@@ -4685,103 +4685,111 @@
     }
 
     async function confirmCustomYatra() {
-      if (!currentCustomYatra) return;
+      try {
+        if (!currentCustomYatra) {
+          currentCustomYatra = (typeof yatraCatalog !== 'undefined' && yatraCatalog.length > 0) ? yatraCatalog[0] : null;
+        }
+        if (!currentCustomYatra) return;
 
-      const travelerRadio = document.querySelector('input[name="custTravelers"]:checked');
-      const travelerCount = travelerRadio ? parseInt(travelerRadio.value, 10) : 2;
-      const parentsNames = document.getElementById('custParentsNames').value.trim() || 'Senior Pilgrim Parents';
-      const travelDate = document.getElementById('custTravelDate').value || '2027-04-15';
-      const healthNotes = document.getElementById('custHealthNotes').value.trim();
+        const travelerRadio = document.querySelector('input[name="custTravelers"]:checked');
+        const travelerCount = travelerRadio ? parseInt(travelerRadio.value, 10) : 2;
+        const parentsNames = (document.getElementById('custParentsNames') && document.getElementById('custParentsNames').value.trim()) || 'Senior Pilgrim Parents';
+        const travelDate = (document.getElementById('custTravelDate') && document.getElementById('custTravelDate').value) || '2027-04-15';
+        const healthNotes = (document.getElementById('custHealthNotes') && document.getElementById('custHealthNotes').value.trim()) || '';
 
-      const rawPrice = document.getElementById('custLiveTotalPrice').innerText.replace(/[^0-9]/g, '');
-      const finalPrice = parseInt(rawPrice, 10) || currentCustomYatra.basePrice;
+        const rawPrice = (document.getElementById('custLiveTotalPrice') && document.getElementById('custLiveTotalPrice').innerText.replace(/[^0-9]/g, '')) || '';
+        const finalPrice = parseInt(rawPrice, 10) || currentCustomYatra.basePrice;
 
-      const ref = `${Math.floor(1000000000 + Math.random() * 9000000000)}`;
+        const ref = `${Math.floor(1000000000 + Math.random() * 9000000000)}`;
 
-      const nightsCount = parseInt(currentCustomYatra.subtitle.match(/\d+/)?.[0] || '6', 10);
-      const bookingRecord = {
-        reference: ref,
-        booking_reference: ref,
-        confirmed_at: new Date().toISOString(),
-        country: `India Pilgrimage (${currentCustomYatra.region})`,
-        package_name: currentCustomYatra.title,
-        is_pilgrim: true,
-        start_date: travelDate,
-        end_date: addDays(travelDate, nightsCount),
-        budget_inr: finalPrice + 35000,
-        total_inr: finalPrice,
-        total_price_inr: finalPrice,
-        traveler: {
-          name: parentsNames,
-          seniors_count: travelerCount,
-          health_notes: healthNotes || 'Wheelchair assistance & Sattvic meal requested'
-        },
-        items: [
-          {
-            item_id: `pilgrim-hotel-${ref}`,
-            type: 'hotel',
-            name: `${currentCustomYatra.title} (Senior Care Ground-Floor Suite)`,
-            city: currentCustomYatra.region,
-            status: 'BOOKED',
-            start: `${travelDate}T12:00`,
-            end: `${addDays(travelDate, nightsCount)}T10:00`,
-            price_inr: Math.round(finalPrice * 0.55),
-            booking: { reference: ref }
-          },
-          {
-            item_id: `pilgrim-transfer-${ref}`,
-            type: 'transfer',
-            name: 'VIP Helipad Shuttle & Temple Corridor Golf Cart Buggy',
-            city: currentCustomYatra.region,
-            status: 'BOOKED',
-            start: `${travelDate}T09:00`,
-            end: `${travelDate}T11:00`,
-            price_inr: Math.round(finalPrice * 0.25),
-            booking: { reference: ref }
-          },
-          {
-            item_id: `pilgrim-darshan-${ref}`,
-            type: 'attraction',
-            name: 'VIP Sanctum Darshan & Special Gotra Sankalp Puja',
-            city: currentCustomYatra.region,
-            status: 'BOOKED',
-            start: `${travelDate}T14:00`,
-            end: `${travelDate}T17:00`,
-            price_inr: Math.round(finalPrice * 0.20),
-            booking: { reference: ref }
-          }
-        ],
-        trip: {
-          destination_country: `India Pilgrimage (${currentCustomYatra.region})`,
+        const nightsCount = parseInt((currentCustomYatra.subtitle && currentCustomYatra.subtitle.match(/\d+/)?.[0]) || '6', 10);
+        const bookingRecord = {
+          reference: ref,
+          booking_reference: ref,
+          confirmed_at: new Date().toISOString(),
+          country: `India Pilgrimage (${currentCustomYatra.region || 'Sacred Site'})`,
           package_name: currentCustomYatra.title,
+          is_pilgrim: true,
           start_date: travelDate,
           end_date: addDays(travelDate, nightsCount),
-          nights: nightsCount,
-          travelers_count: travelerCount,
-          total_price_inr: finalPrice
+          budget_inr: finalPrice + 35000,
+          total_inr: finalPrice,
+          total_price_inr: finalPrice,
+          traveler: {
+            name: parentsNames,
+            seniors_count: travelerCount,
+            health_notes: healthNotes || 'Wheelchair assistance & Sattvic meal requested'
+          },
+          items: [
+            {
+              item_id: `pilgrim-hotel-${ref}`,
+              type: 'hotel',
+              name: `${currentCustomYatra.title} (Senior Care Ground-Floor Suite)`,
+              city: currentCustomYatra.region || 'Sacred Site',
+              status: 'BOOKED',
+              start: `${travelDate}T12:00`,
+              end: `${addDays(travelDate, nightsCount)}T10:00`,
+              price_inr: Math.round(finalPrice * 0.55),
+              booking: { reference: ref }
+            },
+            {
+              item_id: `pilgrim-transfer-${ref}`,
+              type: 'transfer',
+              name: 'VIP Helipad Shuttle & Temple Corridor Golf Cart Buggy',
+              city: currentCustomYatra.region || 'Pilgrim Corridor',
+              status: 'BOOKED',
+              start: `${travelDate}T09:00`,
+              end: `${travelDate}T11:00`,
+              price_inr: Math.round(finalPrice * 0.25),
+              booking: { reference: ref }
+            },
+            {
+              item_id: `pilgrim-darshan-${ref}`,
+              type: 'attraction',
+              name: 'VIP Sanctum Darshan & Special Gotra Sankalp Puja',
+              city: currentCustomYatra.region || 'Sanctum Corridor',
+              status: 'BOOKED',
+              start: `${travelDate}T14:00`,
+              end: `${travelDate}T17:00`,
+              price_inr: Math.round(finalPrice * 0.20),
+              booking: { reference: ref }
+            }
+          ],
+          trip: {
+            destination_country: `India Pilgrimage (${currentCustomYatra.region || 'Sacred Site'})`,
+            package_name: currentCustomYatra.title,
+            start_date: travelDate,
+            end_date: addDays(travelDate, nightsCount),
+            nights: nightsCount,
+            travelers_count: travelerCount,
+            total_price_inr: finalPrice
+          }
+        };
+
+        try {
+          await fetch('/api/bookings/confirm', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ trip: bookingRecord, package: bookingRecord })
+          });
+        } catch (err) {
+          console.warn('Persist booking local error:', err);
         }
-      };
 
-      try {
-        await fetch('/api/bookings/confirm', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ trip: bookingRecord, package: bookingRecord })
-        });
-      } catch (err) {
-        console.warn('Persist booking local error:', err);
+        confirmedReservationData = bookingRecord;
+        closeYatraCustomizer();
+
+        document.getElementById('confRefCode').innerText = ref;
+        document.getElementById('confTraveler').innerText = `${parentsNames} (${travelerCount} Seniors) · ${currentCustomYatra.title}`;
+        document.getElementById('confDates').innerText = `${formatDateDisplay(travelDate)} (Confirmed VIP Pilgrim Pass)`;
+        document.getElementById('confTotal').innerText = `₹${finalPrice.toLocaleString()}`;
+        document.getElementById('modalConfirmed').style.display = 'flex';
+
+        showToast(`✓ Custom Tirth Yatra confirmed for parents with 10-digit code #${ref}!`);
+      } catch (e) {
+        console.error('confirmCustomYatra error:', e);
+        showToast('Error confirming package. Please try again.');
       }
-
-      confirmedReservationData = bookingRecord;
-      closeYatraCustomizer();
-
-      document.getElementById('confRefCode').innerText = ref;
-      document.getElementById('confTraveler').innerText = `${parentsNames} (${travelerCount} Seniors) · ${currentCustomYatra.title}`;
-      document.getElementById('confDates').innerText = `${formatDateDisplay(travelDate)} (Confirmed VIP Pilgrim Pass)`;
-      document.getElementById('confTotal').innerText = `₹${finalPrice.toLocaleString()}`;
-      document.getElementById('modalConfirmed').style.display = 'flex';
-
-      showToast(`✓ Custom Tirth Yatra confirmed for parents with 10-digit code #${ref}!`);
     }
 
     async function bookPilgrimInstant(name, price) {
@@ -4996,6 +5004,16 @@
     }
 
     // Date Utilities
+    function addDays(dateStr, days) {
+      if (!dateStr) return '2027-04-20';
+      const [y, m, d] = dateStr.split('-').map(Number);
+      const dt = new Date(y, m - 1, d + (parseInt(days, 10) || 0));
+      const year = dt.getFullYear();
+      const month = String(dt.getMonth() + 1).padStart(2, '0');
+      const day = String(dt.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
     function formatDateDisplay(dStr) {
       if (!dStr) return '';
       const d = new Date(dStr);
