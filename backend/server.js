@@ -112,6 +112,54 @@ const server = http.createServer(async (req, res) => {
       });
     }
 
+    // 2a. GET /api/catalog/flights
+    if (req.method === 'GET' && pathname === '/api/catalog/flights') {
+      let results = catalog.flights;
+      if (query.from) {
+        results = results.filter(f => f.from.toLowerCase() === query.from.toLowerCase());
+      }
+      if (query.to) {
+        results = results.filter(f => f.to.toLowerCase() === query.to.toLowerCase());
+      }
+      if (query.airline) {
+        results = results.filter(f => f.airline.toLowerCase().includes(query.airline.toLowerCase()));
+      }
+      if (query.cabin) {
+        results = results.filter(f => f.cabin.toLowerCase() === query.cabin.toLowerCase());
+      }
+      return sendJson(res, 200, { success: true, count: results.length, flights: results.slice(0, 60) });
+    }
+
+    // 2b. GET /api/catalog/attractions
+    if (req.method === 'GET' && pathname === '/api/catalog/attractions') {
+      let results = catalog.attractions;
+      if (query.city) {
+        results = results.filter(a => a.city.toLowerCase() === query.city.toLowerCase());
+      }
+      if (query.category) {
+        results = results.filter(a => a.category.toLowerCase() === query.category.toLowerCase());
+      }
+      return sendJson(res, 200, { success: true, count: results.length, attractions: results });
+    }
+
+    // 2c. GET /api/catalog/hotels
+    if (req.method === 'GET' && pathname === '/api/catalog/hotels') {
+      let results = catalog.hotels;
+      if (query.city) {
+        results = results.filter(h => h.city.toLowerCase() === query.city.toLowerCase());
+      }
+      return sendJson(res, 200, { success: true, count: results.length, hotels: results });
+    }
+
+    // 2d. GET /api/catalog/transfers
+    if (req.method === 'GET' && pathname === '/api/catalog/transfers') {
+      let results = catalog.transfers;
+      if (query.city) {
+        results = results.filter(t => (t.city && t.city.toLowerCase() === query.city.toLowerCase()) || (t.to_city && t.to_city.toLowerCase() === query.city.toLowerCase()));
+      }
+      return sendJson(res, 200, { success: true, count: results.length, transfers: results });
+    }
+
     // 3. POST /api/trips/validate-request
     if (req.method === 'POST' && pathname === '/api/trips/validate-request') {
       const body = await parseBody(req);
@@ -241,26 +289,43 @@ const server = http.createServer(async (req, res) => {
     // 11. POST /api/bookings/confirm
     if (req.method === 'POST' && pathname === '/api/bookings/confirm') {
       const body = await parseBody(req);
-      if (!body.trip) {
+      const tripData = body.trip || body.package;
+      if (!tripData) {
         return sendJson(res, 400, { success: false, error: 'Missing trip data' });
       }
-      const reservation = storage.createReservation(body.trip);
+      const reservation = storage.createReservation(tripData);
       return sendJson(res, 200, { success: true, reservation });
     }
 
-    // 12. GET /api/bookings/:reference
-    if (req.method === 'GET' && pathname.startsWith('/api/bookings/')) {
+    // 12. GET /api/bookings/:reference or DELETE
+    if (pathname.startsWith('/api/bookings/')) {
       const reference = pathname.replace('/api/bookings/', '').trim();
-      const reservation = storage.getReservation(reference);
-      if (reservation) {
-        return sendJson(res, 200, { success: true, reservation });
-      } else {
-        return sendJson(res, 404, { success: false, error: 'Reservation not found' });
+      if (req.method === 'DELETE') {
+        storage.reservations.delete(reference);
+        storage.saveData();
+        return sendJson(res, 200, { success: true, message: 'Reservation cancelled successfully' });
+      }
+      if (req.method === 'GET') {
+        const reservation = storage.getReservation(reference);
+        if (reservation) {
+          return sendJson(res, 200, { success: true, reservation, booking: reservation });
+        } else {
+          return sendJson(res, 404, { success: false, error: 'Reservation not found' });
+        }
       }
     }
 
-    // 13. GET /api/bookings (All saved reservations)
+    // 13. GET /api/bookings (All saved reservations or query)
     if (req.method === 'GET' && pathname === '/api/bookings') {
+      const ref = query.reference || query.ref;
+      if (ref) {
+        const reservation = storage.getReservation(ref);
+        if (reservation) {
+          return sendJson(res, 200, { success: true, reservation, booking: reservation });
+        } else {
+          return sendJson(res, 404, { success: false, error: 'Reservation not found' });
+        }
+      }
       const all = storage.getAllReservations();
       return sendJson(res, 200, { success: true, reservations: all });
     }
