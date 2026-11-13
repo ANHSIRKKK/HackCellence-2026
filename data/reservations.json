@@ -973,5 +973,63 @@
     "is_pilgrim": true,
     "package_name": "Char Dham Yatra Deluxe (Helicopter VIP Darshan)",
     "created_at": "2026-11-13T17:41:39.295Z"
+  },
+  {
+    "reference": "6336193810",
+    "trip_id": "trip-pilgrim-6336193810",
+    "traveler": {
+      "name": "Senior Pilgrim Parents",
+      "seniors_count": 2,
+      "health_notes": "Wheelchair assistance & Sattvic meal requested"
+    },
+    "country": "India Pilgrimage (Uttarakhand Himalayas)",
+    "start_date": "2027-04-15",
+    "end_date": "2027-04-24",
+    "budget_inr": 220000,
+    "total_inr": 185000,
+    "items": [
+      {
+        "item_id": "pilgrim-hotel-2196027071",
+        "type": "hotel",
+        "name": "Char Dham Yatra Deluxe (Helicopter VIP Darshan) (Senior Care Ground-Floor Suite)",
+        "city": "Uttarakhand Himalayas",
+        "status": "BOOKED",
+        "start": "2027-04-15T12:00",
+        "end": "2027-04-24T10:00",
+        "price_inr": 101750,
+        "booking": {
+          "reference": "6336193810"
+        }
+      },
+      {
+        "item_id": "pilgrim-transfer-2196027071",
+        "type": "transfer",
+        "name": "VIP Helipad Shuttle & Temple Corridor Golf Cart Buggy",
+        "city": "Uttarakhand Himalayas",
+        "status": "BOOKED",
+        "start": "2027-04-15T09:00",
+        "end": "2027-04-15T11:00",
+        "price_inr": 46250,
+        "booking": {
+          "reference": "6336193810"
+        }
+      },
+      {
+        "item_id": "pilgrim-darshan-2196027071",
+        "type": "attraction",
+        "name": "VIP Sanctum Darshan & Special Gotra Sankalp Puja",
+        "city": "Uttarakhand Himalayas",
+        "status": "BOOKED",
+        "start": "2027-04-15T14:00",
+        "end": "2027-04-15T17:00",
+        "price_inr": 37000,
+        "booking": {
+          "reference": "6336193810"
+        }
+      }
+    ],
+    "is_pilgrim": true,
+    "package_name": "Char Dham Yatra Deluxe (Helicopter VIP Darshan)",
+    "created_at": "2026-11-13T18:29:25.991Z"
   }
 ]

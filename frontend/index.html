@@ -1765,6 +1765,32 @@
       .explore-country-grid, .yatra-grid-booking { grid-template-columns: 1fr; }
       .footer-columns-grid { grid-template-columns: repeat(2, 1fr); }
     }
+
+    /* Print Stylesheet for Travel Receipt / Voucher */
+    @media print {
+      body * { visibility: hidden !important; }
+      #modalTravelReceipt, #modalTravelReceipt * { visibility: visible !important; }
+      #modalTravelReceipt {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        background: #ffffff !important;
+        display: block !important;
+        padding: 0 !important;
+      }
+      .receipt-no-print { display: none !important; }
+      #modalTravelReceipt .modal-booking-content {
+        max-width: 100% !important;
+        width: 100% !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+      }
+      #receiptVoucherContent {
+        padding: 10px 15px !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2603,8 +2629,37 @@
         </div>
       </div>
 
-      <button class="btn-reserve-full" onclick="exportTripJSON()">📥 Download Full Itinerary JSON</button>
-      <button class="btn-export-outline" onclick="closeConfirmModal(); navigateToPage('bookings');">View in My Bookings</button>
+      <button class="btn-reserve-full" style="background: linear-gradient(135deg, #C28B51 0%, #AF773E 100%); margin-bottom: 8px;" onclick="openReceiptModal(document.getElementById('confRefCode').innerText)">
+        📄 View & Print Official Receipt / Voucher
+      </button>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn-booking-outline" style="flex: 1; padding: 10px;" onclick="exportTripJSON()">📥 Download JSON (Section 6)</button>
+        <button class="btn-booking-outline" style="flex: 1; padding: 10px;" onclick="closeConfirmModal(); navigateToPage('bookings');">View in My Bookings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Official Travel Receipt & Printable Voucher Modal -->
+  <div id="modalTravelReceipt" class="modal-overlay-booking" style="z-index: 10000;">
+    <div class="modal-booking-content" style="max-width: 760px; width: 95%; padding: 0; overflow: hidden; background: #ffffff; border-radius: 16px; border: 1px solid #d6c4ae; max-height: 90vh; display: flex; flex-direction: column;">
+      <!-- Action Bar (Not Printed) -->
+      <div class="receipt-no-print" style="background: #1e1b18; color: #ffffff; padding: 14px 22px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #c28b51;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 16px;">📄</span>
+          <span style="font-size: 13.5px; font-weight: 700; color: #f7efe4; letter-spacing: 0.5px;">OFFICIAL TRAVEL RECEIPT & E-VOUCHER</span>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <button class="btn-booking-primary" style="padding: 7px 16px; font-size: 13px; background: #c28b51; display: flex; align-items: center; gap: 6px;" onclick="window.print()">
+            🖨️ Print / Save as PDF
+          </button>
+          <button style="background: transparent; border: none; color: #d4c9bc; font-size: 20px; cursor: pointer; padding: 0 4px;" onclick="closeReceiptModal()">✕</button>
+        </div>
+      </div>
+
+      <!-- Printable Voucher Area -->
+      <div id="receiptVoucherContent" style="padding: 32px 36px; overflow-y: auto; background: #ffffff; color: #1e1b18; font-family: var(--font-sans);">
+        <!-- Filled dynamically by openReceiptModal(...) -->
+      </div>
     </div>
   </div>
 
@@ -4022,7 +4077,8 @@
               </div>
 
               <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <button class="btn-booking-primary" onclick="downloadSpecificReservationJSON('${b.reference}')">📥 Download JSON Itinerary</button>
+                <button class="btn-booking-primary" style="background: #C28B51;" onclick="openReceiptModal('${b.reference}')">📄 View Official Receipt & Pass</button>
+                <button class="btn-booking-outline" onclick="downloadSpecificReservationJSON('${b.reference}')">📥 Download JSON</button>
                 <button class="btn-booking-outline" style="color: #dc2626; border-color: #fca5a5;" onclick="cancelBooking('${b.reference}')">✕ Cancel Reservation</button>
               </div>
             `;
@@ -4070,8 +4126,9 @@
             <div style="font-size: 13.5px; margin-bottom: 16px;">
               <strong>Guest:</strong> ${(b.traveler && b.traveler.name) || 'Lead Guest'} · <strong>Country:</strong> ${b.country} · <strong>Dates:</strong> ${b.start_date} to ${b.end_date}
             </div>
-            <div style="display: flex; gap: 10px;">
-              <button class="btn-booking-primary" onclick="downloadSpecificReservationJSON('${b.reference}')">📥 Download JSON</button>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button class="btn-booking-primary" style="background: #C28B51;" onclick="openReceiptModal('${b.reference}')">📄 View Official Receipt & Pass</button>
+              <button class="btn-booking-outline" onclick="downloadSpecificReservationJSON('${b.reference}')">📥 Download JSON</button>
               <button class="btn-booking-outline" style="color: #dc2626; border-color: #fca5a5;" onclick="cancelBooking('${b.reference}')">✕ Cancel Booking</button>
             </div>
           `;
@@ -4113,6 +4170,159 @@
             URL.revokeObjectURL(url);
           }
         });
+    }
+
+    // OFFICIAL TRAVEL RECEIPT & VOUCHER MODAL HANDLERS
+    async function openReceiptModal(reference) {
+      if (!reference) return;
+      const modal = document.getElementById('modalTravelReceipt');
+      const content = document.getElementById('receiptVoucherContent');
+      content.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--text-muted);">Generating verified travel voucher...</div>';
+      modal.style.display = 'flex';
+
+      try {
+        let b = null;
+        if (confirmedReservationData && (confirmedReservationData.reference === reference || confirmedReservationData.booking_reference === reference)) {
+          b = confirmedReservationData;
+        } else {
+          const res = await fetch(`/api/bookings/${encodeURIComponent(reference)}`);
+          const data = await res.json();
+          if (data && data.reservation) b = data.reservation;
+        }
+
+        if (!b) {
+          content.innerHTML = `<div style="padding: 40px; text-align: center; color: #dc2626;">Reservation #${reference} not found in database.</div>`;
+          return;
+        }
+
+        const travelerName = (b.traveler && b.traveler.name) || 'Lead Guest';
+        const seniorsCount = (b.traveler && b.traveler.seniors_count) || 0;
+        const healthNotes = (b.traveler && b.traveler.health_notes) || '';
+        const items = b.items || [];
+        const isPilgrim = Boolean(b.is_pilgrim || (b.country && b.country.includes('Pilgrim')));
+        const pkgName = b.package_name || (b.trip && b.trip.package_name) || (isPilgrim ? 'Sacred Tirth Yatra Package' : 'Curated Luxury Holiday');
+
+        let itemsHtml = '';
+        if (items.length > 0) {
+          itemsHtml = items.map((it, idx) => {
+            let icon = '🏷️';
+            if (it.type === 'flight') icon = '✈️';
+            if (it.type === 'hotel') icon = '🏨';
+            if (it.type === 'transfer') icon = '🚖';
+            if (it.type === 'attraction') icon = isPilgrim ? '🕉️' : '🎡';
+
+            const startStr = it.start ? it.start.replace('T', ' ') : '—';
+            return `
+              <tr style="border-bottom: 1px solid #eef2f6; font-size: 13px;">
+                <td style="padding: 10px 8px; vertical-align: top; color: var(--text-muted);">${idx + 1}</td>
+                <td style="padding: 10px 8px; vertical-align: top;">
+                  <span style="font-weight: 700; color: #1e1b18;">${icon} ${it.name}</span>
+                  <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">
+                    ${it.city ? `📍 ${it.city} · ` : ''}Service Time: ${startStr} ${it.quantity ? `· Qty: ${it.quantity}` : ''}
+                  </div>
+                </td>
+                <td style="padding: 10px 8px; vertical-align: top; text-align: right; font-weight: 700; color: #1e1b18; white-space: nowrap;">
+                  ₹${(it.price_inr || 0).toLocaleString()}
+                </td>
+              </tr>
+            `;
+          }).join('');
+        }
+
+        content.innerHTML = `
+          <!-- Header Row -->
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #1e1b18; padding-bottom: 18px; margin-bottom: 20px;">
+            <div>
+              <div style="font-size: 11px; font-weight: 800; color: #c28b51; letter-spacing: 1.5px; text-transform: uppercase;">CONFIRMED HOLIDAY RECEIPT & PASS</div>
+              <h1 style="font-family: var(--font-serif); font-size: 26px; font-weight: 700; margin: 4px 0 2px 0; color: #1e1b18;">
+                TRIPRISE LUXURY HOLIDAYS
+              </h1>
+              <div style="font-size: 12px; color: var(--text-muted);">
+                Autonomous Travel Architecture · ACID Database Record
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div style="display: inline-block; background: #ebf5ed; border: 1px solid #bbf7d0; color: #166534; padding: 4px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 800; margin-bottom: 6px;">
+                ● PAID IN FULL · INVENTORY LOCKED
+              </div>
+              <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Reservation Code</div>
+              <div style="font-family: monospace; font-size: 22px; font-weight: 800; letter-spacing: 2px; color: #c28b51;">
+                #${b.reference}
+              </div>
+            </div>
+          </div>
+
+          <!-- Trip Overview Box -->
+          <div style="background: #faf8f5; border: 1px solid #eae3d7; border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
+            <div>
+              <span style="font-size: 11px; font-weight: 700; color: #8c847a; text-transform: uppercase; display: block; margin-bottom: 2px;">Lead Guest</span>
+              <strong style="font-size: 14px; color: #1e1b18;">${travelerName}</strong>
+              ${seniorsCount ? `<div style="font-size: 12px; color: #b45309; font-weight: 600;">${seniorsCount} Senior Citizen Parents</div>` : ''}
+            </div>
+            <div>
+              <span style="font-size: 11px; font-weight: 700; color: #8c847a; text-transform: uppercase; display: block; margin-bottom: 2px;">Travel Dates</span>
+              <strong style="font-size: 14px; color: #1e1b18;">${b.start_date} ➔ ${b.end_date}</strong>
+              <div style="font-size: 12px; color: var(--text-muted);">Confirmed Schedule</div>
+            </div>
+            <div>
+              <span style="font-size: 11px; font-weight: 700; color: #8c847a; text-transform: uppercase; display: block; margin-bottom: 2px;">Package / Route</span>
+              <strong style="font-size: 14px; color: #1e1b18;">${pkgName}</strong>
+              <div style="font-size: 12px; color: var(--text-muted);">${b.country}</div>
+            </div>
+          </div>
+
+          ${healthNotes ? `
+            <div style="background: #fffbeb; border-left: 4px solid #f59e0b; padding: 10px 14px; border-radius: 4px; margin-bottom: 20px; font-size: 12.5px; color: #92400e;">
+              <strong>Special Care / Dietary Notes:</strong> ${healthNotes}
+            </div>
+          ` : ''}
+
+          <!-- Components Table -->
+          <div style="margin-bottom: 24px;">
+            <div style="font-size: 12px; font-weight: 800; color: #1e1b18; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
+              Itemized Component Vouchers & Passes:
+            </div>
+            <table style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 1.5px solid #cbd5e1; font-size: 11px; font-weight: 800; color: #64748b; text-align: left; text-transform: uppercase;">
+                  <th style="padding: 6px 8px; width: 30px;">#</th>
+                  <th style="padding: 6px 8px;">Service Description & Schedule</th>
+                  <th style="padding: 6px 8px; text-align: right; width: 110px;">Amount (INR)</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${itemsHtml || `<tr><td colspan="3" style="padding: 16px; text-align: center; color: var(--text-muted);">Verified Complete Package Itinerary</td></tr>`}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Total & Signoff -->
+          <div style="border-top: 2px solid #1e1b18; padding-top: 16px; display: flex; justify-content: space-between; align-items: flex-end;">
+            <div>
+              <div style="font-size: 11.5px; color: var(--text-muted); line-height: 1.5;">
+                • Official confirmation voucher for check-in at airports, hotels, and temple counters.<br>
+                • 100% Guaranteed inventory holds backed by ACID relational storage.<br>
+                • 24/7 Concierge Support: support@triprise.com
+              </div>
+            </div>
+            <div style="text-align: right; min-width: 220px;">
+              <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 2px;">Total Package Amount Paid</div>
+              <div style="font-size: 26px; font-weight: 800; color: #1e1b18; font-family: var(--font-serif);">
+                ₹${(b.total_inr || 0).toLocaleString()}
+              </div>
+              <div style="font-size: 11px; color: #166534; font-weight: 700; margin-top: 2px;">
+                ✓ Free cancellation up to 72h before departure
+              </div>
+            </div>
+          </div>
+        `;
+      } catch (err) {
+        content.innerHTML = '<div style="padding: 40px; text-align: center; color: #dc2626;">Error rendering receipt.</div>';
+      }
+    }
+
+    function closeReceiptModal() {
+      document.getElementById('modalTravelReceipt').style.display = 'none';
     }
 
     // SQL DATABASE CONSOLE MODAL HANDLERS
