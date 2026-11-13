@@ -286,6 +286,219 @@
     }
 
     /* ============================================================== */
+    /* CLEAN EDITORIAL PLANNER CARD ("WHERE TO NEXT?" FORMAT)          */
+    /* ============================================================== */
+    .planner-card-clean {
+      max-width: 840px;
+      margin: 20px auto 40px auto;
+      background: #FFFFFF;
+      border: 1px solid #EAE3D5;
+      border-radius: 16px;
+      padding: 38px 44px;
+      box-shadow: 0 12px 36px -10px rgba(35, 25, 15, 0.07);
+    }
+
+    .planner-step-header {
+      border-bottom: 1px solid #ECE5D8;
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+
+    .step-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .step-label-caps {
+      font-size: 11px;
+      font-weight: 700;
+      color: #8C8275;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .step-counter-caps {
+      font-size: 13px;
+      font-weight: 600;
+      color: #6E6659;
+      letter-spacing: 0.5px;
+    }
+
+    .planner-title-serif {
+      font-family: var(--font-serif);
+      font-size: 34px;
+      font-weight: 600;
+      color: #1E1B18;
+      letter-spacing: -0.5px;
+      margin: 0;
+    }
+
+    .nlp-prompt-card {
+      background: #FAF7F0;
+      border: 1px solid #EAE2D2;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+
+    .nlp-prompt-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1E1B18;
+    }
+
+    .nlp-prompt-subtitle {
+      font-size: 12px;
+      color: #8C8275;
+      margin-top: 2px;
+    }
+
+    .nlp-prompt-input-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .nlp-input-field {
+      flex: 1;
+      background: #FFFFFF;
+      border: 1px solid #DDD5C7;
+      border-radius: 8px;
+      padding: 11px 16px;
+      font-size: 13.5px;
+      color: #1E1B18;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .nlp-input-field:focus {
+      border-color: #C28B51;
+      box-shadow: 0 0 0 3px rgba(194, 139, 81, 0.12);
+    }
+
+    .btn-nlp-fill {
+      background: #FFFFFF;
+      border: 1px solid #D1C5B2;
+      border-radius: 8px;
+      padding: 11px 22px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #4A3E31;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-nlp-fill:hover {
+      background: #F4EDE2;
+      border-color: #B8935A;
+      color: #1E1B18;
+    }
+
+    .form-three-col-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .form-three-col-grid {
+        grid-template-columns: 1fr;
+      }
+      .planner-card-clean {
+        padding: 24px 20px;
+      }
+    }
+
+    .form-field-group {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .form-field-label {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #1E1B18;
+      margin-bottom: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-height: 38px;
+      justify-content: flex-end;
+    }
+
+    .field-sub-note {
+      font-size: 12px;
+      font-weight: 400;
+      color: #7A7265;
+    }
+
+    .form-input-control {
+      width: 100%;
+      background: #FFFFFF;
+      border: 1px solid #DDD5C7;
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1E1B18;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .form-input-control:focus {
+      border-color: #C28B51;
+      box-shadow: 0 0 0 3px rgba(194, 139, 81, 0.12);
+    }
+
+    .planner-card-bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #ECE5D8;
+      padding-top: 24px;
+      margin-top: 26px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .planner-bottom-caption {
+      font-size: 13.5px;
+      color: #6E6659;
+      font-style: italic;
+    }
+
+    .btn-build-holiday-primary {
+      background: #967038;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      padding: 13px 28px;
+      font-size: 14.5px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(150, 112, 56, 0.28);
+      transition: all 0.2s ease;
+    }
+
+    .btn-build-holiday-primary:hover {
+      background: #84612D;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(150, 112, 56, 0.38);
+    }
+
+    /* ============================================================== */
     /* LUXURY GLASSMORPHIC SEARCH FRAME (SCREENSHOT MATCH)            */
     /* ============================================================== */
     .search-box-anchor {
@@ -1838,83 +2051,111 @@
   <!-- ============================================================== -->
   <!-- PAGE 1: 🛏️ STAYS & HOLIDAYS (CLEAN MINIMAL LUXURY LAYOUT)       -->
   <!-- ============================================================== -->
-  <div id="page-stays" class="page-section active">
-    <!-- Clean Minimalist Header for Holiday Builder -->
-    <div class="container" style="padding-top: 36px; padding-bottom: 4px;">
-      <div style="margin-bottom: 22px;">
-        <span style="font-size: 11.5px; font-weight: 700; color: #C28B51; text-transform: uppercase; letter-spacing: 1.5px;">✨ SMART HOLIDAY ARCHITECTURE</span>
-        <h1 style="font-family: var(--font-serif); font-size: 36px; font-weight: 700; color: var(--text-dark); margin: 6px 0 4px 0; letter-spacing: -0.5px;">
-          Build Your Curated Holiday
-        </h1>
-        <p style="font-size: 14.5px; color: var(--text-muted); max-width: 680px;">
-          Verified flights, certified family suites, private chauffeur transfers & curated passes — auto-optimized to your budget.
-        </p>
+  <div id="page-stays" class="page-section active" style="padding: 30px 16px 60px 16px;">
+    <div class="planner-card-clean">
+      <!-- Step Header -->
+      <div class="planner-step-header">
+        <div class="step-meta-row">
+          <span class="step-label-caps">STEP 1 OF 3</span>
+          <span class="step-counter-caps">01 — 03</span>
+        </div>
+        <h1 class="planner-title-serif">Where to next?</h1>
       </div>
-    </div>
 
-    <!-- Signature Luxury Search Box -->
-    <div class="container search-box-anchor">
-      <div class="yellow-search-frame">
-        <div class="search-cell">
-          <span class="search-cell-icon">🛏️</span>
-          <div class="search-cell-content">
-            <span class="search-cell-label">Departure & Destination</span>
-            <div style="display: flex; gap: 6px; align-items: center;">
-              <select id="homeDepCity" class="search-cell-select" style="max-width: 110px;">
-                <option value="Bengaluru" selected>BLR (Bengaluru)</option>
-                <option value="Delhi">DEL (Delhi)</option>
-                <option value="Mumbai">BOM (Mumbai)</option>
-                <option value="Chennai">MAA (Chennai)</option>
-              </select>
-              <span style="color: var(--text-muted); font-weight: 700;">→</span>
-              <select id="homeDestCountry" class="search-cell-select">
-                <option value="Japan" selected>Japan (Tokyo, Kyoto, Osaka)</option>
-                <option value="United Arab Emirates">UAE (Dubai, Abu Dhabi)</option>
-              </select>
-            </div>
-          </div>
+      <!-- Rule-Based Quick NLP Prompt Card (Feature S1) -->
+      <div class="nlp-prompt-card">
+        <div class="nlp-prompt-title">Have a short trip request?</div>
+        <div class="nlp-prompt-subtitle">Rule-based helper · no AI</div>
+        <div class="nlp-prompt-input-row">
+          <input type="text" id="homeQuickNlpInput" class="nlp-input-field" 
+                 placeholder="e.g. Bengaluru to Japan, 10 April 2027, 6 nights, 2 adults, child age 6, budget INR 350000" 
+                 value="Bengaluru to Japan, 10 April 2027, 6 nights, 2 adults, child age 6, budget INR 350000"
+                 onkeydown="if(event.key==='Enter'){event.preventDefault();executeQuickNlpFill();}">
+          <button type="button" class="btn-nlp-fill" onclick="executeQuickNlpFill()">Fill form</button>
         </div>
-
-        <div class="search-cell">
-          <span class="search-cell-icon">📅</span>
-          <div class="search-cell-content">
-            <span class="search-cell-label">Check-in — Check-out (Nights)</span>
-            <div style="display: flex; gap: 6px; align-items: center;">
-              <input type="date" id="homeStartDate" class="search-cell-input" value="2027-04-10" min="2027-04-01" max="2027-04-20">
-              <select id="homeNights" class="search-cell-select" style="max-width: 100px;">
-                <option value="3">3 Nights</option>
-                <option value="4">4 Nights</option>
-                <option value="5">5 Nights</option>
-                <option value="6" selected>6 Nights</option>
-                <option value="7">7 Nights</option>
-                <option value="8">8 Nights</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="search-cell" style="cursor: pointer;" onclick="openGuestPickerModal()">
-          <span class="search-cell-icon">👤</span>
-          <div class="search-cell-content">
-            <span class="search-cell-label">Guests & Occupancy</span>
-            <span id="homeGuestsDisplay" style="font-size: 14px; font-weight: 700; color: var(--text-dark);">2 adults · 1 child (age 6)</span>
-          </div>
-          <span style="font-size: 12px; color: var(--text-muted);">⌵</span>
-        </div>
-
-        <div class="search-cell">
-          <span class="search-cell-icon">₹</span>
-          <div class="search-cell-content">
-            <span class="search-cell-label">Total Holiday Budget</span>
-            <input type="number" id="homeBudget" class="search-cell-input" value="350000" step="10000">
-          </div>
-        </div>
-
-        <button class="btn-search-booking" onclick="triggerSearchFromHome()">
-          <span>Check Availability</span>
-          <span>→</span>
-        </button>
       </div>
+
+      <!-- Main Holiday Builder Form -->
+      <form id="homeRequestForm" onsubmit="event.preventDefault(); triggerSearchFromHome();">
+        <!-- Row 1: Departure, Destination, Start Date -->
+        <div class="form-three-col-grid">
+          <div class="form-field-group">
+            <label class="form-field-label" for="homeDepCity">
+              <span>Leaving from</span>
+            </label>
+            <select id="homeDepCity" class="form-input-control">
+              <option value="Bengaluru" selected>Bengaluru (BLR)</option>
+              <option value="Delhi">Delhi (DEL)</option>
+              <option value="Mumbai">Mumbai (BOM)</option>
+              <option value="Chennai">Chennai (MAA)</option>
+            </select>
+          </div>
+          <div class="form-field-group">
+            <label class="form-field-label" for="homeDestCountry">
+              <span>Going to</span>
+            </label>
+            <select id="homeDestCountry" class="form-input-control">
+              <option value="Japan" selected>Japan</option>
+              <option value="United Arab Emirates">United Arab Emirates</option>
+            </select>
+          </div>
+          <div class="form-field-group">
+            <label class="form-field-label" for="homeStartDate">
+              <span>First day there</span>
+            </label>
+            <input type="date" id="homeStartDate" class="form-input-control" value="2027-04-10" min="2027-04-01" max="2027-04-20">
+          </div>
+        </div>
+
+        <!-- Row 2: Nights, Adults, Children's ages -->
+        <div class="form-three-col-grid">
+          <div class="form-field-group">
+            <label class="form-field-label" for="homeNights">
+              <span>How many nights?</span>
+            </label>
+            <input type="number" id="homeNights" class="form-input-control" value="6" min="3" max="14">
+          </div>
+          <div class="form-field-group">
+            <label class="form-field-label" for="homeAdults">
+              <span>Adults</span>
+            </label>
+            <input type="number" id="homeAdults" class="form-input-control" value="2" min="1" max="9" onchange="syncHomeGuests()">
+          </div>
+          <div class="form-field-group">
+            <label class="form-field-label" for="homeChildAges">
+              <span>Children's ages</span>
+              <span class="field-sub-note">optional</span>
+            </label>
+            <input type="text" id="homeChildAges" class="form-input-control" placeholder="e.g. 6, 10" value="6" onchange="syncHomeGuests()">
+          </div>
+        </div>
+
+        <!-- Row 3: Budget INR -->
+        <div class="form-three-col-grid" style="margin-bottom: 24px;">
+          <div class="form-field-group">
+            <label class="form-field-label" for="homeBudget">
+              <span>Your total budget</span>
+              <span class="field-sub-note">INR</span>
+            </label>
+            <input type="number" id="homeBudget" class="form-input-control" value="350000" step="10000">
+          </div>
+          <div></div>
+          <div></div>
+        </div>
+
+        <!-- Compatibility bridge for existing guest modal logic -->
+        <span id="homeGuestsDisplay" style="display: none;">2 adults · 1 child (age 6)</span>
+
+        <!-- Bottom Action Row -->
+        <div class="planner-card-bottom-row">
+          <span class="planner-bottom-caption">
+            We'll put together the whole trip, down to the last transfer.
+          </span>
+          <button type="submit" id="btnBuildHoliday" class="btn-build-holiday-primary">
+            Build my holiday <span style="font-size: 16px;">↗</span>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -2941,7 +3182,144 @@
       triggerSearchFromHome();
     }
 
+    // Sync input fields for guests & children with guestState
+    function syncHomeGuests() {
+      const adultsInput = document.getElementById('homeAdults');
+      const childAgesInput = document.getElementById('homeChildAges');
+      if (adultsInput) {
+        const val = parseInt(adultsInput.value, 10);
+        guestState.adults = isNaN(val) ? 2 : Math.max(1, val);
+      }
+      if (childAgesInput) {
+        const raw = childAgesInput.value.trim();
+        if (!raw) {
+          guestState.children = 0;
+          guestState.childAges = [];
+        } else {
+          const parts = raw.split(/[,;\s]+/).map(s => parseInt(s, 10)).filter(n => !isNaN(n) && n >= 0 && n <= 17);
+          guestState.children = parts.length;
+          guestState.childAges = parts;
+        }
+      }
+      const el = document.getElementById('homeGuestsDisplay');
+      if (el) {
+        let label = `${guestState.adults} adult${guestState.adults > 1 ? 's' : ''}`;
+        if (guestState.children > 0) {
+          label += ` · ${guestState.children} child${guestState.children > 1 ? 'ren' : ''} (age ${guestState.childAges.join(', ') || '6'})`;
+        }
+        el.innerText = label;
+      }
+    }
+
+    // Rule-Based Quick NLP Query Fill (Feature S1: Zero AI, instant regex parsing)
+    async function executeQuickNlpFill() {
+      const inputEl = document.getElementById('homeQuickNlpInput');
+      if (!inputEl) return;
+      const query = inputEl.value.trim();
+      if (!query) {
+        showToast('Please enter a trip query (e.g. Bengaluru to Japan, 10 April 2027, 6 nights...)');
+        return;
+      }
+
+      showToast('Parsing trip parameters with rule engine...');
+
+      try {
+        const res = await fetch('/api/nlp/parse', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: query })
+        });
+        const data = await res.json();
+        if (data.success && data.parsed) {
+          applyParsedTripData(data.parsed);
+          return;
+        }
+      } catch (err) {
+        console.warn('Network NLP fallback to local rule-based parser:', err);
+      }
+
+      // Pure client-side rule fallback
+      const parsed = fallbackParseTrip(query);
+      applyParsedTripData(parsed);
+    }
+
+    function applyParsedTripData(p) {
+      if (p.departure_city && document.getElementById('homeDepCity')) {
+        document.getElementById('homeDepCity').value = p.departure_city;
+      }
+      if (p.country && document.getElementById('homeDestCountry')) {
+        document.getElementById('homeDestCountry').value = p.country;
+      }
+      if (p.start_date && document.getElementById('homeStartDate')) {
+        document.getElementById('homeStartDate').value = p.start_date;
+      }
+      if (p.nights && document.getElementById('homeNights')) {
+        document.getElementById('homeNights').value = p.nights;
+      }
+      if (p.adults && document.getElementById('homeAdults')) {
+        document.getElementById('homeAdults').value = p.adults;
+      }
+      if (document.getElementById('homeChildAges')) {
+        if (Array.isArray(p.child_ages) && p.child_ages.length > 0) {
+          document.getElementById('homeChildAges').value = p.child_ages.join(', ');
+        } else if (p.children > 0) {
+          document.getElementById('homeChildAges').value = '6';
+        } else {
+          document.getElementById('homeChildAges').value = '';
+        }
+      }
+      if (p.budget && document.getElementById('homeBudget')) {
+        document.getElementById('homeBudget').value = p.budget;
+      }
+      syncHomeGuests();
+      showToast(`✓ Populated: ${p.departure_city || 'Origin'} → ${p.country || 'Destination'} (${p.nights || 6}N, ₹${(p.budget || 350000).toLocaleString()})`);
+    }
+
+    function fallbackParseTrip(query) {
+      const lower = query.toLowerCase();
+      const res = {
+        departure_city: 'Bengaluru',
+        country: 'Japan',
+        start_date: '2027-04-10',
+        nights: 6,
+        adults: 2,
+        children: 0,
+        child_ages: [],
+        budget: 350000
+      };
+      if (lower.includes('delhi') || lower.includes('del')) res.departure_city = 'Delhi';
+      if (lower.includes('mumbai') || lower.includes('bom')) res.departure_city = 'Mumbai';
+      if (lower.includes('chennai') || lower.includes('maa')) res.departure_city = 'Chennai';
+      if (lower.includes('bengaluru') || lower.includes('blr') || lower.includes('bangalore')) res.departure_city = 'Bengaluru';
+
+      if (lower.includes('uae') || lower.includes('dubai') || lower.includes('emirates') || lower.includes('abu dhabi')) {
+        res.country = 'United Arab Emirates';
+      } else if (lower.includes('japan') || lower.includes('tokyo') || lower.includes('kyoto') || lower.includes('osaka')) {
+        res.country = 'Japan';
+      }
+
+      const adultMatch = lower.match(/(\d+)\s*adult/i);
+      if (adultMatch) res.adults = parseInt(adultMatch[1], 10);
+
+      const childMatch = lower.match(/(\d+)\s*(?:child|kid|children)/i);
+      if (childMatch) {
+        res.children = parseInt(childMatch[1], 10);
+        const ageMatch = lower.match(/(?:age|aged)\s*(\d+)/i);
+        if (ageMatch) res.child_ages = [parseInt(ageMatch[1], 10)];
+        else res.child_ages = [6];
+      }
+
+      const nightsMatch = lower.match(/(\d+)\s*night/i);
+      if (nightsMatch) res.nights = parseInt(nightsMatch[1], 10);
+
+      const numBudget = lower.match(/(?:budget|inr|₹|rs\.?)\s*(\d[\d,]{3,})/i) || lower.match(/(\d[\d,]{4,})/);
+      if (numBudget) res.budget = parseInt(numBudget[1].replace(/,/g, ''), 10);
+
+      return res;
+    }
+
     function triggerSearchFromHome() {
+      syncHomeGuests();
       navigateToPage('packages');
       executeSmartSearch();
     }
@@ -3030,6 +3408,7 @@
 
     // Core Package Search via REST API (PAGE 3)
     async function executeSmartSearch(chosenCityPlan = null) {
+      syncHomeGuests();
       if (chosenCityPlan) {
         currentActiveCityPlan = chosenCityPlan;
       }
